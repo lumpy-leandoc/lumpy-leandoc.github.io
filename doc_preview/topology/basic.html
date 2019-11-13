@@ -1,0 +1,37 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><h1>Basic theory of topological spaces.</h1>
+<p>The main definition is the type class <span style="background-color:#fdf6e3;color:#657b83;">topological space α</span> which endows a type <span style="background-color:#fdf6e3;color:#657b83;">α</span> with a topology.
+Then <span style="background-color:#fdf6e3;color:#657b83;">set α</span> gets predicates <span style="background-color:#fdf6e3;color:#657b83;">is_open</span>, <span style="background-color:#fdf6e3;color:#657b83;">is_closed</span> and functions <span style="background-color:#fdf6e3;color:#657b83;">interior</span>, <span style="background-color:#fdf6e3;color:#657b83;">closure</span> and
+<span style="background-color:#fdf6e3;color:#657b83;">frontier</span>. Each point <span style="background-color:#fdf6e3;color:#657b83;">x</span> of <span style="background-color:#fdf6e3;color:#657b83;">α</span> gets a neighborhood filter <span style="background-color:#fdf6e3;color:#657b83;">nhds x</span>.</p>
+<p>This file also defines locally finite families of subsets of <span style="background-color:#fdf6e3;color:#657b83;">α</span>.</p>
+<p>For topological spaces <span style="background-color:#fdf6e3;color:#657b83;">α</span> and <span style="background-color:#fdf6e3;color:#657b83;">β</span>, a function <span style="background-color:#fdf6e3;color:#657b83;">f : α </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> β</span> and a point <span style="background-color:#fdf6e3;color:#657b83;">a : α</span>,
+<span style="background-color:#fdf6e3;color:#657b83;">continuous_at f a</span> means <span style="background-color:#fdf6e3;color:#657b83;">f</span> is continuous at <span style="background-color:#fdf6e3;color:#657b83;">a</span>, and global continuity is
+<span style="background-color:#fdf6e3;color:#657b83;">continuous f</span>. There is also a version of continuity <span style="background-color:#fdf6e3;color:#657b83;">pcontinuous</span> for
+partially defined functions.</p>
+<h2>Implementation notes</h2>
+<p>Topology in mathlib heavily uses filters (even more than in Bourbaki). See explanations in
+<span style="background-color:#fdf6e3;color:#657b83;">docs</span><span style="background-color:#fdf6e3;color:#b58900;">/</span><span style="background-color:#fdf6e3;color:#657b83;">theories</span><span style="background-color:#fdf6e3;color:#b58900;">/</span><span style="background-color:#fdf6e3;color:#657b83;">topology.md</span>.</p>
+<h2>References</h2>
+<ul>
+<li>[N. Bourbaki, <em>General Topology</em>][bourbaki1966]</li>
+<li>[I. M. James, <em>Topologies and Uniformities</em>][james1999]</li>
+</ul>
+<h2>Tags</h2>
+<p>topological space, interior, closure, frontier, neighborhood, continuity, continuous function</p>
+<hr/><div class="decl"><h4>topological_space</h4><div class="decl_par"><p>A topology on <span style="background-color:#fdf6e3;color:#657b83;">α</span>.</p>
+</div></div><div class="decl"><h4>is_open</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">is_open s</span> means that <span style="background-color:#fdf6e3;color:#657b83;">s</span> is open in the ambient topological space on <span style="background-color:#fdf6e3;color:#657b83;">α</span></p>
+</div></div><div class="decl"><h4>is_closed</h4><div class="decl_par"><p>A set is closed if its complement is open</p>
+</div></div><div class="decl"><h4>interior</h4><div class="decl_par"><p>The interior of a set <span style="background-color:#fdf6e3;color:#657b83;">s</span> is the largest open subset of <span style="background-color:#fdf6e3;color:#657b83;">s</span>.</p>
+</div></div><div class="decl"><h4>closure</h4><div class="decl_par"><p>The closure of <span style="background-color:#fdf6e3;color:#657b83;">s</span> is the smallest closed set containing <span style="background-color:#fdf6e3;color:#657b83;">s</span>.</p>
+</div></div><div class="decl"><h4>frontier</h4><div class="decl_par"><p>The frontier of a set is the set of points between the closure and interior.</p>
+</div></div><div class="decl"><h4>nhds</h4><div class="decl_par"><p>neighbourhood filter</p>
+</div></div><div class="decl"><h4>mem_closure_iff_ultrafilter</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">x</span> belongs to the closure of <span style="background-color:#fdf6e3;color:#657b83;">s</span> if and only if some ultrafilter
+supported on <span style="background-color:#fdf6e3;color:#657b83;">s</span> converges to <span style="background-color:#fdf6e3;color:#657b83;">x</span>.</p>
+</div></div><div class="decl"><h4>lim</h4><div class="decl_par"><p>If <span style="background-color:#fdf6e3;color:#657b83;">f</span> is a filter, then <span style="background-color:#fdf6e3;color:#657b83;">lim f</span> is a limit of the filter, if it exists.</p>
+</div></div><div class="decl"><h4>locally_finite</h4><div class="decl_par"><p>A family of sets in <span style="background-color:#fdf6e3;color:#657b83;">set α</span> is locally finite if at every point <span style="background-color:#fdf6e3;color:#657b83;">x:α</span>,
+there is a neighborhood of <span style="background-color:#fdf6e3;color:#657b83;">x</span> which meets only finitely many sets in the family</p>
+</div></div><div class="decl"><h4>continuous</h4><div class="decl_par"><p>A function between topological spaces is continuous if the preimage
+of every open set is open.</p>
+</div></div><div class="decl"><h4>continuous_at</h4><div class="decl_par"><p>A function between topological spaces is continuous at a point <span style="background-color:#fdf6e3;color:#657b83;">x₀</span>
+if <span style="background-color:#fdf6e3;color:#657b83;">f x</span> tends to <span style="background-color:#fdf6e3;color:#657b83;">f x₀</span> when <span style="background-color:#fdf6e3;color:#657b83;">x</span> tends to <span style="background-color:#fdf6e3;color:#657b83;">x₀</span>.</p>
+</div></div><div class="decl"><h4>pcontinuous</h4><div class="decl_par"><p>Continuity of a partial function</p>
+</div></div></html>

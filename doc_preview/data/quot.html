@@ -1,0 +1,24 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><div class="decl"><h4>quot.map</h4><div class="decl_par"><p>Map a function <span style="background-color:#fdf6e3;color:#657b83;">f : α </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> β</span> such that <span style="background-color:#fdf6e3;color:#657b83;">ra x y</span> implies <span style="background-color:#fdf6e3;color:#657b83;">rb (f x) (f y)</span>
+to a map <span style="background-color:#fdf6e3;color:#657b83;">quot ra </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> quot rb</span>.</p>
+</div></div><div class="decl"><h4>quot.map_right</h4><div class="decl_par"><p>If <span style="background-color:#fdf6e3;color:#657b83;">ra</span> is a subrelation of <span style="background-color:#fdf6e3;color:#657b83;">ra&#39;</span>, then we have a natural map <span style="background-color:#fdf6e3;color:#657b83;">quot ra </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> quot ra&#39;</span>.</p>
+</div></div><div class="decl"><h4>quotient.map</h4><div class="decl_par"><p>Map a function <span style="background-color:#fdf6e3;color:#657b83;">f : α </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> β</span> that sends equivalent elements to equivalent elements
+to a function <span style="background-color:#fdf6e3;color:#657b83;">quotient sa </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> quotient sb</span>. Useful to define unary operations on quotients.</p>
+</div></div><div class="decl"><h4>quotient.map₂</h4><div class="decl_par"><p>Map a function <span style="background-color:#fdf6e3;color:#657b83;">f : α </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> β </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> γ</span> that sends equivalent elements to equivalent elements
+to a function <span style="background-color:#fdf6e3;color:#657b83;">f : quotient sa </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> quotient sb </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> quotient sc</span>.
+Useful to define binary operations on quotients.</p>
+</div></div><div class="decl"><h4>quotient.map₂'</h4><div class="decl_par"><p>A version of <span style="background-color:#fdf6e3;color:#657b83;">quotient.map₂</span> using curly braces and unification.</p>
+</div></div><div class="decl"><h4>quot.out</h4><div class="decl_par"><p>Choose an element of the equivalence class using the axiom of choice.
+Sound but noncomputable.</p>
+</div></div><div class="decl"><h4>quot.unquot</h4><div class="decl_par"><p>Unwrap the VM representation of a quotient to obtain an element of the equivalence class.
+Computable but unsound.</p>
+</div></div><div class="decl"><h4>quotient.out</h4><div class="decl_par"><p>Choose an element of the equivalence class using the axiom of choice.
+Sound but noncomputable.</p>
+</div></div><div class="decl"><h4>trunc</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">trunc α</span> is the quotient of <span style="background-color:#fdf6e3;color:#657b83;">α</span> by the always-true relation. This
+is related to the propositional truncation in HoTT, and is similar
+in effect to <span style="background-color:#fdf6e3;color:#657b83;">nonempty α</span>, but unlike <span style="background-color:#fdf6e3;color:#657b83;">nonempty α</span>, <span style="background-color:#fdf6e3;color:#657b83;">trunc α</span> is data,
+so the VM representation is the same as <span style="background-color:#fdf6e3;color:#657b83;">α</span>, and so this can be used to
+maintain computability.</p>
+</div></div><div class="decl"><h4>trunc.mk</h4><div class="decl_par"><p>Constructor for <span style="background-color:#fdf6e3;color:#657b83;">trunc α</span></p>
+</div></div><div class="decl"><h4>trunc.lift</h4><div class="decl_par"><p>Any constant function lifts to a function out of the truncation</p>
+</div></div><div class="decl"><h4>trunc.out</h4><div class="decl_par"><p>Noncomputably extract a representative of <span style="background-color:#fdf6e3;color:#657b83;">trunc α</span> (using the axiom of choice).</p>
+</div></div></html>

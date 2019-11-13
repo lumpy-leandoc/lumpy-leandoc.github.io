@@ -1,0 +1,24 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><div class="decl"><h4>filter.is_bounded</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">f.is_bounded (≺)</span>: the filter <span style="background-color:#fdf6e3;color:#657b83;">f</span> is eventually bounded w.r.t. the relation <span style="background-color:#fdf6e3;color:#657b83;">≺</span>, i.e.
+eventually, it is bounded by some uniform bound.
+<span style="background-color:#fdf6e3;color:#657b83;">r</span> will be usually instantiated with <span style="background-color:#fdf6e3;color:#b58900;">≤</span> or <span style="background-color:#fdf6e3;color:#b58900;">≥</span>.</p>
+</div></div><div class="decl"><h4>filter.is_bounded_iff</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">f</span> is eventually bounded if and only if, there exists an admissible set on which it is
+bounded.</p>
+</div></div><div class="decl"><h4>filter.is_bounded_under_of</h4><div class="decl_par"><p>A bounded function <span style="background-color:#fdf6e3;color:#657b83;">u</span> is in particular eventually bounded.</p>
+</div></div><div class="decl"><h4>filter.is_cobounded</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">is_cobounded (≺) f</span> states that filter <span style="background-color:#fdf6e3;color:#657b83;">f</span> is not tend to infinite w.r.t. <span style="background-color:#fdf6e3;color:#657b83;">≺</span>. This is also
+called frequently bounded. Will be usually instantiated with <span style="background-color:#fdf6e3;color:#b58900;">≤</span> or <span style="background-color:#fdf6e3;color:#b58900;">≥</span>.</p>
+<p>There is a subtlety in this definition: we want <span style="background-color:#fdf6e3;color:#657b83;">f.is_cobounded</span> to hold for any <span style="background-color:#fdf6e3;color:#657b83;">f</span> in the case of
+complete lattices. This will be relevant to deduce theorems on complete lattices from their
+versions on conditionally complete lattices with additional assumptions. We have to be careful in
+the edge case of the trivial filter containing the empty set: the other natural definition
+<span style="background-color:#fdf6e3;color:#b58900;">¬ </span><span style="background-color:#fdf6e3;color:#859900;">∀</span><span style="background-color:#fdf6e3;color:#657b83;">a, {n | a </span><span style="background-color:#fdf6e3;color:#b58900;">≤</span><span style="background-color:#fdf6e3;color:#657b83;"> n} ∈ f.sets</span>
+would not work as well in this case.</p>
+</div></div><div class="decl"><h4>filter.is_cobounded.mk</h4><div class="decl_par"><p>To check that a filter is frequently bounded, it suffices to have a witness
+which bounds <span style="background-color:#fdf6e3;color:#657b83;">f</span> at some point for every admissible set.</p>
+<p>This is only an implication, as the other direction is wrong for the trivial filter.</p>
+</div></div><div class="decl"><h4>filter.is_cobounded_of_is_bounded</h4><div class="decl_par"><p>A filter which is eventually bounded is in particular frequently bounded (in the opposite
+direction). At least if the filter is not trivial.</p>
+</div></div><div class="decl"><h4>filter.limsup_eq_infi_supr</h4><div class="decl_par"><p>In a complete lattice, the limsup of a function is the infimum over sets <span style="background-color:#fdf6e3;color:#657b83;">s</span> in the filter
+of the supremum of the function over <span style="background-color:#fdf6e3;color:#657b83;">s</span></p>
+</div></div><div class="decl"><h4>filter.liminf_eq_supr_infi</h4><div class="decl_par"><p>In a complete lattice, the liminf of a function is the infimum over sets <span style="background-color:#fdf6e3;color:#657b83;">s</span> in the filter
+of the supremum of the function over <span style="background-color:#fdf6e3;color:#657b83;">s</span></p>
+</div></div></html>

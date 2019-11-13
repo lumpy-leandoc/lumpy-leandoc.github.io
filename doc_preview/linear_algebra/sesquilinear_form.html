@@ -1,0 +1,21 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><h1>Sesquilinear form</h1>
+<p>This file defines a bilinear form over a module. The definition requires a ring antiautomorphism
+on the scalar ring, which comes from the file ring_theory.involution. Basic ideas such as
+orthogonality are also introduced.</p>
+<p>A sesquilinear form on an R-module M, is a function from M x M to R, that is linear in the first argument
+and antilinear in the second, with respect to an antiautomorphism on R (an antiisomorphism from R to R).</p>
+<h2>Notations</h2>
+<p>Given any term S of type sesq_form, due to a coercion, can use the notation S x y to
+refer to the function field, ie. S x y = S.bilin x y.</p>
+<h2>References</h2>
+<ul>
+<li>https://en.wikipedia.org/wiki/Sesquilinear_form#Over_arbitrary_rings</li>
+</ul>
+<h2>Tags</h2>
+<p>Sesquilinear form,</p>
+<hr/><div class="decl"><h4>sesq_form</h4><div class="decl_par"><p>A sesquilinear form over a module</p>
+</div></div><div class="decl"><h4>sesq_form.is_ortho</h4><div class="decl_par"><p>The proposition that two elements of a sesquilinear form space are orthogonal</p>
+</div></div><div class="decl"><h4>refl_sesq_form.is_refl</h4><div class="decl_par"><p>The proposition that a sesquilinear form is reflexive</p>
+</div></div><div class="decl"><h4>sym_sesq_form.is_sym</h4><div class="decl_par"><p>The proposition that a sesquilinear form is symmetric</p>
+</div></div><div class="decl"><h4>alt_sesq_form.is_alt</h4><div class="decl_par"><p>The proposition that a sesquilinear form is alternating</p>
+</div></div></html>

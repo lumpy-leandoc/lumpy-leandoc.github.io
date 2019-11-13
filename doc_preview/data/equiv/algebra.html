@@ -1,0 +1,72 @@
+<html><head><link rel="stylesheet" href="../../docs_style.css"></head><h1>equivs in the algebraic hierarchy</h1>
+<p>In the first part there are theorems of the following
+form: if <span style="background-color:#fdf6e3;color:#657b83;">α</span> has a group structure and <span style="background-color:#fdf6e3;color:#657b83;">α ≃ β</span> then <span style="background-color:#fdf6e3;color:#657b83;">β</span> has a group structure, and
+similarly for monoids, semigroups, rings, integral domains, fields and so on.</p>
+<p>In the second part there are extensions of <span style="background-color:#fdf6e3;color:#657b83;">equiv</span> called <span style="background-color:#fdf6e3;color:#657b83;">add_equiv</span>,
+<span style="background-color:#fdf6e3;color:#657b83;">mul_equiv</span>, and <span style="background-color:#fdf6e3;color:#657b83;">ring_equiv</span>, which are datatypes representing
+isomorphisms of add_monoids/add_groups, monoids/groups and rings. We
+also introduce the corresponding groups of automorphisms <span style="background-color:#fdf6e3;color:#657b83;">add_aut</span>,
+<span style="background-color:#fdf6e3;color:#657b83;">mul_aut</span>, and <span style="background-color:#fdf6e3;color:#657b83;">ring_aut</span>.</p>
+<h2>Notations</h2>
+<p>The extended equivs all have coercions to functions, and the coercions are the canonical
+notation when treating the isomorphisms as maps.</p>
+<h2>Implementation notes</h2>
+<p>The fields for <span style="background-color:#fdf6e3;color:#657b83;">mul_equiv</span>, <span style="background-color:#fdf6e3;color:#657b83;">add_equiv</span>, and <span style="background-color:#fdf6e3;color:#657b83;">ring_equiv</span> now avoid
+the unbundled <span style="background-color:#fdf6e3;color:#657b83;">is_mul_hom</span> and <span style="background-color:#fdf6e3;color:#657b83;">is_add_hom</span>, as these are deprecated.</p>
+<p>Definition of multiplication in the groups of automorphisms agrees
+with function composition, multiplication in <span style="background-color:#fdf6e3;color:#657b83;">equiv.perm</span>, and
+multiplication in <span style="background-color:#fdf6e3;color:#657b83;">category_theory.End</span>, not with
+<span style="background-color:#fdf6e3;color:#657b83;">category_theory.comp</span>.</p>
+<h2>Tags</h2>
+<p>equiv, mul_equiv, add_equiv, ring_equiv, mul_aut, add_aut, ring_aut</p>
+<hr/><div class="decl"><h4>add_equiv</h4><div class="decl_par"><p>add_equiv α β is the type of an equiv α ≃ β which preserves addition.</p>
+</div></div><div class="decl"><h4>mul_equiv</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">mul_equiv α β</span> is the type of an equiv <span style="background-color:#fdf6e3;color:#657b83;">α ≃ β</span> which preserves multiplication.</p>
+</div></div><div class="decl"><h4>mul_equiv.map_mul</h4><div class="decl_par"><p>A multiplicative isomorphism preserves multiplication (canonical form).</p>
+</div></div><div class="decl"><h4>mul_equiv.is_mul_hom</h4><div class="decl_par"><p>A multiplicative isomorphism preserves multiplication (deprecated).</p>
+</div></div><div class="decl"><h4>mul_equiv.refl</h4><div class="decl_par"><p>The identity map is a multiplicative isomorphism.</p>
+</div></div><div class="decl"><h4>mul_equiv.symm</h4><div class="decl_par"><p>The inverse of an isomorphism is an isomorphism.</p>
+</div></div><div class="decl"><h4>mul_equiv.trans</h4><div class="decl_par"><p>Transitivity of multiplication-preserving isomorphisms</p>
+</div></div><div class="decl"><h4>mul_equiv.apply_symm_apply</h4><div class="decl_par"><p>e.right_inv in canonical form</p>
+</div></div><div class="decl"><h4>mul_equiv.symm_apply_apply</h4><div class="decl_par"><p>e.left_inv in canonical form</p>
+</div></div><div class="decl"><h4>mul_equiv.map_one</h4><div class="decl_par"><p>a multiplicative equiv of monoids sends 1 to 1 (and is hence a monoid isomorphism)</p>
+</div></div><div class="decl"><h4>mul_equiv.to_monoid_hom</h4><div class="decl_par"><p>A multiplicative bijection between two monoids is an isomorphism.</p>
+</div></div><div class="decl"><h4>mul_equiv.map_inv</h4><div class="decl_par"><p>A multiplicative equivalence of groups preserves inversion.</p>
+</div></div><div class="decl"><h4>mul_equiv.is_monoid_hom</h4><div class="decl_par"><p>A multiplicative bijection between two monoids is a monoid hom
+(deprecated -- use to_monoid_hom).</p>
+</div></div><div class="decl"><h4>mul_equiv.is_group_hom</h4><div class="decl_par"><p>A multiplicative bijection between two groups is a group hom
+(deprecated -- use to_monoid_hom).</p>
+</div></div><div class="decl"><h4>mul_equiv.ext</h4><div class="decl_par"><p>Two multiplicative isomorphisms agree if they are defined by the
+same underlying function.</p>
+</div></div><div class="decl"><h4>add_equiv.ext</h4><div class="decl_par"><p>Two additive isomorphisms agree if they are defined by the same underlying function.</p>
+</div></div><div class="decl"><h4>add_equiv.map_sub</h4><div class="decl_par"><p>An additive equivalence of additive groups preserves subtraction.</p>
+</div></div><div class="decl"><h4>mul_aut</h4><div class="decl_par"><p>The group of multiplicative automorphisms.</p>
+</div></div><div class="decl"><h4>add_aut</h4><div class="decl_par"><p>The group of additive automorphisms.</p>
+</div></div><div class="decl"><h4>mul_aut.group</h4><div class="decl_par"><p>The group operation on multiplicative automorphisms is defined by
+<span style="background-color:#fdf6e3;color:#657b83;">λ g h, mul_equiv.trans h g</span>.
+This means that multiplication agrees with composition, <span style="background-color:#fdf6e3;color:#657b83;">(g</span><span style="background-color:#fdf6e3;color:#b58900;">*</span><span style="background-color:#fdf6e3;color:#657b83;">h)(x) </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> g (h x)</span>.</p>
+</div></div><div class="decl"><h4>mul_aut.to_perm</h4><div class="decl_par"><p>Monoid hom from the group of multiplicative automorphisms to the group of permutations.</p>
+</div></div><div class="decl"><h4>add_aut.group</h4><div class="decl_par"><p>The group operation on additive automorphisms is defined by
+<span style="background-color:#fdf6e3;color:#657b83;">λ g h, mul_equiv.trans h g</span>.
+This means that multiplication agrees with composition, <span style="background-color:#fdf6e3;color:#657b83;">(g</span><span style="background-color:#fdf6e3;color:#b58900;">*</span><span style="background-color:#fdf6e3;color:#657b83;">h)(x) </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> g (h x)</span>.</p>
+</div></div><div class="decl"><h4>add_aut.to_perm</h4><div class="decl_par"><p>Monoid hom from the group of multiplicative automorphisms to the group of permutations.</p>
+</div></div><div class="decl"><h4>to_units</h4><div class="decl_par"><p>A group is isomorphic to its group of units.</p>
+</div></div><div class="decl"><h4>ring_equiv.refl</h4><div class="decl_par"><p>The identity map is a ring isomorphism.</p>
+</div></div><div class="decl"><h4>ring_equiv.symm</h4><div class="decl_par"><p>The inverse of a ring isomorphism is a ring isomorphis.</p>
+</div></div><div class="decl"><h4>ring_equiv.trans</h4><div class="decl_par"><p>Transitivity of <span style="background-color:#fdf6e3;color:#657b83;">ring_equiv</span>.</p>
+</div></div><div class="decl"><h4>ring_equiv.map_mul</h4><div class="decl_par"><p>A ring isomorphism preserves multiplication.</p>
+</div></div><div class="decl"><h4>ring_equiv.map_one</h4><div class="decl_par"><p>A ring isomorphism sends one to one.</p>
+</div></div><div class="decl"><h4>ring_equiv.map_add</h4><div class="decl_par"><p>A ring isomorphism preserves addition.</p>
+</div></div><div class="decl"><h4>ring_equiv.map_zero</h4><div class="decl_par"><p>A ring isomorphism sends zero to zero.</p>
+</div></div><div class="decl"><h4>ring_equiv.to_ring_hom</h4><div class="decl_par"><p>Reinterpret a ring equivalence as a ring homomorphism.</p>
+</div></div><div class="decl"><h4>ring_equiv.of</h4><div class="decl_par"><p>Interpret an equivalence <span style="background-color:#fdf6e3;color:#657b83;">f : α ≃ β</span> as a ring equivalence <span style="background-color:#fdf6e3;color:#657b83;">α ≃</span><span style="background-color:#fdf6e3;color:#b58900;">+*</span><span style="background-color:#fdf6e3;color:#657b83;"> β</span>.</p>
+</div></div><div class="decl"><h4>ring_equiv.of'</h4><div class="decl_par"><p>Interpret an equivalence <span style="background-color:#fdf6e3;color:#657b83;">f : α ≃ β</span> as a ring equivalence <span style="background-color:#fdf6e3;color:#657b83;">α ≃</span><span style="background-color:#fdf6e3;color:#b58900;">+*</span><span style="background-color:#fdf6e3;color:#657b83;"> β</span>.</p>
+</div></div><div class="decl"><h4>ring_equiv.ext</h4><div class="decl_par"><p>Two ring isomorphisms agree if they are defined by the
+same underlying function.</p>
+</div></div><div class="decl"><h4>ring_aut</h4><div class="decl_par"><p>The group of ring automorphisms.</p>
+</div></div><div class="decl"><h4>ring_aut.group</h4><div class="decl_par"><p>The group operation on automorphisms of a ring is defined by
+λ g h, ring_equiv.trans h g.
+This means that multiplication agrees with composition, (g*h)(x) = g (h x) .</p>
+</div></div><div class="decl"><h4>ring_aut.to_add_aut</h4><div class="decl_par"><p>Monoid homomorphism from ring automorphisms to additive automorphisms.</p>
+</div></div><div class="decl"><h4>ring_aut.to_mul_aut</h4><div class="decl_par"><p>Monoid homomorphism from ring automorphisms to multiplicative automorphisms.</p>
+</div></div><div class="decl"><h4>ring_aut.to_perm</h4><div class="decl_par"><p>Monoid homomorphism from ring automorphisms to permutations.</p>
+</div></div></html>

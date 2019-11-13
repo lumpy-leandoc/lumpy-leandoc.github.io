@@ -1,0 +1,106 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><h1>Equivalence relations</h1>
+<p>The first section of the file defines the complete lattice of equivalence relations
+on a type, results about the inductively defined equivalence closure of a binary relation,
+and the analogues of some isomorphism theorems for quotients of arbitrary types.</p>
+<p>The second section comprises properties of equivalence relations viewed as partitions.</p>
+<h2>Implementation notes</h2>
+<p>The function <span style="background-color:#fdf6e3;color:#657b83;">rel</span> and lemmas ending in ' make it easier to talk about different
+equivalence relations on the same type.</p>
+<p>The complete lattice instance for equivalence relations could have been defined by lifting
+the Galois insertion of equivalence relations on α into binary relations on α, and then using
+<span style="background-color:#fdf6e3;color:#657b83;">complete_lattice.copy</span> to define a complete lattice instance with more appropriate
+definitional equalities (a similar example is <span style="background-color:#fdf6e3;color:#657b83;">filter.lattice.complete_lattice</span> in
+<span style="background-color:#fdf6e3;color:#657b83;">order</span><span style="background-color:#fdf6e3;color:#b58900;">/</span><span style="background-color:#fdf6e3;color:#657b83;">filter</span><span style="background-color:#fdf6e3;color:#b58900;">/</span><span style="background-color:#fdf6e3;color:#657b83;">basic.lean</span>). This does not save space, however, and is less clear.</p>
+<p>Partitions are not defined as a separate structure here; users are encouraged to
+reason about them using the existing <span style="background-color:#fdf6e3;color:#657b83;">setoid</span> and its infrastructure.</p>
+<h2>Tags</h2>
+<p>setoid, equivalence, iseqv, relation, equivalence relation, partition, equivalence
+class</p>
+<hr/><div class="decl"><h4>setoid.rel</h4><div class="decl_par"><p>A version of <span style="background-color:#fdf6e3;color:#657b83;">setoid.r</span> that takes the equivalence relation as an explicit argument.</p>
+</div></div><div class="decl"><h4>quotient.eq_rel</h4><div class="decl_par"><p>A version of <span style="background-color:#fdf6e3;color:#657b83;">quotient.eq&#39;</span> compatible with <span style="background-color:#fdf6e3;color:#657b83;">setoid.rel</span>, to make rewriting possible.</p>
+</div></div><div class="decl"><h4>setoid.eq_iff_rel_eq</h4><div class="decl_par"><p>Two equivalence relations are equal iff their underlying binary operations are equal.</p>
+</div></div><div class="decl"><h4>setoid.has_le</h4><div class="decl_par"><p>Defining <span style="background-color:#fdf6e3;color:#b58900;">≤</span> for equivalence relations.</p>
+</div></div><div class="decl"><h4>setoid.ker</h4><div class="decl_par"><p>The kernel of a function is an equivalence relation.</p>
+</div></div><div class="decl"><h4>setoid.ker_mk_eq</h4><div class="decl_par"><p>The kernel of the quotient map induced by an equivalence relation r equals r.</p>
+</div></div><div class="decl"><h4>setoid.lattice.has_inf</h4><div class="decl_par"><p>The infimum of two equivalence relations.</p>
+</div></div><div class="decl"><h4>setoid.inf_def</h4><div class="decl_par"><p>The infimum of 2 equivalence relations r and s is the same relation as the infimum
+of the underlying binary operations.</p>
+</div></div><div class="decl"><h4>setoid.lattice.has_Inf</h4><div class="decl_par"><p>The infimum of a set of equivalence relations.</p>
+</div></div><div class="decl"><h4>setoid.Inf_def</h4><div class="decl_par"><p>The underlying binary operation of the infimum of a set of equivalence relations
+is the infimum of the set's image under the map to the underlying binary operation.</p>
+</div></div><div class="decl"><h4>setoid.Inf_le</h4><div class="decl_par"><p>The infimum of a set of equivalence relations is contained in any element of the set.</p>
+</div></div><div class="decl"><h4>setoid.le_Inf</h4><div class="decl_par"><p>If an equivalence relation r is contained in every element of a set of equivalence relations,
+r is contained in the infimum of the set.</p>
+</div></div><div class="decl"><h4>setoid.eqv_gen_eq</h4><div class="decl_par"><p>The inductively defined equivalence closure of a binary relation r is the infimum
+of the set of all equivalence relations containing r.</p>
+</div></div><div class="decl"><h4>setoid.lattice.has_sup</h4><div class="decl_par"><p>The supremum of two equivalence relations, defined as the infimum of the set of
+equivalence relations containing both.</p>
+</div></div><div class="decl"><h4>setoid.sup_eq_eqv_gen</h4><div class="decl_par"><p>The supremum of two equivalence relations r and s is the equivalence closure of the binary
+relation <span style="background-color:#fdf6e3;color:#657b83;">x is related to y </span><span style="background-color:#fdf6e3;color:#859900;">by</span><span style="background-color:#fdf6e3;color:#657b83;"> r or s</span>.</p>
+</div></div><div class="decl"><h4>setoid.sup_def</h4><div class="decl_par"><p>The supremum of 2 equivalence relations r and s is the equivalence closure of the
+supremum of the underlying binary operations.</p>
+</div></div><div class="decl"><h4>setoid.complete_lattice</h4><div class="decl_par"><p>The complete lattice of equivalence relations on a type, with bottom element <span style="background-color:#fdf6e3;color:#b58900;">=</span>
+and top element the trivial equivalence relation.</p>
+</div></div><div class="decl"><h4>setoid.Sup_eq_eqv_gen</h4><div class="decl_par"><p>The supremum of a set S of equivalence relations is the equivalence closure of the binary
+relation <span style="background-color:#fdf6e3;color:#657b83;">there </span><span style="background-color:#fdf6e3;color:#859900;">exists</span><span style="background-color:#fdf6e3;color:#657b83;"> r ∈ S relating x and y</span>.</p>
+</div></div><div class="decl"><h4>setoid.Sup_def</h4><div class="decl_par"><p>The supremum of a set of equivalence relations is the equivalence closure of the
+supremum of the set's image under the map to the underlying binary operation.</p>
+</div></div><div class="decl"><h4>setoid.eqv_gen_of_setoid</h4><div class="decl_par"><p>The equivalence closure of an equivalence relation r is r.</p>
+</div></div><div class="decl"><h4>setoid.eqv_gen_idem</h4><div class="decl_par"><p>Equivalence closure is idempotent.</p>
+</div></div><div class="decl"><h4>setoid.eqv_gen_le</h4><div class="decl_par"><p>The equivalence closure of a binary relation r is contained in any equivalence
+relation containing r.</p>
+</div></div><div class="decl"><h4>setoid.eqv_gen_mono</h4><div class="decl_par"><p>Equivalence closure of binary relations is monotonic.</p>
+</div></div><div class="decl"><h4>setoid.gi</h4><div class="decl_par"><p>There is a Galois insertion of equivalence relations on α into binary relations
+on α, with equivalence closure the lower adjoint.</p>
+</div></div><div class="decl"><h4>setoid.injective_iff_ker_bot</h4><div class="decl_par"><p>A function from α to β is injective iff its kernel is the bottom element of the complete lattice
+of equivalence relations on α.</p>
+</div></div><div class="decl"><h4>setoid.ker_apply_eq_preimage</h4><div class="decl_par"><p>The elements related to x ∈ α by the kernel of f are those in the preimage of f(x) under f.</p>
+</div></div><div class="decl"><h4>setoid.lift_unique</h4><div class="decl_par"><p>The uniqueness part of the universal property for quotients of an arbitrary type.</p>
+</div></div><div class="decl"><h4>setoid.injective_ker_lift</h4><div class="decl_par"><p>Given a map f from α to β, the natural map from the quotient of α by the kernel of f is
+injective.</p>
+</div></div><div class="decl"><h4>setoid.ker_eq_lift_of_injective</h4><div class="decl_par"><p>Given a map f from α to β, the kernel of f is the unique equivalence relation on α whose
+induced map from the quotient of α to β is injective.</p>
+</div></div><div class="decl"><h4>setoid.quotient_ker_equiv_range</h4><div class="decl_par"><p>The first isomorphism theorem for sets: the quotient of α by the kernel of a function f
+bijects with f's image.</p>
+</div></div><div class="decl"><h4>setoid.quotient_ker_equiv_of_surjective</h4><div class="decl_par"><p>The quotient of α by the kernel of a surjective function f bijects with f's codomain.</p>
+</div></div><div class="decl"><h4>setoid.quotient_quotient_equiv_quotient</h4><div class="decl_par"><p>The third isomorphism theorem for sets.</p>
+</div></div><div class="decl"><h4>setoid.map</h4><div class="decl_par"><p>Given a function f whose kernel is contained in an equivalence relation r, the equivalence
+closure of the relation on f's image defined by x ≈ y ↔ the elements of f⁻¹(x) are related
+to the elements of f⁻¹(y) by r.</p>
+</div></div><div class="decl"><h4>setoid.map_of_surjective</h4><div class="decl_par"><p>Given a surjective function f whose kernel is contained in an equivalence relation r, the
+equivalence relation on f's codomain defined by x ≈ y ↔ the elements of f⁻¹(x) are related to
+the elements of f⁻¹(y) by r.</p>
+</div></div><div class="decl"><h4>setoid.map_of_surjective_eq_map</h4><div class="decl_par"><p>A special case of the equivalence closure of an equivalence relation r equalling r.</p>
+</div></div><div class="decl"><h4>setoid.comap</h4><div class="decl_par"><p>Given an equivalence relation r on α and a map f to the quotient of α by r, an
+equivalence relation s on the quotient induces an equivalence relation on f's domain defined
+by x ≈ y ↔ f(x) is related to f(y) by s.</p>
+</div></div><div class="decl"><h4>setoid.correspondence</h4><div class="decl_par"><p>Given an equivalence relation r on α, the order-preserving bijection between the set of
+equivalence relations containing r and the equivalence relations on the quotient of α by r.</p>
+</div></div><div class="decl"><h4>setoid.eq_of_mem_eqv_class</h4><div class="decl_par"><p>If x ∈ α is in 2 elements of a set of sets partitioning α, those 2 sets are equal.</p>
+</div></div><div class="decl"><h4>setoid.mk_classes</h4><div class="decl_par"><p>Makes an equivalence relation from a set of sets partitioning α.</p>
+</div></div><div class="decl"><h4>setoid.classes</h4><div class="decl_par"><p>Makes the equivalence classes of an equivalence relation.</p>
+</div></div><div class="decl"><h4>setoid.eq_iff_classes_eq</h4><div class="decl_par"><p>Two equivalence relations are equal iff all their equivalence classes are equal.</p>
+</div></div><div class="decl"><h4>setoid.classes_inj</h4><div class="decl_par"><p>Two equivalence relations are equal iff their equivalence classes are equal.</p>
+</div></div><div class="decl"><h4>setoid.empty_not_mem_classes</h4><div class="decl_par"><p>The empty set is not an equivalence class.</p>
+</div></div><div class="decl"><h4>setoid.classes_eqv_classes</h4><div class="decl_par"><p>Equivalence classes partition the type.</p>
+</div></div><div class="decl"><h4>setoid.eq_of_mem_classes</h4><div class="decl_par"><p>If x ∈ α is in 2 equivalence classes, the equivalence classes are equal.</p>
+</div></div><div class="decl"><h4>setoid.eq_eqv_class_of_mem</h4><div class="decl_par"><p>The elements of a set of sets partitioning α are the equivalence classes of the
+equivalence relation defined by the set of sets.</p>
+</div></div><div class="decl"><h4>setoid.eqv_class_mem</h4><div class="decl_par"><p>The equivalence classes of the equivalence relation defined by a set of sets
+partitioning α are elements of the set of sets.</p>
+</div></div><div class="decl"><h4>setoid.eqv_classes_disjoint</h4><div class="decl_par"><p>Distinct elements of a set of sets partitioning α are disjoint.</p>
+</div></div><div class="decl"><h4>setoid.eqv_classes_of_disjoint_union</h4><div class="decl_par"><p>A set of disjoint sets covering α partition α (classical).</p>
+</div></div><div class="decl"><h4>setoid.setoid_of_disjoint_union</h4><div class="decl_par"><p>Makes an equivalence relation from a set of disjoints sets covering α.</p>
+</div></div><div class="decl"><h4>setoid.mk_classes_classes</h4><div class="decl_par"><p>The equivalence relation made from the equivalence classes of an equivalence
+relation r equals r.</p>
+</div></div><div class="decl"><h4>setoid.ne_empty_of_mem_partition</h4><div class="decl_par"><p>A partition of α does not contain the empty set.</p>
+</div></div><div class="decl"><h4>setoid.exists_of_mem_partition</h4><div class="decl_par"><p>All elements of a partition of α are the equivalence class of some y ∈ α.</p>
+</div></div><div class="decl"><h4>setoid.classes_mk_classes</h4><div class="decl_par"><p>The equivalence classes of the equivalence relation defined by a partition of α equal
+the original partition.</p>
+</div></div><div class="decl"><h4>setoid.partition.le</h4><div class="decl_par"><p>Defining <span style="background-color:#fdf6e3;color:#b58900;">≤</span> on partitions as the <span style="background-color:#fdf6e3;color:#b58900;">≤</span> defined on their induced equivalence relations.</p>
+</div></div><div class="decl"><h4>setoid.partition.partial_order</h4><div class="decl_par"><p>Defining a partial order on partitions as the partial order on their induced
+equivalence relations.</p>
+</div></div><div class="decl"><h4>setoid.partition.order_iso</h4><div class="decl_par"><p>The order-preserving bijection between equivalence relations and partitions of sets.</p>
+</div></div><div class="decl"><h4>setoid.partition.complete_lattice</h4><div class="decl_par"><p>A complete lattice instance for partitions; there is more infrastructure for the
+equivalent complete lattice on equivalence relations.</p>
+</div></div></html>

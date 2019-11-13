@@ -1,0 +1,104 @@
+<html><head><link rel="stylesheet" href="../../docs_style.css"></head><h1>Basic Definitions/Theorems for Continued Fractions</h1>
+<h2>Summary</h2>
+<p>We define generalised, simple, and regular continued fractions and functions to evaluate their
+convergents. We follow the naming conventions from Wikipedia and [wall2018analytic], Chapter 1.</p>
+<h2>Main definitions</h2>
+<ol>
+<li>Generalised continued fractions (gcfs)</li>
+<li>Simple continued fractions (scfs)</li>
+<li>(Regular) continued fractions ((r)cfs)</li>
+<li>Computation of convergents using the recurrence relation in <span style="background-color:#fdf6e3;color:#657b83;">convergents</span>.</li>
+<li>Computation of convergents by directly evaluating the fraction described by the gcf in
+<span style="background-color:#fdf6e3;color:#657b83;">convergents&#39;</span>.</li>
+</ol>
+<h2>Implementation notes</h2>
+<ol>
+<li>The most commonly used kind of continued fractions in the literature are regular continued
+fractions. We hence just call them <span style="background-color:#fdf6e3;color:#657b83;">continued_fractions</span> in the library.</li>
+<li>We use sequences from <span style="background-color:#fdf6e3;color:#657b83;">data.seq</span> to encode potentially infinite sequences.</li>
+</ol>
+<h2>References</h2>
+<ul>
+<li>https://en.wikipedia.org/wiki/Generalized_continued_fraction</li>
+<li>[Wall, H.S., <em>Analytic Theory of Continued Fractions</em>][wall2018analytic]</li>
+</ul>
+<h2>Tags</h2>
+<p>numerics, number theory, approximations, fractions</p>
+<hr/><div class="decl"><h4>generalized_continued_fraction.pair</h4><div class="decl_par"><p>We collect a partial numerator <span style="background-color:#fdf6e3;color:#657b83;">aᵢ</span> and partial denominator <span style="background-color:#fdf6e3;color:#657b83;">bᵢ</span> in a pair <span style="background-color:#fdf6e3;color:#657b83;">⟨aᵢ,bᵢ⟩</span>.</p>
+</div></div><div class="decl"><h4>generalized_continued_fraction.pair.has_repr</h4><div class="decl_par"><p>Make a gcf.pair printable.</p>
+</div></div><div class="decl"><h4>generalized_continued_fraction.pair.has_coe_to_generalized_continued_fraction_pair</h4><div class="decl_par"><p>Coerce a pair by elementwise coercion.</p>
+</div></div><div class="decl"><h4>generalized_continued_fraction</h4><div class="decl_par"><p>A <em>generalised continued fraction</em> (gcf) is a potentially infinite expression of the form</p>
+<pre><code>                            a₀
+            h + --------------------------
+                              a₁
+                  b₀ + --------------------
+                                a₂
+                        b₁ + --------------
+                                    a₃
+                              b₂ + --------
+                                  b₃ + ...
+</code></pre>
+<p>where <span style="background-color:#fdf6e3;color:#657b83;">h</span> is called the <em>head term</em> or <em>integer part</em>, the <span style="background-color:#fdf6e3;color:#657b83;">aᵢ</span> are called the
+<em>partial numerators</em> and the <span style="background-color:#fdf6e3;color:#657b83;">bᵢ</span> the <em>partial denominators</em> of the gcf.
+We store the sequence of partial numerators and denominators in a sequence of
+generalized_continued_fraction.pairs <span style="background-color:#fdf6e3;color:#657b83;">s</span>.
+For convenience, one often writes <span style="background-color:#fdf6e3;color:#657b83;">[h; (a₀, b₀), (a₁, b₁), (a₂, b₂),...]</span>.</p>
+</div></div><div class="decl"><h4>generalized_continued_fraction.partial_numerators</h4><div class="decl_par"><p>Returns the sequence of partial numerators <span style="background-color:#fdf6e3;color:#657b83;">aᵢ</span> of <span style="background-color:#fdf6e3;color:#657b83;">g</span>.</p>
+</div></div><div class="decl"><h4>generalized_continued_fraction.partial_denominators</h4><div class="decl_par"><p>Returns the sequence of partial denominators <span style="background-color:#fdf6e3;color:#657b83;">bᵢ</span> of <span style="background-color:#fdf6e3;color:#657b83;">g</span>.</p>
+</div></div><div class="decl"><h4>generalized_continued_fraction.terminated_at</h4><div class="decl_par"><p>A gcf terminated at position <span style="background-color:#fdf6e3;color:#657b83;">n</span> if its sequence terminates at position <span style="background-color:#fdf6e3;color:#657b83;">n</span>.</p>
+</div></div><div class="decl"><h4>generalized_continued_fraction.terminated_at_decidable</h4><div class="decl_par"><p>It is decidable whether a gcf terminated at a given position.</p>
+</div></div><div class="decl"><h4>generalized_continued_fraction.terminates</h4><div class="decl_par"><p>A gcf terminates if its sequence terminates.</p>
+</div></div><div class="decl"><h4>generalized_continued_fraction.seq.coe_to_seq</h4><div class="decl_par"><p>Coerce a sequence by elementwise coercion.</p>
+</div></div><div class="decl"><h4>generalized_continued_fraction.has_coe_to_generalized_continued_fraction</h4><div class="decl_par"><p>Coerce a gcf by elementwise coercion.</p>
+</div></div><div class="decl"><h4>generalized_continued_fraction.is_simple_continued_fraction</h4><div class="decl_par"><p>A generalized continued fraction is a <em>simple continued fraction</em> if all partial numerators are
+equal to one.</p>
+<pre><code>                            1
+            h + --------------------------
+                              1
+                  b₀ + --------------------
+                                1
+                        b₁ + --------------
+                                    1
+                              b₂ + --------
+                                  b₃ + ...</code></pre>
+</div></div><div class="decl"><h4>simple_continued_fraction</h4><div class="decl_par"><p>A <em>simple continued fraction</em> (scf) is a generalized continued fraction (gcf) whose partial
+numerators are equal to one.</p>
+<pre><code>                            1
+            h + --------------------------
+                              1
+                  b₀ + --------------------
+                                1
+                        b₁ + --------------
+                                    1
+                              b₂ + --------
+                                  b₃ + ...
+</code></pre>
+<p>For convenience, one often writes <span style="background-color:#fdf6e3;color:#657b83;">[h; b₀, b₁, b₂,...]</span>.
+It is encoded as the subtype of gcfs that satisfy
+<span style="background-color:#fdf6e3;color:#657b83;">generalized_continued_fraction.is_simple_continued_fraction</span>.</p>
+</div></div><div class="decl"><h4>simple_continued_fraction.has_coe_to_generalized_continued_fraction</h4><div class="decl_par"><p>Lift a scf to a gcf using the inclusion map.</p>
+</div></div><div class="decl"><h4>simple_continued_fraction.is_regular_continued_fraction</h4><div class="decl_par"><p>A simple continued fraction is a <em>(regular) continued fraction</em> ((r)cf) if all partial denominators
+<span style="background-color:#fdf6e3;color:#657b83;">bᵢ</span> are positive, i.e. <span style="background-color:#fdf6e3;color:#6c71c4;">0 </span><span style="background-color:#fdf6e3;color:#b58900;">&lt;</span><span style="background-color:#fdf6e3;color:#657b83;"> bᵢ</span>.</p>
+</div></div><div class="decl"><h4>continued_fraction</h4><div class="decl_par"><p>A <em>(regular) continued fraction</em> ((r)cf) is a simple continued fraction (scf) whose partial
+denominators are all positive. It is the subtype of scfs that satisfy
+<span style="background-color:#fdf6e3;color:#657b83;">simple_continued_fraction.is_regular_continued_fraction</span>.</p>
+</div></div><div class="decl"><h4>continued_fraction.has_coe_to_simple_continued_fraction</h4><div class="decl_par"><p>Lift a cf to a scf using the inclusion map.</p>
+</div></div><div class="decl"><h4>continued_fraction.has_coe_to_generalized_continued_fraction</h4><div class="decl_par"><p>Lift a cf to a scf using the inclusion map.</p>
+</div></div><div class="decl"><h4>generalized_continued_fraction.next_numerator</h4><div class="decl_par"><p>Returns the next numerator <span style="background-color:#fdf6e3;color:#657b83;">Aₙ </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> bₙ</span><span style="background-color:#fdf6e3;color:#b58900;">-</span><span style="background-color:#fdf6e3;color:#657b83;">₁ </span><span style="background-color:#fdf6e3;color:#b58900;">*</span><span style="background-color:#fdf6e3;color:#657b83;"> Aₙ₋₁ </span><span style="background-color:#fdf6e3;color:#b58900;">+</span><span style="background-color:#fdf6e3;color:#657b83;"> aₙ</span><span style="background-color:#fdf6e3;color:#b58900;">-</span><span style="background-color:#fdf6e3;color:#657b83;">₁ </span><span style="background-color:#fdf6e3;color:#b58900;">*</span><span style="background-color:#fdf6e3;color:#657b83;"> Aₙ₋₂</span>, where <span style="background-color:#fdf6e3;color:#657b83;">predA</span> is <span style="background-color:#fdf6e3;color:#657b83;">Aₙ₋₁</span>,
+<span style="background-color:#fdf6e3;color:#657b83;">ppredA</span> is <span style="background-color:#fdf6e3;color:#657b83;">Aₙ₋₂</span>, <span style="background-color:#fdf6e3;color:#657b83;">a</span> is <span style="background-color:#fdf6e3;color:#657b83;">aₙ₋₁</span>, and <span style="background-color:#fdf6e3;color:#657b83;">b</span> is <span style="background-color:#fdf6e3;color:#657b83;">bₙ₋₁</span>.</p>
+</div></div><div class="decl"><h4>generalized_continued_fraction.next_denominator</h4><div class="decl_par"><p>Returns the next denominator <span style="background-color:#fdf6e3;color:#657b83;">Bₙ </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> bₙ</span><span style="background-color:#fdf6e3;color:#b58900;">-</span><span style="background-color:#fdf6e3;color:#657b83;">₁ </span><span style="background-color:#fdf6e3;color:#b58900;">*</span><span style="background-color:#fdf6e3;color:#657b83;"> Bₙ₋₁ </span><span style="background-color:#fdf6e3;color:#b58900;">+</span><span style="background-color:#fdf6e3;color:#657b83;"> aₙ</span><span style="background-color:#fdf6e3;color:#b58900;">-</span><span style="background-color:#fdf6e3;color:#657b83;">₁ </span><span style="background-color:#fdf6e3;color:#b58900;">*</span><span style="background-color:#fdf6e3;color:#657b83;"> Bₙ₋₂``, where </span>predB<span style="background-color:#fdf6e3;color:#657b83;">is</span>Bₙ₋₁<span style="background-color:#fdf6e3;color:#657b83;">and</span>ppredB<span style="background-color:#fdf6e3;color:#657b83;">is</span>Bₙ₋₂<span style="background-color:#fdf6e3;color:#657b83;">, </span>a<span style="background-color:#fdf6e3;color:#657b83;">is</span>aₙ₋₁<span style="background-color:#fdf6e3;color:#657b83;">, and </span>b<span style="background-color:#fdf6e3;color:#657b83;">is</span>bₙ₋₁`.</p>
+</div></div><div class="decl"><h4>generalized_continued_fraction.next_continuants</h4><div class="decl_par"><p>Returns the next continuants <span style="background-color:#fdf6e3;color:#657b83;">⟨Aₙ, Bₙ⟩</span> using <span style="background-color:#fdf6e3;color:#657b83;">next_numerator</span> and <span style="background-color:#fdf6e3;color:#657b83;">next_denominator</span>, where <span style="background-color:#fdf6e3;color:#657b83;">pred</span>
+is <span style="background-color:#fdf6e3;color:#657b83;">⟨Aₙ₋₁, Bₙ₋₁⟩</span>, <span style="background-color:#fdf6e3;color:#657b83;">ppred</span> is <span style="background-color:#fdf6e3;color:#657b83;">⟨Aₙ₋₂, Bₙ₋₂⟩</span>, <span style="background-color:#fdf6e3;color:#657b83;">a</span> is <span style="background-color:#fdf6e3;color:#657b83;">aₙ₋₁</span>, and <span style="background-color:#fdf6e3;color:#657b83;">b</span> is <span style="background-color:#fdf6e3;color:#657b83;">bₙ₋₁</span>.</p>
+</div></div><div class="decl"><h4>generalized_continued_fraction.continuants_aux</h4><div class="decl_par"><p>Returns the continuants <span style="background-color:#fdf6e3;color:#657b83;">⟨Aₙ₋₁, Bₙ₋₁⟩</span> of <span style="background-color:#fdf6e3;color:#657b83;">g</span>.</p>
+</div></div><div class="decl"><h4>generalized_continued_fraction.continuants</h4><div class="decl_par"><p>Returns the continuants <span style="background-color:#fdf6e3;color:#657b83;">⟨Aₙ, Bₙ⟩</span> of <span style="background-color:#fdf6e3;color:#657b83;">g</span>.</p>
+</div></div><div class="decl"><h4>generalized_continued_fraction.numerators</h4><div class="decl_par"><p>Returns the numerators <span style="background-color:#fdf6e3;color:#657b83;">Aₙ</span> of <span style="background-color:#fdf6e3;color:#657b83;">g</span>.</p>
+</div></div><div class="decl"><h4>generalized_continued_fraction.denominators</h4><div class="decl_par"><p>Returns the denominators <span style="background-color:#fdf6e3;color:#657b83;">Bₙ</span> of <span style="background-color:#fdf6e3;color:#657b83;">g</span>.</p>
+</div></div><div class="decl"><h4>generalized_continued_fraction.convergents</h4><div class="decl_par"><p>Returns the convergents <span style="background-color:#fdf6e3;color:#657b83;">Aₙ </span><span style="background-color:#fdf6e3;color:#b58900;">/</span><span style="background-color:#fdf6e3;color:#657b83;"> Bₙ</span> of <span style="background-color:#fdf6e3;color:#657b83;">g</span>, where <span style="background-color:#fdf6e3;color:#657b83;">Aₙ, Bₙ</span> are the nth continuants of <span style="background-color:#fdf6e3;color:#657b83;">g</span>.</p>
+</div></div><div class="decl"><h4>generalized_continued_fraction.convergents'_aux</h4><div class="decl_par"><p>Returns the approximation of the fraction described by the given sequence up to a given position n.
+For example, <span style="background-color:#fdf6e3;color:#657b83;">convergents&#39;_aux [(</span><span style="background-color:#fdf6e3;color:#6c71c4;">1</span><span style="background-color:#fdf6e3;color:#657b83;">, </span><span style="background-color:#fdf6e3;color:#6c71c4;">2</span><span style="background-color:#fdf6e3;color:#657b83;">), (</span><span style="background-color:#fdf6e3;color:#6c71c4;">3</span><span style="background-color:#fdf6e3;color:#657b83;">, </span><span style="background-color:#fdf6e3;color:#6c71c4;">4</span><span style="background-color:#fdf6e3;color:#657b83;">), (</span><span style="background-color:#fdf6e3;color:#6c71c4;">5</span><span style="background-color:#fdf6e3;color:#657b83;">, </span><span style="background-color:#fdf6e3;color:#6c71c4;">6</span><span style="background-color:#fdf6e3;color:#657b83;">)] </span><span style="background-color:#fdf6e3;color:#6c71c4;">2 </span><span style="background-color:#fdf6e3;color:#b58900;">= </span><span style="background-color:#fdf6e3;color:#6c71c4;">1 </span><span style="background-color:#fdf6e3;color:#b58900;">/</span><span style="background-color:#fdf6e3;color:#657b83;"> (</span><span style="background-color:#fdf6e3;color:#6c71c4;">2 </span><span style="background-color:#fdf6e3;color:#b58900;">+ </span><span style="background-color:#fdf6e3;color:#6c71c4;">3 </span><span style="background-color:#fdf6e3;color:#b58900;">/ </span><span style="background-color:#fdf6e3;color:#6c71c4;">4</span><span style="background-color:#fdf6e3;color:#657b83;">)</span> and
+<span style="background-color:#fdf6e3;color:#657b83;">convergents&#39;_aux [(</span><span style="background-color:#fdf6e3;color:#6c71c4;">1</span><span style="background-color:#fdf6e3;color:#657b83;">, </span><span style="background-color:#fdf6e3;color:#6c71c4;">2</span><span style="background-color:#fdf6e3;color:#657b83;">), (</span><span style="background-color:#fdf6e3;color:#6c71c4;">3</span><span style="background-color:#fdf6e3;color:#657b83;">, </span><span style="background-color:#fdf6e3;color:#6c71c4;">4</span><span style="background-color:#fdf6e3;color:#657b83;">), (</span><span style="background-color:#fdf6e3;color:#6c71c4;">5</span><span style="background-color:#fdf6e3;color:#657b83;">, </span><span style="background-color:#fdf6e3;color:#6c71c4;">6</span><span style="background-color:#fdf6e3;color:#657b83;">)] </span><span style="background-color:#fdf6e3;color:#6c71c4;">0 </span><span style="background-color:#fdf6e3;color:#b58900;">= </span><span style="background-color:#fdf6e3;color:#6c71c4;">0</span>.</p>
+</div></div><div class="decl"><h4>generalized_continued_fraction.convergents'</h4><div class="decl_par"><p>Returns the convergents of <span style="background-color:#fdf6e3;color:#657b83;">g</span> by evaluating the fraction described by <span style="background-color:#fdf6e3;color:#657b83;">g</span> up to a given
+position <span style="background-color:#fdf6e3;color:#657b83;">n</span>. For example, <span style="background-color:#fdf6e3;color:#657b83;">convergents&#39; [</span><span style="background-color:#fdf6e3;color:#6c71c4;">9</span><span style="background-color:#fdf6e3;color:#657b83;">; (</span><span style="background-color:#fdf6e3;color:#6c71c4;">1</span><span style="background-color:#fdf6e3;color:#657b83;">, </span><span style="background-color:#fdf6e3;color:#6c71c4;">2</span><span style="background-color:#fdf6e3;color:#657b83;">), (</span><span style="background-color:#fdf6e3;color:#6c71c4;">3</span><span style="background-color:#fdf6e3;color:#657b83;">, </span><span style="background-color:#fdf6e3;color:#6c71c4;">4</span><span style="background-color:#fdf6e3;color:#657b83;">), (</span><span style="background-color:#fdf6e3;color:#6c71c4;">5</span><span style="background-color:#fdf6e3;color:#657b83;">, </span><span style="background-color:#fdf6e3;color:#6c71c4;">6</span><span style="background-color:#fdf6e3;color:#657b83;">)] </span><span style="background-color:#fdf6e3;color:#6c71c4;">2 </span><span style="background-color:#fdf6e3;color:#b58900;">= </span><span style="background-color:#fdf6e3;color:#6c71c4;">9 </span><span style="background-color:#fdf6e3;color:#b58900;">+ </span><span style="background-color:#fdf6e3;color:#6c71c4;">1 </span><span style="background-color:#fdf6e3;color:#b58900;">/</span><span style="background-color:#fdf6e3;color:#657b83;"> (</span><span style="background-color:#fdf6e3;color:#6c71c4;">2 </span><span style="background-color:#fdf6e3;color:#b58900;">+ </span><span style="background-color:#fdf6e3;color:#6c71c4;">3 </span><span style="background-color:#fdf6e3;color:#b58900;">/ </span><span style="background-color:#fdf6e3;color:#6c71c4;">4</span><span style="background-color:#fdf6e3;color:#657b83;">)</span> and
+<span style="background-color:#fdf6e3;color:#657b83;">convergents&#39; [</span><span style="background-color:#fdf6e3;color:#6c71c4;">9</span><span style="background-color:#fdf6e3;color:#657b83;">; (</span><span style="background-color:#fdf6e3;color:#6c71c4;">1</span><span style="background-color:#fdf6e3;color:#657b83;">, </span><span style="background-color:#fdf6e3;color:#6c71c4;">2</span><span style="background-color:#fdf6e3;color:#657b83;">), (</span><span style="background-color:#fdf6e3;color:#6c71c4;">3</span><span style="background-color:#fdf6e3;color:#657b83;">, </span><span style="background-color:#fdf6e3;color:#6c71c4;">4</span><span style="background-color:#fdf6e3;color:#657b83;">), (</span><span style="background-color:#fdf6e3;color:#6c71c4;">5</span><span style="background-color:#fdf6e3;color:#657b83;">, </span><span style="background-color:#fdf6e3;color:#6c71c4;">6</span><span style="background-color:#fdf6e3;color:#657b83;">)] </span><span style="background-color:#fdf6e3;color:#6c71c4;">0 </span><span style="background-color:#fdf6e3;color:#b58900;">= </span><span style="background-color:#fdf6e3;color:#6c71c4;">9</span></p>
+</div></div><div class="decl"><h4>generalized_continued_fraction.ext_iff</h4><div class="decl_par"><p>Two gcfs <span style="background-color:#fdf6e3;color:#657b83;">g</span> and <span style="background-color:#fdf6e3;color:#657b83;">g&#39;</span> are equal if and only if their components are equal.</p>
+</div></div></html>

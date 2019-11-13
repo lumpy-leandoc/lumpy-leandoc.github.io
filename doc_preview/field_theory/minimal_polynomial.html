@@ -1,0 +1,36 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><h1>Minimal polynomials</h1>
+<p>This file defines the minimal polynomial of an element x of an A-algebra B,
+under the assumption that x is integral over A.</p>
+<p>After stating the defining property we specialize to the setting of field extensions
+and derive some well-known properties, amongst which the fact that minimal polynomials
+are irreducible, and uniquely determined by their defining property.</p>
+<hr/><div class="decl"><h4>minimal_polynomial</h4><div class="decl_par"><p>Let B be an A-algebra, and x an element of B that is integral over A.
+The minimal polynomial of x is a monic polynomial of smallest degree that has x as its root.</p>
+</div></div><div class="decl"><h4>minimal_polynomial.monic</h4><div class="decl_par"><p>A minimal polynomial is monic.</p>
+</div></div><div class="decl"><h4>minimal_polynomial.aeval</h4><div class="decl_par"><p>An element is a root of its minimal polynomial.</p>
+</div></div><div class="decl"><h4>minimal_polynomial.min</h4><div class="decl_par"><p>The defining property of the minimal polynomial of an element x:
+it is the monic polynomial with smallest degree that has x as its root.</p>
+</div></div><div class="decl"><h4>minimal_polynomial.ne_zero</h4><div class="decl_par"><p>A minimal polynomial is nonzero.</p>
+</div></div><div class="decl"><h4>minimal_polynomial.degree_le_of_ne_zero</h4><div class="decl_par"><p>If an element x is a root of a nonzero polynomial p,
+then the degree of p is at least the degree of the minimal polynomial of x.</p>
+</div></div><div class="decl"><h4>minimal_polynomial.unique</h4><div class="decl_par"><p>The minimal polynomial of an element x is uniquely characterized by its defining property:
+if there is another monic polynomial of minimal degree that has x as a root,
+then this polynomial is equal to the minimal polynomial of x.</p>
+</div></div><div class="decl"><h4>minimal_polynomial.dvd</h4><div class="decl_par"><p>If an element x is a root of a polynomial p, then the minimal polynomial of x divides p.</p>
+</div></div><div class="decl"><h4>minimal_polynomial.degree_ne_zero</h4><div class="decl_par"><p>The degree of a minimal polynomial is nonzero.</p>
+</div></div><div class="decl"><h4>minimal_polynomial.not_is_unit</h4><div class="decl_par"><p>A minimal polynomial is not a unit.</p>
+</div></div><div class="decl"><h4>minimal_polynomial.degree_pos</h4><div class="decl_par"><p>The degree of a minimal polynomial is positive.</p>
+</div></div><div class="decl"><h4>minimal_polynomial.prime</h4><div class="decl_par"><p>A minimal polynomial is prime.</p>
+</div></div><div class="decl"><h4>minimal_polynomial.irreducible</h4><div class="decl_par"><p>A minimal polynomial is irreducible.</p>
+</div></div><div class="decl"><h4>minimal_polynomial.algebra_map</h4><div class="decl_par"><p>If L/K is a field extension, and x is an element of L in the image of K,
+then the minimal polynomial of x is X - C x.</p>
+</div></div><div class="decl"><h4>minimal_polynomial.algebra_map'</h4><div class="decl_par"><p>If L/K is a field extension, and x is an element of L in the image of K,
+then the minimal polynomial of x is X - C x.</p>
+</div></div><div class="decl"><h4>minimal_polynomial.zero</h4><div class="decl_par"><p>The minimal polynomial of 0 is X.</p>
+</div></div><div class="decl"><h4>minimal_polynomial.one</h4><div class="decl_par"><p>The minimal polynomial of 1 is X - 1.</p>
+</div></div><div class="decl"><h4>minimal_polynomial.root</h4><div class="decl_par"><p>If L/K is a field extension and an element y of K is a root of the minimal polynomial
+of an element x ∈ L, then y maps to x under the field embedding.</p>
+</div></div><div class="decl"><h4>minimal_polynomial.coeff_zero_eq_zero</h4><div class="decl_par"><p>The constant coefficient of the minimal polynomial of x is 0
+if and only if x = 0.</p>
+</div></div><div class="decl"><h4>minimal_polynomial.coeff_zero_ne_zero</h4><div class="decl_par"><p>The minimal polynomial of a nonzero element has nonzero constant coefficient.</p>
+</div></div></html>

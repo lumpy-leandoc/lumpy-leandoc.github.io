@@ -1,0 +1,36 @@
+<html><head><link rel="stylesheet" href="../../docs_style.css"></head><h1>Concrete categories</h1>
+<p>A concrete category is a category <span style="background-color:#fdf6e3;color:#657b83;">C</span> with a fixed faithful functor
+<span style="background-color:#fdf6e3;color:#657b83;">forget : C ⥤ </span><span style="background-color:#fdf6e3;color:#268bd2;">Type</span><span style="background-color:#fdf6e3;color:#b58900;">*</span>.  We define concrete categories using <span style="background-color:#fdf6e3;color:#859900;">class </span><span style="background-color:#fdf6e3;color:#d33682;">concrete_category</span>.  In particular, we impose no restrictions on the
+carrier type <span style="background-color:#fdf6e3;color:#657b83;">C</span>, so <span style="background-color:#fdf6e3;color:#268bd2;">Type</span> is a concrete category with the identity
+forgetful functor.</p>
+<p>Each concrete category <span style="background-color:#fdf6e3;color:#657b83;">C</span> comes with a canonical faithful functor
+<span style="background-color:#fdf6e3;color:#657b83;">forget C : C ⥤ </span><span style="background-color:#fdf6e3;color:#268bd2;">Type</span><span style="background-color:#fdf6e3;color:#b58900;">*</span>.  We say that a concrete category <span style="background-color:#fdf6e3;color:#657b83;">C</span> admits a
+<em>forgetful functor</em> to a concrete category <span style="background-color:#fdf6e3;color:#657b83;">D</span>, if it has a functor
+<span style="background-color:#fdf6e3;color:#657b83;">forget₂ C D : C ⥤ D</span> such that <span style="background-color:#fdf6e3;color:#657b83;">(forget₂ C D) ⋙ (forget D) </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> forget C</span>, see <span style="background-color:#fdf6e3;color:#859900;">class </span><span style="background-color:#fdf6e3;color:#d33682;">has_forget₂</span>.  Due to <span style="background-color:#fdf6e3;color:#657b83;">faithful.div_comp</span>, it suffices
+to verify that <span style="background-color:#fdf6e3;color:#657b83;">forget₂.obj</span> and <span style="background-color:#fdf6e3;color:#657b83;">forget₂.map</span> agree with the equality
+above; then <span style="background-color:#fdf6e3;color:#657b83;">forget₂</span> will satisfy the functor laws automatically, see
+<span style="background-color:#fdf6e3;color:#657b83;">has_forget₂.mk&#39;</span>.</p>
+<p>Two classes helping construct concrete categories in the two most
+common cases are provided in the files <span style="background-color:#fdf6e3;color:#657b83;">bundled_hom</span> and
+<span style="background-color:#fdf6e3;color:#657b83;">unbundled_hom</span>, see their documentation for details.</p>
+<h2>References</h2>
+<p>See [Ahrens and Lumsdaine, <em>Displayed Categories</em>][ahrens2017] for
+related work.</p>
+<hr/><div class="decl"><h4>category_theory.concrete_category</h4><div class="decl_par"><p>A concrete category is a category <span style="background-color:#fdf6e3;color:#657b83;">C</span> with a fixed faithful functor <span style="background-color:#fdf6e3;color:#657b83;">forget : C ⥤ </span><span style="background-color:#fdf6e3;color:#268bd2;">Type</span>.</p>
+</div></div><div class="decl"><h4>category_theory.forget</h4><div class="decl_par"><p>The forgetful functor from a concrete category to <span style="background-color:#fdf6e3;color:#268bd2;">Type</span><span style="background-color:#fdf6e3;color:#657b83;"> u</span>.</p>
+</div></div><div class="decl"><h4>category_theory.concrete_category.has_coe_to_sort</h4><div class="decl_par"><p>Provide a coercion to <span style="background-color:#fdf6e3;color:#268bd2;">Type</span><span style="background-color:#fdf6e3;color:#657b83;"> u</span> for a concrete category. This is not marked as an instance
+as it could potentially apply to every type, and so is too expensive in typeclass search.</p>
+<p>You can use it on particular examples as:</p>
+<pre><code class="language-lean"><pre style="background-color:#fdf6e3;">
+<span style="color:#859900;">instance </span><span style="color:#d33682;">: </span><span style="color:#657b83;">has_coe_to_sort X </span><span style="color:#b58900;">:=</span><span style="color:#657b83;"> concrete_category.has_coe_to_sort X
+</span></pre>
+</code></pre>
+</div></div><div class="decl"><h4>category_theory.concrete_category.has_coe_to_fun</h4><div class="decl_par"><p>Usually a bundled hom structure already has a coercion to function
+that works with different universes. So we don't use this as a global instance.</p>
+</div></div><div class="decl"><h4>category_theory.has_forget₂</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">has_forget₂ C D</span>, where <span style="background-color:#fdf6e3;color:#657b83;">C</span> and <span style="background-color:#fdf6e3;color:#657b83;">D</span> are both concrete categories, provides a functor
+<span style="background-color:#fdf6e3;color:#657b83;">forget₂ C D : C ⥤ C</span> and a proof that <span style="background-color:#fdf6e3;color:#657b83;">forget₂ ⋙ (forget D) </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> forget C</span>.</p>
+</div></div><div class="decl"><h4>category_theory.forget₂</h4><div class="decl_par"><p>The forgetful functor <span style="background-color:#fdf6e3;color:#657b83;">C ⥤ D</span> between concrete categories for which we have an instance
+<span style="background-color:#fdf6e3;color:#657b83;">has_forget₂ C </span>.</p>
+</div></div><div class="decl"><h4>category_theory.has_forget₂.mk'</h4><div class="decl_par"><p>In order to construct a “partially forgetting” functor, we do not need to verify functor laws;
+it suffices to ensure that compositions agree with <span style="background-color:#fdf6e3;color:#657b83;">forget₂ C D ⋙ forget D </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> forget C</span>.</p>
+</div></div></html>

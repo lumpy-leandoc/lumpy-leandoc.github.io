@@ -1,0 +1,21 @@
+<html><head><link rel="stylesheet" href="../../docs_style.css"></head><div class="decl"><h4>pnat</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">ℕ</span><span style="background-color:#fdf6e3;color:#b58900;">+</span> is the type of positive natural numbers. It is defined as a subtype,
+and the VM representation of <span style="background-color:#fdf6e3;color:#657b83;">ℕ</span><span style="background-color:#fdf6e3;color:#b58900;">+</span> is the same as <span style="background-color:#fdf6e3;color:#657b83;">ℕ</span> because the proof
+is not stored.</p>
+</div></div><div class="decl"><h4>nat.to_pnat</h4><div class="decl_par"><p>Convert a natural number to a positive natural number. The
+positivity assumption is inferred by <span style="background-color:#fdf6e3;color:#657b83;">dec_trivial</span>.</p>
+</div></div><div class="decl"><h4>nat.succ_pnat</h4><div class="decl_par"><p>Write a successor as an element of <span style="background-color:#fdf6e3;color:#657b83;">ℕ</span><span style="background-color:#fdf6e3;color:#b58900;">+</span>.</p>
+</div></div><div class="decl"><h4>nat.to_pnat'</h4><div class="decl_par"><p>Convert a natural number to a pnat. <span style="background-color:#fdf6e3;color:#657b83;">n</span><span style="background-color:#fdf6e3;color:#b58900;">+</span><span style="background-color:#fdf6e3;color:#6c71c4;">1</span> is mapped to itself,
+and <span style="background-color:#fdf6e3;color:#6c71c4;">0</span> becomes <span style="background-color:#fdf6e3;color:#6c71c4;">1</span>.</p>
+</div></div><div class="decl"><h4>pnat.decidable_eq</h4><div class="decl_par"><p>We now define a long list of structures on ℕ+ induced by
+similar structures on ℕ. Most of these behave in a completely
+obvious way, but there are a few things to be said about
+subtraction, division and powers.</p>
+</div></div><div class="decl"><h4>pnat.has_sub</h4><div class="decl_par"><p>Subtraction a - b is defined in the obvious way when
+a &gt; b, and by a - b = 1 if a ≤ b.</p>
+</div></div><div class="decl"><h4>pnat.mod_div_aux</h4><div class="decl_par"><p>We define m % k and m / k in the same way as for nat
+except that when m = n * k we take m % k = k and
+m / k = n - 1.  This ensures that m % k is always positive
+and m = (m % k) + k * (m / k) in all cases.  Later we
+define a function div_exact which gives the usual m / k
+in the case where k divides m.</p>
+</div></div></html>

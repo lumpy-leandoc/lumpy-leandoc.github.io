@@ -1,0 +1,21 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><p>Replacement for the definition of <span style="background-color:#fdf6e3;color:#657b83;">well_founded_tactics.default_dec_tac</span> in core.</p>
+<hr/><div class="decl"><h4>well_founded_tactics.default_dec_tac'</h4><div class="decl_par"><p>The definition of <span style="background-color:#fdf6e3;color:#657b83;">default_dec_tac</span> in core is broken, because <span style="background-color:#fdf6e3;color:#657b83;">unfold_sizeof</span>
+could actually discharge the goal.</p>
+<p>Here we add a test using <span style="background-color:#fdf6e3;color:#657b83;">done</span> to detect this.</p>
+</div></div><div class="decl"><h4>wf_tacs</h4><div class="decl_par"><p>The default <span style="background-color:#fdf6e3;color:#657b83;">well_founded_tactics</span> provided in core are broken in some situations, often indicated
+by the message</p>
+<pre><code class="language-lean"><pre style="background-color:#fdf6e3;">
+<span style="color:#657b83;">The nested exception contains the failure state for the decreasing tactic.
+</span><span style="color:#657b83;">nested exception message:
+</span><span style="color:#657b83;">tactic failed, there are no goals to be solved
+</span><span style="color:#657b83;">state:
+</span><span style="color:#657b83;">no goals
+</span></pre>
+</code></pre>
+<p>Use this replacement by adding</p>
+<pre><code class="language-lean"><pre style="background-color:#fdf6e3;">
+<span style="color:#657b83;">using_well_founded wf_tacs
+</span></pre>
+</code></pre>
+<p>at the end of your inductive definition.</p>
+</div></div></html>

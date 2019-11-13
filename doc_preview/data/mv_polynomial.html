@@ -1,0 +1,42 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><div class="decl"><h4>mv_polynomial</h4><div class="decl_par"><p>Multivariate polynomial, where <span style="background-color:#fdf6e3;color:#657b83;">σ</span> is the index set of the variables and
+<span style="background-color:#fdf6e3;color:#657b83;">α</span> is the coefficient ring</p>
+</div></div><div class="decl"><h4>mv_polynomial.monomial</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">monomial s a</span> is the monomial <span style="background-color:#fdf6e3;color:#657b83;">a </span><span style="background-color:#fdf6e3;color:#b58900;">*</span><span style="background-color:#fdf6e3;color:#657b83;"> X^s</span></p>
+</div></div><div class="decl"><h4>mv_polynomial.C</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">C a</span> is the constant polynomial with value <span style="background-color:#fdf6e3;color:#657b83;">a</span></p>
+</div></div><div class="decl"><h4>mv_polynomial.X</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">X n</span> is the polynomial with value X_n</p>
+</div></div><div class="decl"><h4>mv_polynomial.coeff</h4><div class="decl_par"><p>The coefficient of the monomial <span style="background-color:#fdf6e3;color:#657b83;">m</span> in the multi-variable polynomial <span style="background-color:#fdf6e3;color:#657b83;">p</span>.</p>
+</div></div><div class="decl"><h4>mv_polynomial.eval₂</h4><div class="decl_par"><p>Evaluate a polynomial <span style="background-color:#fdf6e3;color:#657b83;">p</span> given a valuation <span style="background-color:#fdf6e3;color:#657b83;">g</span> of all the variables
+and a ring hom <span style="background-color:#fdf6e3;color:#657b83;">f</span> from the scalar ring to the target</p>
+</div></div><div class="decl"><h4>mv_polynomial.eval</h4><div class="decl_par"><p>Evaluate a polynomial <span style="background-color:#fdf6e3;color:#657b83;">p</span> given a valuation <span style="background-color:#fdf6e3;color:#657b83;">f</span> of all the variables</p>
+</div></div><div class="decl"><h4>mv_polynomial.map</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">map f p</span> maps a polynomial <span style="background-color:#fdf6e3;color:#657b83;">p</span> across a ring hom <span style="background-color:#fdf6e3;color:#657b83;">f</span></p>
+</div></div><div class="decl"><h4>mv_polynomial.degrees</h4><div class="decl_par"><p>The maximal degrees of each variable in a multi-variable polynomial, expressed as a multiset.</p>
+<p>(For example, <span style="background-color:#fdf6e3;color:#657b83;">degrees (x^</span><span style="background-color:#fdf6e3;color:#6c71c4;">2 </span><span style="background-color:#fdf6e3;color:#b58900;">*</span><span style="background-color:#fdf6e3;color:#657b83;"> y </span><span style="background-color:#fdf6e3;color:#b58900;">+</span><span style="background-color:#fdf6e3;color:#657b83;"> y^</span><span style="background-color:#fdf6e3;color:#6c71c4;">3</span><span style="background-color:#fdf6e3;color:#657b83;">)</span> would be <span style="background-color:#fdf6e3;color:#657b83;">{x, x, y, y, y}</span>.)</p>
+</div></div><div class="decl"><h4>mv_polynomial.vars</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">vars p</span> is the set of variables appearing in the polynomial <span style="background-color:#fdf6e3;color:#657b83;">p</span></p>
+</div></div><div class="decl"><h4>mv_polynomial.degree_of</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">degree_of n p</span> gives the highest power of X_n that appears in <span style="background-color:#fdf6e3;color:#657b83;">p</span></p>
+</div></div><div class="decl"><h4>mv_polynomial.total_degree</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">total_degree p</span> gives the maximum |s| over the monomials X^s in <span style="background-color:#fdf6e3;color:#657b83;">p</span></p>
+</div></div><div class="decl"><h4>mv_polynomial.eval₂_hom_X</h4><div class="decl_par"><p>A ring homomorphism f : Z[X_1, X_2, ...] → R
+is determined by the evaluations f(X_1), f(X_2), ...</p>
+</div></div><div class="decl"><h4>mv_polynomial.hom_equiv</h4><div class="decl_par"><p>Ring homomorphisms out of integer polynomials on a type <span style="background-color:#fdf6e3;color:#657b83;">σ</span> are the same as
+functions out of the type <span style="background-color:#fdf6e3;color:#657b83;">σ</span>,</p>
+</div></div><div class="decl"><h4>mv_polynomial.rename</h4><div class="decl_par"><p>Rename all the variables in a multivariable polynomial.</p>
+</div></div><div class="decl"><h4>mv_polynomial.pempty_ring_equiv</h4><div class="decl_par"><p>The ring isomorphism between multivariable polynomials in no variables and the ground ring.</p>
+</div></div><div class="decl"><h4>mv_polynomial.punit_ring_equiv</h4><div class="decl_par"><p>The ring isomorphism between multivariable polynomials in a single variable and
+polynomials over the ground ring.</p>
+</div></div><div class="decl"><h4>mv_polynomial.ring_equiv_of_equiv</h4><div class="decl_par"><p>The ring isomorphism between multivariable polynomials induced by an equivalence of the variables.</p>
+</div></div><div class="decl"><h4>mv_polynomial.ring_equiv_congr</h4><div class="decl_par"><p>The ring isomorphism between multivariable polynomials induced by a ring isomorphism of the ground ring.</p>
+</div></div><div class="decl"><h4>mv_polynomial.sum_to_iter</h4><div class="decl_par"><p>The function from multivariable polynomials in a sum of two types,
+to multivariable polynomials in one of the types,
+with coefficents in multivariable polynomials in the other type.</p>
+<p>See <span style="background-color:#fdf6e3;color:#657b83;">sum_ring_equiv</span> for the ring isomorphism.</p>
+</div></div><div class="decl"><h4>mv_polynomial.iter_to_sum</h4><div class="decl_par"><p>The function from multivariable polynomials in one type,
+with coefficents in multivariable polynomials in another type,
+to multivariable polynomials in the sum of the two types.</p>
+<p>See <span style="background-color:#fdf6e3;color:#657b83;">sum_ring_equiv</span> for the ring isomorphism.</p>
+</div></div><div class="decl"><h4>mv_polynomial.mv_polynomial_equiv_mv_polynomial</h4><div class="decl_par"><p>A helper function for <span style="background-color:#fdf6e3;color:#657b83;">sum_ring_equiv</span>.</p>
+</div></div><div class="decl"><h4>mv_polynomial.sum_ring_equiv</h4><div class="decl_par"><p>The ring isomorphism between multivariable polynomials in a sum of two types,
+and multivariable polynomials in one of the types,
+with coefficents in multivariable polynomials in the other type.</p>
+</div></div><div class="decl"><h4>mv_polynomial.option_equiv_left</h4><div class="decl_par"><p>The ring isomorphism between multivariable polynomials in <span style="background-color:#fdf6e3;color:#657b83;">option β</span> and
+polynomials with coefficients in <span style="background-color:#fdf6e3;color:#657b83;">mv_polynomial β α</span>.</p>
+</div></div><div class="decl"><h4>mv_polynomial.option_equiv_right</h4><div class="decl_par"><p>The ring isomorphism between multivariable polynomials in <span style="background-color:#fdf6e3;color:#657b83;">option β</span> and
+multivariable polynomials with coefficients in polynomials.</p>
+</div></div></html>

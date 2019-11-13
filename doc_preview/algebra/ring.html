@@ -1,0 +1,130 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><h1>Properties and homomorphisms of semirings and rings</h1>
+<p>This file proves simple properties of semirings, rings and domains and their unit groups. It also
+defines homomorphisms of semirings and rings, both unbundled (e.g. <span style="background-color:#fdf6e3;color:#657b83;">is_semiring_hom f</span>)
+and bundled (e.g. <span style="background-color:#fdf6e3;color:#657b83;">ring_hom a β</span>, a.k.a. <span style="background-color:#fdf6e3;color:#657b83;">α </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#b58900;">+*</span><span style="background-color:#fdf6e3;color:#657b83;"> β</span>). The unbundled ones are deprecated
+and the plan is to slowly remove them from mathlib.</p>
+<h2>Main definitions</h2>
+<p>is_semiring_hom (deprecated), is_ring_hom (deprecated), ring_hom, nonzero_comm_semiring,
+nonzero_comm_ring, domain</p>
+<h2>Notations</h2>
+<p>→+* for bundled ring homs (also use for semiring homs)</p>
+<h2>Implementation notes</h2>
+<p>There's a coercion from bundled homs to fun, and the canonical
+notation is to use the bundled hom as a function via this coercion.</p>
+<p>There is no <span style="background-color:#fdf6e3;color:#657b83;">semiring_hom</span> -- the idea is that <span style="background-color:#fdf6e3;color:#657b83;">ring_hom</span> is used.
+The constructor for a <span style="background-color:#fdf6e3;color:#657b83;">ring_hom</span> between semirings needs a proof of <span style="background-color:#fdf6e3;color:#657b83;">map_zero</span>, <span style="background-color:#fdf6e3;color:#657b83;">map_one</span> and
+<span style="background-color:#fdf6e3;color:#657b83;">map_add</span> as well as <span style="background-color:#fdf6e3;color:#657b83;">map_mul</span>; a separate constructor <span style="background-color:#fdf6e3;color:#657b83;">ring_hom.mk&#39;</span> will construct ring homs
+between rings from monoid homs given only a proof that addition is preserved.</p>
+<p>Throughout the section on <span style="background-color:#fdf6e3;color:#657b83;">ring_hom</span> implicit <span style="background-color:#fdf6e3;color:#657b83;">{}</span> brackets are often used instead of type class <span style="background-color:#fdf6e3;color:#657b83;">[]</span> brackets.
+This is done when the instances can be inferred because they are implicit arguments to the type <span style="background-color:#fdf6e3;color:#657b83;">ring_hom</span>.
+When they can be inferred from the type it is faster to use this method than to use type class inference.</p>
+<h2>Tags</h2>
+<p>is_ring_hom, is_semiring_hom, ring_hom, semiring_hom, semiring, comm_semiring, ring, comm_ring,
+domain, integral_domain, nonzero_comm_semiring, nonzero_comm_ring, units</p>
+<hr/><div class="decl"><h4>zero_ne_one_or_forall_eq_0</h4><div class="decl_par"><p>Either zero and one are nonequal in a semiring, or the semiring is the zero ring.</p>
+</div></div><div class="decl"><h4>eq_zero_of_zero_eq_one</h4><div class="decl_par"><p>If zero equals one in a semiring, the semiring is the zero ring.</p>
+</div></div><div class="decl"><h4>subsingleton_of_zero_eq_one</h4><div class="decl_par"><p>If zero equals one in a semiring, all elements of that semiring are equal.</p>
+</div></div><div class="decl"><h4>units.has_neg</h4><div class="decl_par"><p>Each element of the group of units of a ring has an additive inverse.</p>
+</div></div><div class="decl"><h4>units.coe_neg</h4><div class="decl_par"><p>Representing an element of a ring's unit group as an element of the ring commutes with
+mapping this element to its additive inverse.</p>
+</div></div><div class="decl"><h4>units.neg_inv</h4><div class="decl_par"><p>Mapping an element of a ring's unit group to its inverse commutes with mapping this element
+to its additive inverse.</p>
+</div></div><div class="decl"><h4>units.neg_neg</h4><div class="decl_par"><p>An element of a ring's unit group equals the additive inverse of its additive inverse.</p>
+</div></div><div class="decl"><h4>units.neg_mul</h4><div class="decl_par"><p>Multiplication of elements of a ring's unit group commutes with mapping the first
+argument to its additive inverse.</p>
+</div></div><div class="decl"><h4>units.mul_neg</h4><div class="decl_par"><p>Multiplication of elements of a ring's unit group commutes with mapping the second argument
+to its additive inverse.</p>
+</div></div><div class="decl"><h4>units.neg_mul_neg</h4><div class="decl_par"><p>Multiplication of the additive inverses of two elements of a ring's unit group equals
+multiplication of the two original elements.</p>
+</div></div><div class="decl"><h4>units.neg_eq_neg_one_mul</h4><div class="decl_par"><p>The additive inverse of an element of a ring's unit group equals the additive inverse of
+one times the original element.</p>
+</div></div><div class="decl"><h4>is_semiring_hom</h4><div class="decl_par"><p>Predicate for semiring homomorphisms (deprecated -- use the bundled <span style="background-color:#fdf6e3;color:#657b83;">ring_hom</span> version).</p>
+</div></div><div class="decl"><h4>is_semiring_hom.id</h4><div class="decl_par"><p>The identity map is a semiring homomorphism.</p>
+</div></div><div class="decl"><h4>is_semiring_hom.comp</h4><div class="decl_par"><p>The composition of two semiring homomorphisms is a semiring homomorphism.</p>
+</div></div><div class="decl"><h4>is_semiring_hom.is_add_monoid_hom</h4><div class="decl_par"><p>A semiring homomorphism is an additive monoid homomorphism.</p>
+</div></div><div class="decl"><h4>is_semiring_hom.is_monoid_hom</h4><div class="decl_par"><p>A semiring homomorphism is a monoid homomorphism.</p>
+</div></div><div class="decl"><h4>mul_neg_one</h4><div class="decl_par"><p>An element of a ring multiplied by the additive inverse of one is the element's additive
+inverse.</p>
+</div></div><div class="decl"><h4>neg_one_mul</h4><div class="decl_par"><p>The additive inverse of one multiplied by an element of a ring is the element's additive
+inverse.</p>
+</div></div><div class="decl"><h4>mul_add_eq_mul_add_iff_sub_mul_add_eq</h4><div class="decl_par"><p>An iff statement following from right distributivity in rings and the definition
+of subtraction.</p>
+</div></div><div class="decl"><h4>sub_mul_add_eq_of_mul_add_eq_mul_add</h4><div class="decl_par"><p>A simplification of one side of an equation exploiting right distributivity in rings
+and the definition of subtraction.</p>
+</div></div><div class="decl"><h4>ne_zero_and_ne_zero_of_mul_ne_zero</h4><div class="decl_par"><p>If the product of two elements of a ring is nonzero, both elements are nonzero.</p>
+</div></div><div class="decl"><h4>zero_dvd_iff</h4><div class="decl_par"><p>Given an element a of a commutative semiring, there exists another element whose product
+with zero equals a iff a equals zero.</p>
+</div></div><div class="decl"><h4>mul_self_sub_mul_self</h4><div class="decl_par"><p>Representation of a difference of two squares in a commutative ring as a product.</p>
+</div></div><div class="decl"><h4>dvd_neg</h4><div class="decl_par"><p>An element a of a commutative ring divides the additive inverse of an element b iff a
+divides b.</p>
+</div></div><div class="decl"><h4>neg_dvd</h4><div class="decl_par"><p>The additive inverse of an element a of a commutative ring divides another element b iff a
+divides b.</p>
+</div></div><div class="decl"><h4>dvd_add_left</h4><div class="decl_par"><p>If an element a divides another element c in a commutative ring, a divides the sum of another
+element b with c iff a divides b.</p>
+</div></div><div class="decl"><h4>dvd_add_right</h4><div class="decl_par"><p>If an element a divides another element b in a commutative ring, a divides the sum of b and
+another element c iff a divides c.</p>
+</div></div><div class="decl"><h4>dvd_add_self_left</h4><div class="decl_par"><p>An element a divides the sum a + b if and only if a divides b.</p>
+</div></div><div class="decl"><h4>dvd_add_self_right</h4><div class="decl_par"><p>An element a divides the sum b + a if and only if a divides b.</p>
+</div></div><div class="decl"><h4>Vieta_formula_quadratic</h4><div class="decl_par"><p>Vieta's formula for a quadratic equation, relating the coefficients of the polynomial with
+its roots. This particular version states that if we have a root <span style="background-color:#fdf6e3;color:#657b83;">x</span> of a monic quadratic
+polynomial, then there is another root <span style="background-color:#fdf6e3;color:#657b83;">y</span> such that <span style="background-color:#fdf6e3;color:#657b83;">x </span><span style="background-color:#fdf6e3;color:#b58900;">+</span><span style="background-color:#fdf6e3;color:#657b83;"> y</span> is negative the <span style="background-color:#fdf6e3;color:#657b83;">a_1</span> coefficient
+and <span style="background-color:#fdf6e3;color:#657b83;">x </span><span style="background-color:#fdf6e3;color:#b58900;">*</span><span style="background-color:#fdf6e3;color:#657b83;"> y</span> is the <span style="background-color:#fdf6e3;color:#657b83;">a_0</span> coefficient.</p>
+</div></div><div class="decl"><h4>is_ring_hom</h4><div class="decl_par"><p>Predicate for ring homomorphisms (deprecated -- use the bundled <span style="background-color:#fdf6e3;color:#657b83;">ring_hom</span> version).</p>
+</div></div><div class="decl"><h4>is_ring_hom.of_semiring</h4><div class="decl_par"><p>A map of rings that is a semiring homomorphism is also a ring homomorphism.</p>
+</div></div><div class="decl"><h4>is_ring_hom.map_zero</h4><div class="decl_par"><p>Ring homomorphisms map zero to zero.</p>
+</div></div><div class="decl"><h4>is_ring_hom.map_neg</h4><div class="decl_par"><p>Ring homomorphisms preserve additive inverses.</p>
+</div></div><div class="decl"><h4>is_ring_hom.map_sub</h4><div class="decl_par"><p>Ring homomorphisms preserve subtraction.</p>
+</div></div><div class="decl"><h4>is_ring_hom.id</h4><div class="decl_par"><p>The identity map is a ring homomorphism.</p>
+</div></div><div class="decl"><h4>is_ring_hom.comp</h4><div class="decl_par"><p>The composition of two ring homomorphisms is a ring homomorphism.</p>
+</div></div><div class="decl"><h4>is_ring_hom.is_semiring_hom</h4><div class="decl_par"><p>A ring homomorphism is also a semiring homomorphism.</p>
+</div></div><div class="decl"><h4>ring_hom</h4><div class="decl_par"><p>Bundled semiring homomorphisms; use this for bundled ring homomorphisms too.</p>
+</div></div><div class="decl"><h4>ring_hom.of</h4><div class="decl_par"><p>Interpret <span style="background-color:#fdf6e3;color:#657b83;">f : α </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> β</span> with <span style="background-color:#fdf6e3;color:#657b83;">is_semiring_hom f</span> as a ring homomorphism.</p>
+</div></div><div class="decl"><h4>ring_hom.map_zero</h4><div class="decl_par"><p>Ring homomorphisms map zero to zero.</p>
+</div></div><div class="decl"><h4>ring_hom.map_one</h4><div class="decl_par"><p>Ring homomorphisms map one to one.</p>
+</div></div><div class="decl"><h4>ring_hom.map_add</h4><div class="decl_par"><p>Ring homomorphisms preserve addition.</p>
+</div></div><div class="decl"><h4>ring_hom.map_mul</h4><div class="decl_par"><p>Ring homomorphisms preserve multiplication.</p>
+</div></div><div class="decl"><h4>ring_hom.id</h4><div class="decl_par"><p>The identity ring homomorphism from a semiring to itself.</p>
+</div></div><div class="decl"><h4>ring_hom.comp</h4><div class="decl_par"><p>Composition of ring homomorphisms is a ring homomorphism.</p>
+</div></div><div class="decl"><h4>ring_hom.map_neg</h4><div class="decl_par"><p>Ring homomorphisms preserve additive inverse.</p>
+</div></div><div class="decl"><h4>ring_hom.map_sub</h4><div class="decl_par"><p>Ring homomorphisms preserve subtraction.</p>
+</div></div><div class="decl"><h4>ring_hom.mk'</h4><div class="decl_par"><p>Makes a ring homomorphism from a monoid homomorphism of rings which preserves addition.</p>
+</div></div><div class="decl"><h4>nonzero_comm_semiring</h4><div class="decl_par"><p>Predicate for commutative semirings in which zero does not equal one.</p>
+</div></div><div class="decl"><h4>nonzero_comm_ring</h4><div class="decl_par"><p>Predicate for commutative rings in which zero does not equal one.</p>
+</div></div><div class="decl"><h4>nonzero_comm_ring.to_nonzero_comm_semiring</h4><div class="decl_par"><p>A nonzero commutative ring is a nonzero commutative semiring.</p>
+</div></div><div class="decl"><h4>integral_domain.to_nonzero_comm_ring</h4><div class="decl_par"><p>An integral domain is a nonzero commutative ring.</p>
+</div></div><div class="decl"><h4>units.coe_ne_zero</h4><div class="decl_par"><p>An element of the unit group of a nonzero commutative semiring represented as an element
+of the semiring is nonzero.</p>
+</div></div><div class="decl"><h4>nonzero_comm_ring.of_ne</h4><div class="decl_par"><p>Makes a nonzero commutative ring from a commutative ring containing at least two distinct
+elements.</p>
+</div></div><div class="decl"><h4>nonzero_comm_semiring.of_ne</h4><div class="decl_par"><p>Makes a nonzero commutative semiring from a commutative semiring containing at least two
+distinct elements.</p>
+</div></div><div class="decl"><h4>has_div_of_division_ring</h4><div class="decl_par"><p>this is needed for compatibility between Lean 3.4.2 and Lean 3.5.0c</p>
+</div></div><div class="decl"><h4>domain</h4><div class="decl_par"><p>A domain is a ring with no zero divisors, i.e. satisfying
+the condition <span style="background-color:#fdf6e3;color:#657b83;">a </span><span style="background-color:#fdf6e3;color:#b58900;">*</span><span style="background-color:#fdf6e3;color:#657b83;"> b </span><span style="background-color:#fdf6e3;color:#b58900;">= </span><span style="background-color:#fdf6e3;color:#6c71c4;">0 </span><span style="background-color:#fdf6e3;color:#b58900;">↔</span><span style="background-color:#fdf6e3;color:#657b83;"> a </span><span style="background-color:#fdf6e3;color:#b58900;">= </span><span style="background-color:#fdf6e3;color:#6c71c4;">0 </span><span style="background-color:#fdf6e3;color:#b58900;">∨</span><span style="background-color:#fdf6e3;color:#657b83;"> b </span><span style="background-color:#fdf6e3;color:#b58900;">= </span><span style="background-color:#fdf6e3;color:#6c71c4;">0</span>. Alternatively, a domain
+is an integral domain without assuming commutativity of multiplication.</p>
+</div></div><div class="decl"><h4>mul_eq_zero</h4><div class="decl_par"><p>Simplification theorems for the definition of a domain.</p>
+</div></div><div class="decl"><h4>mul_ne_zero'</h4><div class="decl_par"><p>The product of two nonzero elements of a domain is nonzero.</p>
+</div></div><div class="decl"><h4>domain.mul_right_inj</h4><div class="decl_par"><p>Right multiplication by a nonzero element in a domain is injective.</p>
+</div></div><div class="decl"><h4>domain.mul_left_inj</h4><div class="decl_par"><p>Left multiplication by a nonzero element in a domain is injective.</p>
+</div></div><div class="decl"><h4>eq_zero_of_mul_eq_self_right'</h4><div class="decl_par"><p>An element of a domain fixed by right multiplication by an element other than one must
+be zero.</p>
+</div></div><div class="decl"><h4>eq_zero_of_mul_eq_self_left'</h4><div class="decl_par"><p>An element of a domain fixed by left multiplication by an element other than one must
+be zero.</p>
+</div></div><div class="decl"><h4>mul_ne_zero_comm'</h4><div class="decl_par"><p>For elements a, b of a domain, if a<em>b is nonzero, so is b</em>a.</p>
+</div></div><div class="decl"><h4>integral_domain.to_domain</h4><div class="decl_par"><p>An integral domain is a domain.</p>
+</div></div><div class="decl"><h4>eq_of_mul_eq_mul_right_of_ne_zero</h4><div class="decl_par"><p>Right multiplcation by a nonzero element of an integral domain is injective.</p>
+</div></div><div class="decl"><h4>eq_of_mul_eq_mul_left_of_ne_zero</h4><div class="decl_par"><p>Left multiplication by a nonzero element of an integral domain is injective.</p>
+</div></div><div class="decl"><h4>mul_dvd_mul_iff_left</h4><div class="decl_par"><p>Given two elements b, c of an integral domain and a nonzero element a, a<em>b divides a</em>c iff
+b divides c.</p>
+</div></div><div class="decl"><h4>mul_dvd_mul_iff_right</h4><div class="decl_par"><p>Given two elements a, b of an integral domain and a nonzero element c, a<em>c divides b</em>c iff
+a divides b.</p>
+</div></div><div class="decl"><h4>units.inv_eq_self_iff</h4><div class="decl_par"><p>In the unit group of an integral domain, a unit is its own inverse iff the unit is one or
+one's additive inverse.</p>
+</div></div><div class="decl"><h4>units.coe_dvd</h4><div class="decl_par"><p>Elements of the unit group of a commutative semiring represented as elements of the semiring
+divide any element of the semiring.</p>
+</div></div><div class="decl"><h4>units.dvd_coe_mul</h4><div class="decl_par"><p>In a commutative semiring, an element a divides an element b iff a divides all
+associates of b.</p>
+</div></div><div class="decl"><h4>units.dvd_coe</h4><div class="decl_par"><p>An element of a commutative semiring divides a unit iff the element divides one.</p>
+</div></div><div class="decl"><h4>units.coe_mul_dvd</h4><div class="decl_par"><p>In a commutative semiring, an element a divides an element b iff all associates of a divide b.</p>
+</div></div><div class="decl"><h4>units.ne_zero</h4><div class="decl_par"><p>Every unit in a domain is nonzero.</p>
+</div></div></html>

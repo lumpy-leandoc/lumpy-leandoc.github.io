@@ -1,0 +1,17 @@
+<html><head><link rel="stylesheet" href="../../docs_style.css"></head><h1>Gaussian integers</h1>
+<p>The Gaussian integers are complex integer, complex numbers whose real and imaginary parts are both
+integers.</p>
+<h2>Main definitions</h2>
+<p>The Euclidean domain structure on <span style="background-color:#fdf6e3;color:#657b83;">ℤ[i]</span> is defined in this file.</p>
+<p>The homomorphism <span style="background-color:#fdf6e3;color:#657b83;">to_complex</span> into the complex numbers is also defined in this file.</p>
+<h2>Main statements</h2>
+<p><span style="background-color:#fdf6e3;color:#657b83;">prime_iff_mod_four_eq_three_of_nat_prime</span>
+A prime natural number is prime in <span style="background-color:#fdf6e3;color:#657b83;">ℤ[i]</span> if and only if it is <span style="background-color:#fdf6e3;color:#6c71c4;">3</span> mod <span style="background-color:#fdf6e3;color:#6c71c4;">4</span></p>
+<h2>Notations</h2>
+<p>This file uses the local notation <span style="background-color:#fdf6e3;color:#657b83;">ℤ[i]</span> for <span style="background-color:#fdf6e3;color:#657b83;">gaussian_int</span></p>
+<h2>Implementation notes</h2>
+<p>Gaussian integers are implemented using the more general definition <span style="background-color:#fdf6e3;color:#657b83;">zsqrtd</span>, the type of integers
+adjoined a square root of <span style="background-color:#fdf6e3;color:#657b83;">d</span>, in this case <span style="background-color:#fdf6e3;color:#b58900;">-</span><span style="background-color:#fdf6e3;color:#6c71c4;">1</span>. The definition is reducible, so that properties
+and definitions about <span style="background-color:#fdf6e3;color:#657b83;">zsqrtd</span> can easily be used.</p>
+<hr/><div class="decl"><h4>gaussian_int.prime_iff_mod_four_eq_three_of_nat_prime</h4><div class="decl_par"><p>A prime natural number is prime in <span style="background-color:#fdf6e3;color:#657b83;">ℤ[i]</span> if and only if it is <span style="background-color:#fdf6e3;color:#6c71c4;">3</span> mod <span style="background-color:#fdf6e3;color:#6c71c4;">4</span></p>
+</div></div></html>

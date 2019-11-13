@@ -1,0 +1,28 @@
+<html><head><link rel="stylesheet" href="../../docs_style.css"></head><h1>p-adic integers</h1>
+<p>This file defines the p-adic integers ℤ_p as the subtype of ℚ_p with norm ≤ 1. We show that ℤ_p is a
+complete nonarchimedean normed local ring.</p>
+<h2>Important definitions</h2>
+<ul>
+<li><span style="background-color:#fdf6e3;color:#657b83;">padic_int</span> : the type of p-adic numbers</li>
+</ul>
+<h2>Notation</h2>
+<p>We introduce the notation ℤ_[p] for the p-adic integers.</p>
+<h2>Implementation notes</h2>
+<p>Much, but not all, of this file assumes that <span style="background-color:#fdf6e3;color:#657b83;">p</span> is prime. This assumption is inferred automatically
+by taking (prime p) as a type class argument.</p>
+<p>Coercions into ℤ_p are set up to work with the <span style="background-color:#fdf6e3;color:#657b83;">norm_cast</span> tactic.</p>
+<h2>References</h2>
+<ul>
+<li>[F. Q. Gouêva, <em>p-adic numbers</em>][gouvea1997]</li>
+<li>[R. Y. Lewis, <em>A formal proof of Hensel's lemma over the p-adic integers</em>][lewis2019]</li>
+<li>https://en.wikipedia.org/wiki/P-adic_number</li>
+</ul>
+<h2>Tags</h2>
+<p>p-adic, p adic, padic, p-adic integer</p>
+<hr/><div class="decl"><h4>padic_int</h4><div class="decl_par"><p>The p-adic integers ℤ_p are the p-adic numbers with norm ≤ 1.</p>
+</div></div><div class="decl"><h4>padic_int.add</h4><div class="decl_par"><p>Addition on ℤ_p is inherited from ℚ_p.</p>
+</div></div><div class="decl"><h4>padic_int.mul</h4><div class="decl_par"><p>Multiplication on ℤ_p is inherited from ℚ_p.</p>
+</div></div><div class="decl"><h4>padic_int.neg</h4><div class="decl_par"><p>Negation on ℤ_p is inherited from ℚ_p.</p>
+</div></div><div class="decl"><h4>padic_int.inv</h4><div class="decl_par"><p>The inverse of a p-adic integer with norm equal to 1 is also a p-adic integer. Otherwise, the
+inverse is defined to be 0.</p>
+</div></div></html>

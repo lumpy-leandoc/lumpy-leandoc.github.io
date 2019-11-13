@@ -1,0 +1,26 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><h1>Floor and Ceil</h1>
+<h2>Summary</h2>
+<p>We define <span style="background-color:#fdf6e3;color:#657b83;">floor</span>, <span style="background-color:#fdf6e3;color:#657b83;">ceil</span>, and <span style="background-color:#fdf6e3;color:#657b83;">nat_ceil</span> functions on linear ordered rings.</p>
+<h2>Main Definitions</h2>
+<ul>
+<li><span style="background-color:#fdf6e3;color:#657b83;">floor_ring</span> is a linear ordered ring with floor function.</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">floor x</span> is the greatest integer <span style="background-color:#fdf6e3;color:#657b83;">z</span> such that <span style="background-color:#fdf6e3;color:#657b83;">z </span><span style="background-color:#fdf6e3;color:#b58900;">≤</span><span style="background-color:#fdf6e3;color:#657b83;"> x</span>.</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">fract x</span> is the fractional part of x, that is <span style="background-color:#fdf6e3;color:#657b83;">x </span><span style="background-color:#fdf6e3;color:#b58900;">-</span><span style="background-color:#fdf6e3;color:#657b83;"> floor x</span>.</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">ceil x</span> is the smallest integer <span style="background-color:#fdf6e3;color:#657b83;">z</span> such that <span style="background-color:#fdf6e3;color:#657b83;">x </span><span style="background-color:#fdf6e3;color:#b58900;">≤</span><span style="background-color:#fdf6e3;color:#657b83;"> z</span>.</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">nat_ceil x</span> is the smallest nonnegative integer <span style="background-color:#fdf6e3;color:#657b83;">n</span> with <span style="background-color:#fdf6e3;color:#657b83;">x </span><span style="background-color:#fdf6e3;color:#b58900;">≤</span><span style="background-color:#fdf6e3;color:#657b83;"> n</span>.</li>
+</ul>
+<h2>Notations</h2>
+<ul>
+<li><span style="background-color:#fdf6e3;color:#657b83;">⌊x⌋</span> is <span style="background-color:#fdf6e3;color:#657b83;">floor x</span>.</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">⌈x⌉</span> is <span style="background-color:#fdf6e3;color:#657b83;">ceil x</span>.</li>
+</ul>
+<h2>Tags</h2>
+<p>rounding</p>
+<hr/><div class="decl"><h4>floor_ring</h4><div class="decl_par"><p>A <span style="background-color:#fdf6e3;color:#657b83;">floor_ring</span> is a linear ordered ring over <span style="background-color:#fdf6e3;color:#657b83;">α</span> with a function
+<span style="background-color:#fdf6e3;color:#657b83;">floor : α </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> ℤ</span> satisfying <span style="background-color:#fdf6e3;color:#657b83;">∀ (z : ℤ) (x : α), z </span><span style="background-color:#fdf6e3;color:#b58900;">≤</span><span style="background-color:#fdf6e3;color:#657b83;"> floor x </span><span style="background-color:#fdf6e3;color:#b58900;">↔</span><span style="background-color:#fdf6e3;color:#657b83;"> (z : α) </span><span style="background-color:#fdf6e3;color:#b58900;">≤</span><span style="background-color:#fdf6e3;color:#657b83;"> x)</span>.</p>
+</div></div><div class="decl"><h4>floor</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">floor x</span> is the greatest integer <span style="background-color:#fdf6e3;color:#657b83;">z</span> such that <span style="background-color:#fdf6e3;color:#657b83;">z </span><span style="background-color:#fdf6e3;color:#b58900;">≤</span><span style="background-color:#fdf6e3;color:#657b83;"> x</span></p>
+</div></div><div class="decl"><h4>fract</h4><div class="decl_par"><p>The fractional part fract r of r is just r - ⌊r⌋</p>
+</div></div><div class="decl"><h4>ceil</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">ceil x</span> is the smallest integer <span style="background-color:#fdf6e3;color:#657b83;">z</span> such that <span style="background-color:#fdf6e3;color:#657b83;">x </span><span style="background-color:#fdf6e3;color:#b58900;">≤</span><span style="background-color:#fdf6e3;color:#657b83;"> z</span></p>
+</div></div><div class="decl"><h4>nat_ceil</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">nat_ceil x</span> is the smallest nonnegative integer <span style="background-color:#fdf6e3;color:#657b83;">n</span> with <span style="background-color:#fdf6e3;color:#657b83;">x </span><span style="background-color:#fdf6e3;color:#b58900;">≤</span><span style="background-color:#fdf6e3;color:#657b83;"> n</span>.
+It is the same as <span style="background-color:#fdf6e3;color:#657b83;">⌈q⌉</span> when <span style="background-color:#fdf6e3;color:#657b83;">q </span><span style="background-color:#fdf6e3;color:#b58900;">≥ </span><span style="background-color:#fdf6e3;color:#6c71c4;">0</span>, otherwise it is <span style="background-color:#fdf6e3;color:#6c71c4;">0</span>.</p>
+</div></div></html>

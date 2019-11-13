@@ -1,0 +1,11 @@
+<html><head><link rel="stylesheet" href="../../docs_style.css"></head><div class="decl"><h4>list.sorted</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">sorted r l</span> is the same as <span style="background-color:#fdf6e3;color:#657b83;">pairwise r l</span>, preferred in the case that <span style="background-color:#fdf6e3;color:#657b83;">r</span>
+is a <span style="background-color:#fdf6e3;color:#b58900;">&lt;</span> or <span style="background-color:#fdf6e3;color:#b58900;">≤</span>-like relation (transitive and antisymmetric or asymmetric)</p>
+</div></div><div class="decl"><h4>list.ordered_insert</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">ordered_insert a l</span> inserts <span style="background-color:#fdf6e3;color:#657b83;">a</span> into <span style="background-color:#fdf6e3;color:#657b83;">l</span> at such that
+<span style="background-color:#fdf6e3;color:#657b83;">ordered_insert a l</span> is sorted if <span style="background-color:#fdf6e3;color:#657b83;">l</span> is.</p>
+</div></div><div class="decl"><h4>list.insertion_sort</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">insertion_sort l</span> returns <span style="background-color:#fdf6e3;color:#657b83;">l</span> sorted using the insertion sort algorithm.</p>
+</div></div><div class="decl"><h4>list.split</h4><div class="decl_par"><p>Split <span style="background-color:#fdf6e3;color:#657b83;">l</span> into two lists of approximately equal length.</p>
+<pre><code>split [1, 2, 3, 4, 5] = ([1, 3, 5], [2, 4])</code></pre>
+</div></div><div class="decl"><h4>list.merge</h4><div class="decl_par"><p>Merge two sorted lists into one in linear time.</p>
+<pre><code>merge [1, 2, 4, 5] [0, 1, 3, 4] = [0, 1, 1, 2, 3, 4, 4, 5]</code></pre>
+</div></div><div class="decl"><h4>list.merge_sort</h4><div class="decl_par"><p>Implementation of a merge sort algorithm to sort a list.</p>
+</div></div></html>

@@ -1,0 +1,24 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><h1>The category of elements</h1>
+<p>This file defines the category of elements, also known as (a special case of) the Grothendieck construction.</p>
+<p>Given a functor <span style="background-color:#fdf6e3;color:#657b83;">F : C ⥤ </span><span style="background-color:#fdf6e3;color:#268bd2;">Type</span>, an object of <span style="background-color:#fdf6e3;color:#657b83;">F.elements</span> is a pair <span style="background-color:#fdf6e3;color:#657b83;">(X : C, x : F.obj X)</span>.
+A morphism <span style="background-color:#fdf6e3;color:#657b83;">(X, x) ⟶ (Y, y)</span> is a morphism <span style="background-color:#fdf6e3;color:#657b83;">f : X ⟶ Y</span> in <span style="background-color:#fdf6e3;color:#657b83;">C</span>, so <span style="background-color:#fdf6e3;color:#657b83;">F.map f</span> takes <span style="background-color:#fdf6e3;color:#657b83;">x</span> to <span style="background-color:#fdf6e3;color:#657b83;">y</span>.</p>
+<h2>Implementation notes</h2>
+<p>This construction is equivalent to a special case of a comma construction, so this is mostly just
+a more convenient API. We prove the equivalence in <span style="background-color:#fdf6e3;color:#657b83;">category_theory.category_of_elements.comma_equivalence</span>.</p>
+<h2>References</h2>
+<ul>
+<li>[Emily Riehl, <em>Category Theory in Context</em>, Section 2.4][riehl2017]</li>
+<li>https://en.wikipedia.org/wiki/Category_of_elements</li>
+<li>https://ncatlab.org/nlab/show/category+of+elements</li>
+</ul>
+<h2>Tags</h2>
+<p>category of elements, Grothendieck construction, comma category</p>
+<hr/><div class="decl"><h4>category_theory.functor.elements</h4><div class="decl_par"><p>The type of objects for the category of elements of a functor <span style="background-color:#fdf6e3;color:#657b83;">F : C ⥤ </span><span style="background-color:#fdf6e3;color:#268bd2;">Type</span> is a pair <span style="background-color:#fdf6e3;color:#657b83;">(X : C, x : F.obj X)</span>.</p>
+</div></div><div class="decl"><h4>category_theory.category_of_elements</h4><div class="decl_par"><p>The category structure on <span style="background-color:#fdf6e3;color:#657b83;">F.elements</span>, for <span style="background-color:#fdf6e3;color:#657b83;">F : C ⥤ </span><span style="background-color:#fdf6e3;color:#268bd2;">Type</span>.
+A morphism <span style="background-color:#fdf6e3;color:#657b83;">(X, x) ⟶ (Y, y)</span> is a morphism <span style="background-color:#fdf6e3;color:#657b83;">f : X ⟶ Y</span> in <span style="background-color:#fdf6e3;color:#657b83;">C</span>, so <span style="background-color:#fdf6e3;color:#657b83;">F.map f</span> takes <span style="background-color:#fdf6e3;color:#657b83;">x</span> to <span style="background-color:#fdf6e3;color:#657b83;">y</span>.</p>
+</div></div><div class="decl"><h4>category_theory.category_of_elements.π</h4><div class="decl_par"><p>The functor out of the category of elements which forgets the element.</p>
+</div></div><div class="decl"><h4>category_theory.category_of_elements.to_comma</h4><div class="decl_par"><p>The forward direction of the equivalence <span style="background-color:#fdf6e3;color:#657b83;">F.elements ≅ (</span><span style="background-color:#fdf6e3;color:#b58900;">*</span><span style="background-color:#fdf6e3;color:#657b83;">, F)</span>.</p>
+</div></div><div class="decl"><h4>category_theory.category_of_elements.from_comma</h4><div class="decl_par"><p>The reverse direction of the equivalence <span style="background-color:#fdf6e3;color:#657b83;">F.elements ≅ (</span><span style="background-color:#fdf6e3;color:#b58900;">*</span><span style="background-color:#fdf6e3;color:#657b83;">, F)</span>.</p>
+</div></div><div class="decl"><h4>category_theory.category_of_elements.comma_equivalence</h4><div class="decl_par"><p>The equivalence between the category of elements <span style="background-color:#fdf6e3;color:#657b83;">F.elements</span>
+and the comma category <span style="background-color:#fdf6e3;color:#657b83;">(</span><span style="background-color:#fdf6e3;color:#b58900;">*</span><span style="background-color:#fdf6e3;color:#657b83;">, F)</span>.</p>
+</div></div></html>

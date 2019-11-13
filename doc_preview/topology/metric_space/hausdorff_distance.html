@@ -1,0 +1,89 @@
+<html><head><link rel="stylesheet" href="../../docs_style.css"></head><div class="decl"><h4>emetric.inf_edist</h4><div class="decl_par"><p>The minimal edistance of a point to a set</p>
+</div></div><div class="decl"><h4>emetric.inf_edist_union</h4><div class="decl_par"><p>The edist to a union is the minimum of the edists</p>
+</div></div><div class="decl"><h4>emetric.inf_edist_singleton</h4><div class="decl_par"><p>The edist to a singleton is the edistance to the single point of this singleton</p>
+</div></div><div class="decl"><h4>emetric.inf_edist_le_edist_of_mem</h4><div class="decl_par"><p>The edist to a set is bounded above by the edist to any of its points</p>
+</div></div><div class="decl"><h4>emetric.inf_edist_zero_of_mem</h4><div class="decl_par"><p>If a point <span style="background-color:#fdf6e3;color:#657b83;">x</span> belongs to <span style="background-color:#fdf6e3;color:#657b83;">s</span>, then its edist to <span style="background-color:#fdf6e3;color:#657b83;">s</span> vanishes</p>
+</div></div><div class="decl"><h4>emetric.inf_edist_le_inf_edist_of_subset</h4><div class="decl_par"><p>The edist is monotonous with respect to inclusion</p>
+</div></div><div class="decl"><h4>emetric.exists_edist_lt_of_inf_edist_lt</h4><div class="decl_par"><p>If the edist to a set is <span style="background-color:#fdf6e3;color:#b58900;">&lt;</span><span style="background-color:#fdf6e3;color:#657b83;"> r</span>, there exists a point in the set at edistance <span style="background-color:#fdf6e3;color:#b58900;">&lt;</span><span style="background-color:#fdf6e3;color:#657b83;"> r</span></p>
+</div></div><div class="decl"><h4>emetric.inf_edist_le_inf_edist_add_edist</h4><div class="decl_par"><p>The edist of <span style="background-color:#fdf6e3;color:#657b83;">x</span> to <span style="background-color:#fdf6e3;color:#657b83;">s</span> is bounded by the sum of the edist of <span style="background-color:#fdf6e3;color:#657b83;">y</span> to <span style="background-color:#fdf6e3;color:#657b83;">s</span> and
+the edist from <span style="background-color:#fdf6e3;color:#657b83;">x</span> to <span style="background-color:#fdf6e3;color:#657b83;">y</span></p>
+</div></div><div class="decl"><h4>emetric.continuous_inf_edist</h4><div class="decl_par"><p>The edist to a set depends continuously on the point</p>
+</div></div><div class="decl"><h4>emetric.inf_edist_closure</h4><div class="decl_par"><p>The edist to a set and to its closure coincide</p>
+</div></div><div class="decl"><h4>emetric.mem_closure_iff_inf_edist_zero</h4><div class="decl_par"><p>A point belongs to the closure of <span style="background-color:#fdf6e3;color:#657b83;">s</span> iff its infimum edistance to this set vanishes</p>
+</div></div><div class="decl"><h4>emetric.mem_iff_ind_edist_zero_of_closed</h4><div class="decl_par"><p>Given a closed set <span style="background-color:#fdf6e3;color:#657b83;">s</span>, a point belongs to <span style="background-color:#fdf6e3;color:#657b83;">s</span> iff its infimum edistance to this set vanishes</p>
+</div></div><div class="decl"><h4>emetric.inf_edist_image</h4><div class="decl_par"><p>The infimum edistance is invariant under isometries</p>
+</div></div><div class="decl"><h4>emetric.Hausdorff_edist</h4><div class="decl_par"><p>The Hausdorff edistance between two sets is the smallest <span style="background-color:#fdf6e3;color:#657b83;">r</span> such that each set
+is contained in the <span style="background-color:#fdf6e3;color:#657b83;">r</span>-neighborhood of the other one</p>
+</div></div><div class="decl"><h4>emetric.Hausdorff_edist_self</h4><div class="decl_par"><p>The Hausdorff edistance of a set to itself vanishes</p>
+</div></div><div class="decl"><h4>emetric.Hausdorff_edist_comm</h4><div class="decl_par"><p>The Haudorff edistances of <span style="background-color:#fdf6e3;color:#657b83;">s</span> to <span style="background-color:#fdf6e3;color:#657b83;">t</span> and of <span style="background-color:#fdf6e3;color:#657b83;">t</span> to <span style="background-color:#fdf6e3;color:#657b83;">s</span> coincide</p>
+</div></div><div class="decl"><h4>emetric.Hausdorff_edist_le_of_inf_edist</h4><div class="decl_par"><p>Bounding the Hausdorff edistance by bounding the edistance of any point
+in each set to the other set</p>
+</div></div><div class="decl"><h4>emetric.Hausdorff_edist_le_of_mem_edist</h4><div class="decl_par"><p>Bounding the Hausdorff edistance by exhibiting, for any point in each set,
+another point in the other set at controlled distance</p>
+</div></div><div class="decl"><h4>emetric.inf_edist_le_Hausdorff_edist_of_mem</h4><div class="decl_par"><p>The distance to a set is controlled by the Hausdorff distance</p>
+</div></div><div class="decl"><h4>emetric.exists_edist_lt_of_Hausdorff_edist_lt</h4><div class="decl_par"><p>If the Hausdorff distance is <span style="background-color:#fdf6e3;color:#b58900;">&lt;</span><span style="background-color:#fdf6e3;color:#657b83;">r</span>, then any point in one of the sets has
+a corresponding point at distance <span style="background-color:#fdf6e3;color:#b58900;">&lt;</span><span style="background-color:#fdf6e3;color:#657b83;">r</span> in the other set</p>
+</div></div><div class="decl"><h4>emetric.inf_edist_le_inf_edist_add_Hausdorff_edist</h4><div class="decl_par"><p>The distance from <span style="background-color:#fdf6e3;color:#657b83;">x</span> to <span style="background-color:#fdf6e3;color:#657b83;">s</span>or <span style="background-color:#fdf6e3;color:#657b83;">t</span> is controlled in terms of the Hausdorff distance
+between <span style="background-color:#fdf6e3;color:#657b83;">s</span> and <span style="background-color:#fdf6e3;color:#657b83;">t</span></p>
+</div></div><div class="decl"><h4>emetric.Hausdorff_edist_image</h4><div class="decl_par"><p>The Hausdorff edistance is invariant under eisometries</p>
+</div></div><div class="decl"><h4>emetric.Hausdorff_edist_le_ediam</h4><div class="decl_par"><p>The Hausdorff distance is controlled by the diameter of the union</p>
+</div></div><div class="decl"><h4>emetric.Hausdorff_edist_triangle</h4><div class="decl_par"><p>The Hausdorff distance satisfies the triangular inequality</p>
+</div></div><div class="decl"><h4>emetric.Hausdorff_edist_self_closure</h4><div class="decl_par"><p>The Hausdorff edistance between a set and its closure vanishes</p>
+</div></div><div class="decl"><h4>emetric.Hausdorff_edist_closure₁</h4><div class="decl_par"><p>Replacing a set by its closure does not change the Hausdorff edistance.</p>
+</div></div><div class="decl"><h4>emetric.Hausdorff_edist_closure₂</h4><div class="decl_par"><p>Replacing a set by its closure does not change the Hausdorff edistance.</p>
+</div></div><div class="decl"><h4>emetric.Hausdorff_edist_closure</h4><div class="decl_par"><p>The Hausdorff edistance between sets or their closures is the same</p>
+</div></div><div class="decl"><h4>emetric.Hausdorff_edist_zero_iff_closure_eq_closure</h4><div class="decl_par"><p>Two sets are at zero Hausdorff edistance if and only if they have the same closure</p>
+</div></div><div class="decl"><h4>emetric.Hausdorff_edist_zero_iff_eq_of_closed</h4><div class="decl_par"><p>Two closed sets are at zero Hausdorff edistance if and only if they coincide</p>
+</div></div><div class="decl"><h4>emetric.Hausdorff_edist_empty</h4><div class="decl_par"><p>The Haudorff edistance to the empty set is infinite</p>
+</div></div><div class="decl"><h4>emetric.ne_empty_of_Hausdorff_edist_ne_top</h4><div class="decl_par"><p>If a set is at finite Hausdorff edistance of a nonempty set, it is nonempty</p>
+</div></div><div class="decl"><h4>metric.inf_dist</h4><div class="decl_par"><p>The minimal distance of a point to a set</p>
+</div></div><div class="decl"><h4>metric.inf_dist_nonneg</h4><div class="decl_par"><p>the minimal distance is always nonnegative</p>
+</div></div><div class="decl"><h4>metric.inf_dist_empty</h4><div class="decl_par"><p>the minimal distance to the empty set is 0 (if you want to have the more reasonable
+value ∞ instead, use <span style="background-color:#fdf6e3;color:#657b83;">inf_edist</span>, which takes values in ennreal)</p>
+</div></div><div class="decl"><h4>metric.inf_edist_ne_top</h4><div class="decl_par"><p>In a metric space, the minimal edistance to a nonempty set is finite</p>
+</div></div><div class="decl"><h4>metric.inf_dist_zero_of_mem</h4><div class="decl_par"><p>The minimal distance of a point to a set containing it vanishes</p>
+</div></div><div class="decl"><h4>metric.inf_dist_singleton</h4><div class="decl_par"><p>The minimal distance to a singleton is the distance to the unique point in this singleton</p>
+</div></div><div class="decl"><h4>metric.inf_dist_le_dist_of_mem</h4><div class="decl_par"><p>The minimal distance to a set is bounded by the distance to any point in this set</p>
+</div></div><div class="decl"><h4>metric.inf_dist_le_inf_dist_of_subset</h4><div class="decl_par"><p>The minimal distance is monotonous with respect to inclusion</p>
+</div></div><div class="decl"><h4>metric.exists_dist_lt_of_inf_dist_lt</h4><div class="decl_par"><p>If the minimal distance to a set is <span style="background-color:#fdf6e3;color:#b58900;">&lt;</span><span style="background-color:#fdf6e3;color:#657b83;">r</span>, there exists a point in this set at distance <span style="background-color:#fdf6e3;color:#b58900;">&lt;</span><span style="background-color:#fdf6e3;color:#657b83;">r</span></p>
+</div></div><div class="decl"><h4>metric.inf_dist_le_inf_dist_add_dist</h4><div class="decl_par"><p>The minimal distance from <span style="background-color:#fdf6e3;color:#657b83;">x</span> to <span style="background-color:#fdf6e3;color:#657b83;">s</span> is bounded by the distance from <span style="background-color:#fdf6e3;color:#657b83;">y</span> to <span style="background-color:#fdf6e3;color:#657b83;">s</span>, modulo
+the distance between <span style="background-color:#fdf6e3;color:#657b83;">x</span> and <span style="background-color:#fdf6e3;color:#657b83;">y</span></p>
+</div></div><div class="decl"><h4>metric.uniform_continuous_inf_dist</h4><div class="decl_par"><p>The minimal distance to a set is uniformly continuous</p>
+</div></div><div class="decl"><h4>metric.continuous_inf_dist</h4><div class="decl_par"><p>The minimal distance to a set is continuous</p>
+</div></div><div class="decl"><h4>metric.inf_dist_eq_closure</h4><div class="decl_par"><p>The minimal distance to a set and its closure coincide</p>
+</div></div><div class="decl"><h4>metric.mem_closure_iff_inf_dist_zero</h4><div class="decl_par"><p>A point belongs to the closure of <span style="background-color:#fdf6e3;color:#657b83;">s</span> iff its infimum distance to this set vanishes</p>
+</div></div><div class="decl"><h4>metric.mem_iff_inf_dist_zero_of_closed</h4><div class="decl_par"><p>Given a closed set <span style="background-color:#fdf6e3;color:#657b83;">s</span>, a point belongs to <span style="background-color:#fdf6e3;color:#657b83;">s</span> iff its infimum distance to this set vanishes</p>
+</div></div><div class="decl"><h4>metric.inf_dist_image</h4><div class="decl_par"><p>The infimum distance is invariant under isometries</p>
+</div></div><div class="decl"><h4>metric.Hausdorff_dist</h4><div class="decl_par"><p>The Hausdorff distance between two sets is the smallest nonnegative <span style="background-color:#fdf6e3;color:#657b83;">r</span> such that each set is
+included in the <span style="background-color:#fdf6e3;color:#657b83;">r</span>-neighborhood of the other. If there is no such <span style="background-color:#fdf6e3;color:#657b83;">r</span>, it is defined to
+be <span style="background-color:#fdf6e3;color:#6c71c4;">0</span>, arbitrarily</p>
+</div></div><div class="decl"><h4>metric.Hausdorff_dist_nonneg</h4><div class="decl_par"><p>The Hausdorff distance is nonnegative</p>
+</div></div><div class="decl"><h4>metric.Hausdorff_edist_ne_top_of_ne_empty_of_bounded</h4><div class="decl_par"><p>If two sets are nonempty and bounded in a metric space, they are at finite Hausdorff edistance</p>
+</div></div><div class="decl"><h4>metric.Hausdorff_dist_self_zero</h4><div class="decl_par"><p>The Hausdorff distance between a set and itself is zero</p>
+</div></div><div class="decl"><h4>metric.Hausdorff_dist_comm</h4><div class="decl_par"><p>The Hausdorff distance from <span style="background-color:#fdf6e3;color:#657b83;">s</span> to <span style="background-color:#fdf6e3;color:#657b83;">t</span> and from <span style="background-color:#fdf6e3;color:#657b83;">t</span> to <span style="background-color:#fdf6e3;color:#657b83;">s</span> coincide</p>
+</div></div><div class="decl"><h4>metric.Hausdorff_dist_empty</h4><div class="decl_par"><p>The Hausdorff distance to the empty set vanishes (if you want to have the more reasonable
+value ∞ instead, use <span style="background-color:#fdf6e3;color:#657b83;">Hausdorff_edist</span>, which takes values in ennreal)</p>
+</div></div><div class="decl"><h4>metric.Hausdorff_dist_empty'</h4><div class="decl_par"><p>The Hausdorff distance to the empty set vanishes (if you want to have the more reasonable
+value ∞ instead, use <span style="background-color:#fdf6e3;color:#657b83;">Hausdorff_edist</span>, which takes values in ennreal)</p>
+</div></div><div class="decl"><h4>metric.Hausdorff_dist_le_of_inf_dist</h4><div class="decl_par"><p>Bounding the Hausdorff distance by bounding the distance of any point
+in each set to the other set</p>
+</div></div><div class="decl"><h4>metric.Hausdorff_dist_le_of_mem_dist</h4><div class="decl_par"><p>Bounding the Hausdorff distance by exhibiting, for any point in each set,
+another point in the other set at controlled distance</p>
+</div></div><div class="decl"><h4>metric.Hausdorff_dist_le_diam</h4><div class="decl_par"><p>The Hausdorff distance is controlled by the diameter of the union</p>
+</div></div><div class="decl"><h4>metric.inf_dist_le_Hausdorff_dist_of_mem</h4><div class="decl_par"><p>The distance to a set is controlled by the Hausdorff distance</p>
+</div></div><div class="decl"><h4>metric.exists_dist_lt_of_Hausdorff_dist_lt</h4><div class="decl_par"><p>If the Hausdorff distance is <span style="background-color:#fdf6e3;color:#b58900;">&lt;</span><span style="background-color:#fdf6e3;color:#657b83;">r</span>, then any point in one of the sets is at distance
+<span style="background-color:#fdf6e3;color:#b58900;">&lt;</span><span style="background-color:#fdf6e3;color:#657b83;">r</span> of a point in the other set</p>
+</div></div><div class="decl"><h4>metric.exists_dist_lt_of_Hausdorff_dist_lt'</h4><div class="decl_par"><p>If the Hausdorff distance is <span style="background-color:#fdf6e3;color:#b58900;">&lt;</span><span style="background-color:#fdf6e3;color:#657b83;">r</span>, then any point in one of the sets is at distance
+<span style="background-color:#fdf6e3;color:#b58900;">&lt;</span><span style="background-color:#fdf6e3;color:#657b83;">r</span> of a point in the other set</p>
+</div></div><div class="decl"><h4>metric.inf_dist_le_inf_dist_add_Hausdorff_dist</h4><div class="decl_par"><p>The infimum distance to <span style="background-color:#fdf6e3;color:#657b83;">s</span> and <span style="background-color:#fdf6e3;color:#657b83;">t</span> are the same, up to the Hausdorff distance
+between <span style="background-color:#fdf6e3;color:#657b83;">s</span> and <span style="background-color:#fdf6e3;color:#657b83;">t</span></p>
+</div></div><div class="decl"><h4>metric.Hausdorff_dist_image</h4><div class="decl_par"><p>The Hausdorff distance is invariant under isometries</p>
+</div></div><div class="decl"><h4>metric.Hausdorff_dist_triangle</h4><div class="decl_par"><p>The Hausdorff distance satisfies the triangular inequality</p>
+</div></div><div class="decl"><h4>metric.Hausdorff_dist_triangle'</h4><div class="decl_par"><p>The Hausdorff distance satisfies the triangular inequality</p>
+</div></div><div class="decl"><h4>metric.Hausdorff_dist_self_closure</h4><div class="decl_par"><p>The Hausdorff distance between a set and its closure vanish</p>
+</div></div><div class="decl"><h4>metric.Hausdorff_dist_closure₁</h4><div class="decl_par"><p>Replacing a set by its closure does not change the Hausdorff distance.</p>
+</div></div><div class="decl"><h4>metric.Hausdorff_dist_closure₂</h4><div class="decl_par"><p>Replacing a set by its closure does not change the Hausdorff distance.</p>
+</div></div><div class="decl"><h4>metric.Hausdorff_dist_closure</h4><div class="decl_par"><p>The Hausdorff distance between two sets and their closures coincide</p>
+</div></div><div class="decl"><h4>metric.Hausdorff_dist_zero_iff_closure_eq_closure</h4><div class="decl_par"><p>Two sets are at zero Hausdorff distance if and only if they have the same closures</p>
+</div></div><div class="decl"><h4>metric.Hausdorff_dist_zero_iff_eq_of_closed</h4><div class="decl_par"><p>Two closed sets are at zero Hausdorff distance if and only if they coincide</p>
+</div></div></html>

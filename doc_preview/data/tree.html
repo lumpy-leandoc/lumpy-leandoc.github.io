@@ -1,0 +1,21 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><h1>Binary tree</h1>
+<p>Provides binary tree storage for values of any type, with O(lg n) retrieval.
+See also <span style="background-color:#fdf6e3;color:#657b83;">data.rbtree</span> for red-black trees - this version allows more operations
+to be defined and is better suited for in-kernel computation.</p>
+<h2>References</h2>
+<p>https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html</p>
+<hr/><div class="decl"><h4>tree.of_rbnode</h4><div class="decl_par"><p>Makes a <span style="background-color:#fdf6e3;color:#657b83;">tree α</span> out of a red-black tree.</p>
+</div></div><div class="decl"><h4>tree.index_of</h4><div class="decl_par"><p>Finds the index of an element in the tree assuming the tree has been
+constructed according to the provided decidable order on its elements.
+If it hasn't, the result will be incorrect. If it has, but the element
+is not in the tree, returns none.</p>
+</div></div><div class="decl"><h4>tree.get</h4><div class="decl_par"><p>Retrieves an element uniquely determined by a <span style="background-color:#fdf6e3;color:#657b83;">pos_num</span> from the tree,
+taking the following path to get to the element:</p>
+<ul>
+<li><span style="background-color:#fdf6e3;color:#657b83;">bit0</span> - go to left child</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">bit1</span> - go to right child</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">one</span> - retrieve from here</li>
+</ul>
+</div></div><div class="decl"><h4>tree.get_or_else</h4><div class="decl_par"><p>Retrieves an element from the tree, or the provided default value
+if the index is invalid. See <span style="background-color:#fdf6e3;color:#657b83;">tree.get</span>.</p>
+</div></div></html>

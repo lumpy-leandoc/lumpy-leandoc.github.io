@@ -1,0 +1,16 @@
+<html><head><link rel="stylesheet" href="../../docs_style.css"></head><h1>Category of groupoids</h1>
+<p>This file contains the definition of the category <span style="background-color:#fdf6e3;color:#657b83;">Groupoid</span> of all groupoids.
+In this category objects are groupoids and morphisms are functors
+between these groupoids.</p>
+<p>We also provide two “forgetting” functors: <span style="background-color:#fdf6e3;color:#657b83;">objects : Groupoid ⥤ </span><span style="background-color:#fdf6e3;color:#268bd2;">Type</span>
+and <span style="background-color:#fdf6e3;color:#657b83;">forget_to_Cat : Groupoid ⥤ Cat</span>.</p>
+<h2>Implementation notes</h2>
+<p>Though <span style="background-color:#fdf6e3;color:#657b83;">Groupoid</span> is not a concrete category, we use <span style="background-color:#fdf6e3;color:#657b83;">bundled</span> to define
+its carrier type.</p>
+<hr/><div class="decl"><h4>category_theory.Groupoid</h4><div class="decl_par"><p>Category of groupoids</p>
+</div></div><div class="decl"><h4>category_theory.Groupoid.of</h4><div class="decl_par"><p>Construct a bundled <span style="background-color:#fdf6e3;color:#657b83;">Groupoid</span> from the underlying type and the typeclass.</p>
+</div></div><div class="decl"><h4>category_theory.Groupoid.category</h4><div class="decl_par"><p>Category structure on <span style="background-color:#fdf6e3;color:#657b83;">Groupoid</span></p>
+</div></div><div class="decl"><h4>category_theory.Groupoid.objects</h4><div class="decl_par"><p>Functor that gets the set of objects of a groupoid. It is not
+called <span style="background-color:#fdf6e3;color:#657b83;">forget</span>, because it is not a faithful functor.</p>
+</div></div><div class="decl"><h4>category_theory.Groupoid.forget_to_Cat</h4><div class="decl_par"><p>Forgetting functor to <span style="background-color:#fdf6e3;color:#657b83;">Cat</span></p>
+</div></div></html>

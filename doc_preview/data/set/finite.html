@@ -1,0 +1,9 @@
+<html><head><link rel="stylesheet" href="../../docs_style.css"></head><div class="decl"><h4>set.finite</h4><div class="decl_par"><p>A set is finite if the subtype is a fintype, i.e. there is a
+list that enumerates its members.</p>
+</div></div><div class="decl"><h4>set.infinite</h4><div class="decl_par"><p>A set is infinite if it is not finite.</p>
+</div></div><div class="decl"><h4>set.finite.to_finset</h4><div class="decl_par"><p>Get a finset from a finite set</p>
+</div></div><div class="decl"><h4>set.decidable_mem_of_fintype</h4><div class="decl_par"><p>Membership of a subset of a finite type is decidable.</p>
+<p>Using this as an instance leads to potential loops with <span style="background-color:#fdf6e3;color:#657b83;">subtype.fintype</span> under certain decidability
+assumptions, so it should only be declared a local instance.</p>
+</div></div><div class="decl"><h4>set.finite_subsets_of_finite</h4><div class="decl_par"><p>There are finitely many subsets of a given finite set</p>
+</div></div></html>

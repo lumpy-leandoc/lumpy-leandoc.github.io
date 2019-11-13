@@ -1,0 +1,118 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><h1>lint command</h1>
+<p>This file defines the following user commands to spot common mistakes in the code.</p>
+<ul>
+<li><span style="background-color:#fdf6e3;color:#b58900;">#</span><span style="background-color:#fdf6e3;color:#657b83;">lint</span>: check all declarations in the current file</li>
+<li><span style="background-color:#fdf6e3;color:#b58900;">#</span><span style="background-color:#fdf6e3;color:#657b83;">lint_mathlib</span>: check all declarations in mathlib (so excluding core or other projects,
+and also excluding the current file)</li>
+<li><span style="background-color:#fdf6e3;color:#b58900;">#</span><span style="background-color:#fdf6e3;color:#657b83;">lint_all</span>: check all declarations in the environment (the current file and all
+imported files)</li>
+</ul>
+<p>The following linters are run by default:</p>
+<ol>
+<li><span style="background-color:#fdf6e3;color:#657b83;">unused_arguments</span> checks for unused arguments in declarations.</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">def_lemma</span> checks whether a declaration is incorrectly marked as a def/lemma.</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">dup_namespce</span> checks whether a namespace is duplicated in the name of a declaration.</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">illegal_constant</span> checks whether ≥/&gt; is used in the declaration.</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">instance_priority</span> checks that instances that always apply have priority below default.</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">doc_blame</span> checks for missing doc strings on definitions and constants.</li>
+</ol>
+<p>Another linter, <span style="background-color:#fdf6e3;color:#657b83;">doc_blame_thm</span>, checks for missing doc strings on lemmas and theorems.
+This is not run by default.</p>
+<p>The command <span style="background-color:#fdf6e3;color:#b58900;">#</span><span style="background-color:#fdf6e3;color:#657b83;">list_linters</span> prints a list of the names of all available linters.</p>
+<p>You can append a <span style="background-color:#fdf6e3;color:#b58900;">*</span> to any command (e.g. <span style="background-color:#fdf6e3;color:#b58900;">#</span><span style="background-color:#fdf6e3;color:#657b83;">lint_mathlib</span><span style="background-color:#fdf6e3;color:#b58900;">*</span>) to omit the slow tests (4).</p>
+<p>You can append a <span style="background-color:#fdf6e3;color:#b58900;">-</span> to any command (e.g. <span style="background-color:#fdf6e3;color:#b58900;">#</span><span style="background-color:#fdf6e3;color:#657b83;">lint_mathlib</span><span style="background-color:#fdf6e3;color:#b58900;">-</span>) to run a silent lint
+that suppresses the output of passing checks.
+A silent lint will fail if any test fails.</p>
+<p>You can append a sequence of linter names to any command to run extra tests, in addition to the
+default ones. e.g. <span style="background-color:#fdf6e3;color:#b58900;">#</span><span style="background-color:#fdf6e3;color:#657b83;">lint doc_blame_thm</span> will run all default tests and <span style="background-color:#fdf6e3;color:#657b83;">doc_blame_thm</span>.</p>
+<p>You can append <span style="background-color:#fdf6e3;color:#657b83;">only name1 name2 ...</span> to any command to run a subset of linters, e.g.
+<span style="background-color:#fdf6e3;color:#b58900;">#</span><span style="background-color:#fdf6e3;color:#657b83;">lint only unused_arguments</span></p>
+<p>You can add custom linters by defining a term of type <span style="background-color:#fdf6e3;color:#657b83;">linter</span> in the <span style="background-color:#fdf6e3;color:#657b83;">linter</span> namespace.
+A linter defined with the name <span style="background-color:#fdf6e3;color:#657b83;">linter.my_new_check</span> can be run with <span style="background-color:#fdf6e3;color:#b58900;">#</span><span style="background-color:#fdf6e3;color:#657b83;">lint my_new_check</span>
+or <span style="background-color:#fdf6e3;color:#657b83;">lint only my_new_check</span>.
+If you add the attribute <span style="background-color:#fdf6e3;color:#586e75;">@[linter]</span> to <span style="background-color:#fdf6e3;color:#657b83;">linter.my_new_check</span> it will run by default.</p>
+<p>Adding the attribute <span style="background-color:#fdf6e3;color:#586e75;">@[nolint]</span> to a declaration omits it from all linter checks.</p>
+<h2>Tags</h2>
+<p>sanity check, lint, cleanup, command, tactic</p>
+<hr/><div class="decl"><h4>nolint_attr</h4><div class="decl_par"><p>Defines the user attribute <span style="background-color:#fdf6e3;color:#657b83;">nolint</span> for skipping <span style="background-color:#fdf6e3;color:#b58900;">#</span><span style="background-color:#fdf6e3;color:#657b83;">lint</span></p>
+</div></div><div class="decl"><h4>linter</h4><div class="decl_par"><p>A linting test for the <span style="background-color:#fdf6e3;color:#b58900;">#</span><span style="background-color:#fdf6e3;color:#657b83;">lint</span> command.</p>
+<p><span style="background-color:#fdf6e3;color:#657b83;">test</span> defines a test to perform on every declaration. It should never fail. Returning <span style="background-color:#fdf6e3;color:#657b83;">none</span>
+signifies a passing test. Returning <span style="background-color:#fdf6e3;color:#657b83;">some msg</span> reports a failing test with error <span style="background-color:#fdf6e3;color:#657b83;">msg</span>.</p>
+<p><span style="background-color:#fdf6e3;color:#657b83;">no_errors_found</span> is the message printed when all tests are negative, and <span style="background-color:#fdf6e3;color:#657b83;">errors_found</span> is printed
+when at least one test is positive.</p>
+<p>If <span style="background-color:#fdf6e3;color:#657b83;">is_fast</span> is false, this test will be omitted from <span style="background-color:#fdf6e3;color:#b58900;">#</span><span style="background-color:#fdf6e3;color:#657b83;">lint</span><span style="background-color:#fdf6e3;color:#b58900;">-</span>.</p>
+</div></div><div class="decl"><h4>get_linters</h4><div class="decl_par"><p>Takes a list of names that resolve to declarations of type <span style="background-color:#fdf6e3;color:#657b83;">linter</span>,
+and produces a list of linters.</p>
+</div></div><div class="decl"><h4>linter_attr</h4><div class="decl_par"><p>Defines the user attribute <span style="background-color:#fdf6e3;color:#657b83;">linter</span> for adding a linter to the default set.
+Linters should be defined in the <span style="background-color:#fdf6e3;color:#657b83;">linter</span> namespace.
+A linter <span style="background-color:#fdf6e3;color:#657b83;">linter.my_new_linter</span> is referred to as <span style="background-color:#fdf6e3;color:#657b83;">my_new_linter</span> (without the <span style="background-color:#fdf6e3;color:#657b83;">linter</span> namespace)
+when used in <span style="background-color:#fdf6e3;color:#b58900;">#</span><span style="background-color:#fdf6e3;color:#657b83;">lint</span>.</p>
+</div></div><div class="decl"><h4>fold_over_with_cond</h4><div class="decl_par"><p>Find all declarations in <span style="background-color:#fdf6e3;color:#657b83;">l</span> where tac returns <span style="background-color:#fdf6e3;color:#657b83;">some x</span> and list them.</p>
+</div></div><div class="decl"><h4>fold_over_with_cond_sorted</h4><div class="decl_par"><p>Find all declarations in <span style="background-color:#fdf6e3;color:#657b83;">l</span> where tac returns <span style="background-color:#fdf6e3;color:#657b83;">some x</span> and sort the resulting list by file name.</p>
+</div></div><div class="decl"><h4>print_decls</h4><div class="decl_par"><p>Make the output of <span style="background-color:#fdf6e3;color:#657b83;">fold_over_with_cond</span> printable, in the following form:
+<span style="background-color:#fdf6e3;color:#b58900;">#</span><span style="background-color:#fdf6e3;color:#859900;">print </span><span style="background-color:#fdf6e3;color:#b58900;">&lt;</span><span style="background-color:#fdf6e3;color:#657b83;">name</span><span style="background-color:#fdf6e3;color:#b58900;">&gt; &lt;</span><span style="background-color:#fdf6e3;color:#859900;">open</span><span style="background-color:#fdf6e3;color:#657b83;"> multiline comment</span><span style="background-color:#fdf6e3;color:#b58900;">&gt; &lt;</span><span style="background-color:#fdf6e3;color:#657b83;">elt of α</span><span style="background-color:#fdf6e3;color:#b58900;">&gt; &lt;</span><span style="background-color:#fdf6e3;color:#657b83;">close multiline comment</span><span style="background-color:#fdf6e3;color:#b58900;">&gt;</span></p>
+</div></div><div class="decl"><h4>print_decls_sorted</h4><div class="decl_par"><p>Make the output of <span style="background-color:#fdf6e3;color:#657b83;">fold_over_with_cond_sorted</span> printable, with the file path + name inserted.</p>
+</div></div><div class="decl"><h4>print_decls_sorted_mathlib</h4><div class="decl_par"><p>Same as <span style="background-color:#fdf6e3;color:#657b83;">print_decls_sorted</span>, but removing the first <span style="background-color:#fdf6e3;color:#657b83;">n</span> characters from the string.
+Useful for omitting the mathlib directory from the output.</p>
+</div></div><div class="decl"><h4>check_unused_arguments_aux</h4><div class="decl_par"><p>Auxilliary definition for <span style="background-color:#fdf6e3;color:#657b83;">check_unused_arguments</span></p>
+</div></div><div class="decl"><h4>check_unused_arguments</h4><div class="decl_par"><p>Check which arguments of a declaration are not used.
+Prints a list of natural numbers corresponding to which arguments are not used (e.g.
+this outputs [1, 4] if the first and fourth arguments are unused).
+Checks both the type and the value of <span style="background-color:#fdf6e3;color:#657b83;">d</span> for whether the argument is used
+(in rare cases an argument is used in the type but not in the value).
+We return [] if the declaration was automatically generated.
+We print arguments that are larger than the arity of the type of the declaration
+(without unfolding definitions).</p>
+</div></div><div class="decl"><h4>unused_arguments</h4><div class="decl_par"><p>Check for unused arguments, and print them with their position, variable name, type and whether
+the argument is a duplicate.
+See also <span style="background-color:#fdf6e3;color:#657b83;">check_unused_arguments</span>.
+This tactic additionally filters out all unused arguments of type <span style="background-color:#fdf6e3;color:#657b83;">parse _</span></p>
+</div></div><div class="decl"><h4>linter.unused_arguments</h4><div class="decl_par"><p>A linter object for checking for unused arguments. This is in the default linter set.</p>
+</div></div><div class="decl"><h4>incorrect_def_lemma</h4><div class="decl_par"><p>Checks whether the correct declaration constructor (definition or theorem) by comparing it
+to its sort. Instances will not be printed.</p>
+</div></div><div class="decl"><h4>linter.def_lemma</h4><div class="decl_par"><p>A linter for checking whether the correct declaration constructor (definition or theorem)
+has been used.</p>
+</div></div><div class="decl"><h4>dup_namespace</h4><div class="decl_par"><p>Checks whether a declaration has a namespace twice consecutively in its name</p>
+</div></div><div class="decl"><h4>linter.dup_namespace</h4><div class="decl_par"><p>A linter for checking whether a declaration has a namespace twice consecutively in its name.</p>
+</div></div><div class="decl"><h4>illegal_constants_in_statement</h4><div class="decl_par"><p>Checks whether a <span style="background-color:#fdf6e3;color:#b58900;">&gt;</span>/<span style="background-color:#fdf6e3;color:#b58900;">≥</span> is used in the statement of <span style="background-color:#fdf6e3;color:#657b83;">d</span>.</p>
+</div></div><div class="decl"><h4>linter.illegal_constants</h4><div class="decl_par"><p>A linter for checking whether illegal constants (≥, &gt;) appear in a declaration's type.</p>
+</div></div><div class="decl"><h4>instance_priority</h4><div class="decl_par"><p>checks whether an instance that always applies has priority ≥ 1000.</p>
+</div></div><div class="decl"><h4>linter.instance_priority</h4><div class="decl_par"><p>A linter object for checking instance priorities of instances that always apply.
+This is in the default linter set.</p>
+</div></div><div class="decl"><h4>doc_blame_report_defn</h4><div class="decl_par"><p>Reports definitions and constants that are missing doc strings</p>
+</div></div><div class="decl"><h4>doc_blame_report_thm</h4><div class="decl_par"><p>Reports definitions and constants that are missing doc strings</p>
+</div></div><div class="decl"><h4>linter.doc_blame</h4><div class="decl_par"><p>A linter for checking definition doc strings</p>
+</div></div><div class="decl"><h4>linter.doc_blame_thm</h4><div class="decl_par"><p>A linter for checking theorem doc strings. This is not in the default linter set.</p>
+</div></div><div class="decl"><h4>get_checks</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">get_checks slow extra use_only</span> produces a list of linters.
+<span style="background-color:#fdf6e3;color:#657b83;">extras</span> is a list of names that should resolve to declarations with type <span style="background-color:#fdf6e3;color:#657b83;">linter</span>.
+If <span style="background-color:#fdf6e3;color:#657b83;">use_only</span> is true, it only uses the linters in <span style="background-color:#fdf6e3;color:#657b83;">extra</span>.
+Otherwise, it uses all linters in the environment tagged with <span style="background-color:#fdf6e3;color:#586e75;">@[linter]</span>.
+If <span style="background-color:#fdf6e3;color:#657b83;">slow</span> is false, it only uses the fast default tests.</p>
+</div></div><div class="decl"><h4>_private.1343758449.append_when</h4><div class="decl_par"><p>If <span style="background-color:#fdf6e3;color:#657b83;">verbose</span> is true, return <span style="background-color:#fdf6e3;color:#657b83;">old </span><span style="background-color:#fdf6e3;color:#b58900;">++</span><span style="background-color:#fdf6e3;color:#657b83;"> new</span>, else return <span style="background-color:#fdf6e3;color:#657b83;">old</span>.</p>
+</div></div><div class="decl"><h4>lint_aux</h4><div class="decl_par"><p>The common denominator of <span style="background-color:#fdf6e3;color:#b58900;">#</span><span style="background-color:#fdf6e3;color:#657b83;">lint[|mathlib|all]</span>.
+The different commands have different configurations for <span style="background-color:#fdf6e3;color:#657b83;">l</span>, <span style="background-color:#fdf6e3;color:#657b83;">printer</span> and <span style="background-color:#fdf6e3;color:#657b83;">where_desc</span>.
+If <span style="background-color:#fdf6e3;color:#657b83;">slow</span> is false, doesn't do the checks that take a lot of time.
+If <span style="background-color:#fdf6e3;color:#657b83;">verbose</span> is false, it will suppress messages from passing checks.
+By setting <span style="background-color:#fdf6e3;color:#657b83;">checks</span> you can customize which checks are performed.</p>
+</div></div><div class="decl"><h4>lint</h4><div class="decl_par"><p>Return the message printed by <span style="background-color:#fdf6e3;color:#b58900;">#</span><span style="background-color:#fdf6e3;color:#657b83;">lint</span>.</p>
+</div></div><div class="decl"><h4>lint_mathlib</h4><div class="decl_par"><p>Return the message printed by <span style="background-color:#fdf6e3;color:#b58900;">#</span><span style="background-color:#fdf6e3;color:#657b83;">lint_mathlib</span>.</p>
+</div></div><div class="decl"><h4>lint_all</h4><div class="decl_par"><p>Return the message printed by <span style="background-color:#fdf6e3;color:#b58900;">#</span><span style="background-color:#fdf6e3;color:#657b83;">lint_all</span>.</p>
+</div></div><div class="decl"><h4>_private.2641407029.parse_lint_additions</h4><div class="decl_par"><p>Parses an optional <span style="background-color:#fdf6e3;color:#657b83;">only</span>, followed by a sequence of zero or more identifiers.
+Prepends <span style="background-color:#fdf6e3;color:#657b83;">linter.</span> to each of these identifiers.</p>
+</div></div><div class="decl"><h4>_private.3093258489.lint_cmd_aux</h4><div class="decl_par"><p>The common denominator of <span style="background-color:#fdf6e3;color:#657b83;">lint_cmd</span>, <span style="background-color:#fdf6e3;color:#657b83;">lint_mathlib_cmd</span>, <span style="background-color:#fdf6e3;color:#657b83;">lint_all_cmd</span></p>
+</div></div><div class="decl"><h4>lint_cmd</h4><div class="decl_par"><p>The command <span style="background-color:#fdf6e3;color:#b58900;">#</span><span style="background-color:#fdf6e3;color:#657b83;">lint</span> at the bottom of a file will warn you about some common mistakes
+in that file. Usage: <span style="background-color:#fdf6e3;color:#b58900;">#</span><span style="background-color:#fdf6e3;color:#657b83;">lint</span>, <span style="background-color:#fdf6e3;color:#b58900;">#</span><span style="background-color:#fdf6e3;color:#657b83;">lint linter_1 linter_2</span>, <span style="background-color:#fdf6e3;color:#b58900;">#</span><span style="background-color:#fdf6e3;color:#657b83;">lint only linter_1 linter_2</span>.
+<span style="background-color:#fdf6e3;color:#b58900;">#</span><span style="background-color:#fdf6e3;color:#657b83;">lint</span><span style="background-color:#fdf6e3;color:#b58900;">-</span> will suppress the output of passing checks.
+Use the command <span style="background-color:#fdf6e3;color:#b58900;">#</span><span style="background-color:#fdf6e3;color:#657b83;">list_linters</span> to see all available linters.</p>
+</div></div><div class="decl"><h4>lint_mathlib_cmd</h4><div class="decl_par"><p>The command <span style="background-color:#fdf6e3;color:#b58900;">#</span><span style="background-color:#fdf6e3;color:#657b83;">lint_mathlib</span> checks all of mathlib for certain mistakes.
+Usage: <span style="background-color:#fdf6e3;color:#b58900;">#</span><span style="background-color:#fdf6e3;color:#657b83;">lint_mathlib</span>, <span style="background-color:#fdf6e3;color:#b58900;">#</span><span style="background-color:#fdf6e3;color:#657b83;">lint_mathlib linter_1 linter_2</span>, <span style="background-color:#fdf6e3;color:#b58900;">#</span><span style="background-color:#fdf6e3;color:#657b83;">lint_mathlib only linter_1 linter_2</span>.
+<span style="background-color:#fdf6e3;color:#b58900;">#</span><span style="background-color:#fdf6e3;color:#657b83;">lint_mathlib</span><span style="background-color:#fdf6e3;color:#b58900;">-</span> will suppress the output of passing checks.
+Use the command <span style="background-color:#fdf6e3;color:#b58900;">#</span><span style="background-color:#fdf6e3;color:#657b83;">list_linters</span> to see all available linters.</p>
+</div></div><div class="decl"><h4>lint_all_cmd</h4><div class="decl_par"><p>The command <span style="background-color:#fdf6e3;color:#b58900;">#</span><span style="background-color:#fdf6e3;color:#657b83;">lint_all</span> checks all imported files for certain mistakes.
+Usage: <span style="background-color:#fdf6e3;color:#b58900;">#</span><span style="background-color:#fdf6e3;color:#657b83;">lint_all</span>, <span style="background-color:#fdf6e3;color:#b58900;">#</span><span style="background-color:#fdf6e3;color:#657b83;">lint_all linter_1 linter_2</span>, <span style="background-color:#fdf6e3;color:#b58900;">#</span><span style="background-color:#fdf6e3;color:#657b83;">lint_all only linter_1 linter_2</span>.
+<span style="background-color:#fdf6e3;color:#b58900;">#</span><span style="background-color:#fdf6e3;color:#657b83;">lint_all</span><span style="background-color:#fdf6e3;color:#b58900;">-</span> will suppress the output of passing checks.
+Use the command <span style="background-color:#fdf6e3;color:#b58900;">#</span><span style="background-color:#fdf6e3;color:#657b83;">list_linters</span> to see all available linters.</p>
+</div></div><div class="decl"><h4>list_linters</h4><div class="decl_par"><p>The command <span style="background-color:#fdf6e3;color:#b58900;">#</span><span style="background-color:#fdf6e3;color:#657b83;">list_linters</span> prints a list of all available linters.</p>
+</div></div><div class="decl"><h4>lint_hole_cmd</h4><div class="decl_par"><p>Use <span style="background-color:#fdf6e3;color:#657b83;">lint</span> as a hole command. Note: In a large file, there might be some delay between
+choosing the option and the information appearing</p>
+</div></div></html>

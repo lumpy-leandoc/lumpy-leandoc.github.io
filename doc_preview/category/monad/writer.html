@@ -1,0 +1,22 @@
+<html><head><link rel="stylesheet" href="../../docs_style.css"></head><div class="decl"><h4>monad_writer</h4><div class="decl_par"><p>An implementation of <a href="https://hackage.haskell.org/package/mtl-2.2.2/docs/Control-Monad-Reader-Class.html#t:MonadReader">MonadReader</a>.
+It does not contain <span style="background-color:#fdf6e3;color:#859900;">local</span> because this function cannot be lifted using <span style="background-color:#fdf6e3;color:#657b83;">monad_lift</span>.
+Instead, the <span style="background-color:#fdf6e3;color:#657b83;">monad_reader_adapter</span> class provides the more general <span style="background-color:#fdf6e3;color:#657b83;">adapt_reader</span> function.</p>
+<p>Note: This class can be seen as a simplification of the more &quot;principled&quot; definition</p>
+<pre><code class="language-lean"><pre style="background-color:#fdf6e3;">
+<span style="color:#859900;">class </span><span style="color:#d33682;">monad_reader </span><span style="color:#657b83;">(ρ : out_param (</span><span style="color:#268bd2;">Type</span><span style="color:#657b83;"> u)) (n : </span><span style="color:#268bd2;">Type</span><span style="color:#657b83;"> u </span><span style="color:#859900;">→ </span><span style="color:#268bd2;">Type</span><span style="color:#657b83;"> u) </span><span style="color:#b58900;">:=
+</span></pre>
+<pre style="background-color:#fdf6e3;">
+<span style="color:#657b83;">(lift {} {α : </span><span style="color:#268bd2;">Type</span><span style="color:#657b83;"> u} : (∀ {m : </span><span style="color:#268bd2;">Type</span><span style="color:#657b83;"> u </span><span style="color:#859900;">→ </span><span style="color:#268bd2;">Type</span><span style="color:#657b83;"> u} [monad m], reader_t ρ m α) </span><span style="color:#859900;">→</span><span style="color:#657b83;"> n α)
+</span></pre>
+</code></pre>
+</div></div><div class="decl"><h4>monad_writer_adapter</h4><div class="decl_par"><p>Adapt a monad stack, changing the type of its top-most environment.</p>
+<p>This class is comparable to <a href="https://hackage.haskell.org/package/lens-4.15.4/docs/Control-Lens-Zoom.html#t:Magnify">Control.Lens.Magnify</a>, but does not use lenses (why would it), and is derived automatically for any transformer implementing <span style="background-color:#fdf6e3;color:#657b83;">monad_functor</span>.</p>
+<p>Note: This class can be seen as a simplification of the more &quot;principled&quot; definition</p>
+<pre><code class="language-lean"><pre style="background-color:#fdf6e3;">
+<span style="color:#859900;">class </span><span style="color:#d33682;">monad_reader_functor </span><span style="color:#657b83;">(ρ ρ&#39; : out_param (</span><span style="color:#268bd2;">Type</span><span style="color:#657b83;"> u)) (n n&#39; : </span><span style="color:#268bd2;">Type</span><span style="color:#657b83;"> u </span><span style="color:#859900;">→ </span><span style="color:#268bd2;">Type</span><span style="color:#657b83;"> u) </span><span style="color:#b58900;">:=
+</span></pre>
+<pre style="background-color:#fdf6e3;">
+<span style="color:#657b83;">(map {} {α : </span><span style="color:#268bd2;">Type</span><span style="color:#657b83;"> u} : (∀ {m : </span><span style="color:#268bd2;">Type</span><span style="color:#657b83;"> u </span><span style="color:#859900;">→ </span><span style="color:#268bd2;">Type</span><span style="color:#657b83;"> u} [monad m], reader_t ρ m α </span><span style="color:#859900;">→</span><span style="color:#657b83;"> reader_t ρ&#39; m α) </span><span style="color:#859900;">→</span><span style="color:#657b83;"> n α </span><span style="color:#859900;">→</span><span style="color:#657b83;"> n&#39; α)
+</span></pre>
+</code></pre>
+</div></div></html>

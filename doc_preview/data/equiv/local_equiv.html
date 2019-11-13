@@ -1,0 +1,79 @@
+<html><head><link rel="stylesheet" href="../../docs_style.css"></head><h1>Local equivalences</h1>
+<p>This files defines equivalences between subsets of given types.
+An element <span style="background-color:#fdf6e3;color:#657b83;">e</span> of <span style="background-color:#fdf6e3;color:#657b83;">local_equiv α β</span> is made of two maps <span style="background-color:#fdf6e3;color:#657b83;">e.to_fun</span> and <span style="background-color:#fdf6e3;color:#657b83;">e.inv_fun</span> respectively
+from α to β and from  β to α (just like equivs), which are inverse to each other on the subsets
+<span style="background-color:#fdf6e3;color:#657b83;">e.source</span> and <span style="background-color:#fdf6e3;color:#657b83;">e.target</span> of respectively α and β.</p>
+<p>They are designed in particular to define charts on manifolds.</p>
+<p>The main functionality is <span style="background-color:#fdf6e3;color:#657b83;">e.trans f</span>, which composes the two local equivalences by restricting
+the source and target to the maximal set where the composition makes sense.</p>
+<p>Contrary to equivs, we do not register the coercion to functions and we use explicitly to_fun and
+inv_fun: coercions create numerous unification problems for manifolds.</p>
+<h2>Main definitions</h2>
+<p><span style="background-color:#fdf6e3;color:#657b83;">equiv.to_local_equiv</span>: associating a local equiv to an equiv, with source = target = univ
+<span style="background-color:#fdf6e3;color:#657b83;">local_equiv.symm</span>    : the inverse of a local equiv
+<span style="background-color:#fdf6e3;color:#657b83;">local_equiv.trans</span>   : the composition of two local equivs
+<span style="background-color:#fdf6e3;color:#657b83;">local_equiv.refl</span>    : the identity local equiv
+<span style="background-color:#fdf6e3;color:#657b83;">local_equiv.of_set</span>  : the identity on a set <span style="background-color:#fdf6e3;color:#657b83;">s</span>
+<span style="background-color:#fdf6e3;color:#657b83;">eq_on_source</span>        : equivalence relation describing the &quot;right&quot; notion of equality for local
+equivs (see below in implementation notes)</p>
+<h2>Implementation notes</h2>
+<p>There are at least three possible implementations of local equivalences:</p>
+<ul>
+<li>equivs on subtypes</li>
+<li>pairs of functions taking values in <span style="background-color:#fdf6e3;color:#657b83;">option α</span> and <span style="background-color:#fdf6e3;color:#657b83;">option β</span>, equal to none where the local
+equivalence is not defined</li>
+<li>pairs of functions defined everywhere, keeping the source and target as additional data</li>
+</ul>
+<p>Each of these implementations has pros and cons.</p>
+<ul>
+<li>When dealing with subtypes, one still need to define additional API for composition and
+restriction of domains. Checking that one always belongs to the right subtype makes things very
+tedious, and leads quickly to DTT hell (as the subtype <span style="background-color:#fdf6e3;color:#657b83;">u ∩ v</span> is not the &quot;same&quot; as <span style="background-color:#fdf6e3;color:#657b83;">v ∩ u</span>, for
+instance).</li>
+<li>With option-valued functions, the composition is very neat (it is just the usual composition, and
+the domain is restricted automatically). These are implemented in <span style="background-color:#fdf6e3;color:#657b83;">pequiv.lean</span>. For manifolds,
+where one wants to discuss thoroughly the smoothness of the maps, this creates however a lot of
+overhead as one would need to extend all classes of smoothness to option-valued maps.</li>
+<li>The local_equiv version as explained above is easier to use for manifolds. The drawback is that
+there is extra useless data (the values of <span style="background-color:#fdf6e3;color:#657b83;">to_fun</span> and <span style="background-color:#fdf6e3;color:#657b83;">inv_fun</span> outside of <span style="background-color:#fdf6e3;color:#657b83;">source</span> and <span style="background-color:#fdf6e3;color:#657b83;">target</span>).
+In particular, the equality notion between local equivs is not &quot;the right one&quot;, i.e., coinciding
+source and target and equality there. Moreover, there are no local equivs in this sense between
+an empty type and a nonempty type. Since empty types are not that useful, and since one almost never
+needs to talk about equal local equivs, this is not an issue in practice.
+Still, we introduce an equivalence relation <span style="background-color:#fdf6e3;color:#657b83;">eq_on_source</span> that captures this right notion of
+equality, and show that many properties are invariant under this equivalence relation.</li>
+</ul>
+<hr/><div class="decl"><h4>local_equiv</h4><div class="decl_par"><p>Local equivalence between subsets <span style="background-color:#fdf6e3;color:#657b83;">source</span> and <span style="background-color:#fdf6e3;color:#657b83;">target</span> of α and β respectively. The (global)
+maps <span style="background-color:#fdf6e3;color:#657b83;">to_fun : α </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> β</span> and <span style="background-color:#fdf6e3;color:#657b83;">inv_fun : β </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> α</span> map <span style="background-color:#fdf6e3;color:#657b83;">source</span> to <span style="background-color:#fdf6e3;color:#657b83;">target</span> and conversely, and are inverse
+to each other there. The values of <span style="background-color:#fdf6e3;color:#657b83;">to_fun</span> outside of <span style="background-color:#fdf6e3;color:#657b83;">source</span> and of <span style="background-color:#fdf6e3;color:#657b83;">inv_fun</span> outside of <span style="background-color:#fdf6e3;color:#657b83;">target</span>
+are irrelevant.</p>
+</div></div><div class="decl"><h4>equiv.to_local_equiv</h4><div class="decl_par"><p>Associating a local_equiv to an equiv</p>
+</div></div><div class="decl"><h4>local_equiv.to_equiv</h4><div class="decl_par"><p>Associating to a local_equiv an equiv between the source and the target</p>
+</div></div><div class="decl"><h4>local_equiv.symm</h4><div class="decl_par"><p>The inverse of a local equiv</p>
+</div></div><div class="decl"><h4>local_equiv.bij_on_source</h4><div class="decl_par"><p>A local equiv induces a bijection between its source and target</p>
+</div></div><div class="decl"><h4>local_equiv.ext</h4><div class="decl_par"><p>Two local equivs that have the same source, same to_fun and same inv_fun, coincide.</p>
+</div></div><div class="decl"><h4>local_equiv.restr</h4><div class="decl_par"><p>Restricting a local equivalence to e.source ∩ s</p>
+</div></div><div class="decl"><h4>local_equiv.refl</h4><div class="decl_par"><p>The identity local equiv</p>
+</div></div><div class="decl"><h4>local_equiv.of_set</h4><div class="decl_par"><p>The identity local equiv on a set <span style="background-color:#fdf6e3;color:#657b83;">s</span></p>
+</div></div><div class="decl"><h4>local_equiv.trans'</h4><div class="decl_par"><p>Composing two local equivs if the target of the first coincides with the source of the
+second.</p>
+</div></div><div class="decl"><h4>local_equiv.trans</h4><div class="decl_par"><p>Composing two local equivs, by restricting to the maximal domain where their composition
+is well defined.</p>
+</div></div><div class="decl"><h4>local_equiv.eq_on_source</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">eq_on_source e e&#39;</span> means that <span style="background-color:#fdf6e3;color:#657b83;">e</span> and <span style="background-color:#fdf6e3;color:#657b83;">e&#39;</span> have the same source, and coincide there. Then <span style="background-color:#fdf6e3;color:#657b83;">e</span>
+and <span style="background-color:#fdf6e3;color:#657b83;">e&#39;</span> should really be considered the same local equiv.</p>
+</div></div><div class="decl"><h4>local_equiv.eq_on_source_setoid</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">eq_on_source</span> is an equivalence relation</p>
+</div></div><div class="decl"><h4>local_equiv.eq_on_source_symm</h4><div class="decl_par"><p>If two local equivs are equivalent, so are their inverses</p>
+</div></div><div class="decl"><h4>local_equiv.source_eq_of_eq_on_source</h4><div class="decl_par"><p>Two equivalent local equivs have the same source</p>
+</div></div><div class="decl"><h4>local_equiv.target_eq_of_eq_on_source</h4><div class="decl_par"><p>Two equivalent local equivs have the same target</p>
+</div></div><div class="decl"><h4>local_equiv.apply_eq_of_eq_on_source</h4><div class="decl_par"><p>Two equivalent local equivs coincide on the source</p>
+</div></div><div class="decl"><h4>local_equiv.inv_apply_eq_of_eq_on_source</h4><div class="decl_par"><p>Two equivalent local equivs have coinciding inverses on the target</p>
+</div></div><div class="decl"><h4>local_equiv.eq_on_source_trans</h4><div class="decl_par"><p>Composition of local equivs respects equivalence</p>
+</div></div><div class="decl"><h4>local_equiv.eq_on_source_restr</h4><div class="decl_par"><p>Restriction of local equivs respects equivalence</p>
+</div></div><div class="decl"><h4>local_equiv.eq_on_source_preimage</h4><div class="decl_par"><p>Preimages are respected by equivalence</p>
+</div></div><div class="decl"><h4>local_equiv.trans_self_symm</h4><div class="decl_par"><p>Composition of a local equiv and its inverse is equivalent to the restriction of the identity
+to the source</p>
+</div></div><div class="decl"><h4>local_equiv.trans_symm_self</h4><div class="decl_par"><p>Composition of the inverse of a local equiv and this local equiv is equivalent to the
+restriction of the identity to the target</p>
+</div></div><div class="decl"><h4>local_equiv.eq_of_eq_on_source_univ</h4><div class="decl_par"><p>Two equivalent local equivs are equal when the source and target are univ</p>
+</div></div><div class="decl"><h4>local_equiv.prod</h4><div class="decl_par"><p>The product of two local equivs, as a local equiv on the product.</p>
+</div></div></html>

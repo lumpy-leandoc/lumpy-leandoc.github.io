@@ -1,0 +1,33 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><h1>Single-object category</h1>
+<p>Single object category with a given monoid of endomorphisms.  It is defined to facilitate transfering
+some definitions and lemmas (e.g., conjugacy etc.) from category theory to monoids and groups.</p>
+<h2>Main definitions</h2>
+<p>Given a type <span style="background-color:#fdf6e3;color:#657b83;">α</span> with a monoid structure, <span style="background-color:#fdf6e3;color:#657b83;">single_obj α</span> is <span style="background-color:#fdf6e3;color:#657b83;">unit</span> type with <span style="background-color:#fdf6e3;color:#657b83;">category</span> structure
+such that <span style="background-color:#fdf6e3;color:#657b83;">End (single_obj α).star</span> is the monoid <span style="background-color:#fdf6e3;color:#657b83;">α</span>.  This can be extended to a functor <span style="background-color:#fdf6e3;color:#657b83;">Mon ⥤ Cat</span>.</p>
+<p>If <span style="background-color:#fdf6e3;color:#657b83;">α</span> is a group, then <span style="background-color:#fdf6e3;color:#657b83;">single_obj α</span> is a groupoid.</p>
+<p>An element <span style="background-color:#fdf6e3;color:#657b83;">x : α</span> can be reinterpreted as an element of <span style="background-color:#fdf6e3;color:#657b83;">End (single_obj.star α)</span> using
+<span style="background-color:#fdf6e3;color:#657b83;">single_obj.to_End</span>.</p>
+<h2>Implementation notes</h2>
+<ul>
+<li>
+<p><span style="background-color:#fdf6e3;color:#657b83;">category_struct.comp</span> on <span style="background-color:#fdf6e3;color:#657b83;">End (single_obj.star α)</span> is <span style="background-color:#fdf6e3;color:#657b83;">flip (</span><span style="background-color:#fdf6e3;color:#b58900;">*</span><span style="background-color:#fdf6e3;color:#657b83;">)</span>, not <span style="background-color:#fdf6e3;color:#657b83;">(</span><span style="background-color:#fdf6e3;color:#b58900;">*</span><span style="background-color:#fdf6e3;color:#657b83;">)</span>. This way
+multiplication on <span style="background-color:#fdf6e3;color:#657b83;">End</span> agrees with the multiplication on <span style="background-color:#fdf6e3;color:#657b83;">α</span>.</p>
+</li>
+<li>
+<p>By default, Lean puts instances into <span style="background-color:#fdf6e3;color:#657b83;">category_theory</span> namespace instead of
+<span style="background-color:#fdf6e3;color:#657b83;">category_theory.single_obj</span>, so we give all names explicitly.</p>
+</li>
+</ul>
+<hr/><div class="decl"><h4>category_theory.single_obj</h4><div class="decl_par"><p>Type tag on <span style="background-color:#fdf6e3;color:#657b83;">unit</span> used to define single-object categories and groupoids.</p>
+</div></div><div class="decl"><h4>category_theory.single_obj.category_struct</h4><div class="decl_par"><p>One and <span style="background-color:#fdf6e3;color:#657b83;">flip (</span><span style="background-color:#fdf6e3;color:#b58900;">*</span><span style="background-color:#fdf6e3;color:#657b83;">)</span> become <span style="background-color:#fdf6e3;color:#657b83;">id</span> and <span style="background-color:#fdf6e3;color:#657b83;">comp</span> for morphisms of the single object category.</p>
+</div></div><div class="decl"><h4>category_theory.single_obj.category</h4><div class="decl_par"><p>Monoid laws become category laws for the single object category.</p>
+</div></div><div class="decl"><h4>category_theory.single_obj.groupoid</h4><div class="decl_par"><p>Groupoid structure on <span style="background-color:#fdf6e3;color:#657b83;">single_obj α</span></p>
+</div></div><div class="decl"><h4>category_theory.single_obj.to_End</h4><div class="decl_par"><p>The endomorphisms monoid of the only object in <span style="background-color:#fdf6e3;color:#657b83;">single_obj α</span> is equivalent to the original
+monoid α.</p>
+</div></div><div class="decl"><h4>category_theory.single_obj.map_hom</h4><div class="decl_par"><p>There is a 1-1 correspondence between monoid homomorphisms <span style="background-color:#fdf6e3;color:#657b83;">α </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> β</span> and functors between the
+corresponding single-object categories. It means that <span style="background-color:#fdf6e3;color:#657b83;">single_obj</span> is a fully faithful
+functor.</p>
+</div></div><div class="decl"><h4>monoid_hom.to_functor</h4><div class="decl_par"><p>Reinterpret a monoid homomorphism <span style="background-color:#fdf6e3;color:#657b83;">f : α </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> β</span> as a functor <span style="background-color:#fdf6e3;color:#657b83;">(single_obj α) ⥤ (single_obj β)</span>.
+See also <span style="background-color:#fdf6e3;color:#657b83;">category_theory.single_obj.map_hom</span> for an equivalence between these types.</p>
+</div></div><div class="decl"><h4>Mon.to_Cat</h4><div class="decl_par"><p>The fully faithful functor from <span style="background-color:#fdf6e3;color:#657b83;">Mon</span> to <span style="background-color:#fdf6e3;color:#657b83;">Cat</span>.</p>
+</div></div></html>

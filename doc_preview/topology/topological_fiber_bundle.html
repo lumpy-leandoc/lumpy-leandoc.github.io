@@ -1,0 +1,131 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><h1>Fiber bundles</h1>
+<p>A topological fiber bundle with fiber F over a base B is a space projecting on B for which the
+fibers are all homeomorphic to F, such that the local situation around each point is a direct
+product. We define a predicate <span style="background-color:#fdf6e3;color:#657b83;">is_topological_fiber_bundle F p</span> saying that <span style="background-color:#fdf6e3;color:#657b83;">p : Z </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> B</span> is a
+topological fiber bundle with fiber <span style="background-color:#fdf6e3;color:#657b83;">F</span>.</p>
+<p>It is in general nontrivial to construct a fiber bundle. A way is to start from the knowledge of
+how changes of local trivializations act on the fiber. From this, one can construct the total space
+of the bundle and its topology by a suitable gluing construction. The main content of this file is
+an implementation of this construction: starting from an object of type
+<span style="background-color:#fdf6e3;color:#657b83;">topological_fiber_bundle_core</span> registering the trivialization changes, one gets the corresponding
+fiber bundle and projection.</p>
+<h2>Main definitions</h2>
+<p><span style="background-color:#fdf6e3;color:#657b83;">bundle_trivialization F p</span> : structure extending local homeomorphisms, defining a local
+trivialization of a topological space <span style="background-color:#fdf6e3;color:#657b83;">Z</span> with projection <span style="background-color:#fdf6e3;color:#657b83;">p</span> and fiber <span style="background-color:#fdf6e3;color:#657b83;">F</span>.
+<span style="background-color:#fdf6e3;color:#657b83;">is_topological_fiber_bundle F p</span> : Prop saying that the map <span style="background-color:#fdf6e3;color:#657b83;">p</span> between topological spaces is a
+fiber bundle with fiber <span style="background-color:#fdf6e3;color:#657b83;">F</span>.</p>
+<p><span style="background-color:#fdf6e3;color:#657b83;">topological_fiber_bundle_core ι B F</span> : structure registering how changes of coordinates act on the
+fiber <span style="background-color:#fdf6e3;color:#657b83;">F</span> above open subsets of <span style="background-color:#fdf6e3;color:#657b83;">B</span>, where local trivializations are indexed by ι.
+Let <span style="background-color:#fdf6e3;color:#657b83;">Z : topological_fiber_bundle_core ι B F</span>. Then we define
+<span style="background-color:#fdf6e3;color:#657b83;">Z.total_space</span> : the total space of <span style="background-color:#fdf6e3;color:#657b83;">Z</span>, defined as a Type as <span style="background-color:#fdf6e3;color:#657b83;">B × F</span>, but with a twisted topology
+coming from the fiber bundle structure
+<span style="background-color:#fdf6e3;color:#657b83;">Z.proj</span>        : projection from <span style="background-color:#fdf6e3;color:#657b83;">Z.total_space</span> to <span style="background-color:#fdf6e3;color:#657b83;">B</span>. It is continuous.
+<span style="background-color:#fdf6e3;color:#657b83;">Z.fiber x</span>     : the fiber above <span style="background-color:#fdf6e3;color:#657b83;">x</span>, homeomorphic to <span style="background-color:#fdf6e3;color:#657b83;">F</span> (and defeq to <span style="background-color:#fdf6e3;color:#657b83;">F</span> as a type).
+<span style="background-color:#fdf6e3;color:#657b83;">Z.local_triv i</span>: for <span style="background-color:#fdf6e3;color:#657b83;">i : ι</span>, a local homeomorphism from <span style="background-color:#fdf6e3;color:#657b83;">Z.total_space</span> to <span style="background-color:#fdf6e3;color:#657b83;">B × F</span>, that realizes
+a trivialization above the set <span style="background-color:#fdf6e3;color:#657b83;">Z.base_set i</span>, which is an open set in <span style="background-color:#fdf6e3;color:#657b83;">B</span>.</p>
+<h2>Implementation notes</h2>
+<p>A topological fiber bundle with fiber F over a base B is a family of spaces isomorphic to F,
+indexed by B, which is locally trivial in the following sense: there is a covering of B by open
+sets such that, on each such open set <span style="background-color:#fdf6e3;color:#657b83;">s</span>, the bundle is isomorphic to <span style="background-color:#fdf6e3;color:#657b83;">s × F</span>.</p>
+<p>To construct a fiber bundle formally, the main data is what happens when one changes trivializations
+from <span style="background-color:#fdf6e3;color:#657b83;">s × F</span> to <span style="background-color:#fdf6e3;color:#657b83;">s&#39; × F</span> on <span style="background-color:#fdf6e3;color:#657b83;">s ∩ s&#39;</span>: one should get a family of homeomorphisms of <span style="background-color:#fdf6e3;color:#657b83;">F</span>, depending
+continuously on the base point, satisfying basic compatibility conditions (cocycle property).
+Useful classes of bundles can then be specified by requiring that these homeomorphisms of <span style="background-color:#fdf6e3;color:#657b83;">F</span>
+belong to some subgroup, preserving some structure (the &quot;structure group of the bundle&quot;): then
+these structures are inherited by the fibers of the bundle.</p>
+<p>Given such trivialization change data (encoded below in a structure called
+<span style="background-color:#fdf6e3;color:#657b83;">topological_fiber_bundle_core</span>), one can construct the fiber bundle. The intrinsic canonical
+mathematical construction is the following.
+The fiber above x is the disjoint union of F over all trivializations, modulo the gluing
+identifications: one gets a fiber which is isomorphic to F, but non-canonically
+(each choice of one of the trivializations around x gives such an isomorphism). Given a
+trivialization over a set <span style="background-color:#fdf6e3;color:#657b83;">s</span>, one gets an isomorphism between <span style="background-color:#fdf6e3;color:#657b83;">s × F</span> and <span style="background-color:#fdf6e3;color:#657b83;">proj^{</span><span style="background-color:#fdf6e3;color:#b58900;">-</span><span style="background-color:#fdf6e3;color:#6c71c4;">1</span><span style="background-color:#fdf6e3;color:#657b83;">} s</span>, by using
+the identification corresponding to this trivialization. One chooses the topology on the bundle that
+makes all of these into homeomorphisms.</p>
+<p>For the practical implementation, it turns out to be more convenient to avoid completely the
+gluing and quotienting construction above, and to declare above each <span style="background-color:#fdf6e3;color:#657b83;">x</span> that the fiber is <span style="background-color:#fdf6e3;color:#657b83;">F</span>,
+but thinking that it corresponds to the <span style="background-color:#fdf6e3;color:#657b83;">F</span> coming from the choice of one trivialization around <span style="background-color:#fdf6e3;color:#657b83;">x</span>.
+This has several practical advantages:</p>
+<ul>
+<li>without any work, one gets a topological space structure on the fiber. And if <span style="background-color:#fdf6e3;color:#657b83;">F</span> has more
+structure it is inherited for free by the fiber.</li>
+<li>In the trivial situation of the trivial bundle where there is only one chart and one
+trivialization, this construction gives the product space B × F with the product topology. In the
+case of the tangent bundle of manifolds, this also implies that on vector spaces the derivative and
+the manifold derivative are equal.</li>
+</ul>
+<p>A drawback is that some silly constructions will typecheck: in the case of the tangent bundle, one
+can add two vectors in different tangent spaces (as they both are elements of F from the point of
+view of Lean). To solve this, one could mark the tangent space as irreducible, but then one would
+lose the identification of the tangent space to F with F. There is however a big advantage of this
+situation: even if Lean can not check that two basepoints are defeq, it will accept the fact that
+the tangent spaces are the same. For instance, if two maps f and g are locally inverse to each
+other, one can express that the composition of their derivatives is the identity of
+<span style="background-color:#fdf6e3;color:#657b83;">tangent_space I x</span>. One could fear issues as this composition goes from <span style="background-color:#fdf6e3;color:#657b83;">tangent_space I x</span> to
+<span style="background-color:#fdf6e3;color:#657b83;">tangent_space I (g (f x))</span> (which should be the same, but should not be obvious to Lean
+as it does not know that <span style="background-color:#fdf6e3;color:#657b83;">g (f x) </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> x</span>). As these types are the same to Lean (equal to <span style="background-color:#fdf6e3;color:#657b83;">F</span>), there
+are in fact no dependent type difficulties here!</p>
+<p>For this construction of a fiber bundle from a <span style="background-color:#fdf6e3;color:#657b83;">topological_fiber_bundle_core</span>, we should thus
+choose for each <span style="background-color:#fdf6e3;color:#657b83;">x</span> one specific trivialization around it. We include this choice in the definition
+of the <span style="background-color:#fdf6e3;color:#657b83;">topological_fiber_bundle_core</span>, as it makes some constructions more
+functorial and it is a nice way to say that the trivializations cover the whole space B.</p>
+<p>With this definition, the type of the fiber bundle space constructed from the core data is just
+<span style="background-color:#fdf6e3;color:#657b83;">B × F</span>, but the topology is not the product one.</p>
+<p>We also take the indexing type (indexing all the trivializations) as a parameter to the fiber bundle
+core: it could always be taken as a subtype of all the maps from open subsets of B to continuous
+maps of F, but in practice it will sometimes be something else. For instance, on a manifold, one
+will use the set of charts as a good parameterization for the trivializations of the tangent bundle.
+Or for the pullback of a <span style="background-color:#fdf6e3;color:#657b83;">topological_fiber_bundle_core</span>, the indexing type will be the same as
+for the initial bundle.</p>
+<h2>Tags</h2>
+<p>Fiber bundle, topological bundle, vector bundle, local trivialization, structure group</p>
+<hr/><div class="decl"><h4>bundle_trivialization</h4><div class="decl_par"><p>A structure extending local homeomorphisms, defining a local trivialization of a projection
+<span style="background-color:#fdf6e3;color:#657b83;">proj : Z </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> B</span> with fiber <span style="background-color:#fdf6e3;color:#657b83;">F</span>, as a local homeomorphism between <span style="background-color:#fdf6e3;color:#657b83;">Z</span> and <span style="background-color:#fdf6e3;color:#657b83;">B × F</span> defined between two
+sets of the form <span style="background-color:#fdf6e3;color:#657b83;">proj </span><span style="background-color:#fdf6e3;color:#b58900;">⁻¹</span><span style="background-color:#fdf6e3;color:#657b83;">&#39; base_set</span> and <span style="background-color:#fdf6e3;color:#657b83;">base_set × F</span>, acting trivially on the first coordinate.</p>
+</div></div><div class="decl"><h4>is_topological_fiber_bundle</h4><div class="decl_par"><p>A topological fiber bundle with fiber F over a base B is a space projecting on B for which the
+fibers are all homeomorphic to F, such that the local situation around each point is a direct
+product.</p>
+</div></div><div class="decl"><h4>bundle_trivialization.continuous_at_proj</h4><div class="decl_par"><p>In the domain of a bundle trivialization, the projection is continuous</p>
+</div></div><div class="decl"><h4>is_topological_fiber_bundle.continuous_proj</h4><div class="decl_par"><p>The projection from a topological fiber bundle to its base is continuous.</p>
+</div></div><div class="decl"><h4>is_topological_fiber_bundle.is_open_map_proj</h4><div class="decl_par"><p>The projection from a topological fiber bundle to its base is an open map.</p>
+</div></div><div class="decl"><h4>is_topological_fiber_bundle_fst</h4><div class="decl_par"><p>The first projection in a product is a topological fiber bundle.</p>
+</div></div><div class="decl"><h4>is_topological_fiber_bundle_snd</h4><div class="decl_par"><p>The second projection in a product is a topological fiber bundle.</p>
+</div></div><div class="decl"><h4>topological_fiber_bundle_core</h4><div class="decl_par"><p>Core data defining a locally trivial topological bundle with fiber <span style="background-color:#fdf6e3;color:#657b83;">F</span> over a topological
+space <span style="background-color:#fdf6e3;color:#657b83;">B</span>. Note that &quot;bundle&quot; is used in its mathematical sense. This is the (computer science)
+bundled version, i.e., all the relevant data is contained in the following structure. A family of
+local trivializations is indexed by a type ι, on open subsets <span style="background-color:#fdf6e3;color:#657b83;">base_set i</span> for each <span style="background-color:#fdf6e3;color:#657b83;">i : ι</span>.
+Trivialization changes from <span style="background-color:#fdf6e3;color:#657b83;">i</span> to <span style="background-color:#fdf6e3;color:#657b83;">j</span> are given by continuous maps <span style="background-color:#fdf6e3;color:#657b83;">coord_change i j</span> from
+<span style="background-color:#fdf6e3;color:#657b83;">base_set i ∩ base_set j</span> to the set of homeomorphisms of <span style="background-color:#fdf6e3;color:#657b83;">F</span>, but we express them as maps
+<span style="background-color:#fdf6e3;color:#657b83;">B </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> F </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> F</span> and require continuity on <span style="background-color:#fdf6e3;color:#657b83;">(base_set i ∩ base_set j) × F</span> to avoid the topology on the
+space of continuous maps on <span style="background-color:#fdf6e3;color:#657b83;">F</span>.</p>
+</div></div><div class="decl"><h4>topological_fiber_bundle_core.index</h4><div class="decl_par"><p>The index set of a topological fiber bundle core, as a convenience function for dot notation</p>
+</div></div><div class="decl"><h4>topological_fiber_bundle_core.base</h4><div class="decl_par"><p>The base space of a topological fiber bundle core, as a convenience function for dot notation</p>
+</div></div><div class="decl"><h4>topological_fiber_bundle_core.fiber</h4><div class="decl_par"><p>The fiber of a topological fiber bundle core, as a convenience function for dot notation and
+typeclass inference</p>
+</div></div><div class="decl"><h4>topological_fiber_bundle_core.total_space</h4><div class="decl_par"><p>Total space of a topological bundle created from core. It is equal to <span style="background-color:#fdf6e3;color:#657b83;">B × F</span>, but as it is
+not marked as reducible, typeclass inference will not infer the wrong topology, and will use the
+instance <span style="background-color:#fdf6e3;color:#657b83;">topological_fiber_bundle_core.to_topological_space</span> with the right topology.</p>
+</div></div><div class="decl"><h4>topological_fiber_bundle_core.proj</h4><div class="decl_par"><p>The projection from the total space of a topological fiber bundle core, on its base.</p>
+</div></div><div class="decl"><h4>topological_fiber_bundle_core.triv_change</h4><div class="decl_par"><p>Local homeomorphism version of the trivialization change.</p>
+</div></div><div class="decl"><h4>topological_fiber_bundle_core.local_triv'</h4><div class="decl_par"><p>Associate to a trivialization index <span style="background-color:#fdf6e3;color:#657b83;">i : ι</span> the corresponding trivialization, i.e., a bijection
+between <span style="background-color:#fdf6e3;color:#657b83;">proj </span><span style="background-color:#fdf6e3;color:#b58900;">⁻¹</span><span style="background-color:#fdf6e3;color:#657b83;"> (base_set i)</span> and <span style="background-color:#fdf6e3;color:#657b83;">base_set i × F</span>. As the fiber above <span style="background-color:#fdf6e3;color:#657b83;">x</span> is <span style="background-color:#fdf6e3;color:#657b83;">F</span> but read in the
+chart with index <span style="background-color:#fdf6e3;color:#657b83;">index_at x</span>, the trivialization in the fiber above x is by definition the
+coordinate change from i to <span style="background-color:#fdf6e3;color:#657b83;">index_at x</span>, so it depends on <span style="background-color:#fdf6e3;color:#657b83;">x</span>.
+The local trivialization will ultimately be a local homeomorphism. For now, we only introduce the
+local equiv version, denoted with a prime. In further developments, avoid this auxiliary version,
+and use Z.local_triv instead.</p>
+</div></div><div class="decl"><h4>topological_fiber_bundle_core.local_triv'_trans</h4><div class="decl_par"><p>The composition of two local trivializations is the trivialization change Z.triv_change i j.</p>
+</div></div><div class="decl"><h4>topological_fiber_bundle_core.to_topological_space</h4><div class="decl_par"><p>Topological structure on the total space of a topological bundle created from core, designed so
+that all the local trivialization are continuous.</p>
+</div></div><div class="decl"><h4>topological_fiber_bundle_core.local_triv</h4><div class="decl_par"><p>Local trivialization of a topological bundle created from core, as a local homeomorphism.</p>
+</div></div><div class="decl"><h4>topological_fiber_bundle_core.local_triv_trans</h4><div class="decl_par"><p>The composition of two local trivializations is the trivialization change Z.triv_change i j.</p>
+</div></div><div class="decl"><h4>topological_fiber_bundle_core.local_triv_ext</h4><div class="decl_par"><p>Extended version of the local trivialization of a fiber bundle constructed from core,
+registering additionally in its type that it is a local bundle trivialization.</p>
+</div></div><div class="decl"><h4>topological_fiber_bundle_core.is_topological_fiber_bundle</h4><div class="decl_par"><p>A topological fiber bundle constructed from core is indeed a topological fiber bundle.</p>
+</div></div><div class="decl"><h4>topological_fiber_bundle_core.continuous_proj</h4><div class="decl_par"><p>The projection on the base of a topological bundle created from core is continuous</p>
+</div></div><div class="decl"><h4>topological_fiber_bundle_core.is_open_map_proj</h4><div class="decl_par"><p>The projection on the base of a topological bundle created from core is an open map</p>
+</div></div><div class="decl"><h4>topological_fiber_bundle_core.local_triv_at</h4><div class="decl_par"><p>Preferred local trivialization of a fiber bundle constructed from core, at a given point, as
+a local homeomorphism</p>
+</div></div><div class="decl"><h4>topological_fiber_bundle_core.local_triv_at_ext</h4><div class="decl_par"><p>Preferred local trivialization of a fiber bundle constructed from core, at a given point, as
+a bundle trivialization</p>
+</div></div></html>

@@ -1,0 +1,17 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><div class="decl"><h4>tactic.local_cache.cache_scope.block_local</h4><div class="decl_par"><p>This scope propogates the cache within a <span style="background-color:#fdf6e3;color:#859900;">begin</span><span style="background-color:#fdf6e3;color:#657b83;"> ... </span><span style="background-color:#fdf6e3;color:#859900;">end</span> or <span style="background-color:#fdf6e3;color:#859900;">by</span> block
+and its decendants.</p>
+</div></div><div class="decl"><h4>tactic.local_cache.cache_scope.def_local</h4><div class="decl_par"><p>This scope propogates the cache within an entire <span style="background-color:#fdf6e3;color:#859900;">def</span>/<span style="background-color:#fdf6e3;color:#859900;">lemma</span>.</p>
+</div></div><div class="decl"><h4>tactic.local_cache.present</h4><div class="decl_par"><p>Asks whether the namespace <span style="background-color:#fdf6e3;color:#657b83;">ns</span> currently has a value-in-cache.</p>
+</div></div><div class="decl"><h4>tactic.local_cache.clear</h4><div class="decl_par"><p>Clear cache associated to namespace <span style="background-color:#fdf6e3;color:#657b83;">ns</span>.</p>
+</div></div><div class="decl"><h4>tactic.local_cache.get</h4><div class="decl_par"><p>Gets the (optionally present) value-in-cache for <span style="background-color:#fdf6e3;color:#657b83;">ns</span>.</p>
+</div></div><div class="decl"><h4>tactic.run_once</h4><div class="decl_par"><p>Using the namespace <span style="background-color:#fdf6e3;color:#657b83;">ns</span> as its key, when called for the first
+time <span style="background-color:#fdf6e3;color:#657b83;">run_once ns t</span> runs <span style="background-color:#fdf6e3;color:#657b83;">t</span>, then saves and returns the result.
+Upon subsequent invocations in the same tactic block, with the scope
+of the caching being inherited by child tactic blocks) we return the
+cached result directly.</p>
+<p>You can configure the cached scope to be entire <span style="background-color:#fdf6e3;color:#859900;">def</span>/<span style="background-color:#fdf6e3;color:#859900;">lemma</span>s changing
+the optional cache_scope argument to <span style="background-color:#fdf6e3;color:#657b83;">cache_scope.def_local</span>.
+Note: the caches backing each scope are different.</p>
+<p>If <span style="background-color:#fdf6e3;color:#657b83;">α</span> is just <span style="background-color:#fdf6e3;color:#657b83;">unit</span>, this means we just run <span style="background-color:#fdf6e3;color:#657b83;">t</span> once each tactic
+block.</p>
+</div></div></html>

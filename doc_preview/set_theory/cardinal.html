@@ -1,0 +1,46 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><h1>Cardinal Numbers</h1>
+<p>We define cardinal numbers as a quotient of types under the equivalence relation of equinumerity.
+We define the order on cardinal numbers, define omega, and do basic cardinal arithmetic:
+addition, multiplication, power, cardinal successor, minimum, supremum,
+infinitary sums and products</p>
+<h2>Implementation notes</h2>
+<ul>
+<li>There is a type of cardinal numbers in every universe level: <span style="background-color:#fdf6e3;color:#657b83;">cardinal.{u} : </span><span style="background-color:#fdf6e3;color:#268bd2;">Type</span><span style="background-color:#fdf6e3;color:#657b83;"> (u </span><span style="background-color:#fdf6e3;color:#b58900;">+ </span><span style="background-color:#fdf6e3;color:#6c71c4;">1</span><span style="background-color:#fdf6e3;color:#657b83;">)</span>
+is the quotient of types in <span style="background-color:#fdf6e3;color:#268bd2;">Type</span><span style="background-color:#fdf6e3;color:#657b83;"> u</span>.
+There is a lift operation lifting cardinal numbers to a higher level.</li>
+<li>Cardinal arithmetic specifically for infinite cardinals (like <span style="background-color:#fdf6e3;color:#657b83;">κ </span><span style="background-color:#fdf6e3;color:#b58900;">*</span><span style="background-color:#fdf6e3;color:#657b83;"> κ </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> κ</span>) is in the file
+<span style="background-color:#fdf6e3;color:#657b83;">set_theory</span><span style="background-color:#fdf6e3;color:#b58900;">/</span><span style="background-color:#fdf6e3;color:#657b83;">ordinal.lean</span>, because concepts from that file are used in the proof.</li>
+</ul>
+<h2>References</h2>
+<ul>
+<li>https://en.wikipedia.org/wiki/Cardinal_number</li>
+</ul>
+<h2>Tags</h2>
+<p>cardinal number, cardinal arithmetic, cardinal exponentiation, omega</p>
+<hr/><div class="decl"><h4>cardinal.is_equivalent</h4><div class="decl_par"><p>The equivalence relation on types given by equivalence (bijective correspondence) of types.
+Quotienting by this equivalence relation gives the cardinal numbers.</p>
+</div></div><div class="decl"><h4>cardinal</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">cardinal.{u}</span> is the type of cardinal numbers in <span style="background-color:#fdf6e3;color:#268bd2;">Type</span><span style="background-color:#fdf6e3;color:#657b83;"> u</span>,
+defined as the quotient of <span style="background-color:#fdf6e3;color:#268bd2;">Type</span><span style="background-color:#fdf6e3;color:#657b83;"> u</span> by existence of an equivalence
+(a bijection with explicit inverse).</p>
+</div></div><div class="decl"><h4>cardinal.mk</h4><div class="decl_par"><p>The cardinal number of a type</p>
+</div></div><div class="decl"><h4>cardinal.has_le</h4><div class="decl_par"><p>We define the order on cardinal numbers by <span style="background-color:#fdf6e3;color:#657b83;">mk α </span><span style="background-color:#fdf6e3;color:#b58900;">≤</span><span style="background-color:#fdf6e3;color:#657b83;"> mk β</span> if and only if
+there exists an embedding (injective function) from α to β.</p>
+</div></div><div class="decl"><h4>cardinal.power</h4><div class="decl_par"><p>The cardinal exponential. <span style="background-color:#fdf6e3;color:#657b83;">mk α ^ mk β</span> is the cardinal of <span style="background-color:#fdf6e3;color:#657b83;">β </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> α</span>.</p>
+</div></div><div class="decl"><h4>cardinal.min</h4><div class="decl_par"><p>The minimum cardinal in a family of cardinals (the existence
+of which is provided by <span style="background-color:#fdf6e3;color:#657b83;">injective_min</span>).</p>
+</div></div><div class="decl"><h4>cardinal.succ</h4><div class="decl_par"><p>The successor cardinal - the smallest cardinal greater than
+<span style="background-color:#fdf6e3;color:#657b83;">c</span>. This is not the same as <span style="background-color:#fdf6e3;color:#657b83;">c </span><span style="background-color:#fdf6e3;color:#b58900;">+ </span><span style="background-color:#fdf6e3;color:#6c71c4;">1</span> except in the case of finite <span style="background-color:#fdf6e3;color:#657b83;">c</span>.</p>
+</div></div><div class="decl"><h4>cardinal.sum</h4><div class="decl_par"><p>The indexed sum of cardinals is the cardinality of the
+indexed disjoint union, i.e. sigma type.</p>
+</div></div><div class="decl"><h4>cardinal.sup</h4><div class="decl_par"><p>The indexed supremum of cardinals is the smallest cardinal above
+everything in the family.</p>
+</div></div><div class="decl"><h4>cardinal.prod</h4><div class="decl_par"><p>The indexed product of cardinals is the cardinality of the Pi type
+(dependent product).</p>
+</div></div><div class="decl"><h4>cardinal.lift</h4><div class="decl_par"><p>The universe lift operation on cardinals. You can specify the universes explicitly with
+<span style="background-color:#fdf6e3;color:#657b83;">lift.{u v} : cardinal.{u} </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> cardinal.{max u v}</span></p>
+</div></div><div class="decl"><h4>cardinal.omega</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">ω</span> is the smallest infinite cardinal, also known as ℵ₀.</p>
+</div></div><div class="decl"><h4>cardinal.sum_lt_prod</h4><div class="decl_par"><p>König's theorem</p>
+</div></div><div class="decl"><h4>cardinal.powerlt</h4><div class="decl_par"><p>The function α^{&lt;β}, defined to be sup_{γ &lt; β} α^γ.
+We index over {s : set β.out // mk s &lt; β } instead of {γ // γ &lt; β}, because the latter lives in a
+higher universe</p>
+</div></div></html>

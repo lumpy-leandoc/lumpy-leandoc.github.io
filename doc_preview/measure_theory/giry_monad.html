@@ -1,0 +1,20 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><h1>The Giry monad</h1>
+<p>Let X be a measurable space. The collection of all measures on X again
+forms a measurable space. This construction forms a monad on
+measurable spaces and measurable functions, called the Giry monad.</p>
+<p>Note that most sources use the term &quot;Giry monad&quot; for the restriction
+to <em>probability</em> measures. Here we include all measures on X.</p>
+<p>See also <span style="background-color:#fdf6e3;color:#657b83;">measure_theory</span><span style="background-color:#fdf6e3;color:#b58900;">/</span><span style="background-color:#fdf6e3;color:#657b83;">category</span><span style="background-color:#fdf6e3;color:#b58900;">/</span><span style="background-color:#fdf6e3;color:#657b83;">Meas.lean</span>, containing an upgrade of the type-level
+monad to an honest monad of the functor <span style="background-color:#fdf6e3;color:#657b83;">Measure : Meas ⥤ Meas</span>.</p>
+<h2>References</h2>
+<ul>
+<li>https://ncatlab.org/nlab/show/Giry+monad</li>
+</ul>
+<h2>Tags</h2>
+<p>giry monad</p>
+<hr/><div class="decl"><h4>measure_theory.measure.measurable_space</h4><div class="decl_par"><p>Measurability structure on <span style="background-color:#fdf6e3;color:#657b83;">measure</span>: Measures are measurable w.r.t. all projections</p>
+</div></div><div class="decl"><h4>measure_theory.measure.join</h4><div class="decl_par"><p>Monadic join on <span style="background-color:#fdf6e3;color:#657b83;">measure</span> in the category of measurable spaces and measurable
+functions.</p>
+</div></div><div class="decl"><h4>measure_theory.measure.bind</h4><div class="decl_par"><p>Monadic bind on <span style="background-color:#fdf6e3;color:#657b83;">measure</span>, only works in the category of measurable spaces and measurable
+functions. When the function <span style="background-color:#fdf6e3;color:#657b83;">f</span> is not measurable the result is not well defined.</p>
+</div></div></html>

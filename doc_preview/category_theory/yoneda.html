@@ -1,0 +1,13 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><h1>The Yoneda embedding</h1>
+<p>The Yoneda embedding as a functor <span style="background-color:#fdf6e3;color:#657b83;">yoneda : C ⥤ (Cᵒᵖ ⥤ </span><span style="background-color:#fdf6e3;color:#268bd2;">Type</span><span style="background-color:#fdf6e3;color:#657b83;"> v₁)</span>,
+along with an instance that it is <span style="background-color:#fdf6e3;color:#657b83;">fully_faithful</span>.</p>
+<p>Also the Yoneda lemma, <span style="background-color:#fdf6e3;color:#657b83;">yoneda_lemma : (yoneda_pairing C) ≅ (yoneda_evaluation C)</span>.</p>
+<hr/><div class="decl"><h4>category_theory.yoneda.ext</h4><div class="decl_par"><p>Extensionality via Yoneda. The typical usage would be</p>
+<pre><code class="language-lean"><pre style="background-color:#fdf6e3;">
+<span style="color:#93a1a1;">-- Goal is `X ≅ Y`
+</span><span style="color:#657b83;">apply yoneda.ext,
+</span><span style="color:#93a1a1;">-- Goals are now functions `(Z ⟶ X) → (Z ⟶ Y)`, `(Z ⟶ Y) → (Z ⟶ X)`, and the fact that these
+</span><span style="color:#657b83;">functions are inverses and natural </span><span style="color:#859900;">in</span><span style="color:#657b83;"> `Z`.
+</span></pre>
+</code></pre>
+</div></div></html>

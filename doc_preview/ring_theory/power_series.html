@@ -1,0 +1,104 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><h1>Formal power series</h1>
+<p>This file defines (multivariate) formal power series
+and develops the basic properties of these objects.</p>
+<p>A formal power series is to a polynomial like an infinite sum is to a finite sum.</p>
+<p>We provide the natural inclusion from polynomials to formal power series.</p>
+<h2>Generalities</h2>
+<p>The file starts with setting up the (semi)ring structure on multivariate power series.</p>
+<p><span style="background-color:#fdf6e3;color:#657b83;">trunc n φ</span> truncates a formal power series to the polynomial
+that has the same coefficients as φ, for all m ≤ n, and 0 otherwise.</p>
+<p>If the constant coefficient of a formal power series is invertible,
+then this formal power series is invertible.</p>
+<p>Formal power series over a local ring form a local ring.</p>
+<h2>Formal power series in one variable</h2>
+<p>We prove that if the ring of coefficients is an integral domain,
+then formal power series in one variable form an integral domain.</p>
+<p>The <span style="background-color:#fdf6e3;color:#657b83;">order</span> of a formal power series <span style="background-color:#fdf6e3;color:#657b83;">φ</span> is the multiplicity of the variable <span style="background-color:#fdf6e3;color:#657b83;">X</span> in <span style="background-color:#fdf6e3;color:#657b83;">φ</span>.</p>
+<p>If the coefficients form an integral domain, then <span style="background-color:#fdf6e3;color:#657b83;">order</span> is a valuation
+(<span style="background-color:#fdf6e3;color:#657b83;">order_mul</span>, <span style="background-color:#fdf6e3;color:#657b83;">order_add_ge</span>).</p>
+<h2>Implementation notes</h2>
+<p>In this file we define multivariate formal power series with
+variables indexed by <span style="background-color:#fdf6e3;color:#657b83;">σ</span> and coefficients in <span style="background-color:#fdf6e3;color:#657b83;">α</span> as
+mv_power_series σ α := (σ →₀ ℕ) → α.
+Unfortunately there is not yet enough API to show that they are the completion
+of the ring of multivariate polynomials. However, we provide most of the infrastructure
+that is needed to do this. Once I-adic completion (topological or algebraic) is available
+it should not be hard to fill in the details.</p>
+<p>Formal power series in one variable are defined as
+power_series α := mv_power_series unit α.</p>
+<p>This allows us to port a lot of proofs and properties
+from the multivariate case to the single variable case.
+However, it means that formal power series are indexed by (unit →₀ ℕ),
+which is of course canonically isomorphic to ℕ.
+We then build some glue to treat formal power series as if they are indexed by ℕ.
+Occasionally this leads to proofs that are uglier than expected.</p>
+<hr/><div class="decl"><h4>mv_power_series</h4><div class="decl_par"><p>Multivariate formal power series, where <span style="background-color:#fdf6e3;color:#657b83;">σ</span> is the index set of the variables
+and <span style="background-color:#fdf6e3;color:#657b83;">α</span> is the coefficient ring.</p>
+</div></div><div class="decl"><h4>mv_power_series.monomial</h4><div class="decl_par"><p>The <span style="background-color:#fdf6e3;color:#657b83;">n</span>th monomial with coefficient <span style="background-color:#fdf6e3;color:#657b83;">a</span> as multivariate formal power series.</p>
+</div></div><div class="decl"><h4>mv_power_series.coeff</h4><div class="decl_par"><p>The <span style="background-color:#fdf6e3;color:#657b83;">n</span>th coefficient of a multivariate formal power series.</p>
+</div></div><div class="decl"><h4>mv_power_series.ext</h4><div class="decl_par"><p>Two multivariate formal power series are equal if all their coefficients are equal.</p>
+</div></div><div class="decl"><h4>mv_power_series.ext_iff</h4><div class="decl_par"><p>Two multivariate formal power series are equal
+if and only if all their coefficients are equal.</p>
+</div></div><div class="decl"><h4>mv_power_series.C</h4><div class="decl_par"><p>The constant multivariate formal power series.</p>
+</div></div><div class="decl"><h4>mv_power_series.X</h4><div class="decl_par"><p>The variables of the multivariate formal power series ring.</p>
+</div></div><div class="decl"><h4>mv_power_series.constant_coeff</h4><div class="decl_par"><p>The constant coefficient of a formal power series.</p>
+</div></div><div class="decl"><h4>mv_power_series.is_unit_constant_coeff</h4><div class="decl_par"><p>If a multivariate formal power series is invertible,
+then so is its constant coefficient.</p>
+</div></div><div class="decl"><h4>mv_power_series.map</h4><div class="decl_par"><p>The map between multivariate formal power series induced by a map on the coefficients.</p>
+</div></div><div class="decl"><h4>mv_power_series.trunc</h4><div class="decl_par"><p>The <span style="background-color:#fdf6e3;color:#657b83;">n</span>th truncation of a multivariate formal power series to a multivariate polynomial</p>
+</div></div><div class="decl"><h4>mv_power_series.inv.aux</h4><div class="decl_par"><p>Auxiliary definition that unifies
+the totalised inverse formal power series <span style="background-color:#fdf6e3;color:#657b83;">(_)</span><span style="background-color:#fdf6e3;color:#b58900;">⁻¹</span> and
+the inverse formal power series that depends on
+an inverse of the constant coefficient <span style="background-color:#fdf6e3;color:#657b83;">inv_of_unit</span>.</p>
+</div></div><div class="decl"><h4>mv_power_series.inv_of_unit</h4><div class="decl_par"><p>A multivariate formal power series is invertible if the constant coefficient is invertible.</p>
+</div></div><div class="decl"><h4>mv_power_series.is_local_ring</h4><div class="decl_par"><p>Multivariate formal power series over a local ring form a local ring.</p>
+</div></div><div class="decl"><h4>mv_polynomial.coe_to_mv_power_series</h4><div class="decl_par"><p>The natural inclusion from multivariate polynomials into multivariate formal power series.</p>
+</div></div><div class="decl"><h4>power_series</h4><div class="decl_par"><p>Formal power series over the coefficient ring <span style="background-color:#fdf6e3;color:#657b83;">α</span>.</p>
+</div></div><div class="decl"><h4>power_series.coeff</h4><div class="decl_par"><p>The <span style="background-color:#fdf6e3;color:#657b83;">n</span>th coefficient of a formal power series.</p>
+</div></div><div class="decl"><h4>power_series.monomial</h4><div class="decl_par"><p>The <span style="background-color:#fdf6e3;color:#657b83;">n</span>th monomial with coefficient <span style="background-color:#fdf6e3;color:#657b83;">a</span> as formal power series.</p>
+</div></div><div class="decl"><h4>power_series.ext</h4><div class="decl_par"><p>Two formal power series are equal if all their coefficients are equal.</p>
+</div></div><div class="decl"><h4>power_series.ext_iff</h4><div class="decl_par"><p>Two formal power series are equal if all their coefficients are equal.</p>
+</div></div><div class="decl"><h4>power_series.mk</h4><div class="decl_par"><p>Constructor for formal power series.</p>
+</div></div><div class="decl"><h4>power_series.constant_coeff</h4><div class="decl_par"><p>The constant coefficient of a formal power series.</p>
+</div></div><div class="decl"><h4>power_series.C</h4><div class="decl_par"><p>The constant formal power series.</p>
+</div></div><div class="decl"><h4>power_series.X</h4><div class="decl_par"><p>The variable of the formal power series ring.</p>
+</div></div><div class="decl"><h4>power_series.is_unit_constant_coeff</h4><div class="decl_par"><p>If a formal power series is invertible, then so is its constant coefficient.</p>
+</div></div><div class="decl"><h4>power_series.map</h4><div class="decl_par"><p>The map between formal power series induced by a map on the coefficients.</p>
+</div></div><div class="decl"><h4>power_series.trunc</h4><div class="decl_par"><p>The <span style="background-color:#fdf6e3;color:#657b83;">n</span>th truncation of a formal power series to a polynomial</p>
+</div></div><div class="decl"><h4>power_series.inv_of_unit</h4><div class="decl_par"><p>A formal power series is invertible if the constant coefficient is invertible.</p>
+</div></div><div class="decl"><h4>power_series.span_X_is_prime</h4><div class="decl_par"><p>The ideal spanned by the variable in the power series ring
+over an integral domain is a prime ideal.</p>
+</div></div><div class="decl"><h4>power_series.X_prime</h4><div class="decl_par"><p>The variable of the power series ring over an integral domain is prime.</p>
+</div></div><div class="decl"><h4>power_series.order</h4><div class="decl_par"><p>The order of a formal power series <span style="background-color:#fdf6e3;color:#657b83;">φ</span> is the smallest <span style="background-color:#fdf6e3;color:#657b83;">n : enat</span>
+such that <span style="background-color:#fdf6e3;color:#657b83;">X^n</span> divides <span style="background-color:#fdf6e3;color:#657b83;">φ</span>. The order is <span style="background-color:#fdf6e3;color:#657b83;">⊤</span> if and only if <span style="background-color:#fdf6e3;color:#657b83;">φ </span><span style="background-color:#fdf6e3;color:#b58900;">= </span><span style="background-color:#fdf6e3;color:#6c71c4;">0</span>.</p>
+</div></div><div class="decl"><h4>power_series.coeff_order</h4><div class="decl_par"><p>If the order of a formal power series is finite,
+then the coefficient indexed by the order is nonzero.</p>
+</div></div><div class="decl"><h4>power_series.order_le</h4><div class="decl_par"><p>If the <span style="background-color:#fdf6e3;color:#657b83;">n</span>th coefficient of a formal power series is nonzero,
+then the order of the power series is less than or equal to <span style="background-color:#fdf6e3;color:#657b83;">n</span>.</p>
+</div></div><div class="decl"><h4>power_series.coeff_of_lt_order</h4><div class="decl_par"><p>The <span style="background-color:#fdf6e3;color:#657b83;">n</span>th coefficient of a formal power series is <span style="background-color:#fdf6e3;color:#6c71c4;">0</span> if <span style="background-color:#fdf6e3;color:#657b83;">n</span> is strictly
+smaller than the order of the power series.</p>
+</div></div><div class="decl"><h4>power_series.order_eq_top</h4><div class="decl_par"><p>The <span style="background-color:#fdf6e3;color:#6c71c4;">0</span> power series is the unique power series with infinite order.</p>
+</div></div><div class="decl"><h4>power_series.order_zero</h4><div class="decl_par"><p>The order of the <span style="background-color:#fdf6e3;color:#6c71c4;">0</span> power series is infinite.</p>
+</div></div><div class="decl"><h4>power_series.order_ge_nat</h4><div class="decl_par"><p>The order of a formal power series is at least <span style="background-color:#fdf6e3;color:#657b83;">n</span> if
+the <span style="background-color:#fdf6e3;color:#657b83;">i</span>th coefficient is <span style="background-color:#fdf6e3;color:#6c71c4;">0</span> for all <span style="background-color:#fdf6e3;color:#657b83;">i </span><span style="background-color:#fdf6e3;color:#b58900;">&lt;</span><span style="background-color:#fdf6e3;color:#657b83;"> n</span>.</p>
+</div></div><div class="decl"><h4>power_series.order_ge</h4><div class="decl_par"><p>The order of a formal power series is at least <span style="background-color:#fdf6e3;color:#657b83;">n</span> if
+the <span style="background-color:#fdf6e3;color:#657b83;">i</span>th coefficient is <span style="background-color:#fdf6e3;color:#6c71c4;">0</span> for all <span style="background-color:#fdf6e3;color:#657b83;">i </span><span style="background-color:#fdf6e3;color:#b58900;">&lt;</span><span style="background-color:#fdf6e3;color:#657b83;"> n</span>.</p>
+</div></div><div class="decl"><h4>power_series.order_eq_nat</h4><div class="decl_par"><p>The order of a formal power series is exactly <span style="background-color:#fdf6e3;color:#657b83;">n</span> if the <span style="background-color:#fdf6e3;color:#657b83;">n</span>th coefficient is nonzero,
+and the <span style="background-color:#fdf6e3;color:#657b83;">i</span>th coefficient is <span style="background-color:#fdf6e3;color:#6c71c4;">0</span> for all <span style="background-color:#fdf6e3;color:#657b83;">i </span><span style="background-color:#fdf6e3;color:#b58900;">&lt;</span><span style="background-color:#fdf6e3;color:#657b83;"> n</span>.</p>
+</div></div><div class="decl"><h4>power_series.order_eq</h4><div class="decl_par"><p>The order of a formal power series is exactly <span style="background-color:#fdf6e3;color:#657b83;">n</span> if the <span style="background-color:#fdf6e3;color:#657b83;">n</span>th coefficient is nonzero,
+and the <span style="background-color:#fdf6e3;color:#657b83;">i</span>th coefficient is <span style="background-color:#fdf6e3;color:#6c71c4;">0</span> for all <span style="background-color:#fdf6e3;color:#657b83;">i </span><span style="background-color:#fdf6e3;color:#b58900;">&lt;</span><span style="background-color:#fdf6e3;color:#657b83;"> n</span>.</p>
+</div></div><div class="decl"><h4>power_series.order_add_ge</h4><div class="decl_par"><p>The order of the sum of two formal power series
+is at least the minimum of their orders.</p>
+</div></div><div class="decl"><h4>power_series.order_add_of_order_eq</h4><div class="decl_par"><p>The order of the sum of two formal power series
+is the minimum of their orders if their orders differ.</p>
+</div></div><div class="decl"><h4>power_series.order_mul_ge</h4><div class="decl_par"><p>The order of the product of two formal power series
+is at least the sum of their orders.</p>
+</div></div><div class="decl"><h4>power_series.order_monomial</h4><div class="decl_par"><p>The order of the monomial <span style="background-color:#fdf6e3;color:#657b83;">a</span><span style="background-color:#fdf6e3;color:#b58900;">*</span><span style="background-color:#fdf6e3;color:#657b83;">X^n</span> is infinite if <span style="background-color:#fdf6e3;color:#657b83;">a </span><span style="background-color:#fdf6e3;color:#b58900;">= </span><span style="background-color:#fdf6e3;color:#6c71c4;">0</span> and <span style="background-color:#fdf6e3;color:#657b83;">n</span> otherwise.</p>
+</div></div><div class="decl"><h4>power_series.order_monomial_of_ne_zero</h4><div class="decl_par"><p>The order of the monomial <span style="background-color:#fdf6e3;color:#657b83;">a</span><span style="background-color:#fdf6e3;color:#b58900;">*</span><span style="background-color:#fdf6e3;color:#657b83;">X^n</span> is <span style="background-color:#fdf6e3;color:#657b83;">n</span> if <span style="background-color:#fdf6e3;color:#657b83;">a </span><span style="background-color:#fdf6e3;color:#b58900;">≠ </span><span style="background-color:#fdf6e3;color:#6c71c4;">0</span>.</p>
+</div></div><div class="decl"><h4>power_series.order_one</h4><div class="decl_par"><p>The order of the formal power series <span style="background-color:#fdf6e3;color:#6c71c4;">1</span> is <span style="background-color:#fdf6e3;color:#6c71c4;">0</span>.</p>
+</div></div><div class="decl"><h4>power_series.order_X</h4><div class="decl_par"><p>The order of the formal power series <span style="background-color:#fdf6e3;color:#657b83;">X</span> is <span style="background-color:#fdf6e3;color:#6c71c4;">1</span>.</p>
+</div></div><div class="decl"><h4>power_series.order_X_pow</h4><div class="decl_par"><p>The order of the formal power series <span style="background-color:#fdf6e3;color:#657b83;">X^n</span> is <span style="background-color:#fdf6e3;color:#657b83;">n</span>.</p>
+</div></div><div class="decl"><h4>power_series.order_mul</h4><div class="decl_par"><p>The order of the product of two formal power series over an integral domain
+is the sum of their orders.</p>
+</div></div><div class="decl"><h4>polynomial.coe_to_power_series</h4><div class="decl_par"><p>The natural inclusion from polynomials into formal power series.</p>
+</div></div></html>

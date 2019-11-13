@@ -1,0 +1,15 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><div class="decl"><h4>tactic.mk_mem_name</h4><div class="decl_par"><p>makes the substructure axiom name from field name, by postfacing with <span style="background-color:#fdf6e3;color:#657b83;">_mem</span></p>
+</div></div><div class="decl"><h4>tactic.interactive.subtype_instance</h4><div class="decl_par"><p>builds instances for algebraic substructures</p>
+<p>Example:</p>
+<pre><code class="language-lean"><pre style="background-color:#fdf6e3;">
+<span style="color:#859900;">variables</span><span style="color:#657b83;"> {α : </span><span style="color:#268bd2;">Type</span><span style="color:#b58900;">*</span><span style="color:#657b83;">} [monoid α] {s : set α}
+</span><span style="color:#657b83;">
+</span><span style="color:#859900;">class </span><span style="color:#d33682;">is_submonoid </span><span style="color:#657b83;">(s : set α) : </span><span style="color:#268bd2;">Prop </span><span style="color:#b58900;">:=
+</span><span style="color:#657b83;">(one_mem : (</span><span style="color:#6c71c4;">1</span><span style="color:#657b83;">:α) ∈ s)
+</span><span style="color:#657b83;">(mul_mem {a b} : a ∈ s </span><span style="color:#859900;">→</span><span style="color:#657b83;"> b ∈ s </span><span style="color:#859900;">→</span><span style="color:#657b83;"> a </span><span style="color:#b58900;">*</span><span style="color:#657b83;"> b ∈ s)
+</span><span style="color:#657b83;">
+</span><span style="color:#859900;">instance </span><span style="color:#d33682;">subtype.monoid </span><span style="color:#657b83;">{s : set α} [is_submonoid s] : monoid s </span><span style="color:#b58900;">:=
+</span><span style="color:#859900;">by</span><span style="color:#657b83;"> subtype_instance
+</span></pre>
+</code></pre>
+</div></div></html>

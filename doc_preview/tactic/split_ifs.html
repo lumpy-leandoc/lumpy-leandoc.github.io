@@ -1,0 +1,9 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><div class="decl"><h4>tactic.interactive.split_ifs</h4><div class="decl_par"><p>Splits all if-then-else-expressions into multiple goals.</p>
+<p>Given a goal of the form <span style="background-color:#fdf6e3;color:#657b83;">g (</span><span style="background-color:#fdf6e3;color:#859900;">if</span><span style="background-color:#fdf6e3;color:#657b83;"> p </span><span style="background-color:#fdf6e3;color:#859900;">then</span><span style="background-color:#fdf6e3;color:#657b83;"> x </span><span style="background-color:#fdf6e3;color:#859900;">else</span><span style="background-color:#fdf6e3;color:#657b83;"> y)</span>, <span style="background-color:#fdf6e3;color:#657b83;">split_ifs</span> will produce
+two goals: <span style="background-color:#fdf6e3;color:#657b83;">p ⊢ g x</span> and <span style="background-color:#fdf6e3;color:#b58900;">¬</span><span style="background-color:#fdf6e3;color:#657b83;">p ⊢ g y</span>.</p>
+<p>If there are multiple ite-expressions, then <span style="background-color:#fdf6e3;color:#657b83;">split_ifs</span> will split them all,
+starting with a top-most one whose condition does not contain another
+ite-expression.</p>
+<p><span style="background-color:#fdf6e3;color:#657b83;">split_ifs </span><span style="background-color:#fdf6e3;color:#859900;">at </span><span style="background-color:#fdf6e3;color:#b58900;">*</span> splits all ite-expressions in all hypotheses as well as the goal.</p>
+<p><span style="background-color:#fdf6e3;color:#657b83;">split_ifs </span><span style="background-color:#fdf6e3;color:#859900;">with</span><span style="background-color:#fdf6e3;color:#657b83;"> h₁ h₂ h₃</span> overrides the default names for the hypotheses.</p>
+</div></div></html>

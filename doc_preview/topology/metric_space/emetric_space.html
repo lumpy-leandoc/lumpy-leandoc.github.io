@@ -1,0 +1,60 @@
+<html><head><link rel="stylesheet" href="../../docs_style.css"></head><div class="decl"><h4>uniformity_dist_of_mem_uniformity</h4><div class="decl_par"><p>Characterizing uniformities associated to a (generalized) distance function <span style="background-color:#fdf6e3;color:#657b83;">D</span>
+in terms of the elements of the uniformity.</p>
+</div></div><div class="decl"><h4>uniform_space_of_edist</h4><div class="decl_par"><p>Creating a uniform space from an extended distance.</p>
+</div></div><div class="decl"><h4>emetric_space</h4><div class="decl_par"><p>Extended metric spaces, with an extended distance <span style="background-color:#fdf6e3;color:#657b83;">edist</span> possibly taking the
+value ∞</p>
+<p>Each emetric space induces a canonical <span style="background-color:#fdf6e3;color:#657b83;">uniform_space</span> and hence a canonical <span style="background-color:#fdf6e3;color:#657b83;">topological_space</span>.
+This is enforced in the type class definition, by extending the <span style="background-color:#fdf6e3;color:#657b83;">uniform_space</span> structure. When
+instantiating an <span style="background-color:#fdf6e3;color:#657b83;">emetric_space</span> structure, the uniformity fields are not necessary, they will be
+filled in by default. There is a default value for the uniformity, that can be substituted
+in cases of interest, for instance when instantiating an <span style="background-color:#fdf6e3;color:#657b83;">emetric_space</span> structure
+on a product.</p>
+<p>Continuity of <span style="background-color:#fdf6e3;color:#657b83;">edist</span> is finally proving in <span style="background-color:#fdf6e3;color:#657b83;">topology.</span><span style="background-color:#fdf6e3;color:#859900;">instances</span><span style="background-color:#fdf6e3;color:#657b83;">.ennreal</span></p>
+</div></div><div class="decl"><h4>edist_eq_zero</h4><div class="decl_par"><p>Characterize the equality of points by the vanishing of their extended distance</p>
+</div></div><div class="decl"><h4>edist_triangle_left</h4><div class="decl_par"><p>Triangle inequality for the extended distance</p>
+</div></div><div class="decl"><h4>eq_of_forall_edist_le</h4><div class="decl_par"><p>Two points coincide if their distance is <span style="background-color:#fdf6e3;color:#b58900;">&lt;</span><span style="background-color:#fdf6e3;color:#657b83;"> ε</span> for all positive ε</p>
+</div></div><div class="decl"><h4>uniformity_edist'</h4><div class="decl_par"><p>Reformulation of the uniform structure in terms of the extended distance</p>
+</div></div><div class="decl"><h4>uniformity_edist''</h4><div class="decl_par"><p>Reformulation of the uniform structure in terms of the extended distance on a subtype</p>
+</div></div><div class="decl"><h4>mem_uniformity_edist</h4><div class="decl_par"><p>Characterization of the elements of the uniformity in terms of the extended distance</p>
+</div></div><div class="decl"><h4>edist_mem_uniformity</h4><div class="decl_par"><p>Fixed size neighborhoods of the diagonal belong to the uniform structure</p>
+</div></div><div class="decl"><h4>emetric.uniform_continuous_iff</h4><div class="decl_par"><p>ε-δ characterization of uniform continuity on emetric spaces</p>
+</div></div><div class="decl"><h4>emetric.uniform_embedding_iff</h4><div class="decl_par"><p>ε-δ characterization of uniform embeddings on emetric spaces</p>
+</div></div><div class="decl"><h4>emetric.cauchy_iff</h4><div class="decl_par"><p>ε-δ characterization of Cauchy sequences on emetric spaces</p>
+</div></div><div class="decl"><h4>to_separated</h4><div class="decl_par"><p>An emetric space is separated</p>
+</div></div><div class="decl"><h4>emetric_space.replace_uniformity</h4><div class="decl_par"><p>Auxiliary function to replace the uniformity on an emetric space with
+a uniformity which is equal to the original one, but maybe not defeq.
+This is useful if one wants to construct an emetric space with a
+specified uniformity.</p>
+</div></div><div class="decl"><h4>emetric_space.induced</h4><div class="decl_par"><p>The extended metric induced by an injective function taking values in an emetric space.</p>
+</div></div><div class="decl"><h4>subtype.emetric_space</h4><div class="decl_par"><p>Emetric space instance on subsets of emetric spaces</p>
+</div></div><div class="decl"><h4>subtype.edist_eq</h4><div class="decl_par"><p>The extended distance on a subset of an emetric space is the restriction of
+the original distance, by definition</p>
+</div></div><div class="decl"><h4>prod.emetric_space_max</h4><div class="decl_par"><p>The product of two emetric spaces, with the max distance, is an extended
+metric spaces. We make sure that the uniform structure thus constructed is the one
+corresponding to the product of uniform spaces, to avoid diamond problems.</p>
+</div></div><div class="decl"><h4>emetric_space_pi</h4><div class="decl_par"><p>The product of a finite number of emetric spaces, with the max distance, is still
+an emetric space.
+This construction would also work for infinite products, but it would not give rise
+to the product topology. Hence, we only formalize it in the good situation of finitely many
+spaces.</p>
+</div></div><div class="decl"><h4>emetric.ball</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">emetric.ball x ε</span> is the set of all points <span style="background-color:#fdf6e3;color:#657b83;">y</span> with <span style="background-color:#fdf6e3;color:#657b83;">edist y x </span><span style="background-color:#fdf6e3;color:#b58900;">&lt;</span><span style="background-color:#fdf6e3;color:#657b83;"> ε</span></p>
+</div></div><div class="decl"><h4>emetric.closed_ball</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">emetric.closed_ball x ε</span> is the set of all points <span style="background-color:#fdf6e3;color:#657b83;">y</span> with <span style="background-color:#fdf6e3;color:#657b83;">edist y x </span><span style="background-color:#fdf6e3;color:#b58900;">≤</span><span style="background-color:#fdf6e3;color:#657b83;"> ε</span></p>
+</div></div><div class="decl"><h4>emetric.mem_closure_iff'</h4><div class="decl_par"><p>ε-characterization of the closure in emetric spaces</p>
+</div></div><div class="decl"><h4>emetric.cauchy_seq_iff</h4><div class="decl_par"><p>In an emetric space, Cauchy sequences are characterized by the fact that, eventually,
+the edistance between its elements is arbitrarily small</p>
+</div></div><div class="decl"><h4>emetric.cauchy_seq_iff'</h4><div class="decl_par"><p>A variation around the emetric characterization of Cauchy sequences</p>
+</div></div><div class="decl"><h4>emetric.countable_closure_of_compact</h4><div class="decl_par"><p>A compact set in an emetric space is separable, i.e., it is the closure of a countable set</p>
+</div></div><div class="decl"><h4>emetric.second_countable_of_separable</h4><div class="decl_par"><p>A separable emetric space is second countable: one obtains a countable basis by taking
+the balls centered at points in a dense subset, and with rational radii. We do not register
+this as an instance, as there is already an instance going in the other direction
+from second countable spaces to separable spaces, and we want to avoid loops.</p>
+</div></div><div class="decl"><h4>emetric.diam</h4><div class="decl_par"><p>The diameter of a set in an emetric space, named <span style="background-color:#fdf6e3;color:#657b83;">emetric.diam</span></p>
+</div></div><div class="decl"><h4>emetric.edist_le_diam_of_mem</h4><div class="decl_par"><p>If two points belong to some set, their edistance is bounded by the diameter of the set</p>
+</div></div><div class="decl"><h4>emetric.diam_le_of_forall_edist_le</h4><div class="decl_par"><p>If the distance between any two points in a set is bounded by some constant, this constant
+bounds the diameter.</p>
+</div></div><div class="decl"><h4>emetric.diam_empty</h4><div class="decl_par"><p>The diameter of the empty set vanishes</p>
+</div></div><div class="decl"><h4>emetric.diam_singleton</h4><div class="decl_par"><p>The diameter of a singleton vanishes</p>
+</div></div><div class="decl"><h4>emetric.diam_mono</h4><div class="decl_par"><p>The diameter is monotonous with respect to inclusion</p>
+</div></div><div class="decl"><h4>emetric.diam_union</h4><div class="decl_par"><p>The diameter of a union is controlled by the diameter of the sets, and the edistance
+between two points in the sets.</p>
+</div></div></html>

@@ -1,0 +1,18 @@
+<html><head><link rel="stylesheet" href="../../docs_style.css"></head><h1>Uniform structure induced by an absolute value</h1>
+<p>We build a uniform space structure on a commutative ring <span style="background-color:#fdf6e3;color:#657b83;">R</span> equipped with an absolute value into
+a linear ordered field <span style="background-color:#fdf6e3;color:#657b83;">𝕜</span>. Of course in the case <span style="background-color:#fdf6e3;color:#657b83;">R</span> is <span style="background-color:#fdf6e3;color:#657b83;">ℚ</span>, <span style="background-color:#fdf6e3;color:#657b83;">ℝ</span> or <span style="background-color:#fdf6e3;color:#657b83;">ℂ</span> and
+<span style="background-color:#fdf6e3;color:#657b83;">𝕜 </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> ℝ</span>, we get the same thing as the metric space construction, and the general construction
+follows exactly the same path.</p>
+<h2>Implementation details</h2>
+<p>Note that we import <span style="background-color:#fdf6e3;color:#657b83;">data.real.cau_seq</span> because this is where absolute values are defined, but
+the current file does not depend on real numbers. TODO: extract absolute values from that
+<span style="background-color:#fdf6e3;color:#657b83;">data.real</span> folder.</p>
+<h2>References</h2>
+<ul>
+<li>[N. Bourbaki, <em>Topologie générale</em>][bourbaki1966]</li>
+</ul>
+<h2>Tags</h2>
+<p>absolute value, uniform spaces</p>
+<hr/><div class="decl"><h4>is_absolute_value.uniform_space_core</h4><div class="decl_par"><p>The uniformity coming from an absolute value.</p>
+</div></div><div class="decl"><h4>is_absolute_value.uniform_space</h4><div class="decl_par"><p>The uniform structure coming from an absolute value.</p>
+</div></div></html>

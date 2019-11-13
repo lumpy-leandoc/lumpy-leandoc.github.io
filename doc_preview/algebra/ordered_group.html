@@ -1,0 +1,13 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><div class="decl"><h4>ordered_comm_monoid</h4><div class="decl_par"><p>An ordered (additive) commutative monoid is a commutative monoid
+with a partial order such that addition is an order embedding, i.e.
+<span style="background-color:#fdf6e3;color:#657b83;">a </span><span style="background-color:#fdf6e3;color:#b58900;">+</span><span style="background-color:#fdf6e3;color:#657b83;"> b </span><span style="background-color:#fdf6e3;color:#b58900;">≤</span><span style="background-color:#fdf6e3;color:#657b83;"> a </span><span style="background-color:#fdf6e3;color:#b58900;">+</span><span style="background-color:#fdf6e3;color:#657b83;"> c </span><span style="background-color:#fdf6e3;color:#b58900;">↔</span><span style="background-color:#fdf6e3;color:#657b83;"> b </span><span style="background-color:#fdf6e3;color:#b58900;">≤</span><span style="background-color:#fdf6e3;color:#657b83;"> c</span>. These monoids are automatically cancellative.</p>
+</div></div><div class="decl"><h4>canonically_ordered_monoid</h4><div class="decl_par"><p>A canonically ordered monoid is an ordered commutative monoid
+in which the ordering coincides with the divisibility relation,
+which is to say, <span style="background-color:#fdf6e3;color:#657b83;">a </span><span style="background-color:#fdf6e3;color:#b58900;">≤</span><span style="background-color:#fdf6e3;color:#657b83;"> b</span> iff there exists <span style="background-color:#fdf6e3;color:#657b83;">c</span> with <span style="background-color:#fdf6e3;color:#657b83;">b </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> a </span><span style="background-color:#fdf6e3;color:#b58900;">+</span><span style="background-color:#fdf6e3;color:#657b83;"> c</span>.
+This is satisfied by the natural numbers, for example, but not
+the integers or other ordered groups.</p>
+</div></div><div class="decl"><h4>ordered_comm_group.mk'</h4><div class="decl_par"><p>The <span style="background-color:#fdf6e3;color:#657b83;">add_lt_add_left</span> field of <span style="background-color:#fdf6e3;color:#657b83;">ordered_comm_group</span> is redundant, but it is in core so
+we can't remove it for now. This alternative constructor is the best we can do.</p>
+</div></div><div class="decl"><h4>nonneg_comm_group</h4><div class="decl_par"><p>This is not so much a new structure as a construction mechanism
+for ordered groups, by specifying only the &quot;positive cone&quot; of the group.</p>
+</div></div></html>

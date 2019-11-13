@@ -1,0 +1,36 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><div class="decl"><h4>roption</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">roption α</span> is the type of &quot;partial values&quot; of type <span style="background-color:#fdf6e3;color:#657b83;">α</span>. It
+is similar to <span style="background-color:#fdf6e3;color:#657b83;">option α</span> except the domain condition can be an
+arbitrary proposition, not necessarily decidable.</p>
+</div></div><div class="decl"><h4>roption.to_option</h4><div class="decl_par"><p>Convert an <span style="background-color:#fdf6e3;color:#657b83;">roption α</span> with a decidable domain to an option</p>
+</div></div><div class="decl"><h4>roption.ext'</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">roption</span> extensionality</p>
+</div></div><div class="decl"><h4>roption.eta</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">roption</span> eta expansion</p>
+</div></div><div class="decl"><h4>roption.mem</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">a ∈ o</span> means that <span style="background-color:#fdf6e3;color:#657b83;">o</span> is defined and equal to <span style="background-color:#fdf6e3;color:#657b83;">a</span></p>
+</div></div><div class="decl"><h4>roption.ext</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">roption</span> extensionality</p>
+</div></div><div class="decl"><h4>roption.none</h4><div class="decl_par"><p>The <span style="background-color:#fdf6e3;color:#657b83;">none</span> value in <span style="background-color:#fdf6e3;color:#657b83;">roption</span> has a <span style="background-color:#fdf6e3;color:#657b83;">false</span> domain and an empty function.</p>
+</div></div><div class="decl"><h4>roption.some</h4><div class="decl_par"><p>The <span style="background-color:#fdf6e3;color:#657b83;">some a</span> value in <span style="background-color:#fdf6e3;color:#657b83;">roption</span> has a <span style="background-color:#fdf6e3;color:#657b83;">true</span> domain and the
+function returns <span style="background-color:#fdf6e3;color:#657b83;">a</span>.</p>
+</div></div><div class="decl"><h4>roption.of_option</h4><div class="decl_par"><p>Convert an <span style="background-color:#fdf6e3;color:#657b83;">option α</span> into an <span style="background-color:#fdf6e3;color:#657b83;">roption α</span></p>
+</div></div><div class="decl"><h4>roption.assert</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#859900;">assert</span><span style="background-color:#fdf6e3;color:#657b83;"> p f</span> is a bind-like operation which appends an additional condition
+<span style="background-color:#fdf6e3;color:#657b83;">p</span> to the domain and uses <span style="background-color:#fdf6e3;color:#657b83;">f</span> to produce the value.</p>
+</div></div><div class="decl"><h4>roption.bind</h4><div class="decl_par"><p>The bind operation has value <span style="background-color:#fdf6e3;color:#657b83;">g (f.get)</span>, and is defined when all the
+parts are defined.</p>
+</div></div><div class="decl"><h4>roption.map</h4><div class="decl_par"><p>The map operation for <span style="background-color:#fdf6e3;color:#657b83;">roption</span> just maps the value and maintains the same domain.</p>
+</div></div><div class="decl"><h4>roption.unwrap</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">unwrap o</span> gets the value at <span style="background-color:#fdf6e3;color:#657b83;">o</span>, ignoring the condition.
+(This function is unsound.)</p>
+</div></div><div class="decl"><h4>pfun</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">pfun α β</span>, or <span style="background-color:#fdf6e3;color:#657b83;">α </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;">. β</span>, is the type of partial functions from
+<span style="background-color:#fdf6e3;color:#657b83;">α</span> to <span style="background-color:#fdf6e3;color:#657b83;">β</span>. It is defined as <span style="background-color:#fdf6e3;color:#657b83;">α </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> roption β</span>.</p>
+</div></div><div class="decl"><h4>pfun.dom</h4><div class="decl_par"><p>The domain of a partial function</p>
+</div></div><div class="decl"><h4>pfun.fn</h4><div class="decl_par"><p>Evaluate a partial function</p>
+</div></div><div class="decl"><h4>pfun.eval_opt</h4><div class="decl_par"><p>Evaluate a partial function to return an <span style="background-color:#fdf6e3;color:#657b83;">option</span></p>
+</div></div><div class="decl"><h4>pfun.ext'</h4><div class="decl_par"><p>Partial function extensionality</p>
+</div></div><div class="decl"><h4>pfun.as_subtype</h4><div class="decl_par"><p>Turn a partial function into a function out of a subtype</p>
+</div></div><div class="decl"><h4>pfun.lift</h4><div class="decl_par"><p>Turn a total function into a partial function</p>
+</div></div><div class="decl"><h4>pfun.graph</h4><div class="decl_par"><p>The graph of a partial function is the set of pairs
+<span style="background-color:#fdf6e3;color:#657b83;">(x, f x)</span> where <span style="background-color:#fdf6e3;color:#657b83;">x</span> is in the domain of <span style="background-color:#fdf6e3;color:#657b83;">f</span>.</p>
+</div></div><div class="decl"><h4>pfun.ran</h4><div class="decl_par"><p>The range of a partial function is the set of values
+<span style="background-color:#fdf6e3;color:#657b83;">f x</span> where <span style="background-color:#fdf6e3;color:#657b83;">x</span> is in the domain of <span style="background-color:#fdf6e3;color:#657b83;">f</span>.</p>
+</div></div><div class="decl"><h4>pfun.restrict</h4><div class="decl_par"><p>Restrict a partial function to a smaller domain.</p>
+</div></div><div class="decl"><h4>pfun.pure</h4><div class="decl_par"><p>The monad <span style="background-color:#fdf6e3;color:#657b83;">pure</span> function, the total constant <span style="background-color:#fdf6e3;color:#657b83;">x</span> function</p>
+</div></div><div class="decl"><h4>pfun.bind</h4><div class="decl_par"><p>The monad <span style="background-color:#fdf6e3;color:#657b83;">bind</span> function, pointwise <span style="background-color:#fdf6e3;color:#657b83;">roption.bind</span></p>
+</div></div><div class="decl"><h4>pfun.map</h4><div class="decl_par"><p>The monad <span style="background-color:#fdf6e3;color:#657b83;">map</span> function, pointwise <span style="background-color:#fdf6e3;color:#657b83;">roption.map</span></p>
+</div></div></html>

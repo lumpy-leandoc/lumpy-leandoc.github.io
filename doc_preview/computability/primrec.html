@@ -1,0 +1,21 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><div class="decl"><h4>nat.primrec</h4><div class="decl_par"><p>The primitive recursive functions <span style="background-color:#fdf6e3;color:#657b83;">ℕ </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> ℕ</span>.</p>
+</div></div><div class="decl"><h4>primcodable</h4><div class="decl_par"><p>A <span style="background-color:#fdf6e3;color:#657b83;">primcodable</span> type is an <span style="background-color:#fdf6e3;color:#657b83;">encodable</span> type for which
+the encode/decode functions are primitive recursive.</p>
+</div></div><div class="decl"><h4>primrec</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">primrec f</span> means <span style="background-color:#fdf6e3;color:#657b83;">f</span> is primitive recursive (after
+encoding its input and output as natural numbers).</p>
+</div></div><div class="decl"><h4>primrec₂</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">primrec₂ f</span> means <span style="background-color:#fdf6e3;color:#657b83;">f</span> is a binary primitive recursive function.
+This is technically unnecessary since we can always curry all
+the arguments together, but there are enough natural two-arg
+functions that it is convenient to express this directly.</p>
+</div></div><div class="decl"><h4>primrec_pred</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">primrec_pred p</span> means <span style="background-color:#fdf6e3;color:#657b83;">p : α </span><span style="background-color:#fdf6e3;color:#859900;">→ </span><span style="background-color:#fdf6e3;color:#268bd2;">Prop</span> is a (decidable)
+primitive recursive predicate, which is to say that
+<span style="background-color:#fdf6e3;color:#657b83;">to_bool ∘ p : α </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> bool</span> is primitive recursive.</p>
+</div></div><div class="decl"><h4>primrec_rel</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">primrec_rel p</span> means <span style="background-color:#fdf6e3;color:#657b83;">p : α </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> β </span><span style="background-color:#fdf6e3;color:#859900;">→ </span><span style="background-color:#fdf6e3;color:#268bd2;">Prop</span> is a (decidable)
+primitive recursive relation, which is to say that
+<span style="background-color:#fdf6e3;color:#657b83;">to_bool ∘ p : α </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> β </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> bool</span> is primitive recursive.</p>
+</div></div><div class="decl"><h4>nat.primrec'</h4><div class="decl_par"><p>An alternative inductive definition of <span style="background-color:#fdf6e3;color:#657b83;">primrec</span> which
+does not use the pairing function on ℕ, and so has to
+work with n-ary functions on ℕ instead of unary functions.
+We prove that this is equivalent to the regular notion
+in <span style="background-color:#fdf6e3;color:#657b83;">to_prim</span> and <span style="background-color:#fdf6e3;color:#657b83;">of_prim</span>.</p>
+</div></div></html>

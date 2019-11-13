@@ -1,0 +1,8 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><div class="decl"><h4>tactic.interactive.elide</h4><div class="decl_par"><p>The <span style="background-color:#fdf6e3;color:#657b83;">elide n (</span><span style="background-color:#fdf6e3;color:#859900;">at</span><span style="background-color:#fdf6e3;color:#657b83;"> ...)</span> tactic hides all subterms of the target goal or hypotheses
+beyond depth <span style="background-color:#fdf6e3;color:#657b83;">n</span> by replacing them with <span style="background-color:#fdf6e3;color:#657b83;">hidden</span>, which is a variant
+on the identity function. (Tactics should still mostly be able to see
+through the abbreviation, but if you want to unhide the term you can use
+<span style="background-color:#fdf6e3;color:#657b83;">unelide</span>.)</p>
+</div></div><div class="decl"><h4>tactic.interactive.unelide</h4><div class="decl_par"><p>The <span style="background-color:#fdf6e3;color:#657b83;">unelide (</span><span style="background-color:#fdf6e3;color:#859900;">at</span><span style="background-color:#fdf6e3;color:#657b83;"> ...)</span> tactic removes all <span style="background-color:#fdf6e3;color:#657b83;">hidden</span> subterms in the target
+types (usually added by <span style="background-color:#fdf6e3;color:#657b83;">elide</span>).</p>
+</div></div></html>

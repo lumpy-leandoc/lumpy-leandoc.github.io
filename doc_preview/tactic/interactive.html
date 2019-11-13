@@ -1,0 +1,219 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><div class="decl"><h4>tactic.interactive.fconstructor</h4><div class="decl_par"><p>Similar to <span style="background-color:#fdf6e3;color:#657b83;">constructor</span>, but does not reorder goals.</p>
+</div></div><div class="decl"><h4>tactic.interactive.try_for</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">try_for n { tac }</span> executes <span style="background-color:#fdf6e3;color:#657b83;">tac</span> for <span style="background-color:#fdf6e3;color:#657b83;">n</span> ticks, otherwise uses <span style="background-color:#fdf6e3;color:#657b83;">sorry</span> to close the goal.
+Never fails. Useful for debugging.</p>
+</div></div><div class="decl"><h4>tactic.interactive.substs</h4><div class="decl_par"><p>Multiple subst. <span style="background-color:#fdf6e3;color:#657b83;">substs x y z</span> is the same as <span style="background-color:#fdf6e3;color:#657b83;">subst x, subst y, subst z</span>.</p>
+</div></div><div class="decl"><h4>tactic.interactive.unfold_coes</h4><div class="decl_par"><p>Unfold coercion-related definitions</p>
+</div></div><div class="decl"><h4>tactic.interactive.unfold_aux</h4><div class="decl_par"><p>Unfold auxiliary definitions associated with the current declaration.</p>
+</div></div><div class="decl"><h4>tactic.interactive.recover</h4><div class="decl_par"><p>For debugging only. This tactic checks the current state for any
+missing dropped goals and restores them. Useful when there are no
+goals to solve but &quot;result contains meta-variables&quot;.</p>
+</div></div><div class="decl"><h4>tactic.interactive.continue</h4><div class="decl_par"><p>Like <span style="background-color:#fdf6e3;color:#657b83;">try { tac }</span>, but in the case of failure it continues
+from the failure state instead of reverting to the original state.</p>
+</div></div><div class="decl"><h4>tactic.interactive.swap</h4><div class="decl_par"><p>Move goal <span style="background-color:#fdf6e3;color:#657b83;">n</span> to the front.</p>
+</div></div><div class="decl"><h4>tactic.interactive.rotate</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">rotate n</span> cyclically shifts the goals <span style="background-color:#fdf6e3;color:#657b83;">n</span> times.
+<span style="background-color:#fdf6e3;color:#657b83;">rotate</span> defaults to <span style="background-color:#fdf6e3;color:#657b83;">rotate </span><span style="background-color:#fdf6e3;color:#6c71c4;">1</span>.</p>
+</div></div><div class="decl"><h4>tactic.interactive.clear_</h4><div class="decl_par"><p>Clear all hypotheses starting with <span style="background-color:#fdf6e3;color:#657b83;">_</span>, like <span style="background-color:#fdf6e3;color:#657b83;">_match</span> and <span style="background-color:#fdf6e3;color:#657b83;">_let_match</span>.</p>
+</div></div><div class="decl"><h4>tactic.interactive.congr'</h4><div class="decl_par"><p>Same as the <span style="background-color:#fdf6e3;color:#657b83;">congr</span> tactic, but takes an optional argument which gives
+the depth of recursive applications. This is useful when <span style="background-color:#fdf6e3;color:#657b83;">congr</span>
+is too aggressive in breaking down the goal. For example, given
+<span style="background-color:#fdf6e3;color:#657b83;">⊢ f (g (x </span><span style="background-color:#fdf6e3;color:#b58900;">+</span><span style="background-color:#fdf6e3;color:#657b83;"> y)) </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> f (g (y </span><span style="background-color:#fdf6e3;color:#b58900;">+</span><span style="background-color:#fdf6e3;color:#657b83;"> x))</span>, <span style="background-color:#fdf6e3;color:#657b83;">congr&#39;</span> produces the goals <span style="background-color:#fdf6e3;color:#657b83;">⊢ x </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> y</span>
+and <span style="background-color:#fdf6e3;color:#657b83;">⊢ y </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> x</span>, while <span style="background-color:#fdf6e3;color:#657b83;">congr&#39; </span><span style="background-color:#fdf6e3;color:#6c71c4;">2</span> produces the intended <span style="background-color:#fdf6e3;color:#657b83;">⊢ x </span><span style="background-color:#fdf6e3;color:#b58900;">+</span><span style="background-color:#fdf6e3;color:#657b83;"> y </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> y </span><span style="background-color:#fdf6e3;color:#b58900;">+</span><span style="background-color:#fdf6e3;color:#657b83;"> x</span>.</p>
+</div></div><div class="decl"><h4>tactic.interactive.replace</h4><div class="decl_par"><p>Acts like <span style="background-color:#fdf6e3;color:#859900;">have</span>, but removes a hypothesis with the same name as
+this one. For example if the state is <span style="background-color:#fdf6e3;color:#657b83;">h : p ⊢ goal</span> and <span style="background-color:#fdf6e3;color:#657b83;">f : p </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> q</span>,
+then after <span style="background-color:#fdf6e3;color:#657b83;">replace h </span><span style="background-color:#fdf6e3;color:#b58900;">:=</span><span style="background-color:#fdf6e3;color:#657b83;"> f h</span> the goal will be <span style="background-color:#fdf6e3;color:#657b83;">h : q ⊢ goal</span>,
+where <span style="background-color:#fdf6e3;color:#859900;">have</span><span style="background-color:#fdf6e3;color:#657b83;"> h </span><span style="background-color:#fdf6e3;color:#b58900;">:=</span><span style="background-color:#fdf6e3;color:#657b83;"> f h</span> would result in the state <span style="background-color:#fdf6e3;color:#657b83;">h : p, h : q ⊢ goal</span>.
+This can be used to simulate the <span style="background-color:#fdf6e3;color:#657b83;">specialize</span> and <span style="background-color:#fdf6e3;color:#657b83;">apply </span><span style="background-color:#fdf6e3;color:#859900;">at</span> tactics
+of Coq.</p>
+</div></div><div class="decl"><h4>tactic.interactive.classical</h4><div class="decl_par"><p>Make every propositions in the context decidable</p>
+</div></div><div class="decl"><h4>tactic.interactive.generalize_hyp</h4><div class="decl_par"><p>Like <span style="background-color:#fdf6e3;color:#657b83;">generalize</span> but also considers assumptions
+specified by the user. The user can also specify to
+omit the goal.</p>
+</div></div><div class="decl"><h4>tactic.interactive.convert</h4><div class="decl_par"><p>Similar to <span style="background-color:#fdf6e3;color:#657b83;">refine</span> but generates equality proof obligations
+for every discrepancy between the goal and the type of the rule.
+<span style="background-color:#fdf6e3;color:#657b83;">convert e </span><span style="background-color:#fdf6e3;color:#859900;">using</span><span style="background-color:#fdf6e3;color:#657b83;"> n</span> (with <span style="background-color:#fdf6e3;color:#657b83;">n : ℕ</span>) bounds the depth of the search
+for discrepancies, analogous to <span style="background-color:#fdf6e3;color:#657b83;">congr&#39; n</span>.</p>
+</div></div><div class="decl"><h4>tactic.interactive.clean</h4><div class="decl_par"><p>Remove identity functions from a term. These are normally
+automatically generated with terms like <span style="background-color:#fdf6e3;color:#859900;">show</span><span style="background-color:#fdf6e3;color:#657b83;"> t, </span><span style="background-color:#fdf6e3;color:#859900;">from</span><span style="background-color:#fdf6e3;color:#657b83;"> p</span> or
+<span style="background-color:#fdf6e3;color:#657b83;">(p : t)</span> which translate to some variant on <span style="background-color:#fdf6e3;color:#b58900;">@</span><span style="background-color:#fdf6e3;color:#657b83;">id t p</span> in
+order to retain the type.</p>
+</div></div><div class="decl"><h4>tactic.interactive.refine_struct</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">refine_struct { .. }</span> acts like <span style="background-color:#fdf6e3;color:#657b83;">refine</span> but works only with structure instance
+literals. It creates a goal for each missing field and tags it with the name of the
+field so that <span style="background-color:#fdf6e3;color:#657b83;">have_field</span> can be used to generically refer to the field currently
+being refined.</p>
+<p>As an example, we can use <span style="background-color:#fdf6e3;color:#657b83;">refine_struct</span> to automate the construction semigroup
+instances:</p>
+<pre><code class="language-lean"><pre style="background-color:#fdf6e3;">
+<span style="color:#657b83;">refine_struct ( { .. } : semigroup α ),
+</span><span style="color:#93a1a1;">-- case semigroup, mul
+</span><span style="color:#93a1a1;">-- α : Type u,
+</span><span style="color:#93a1a1;">-- ⊢ α → α → α
+</span><span style="color:#657b83;">
+</span><span style="color:#93a1a1;">-- case semigroup, mul_assoc
+</span><span style="color:#93a1a1;">-- α : Type u,
+</span><span style="color:#93a1a1;">-- ⊢ ∀ (a b c : α), a * b * c = a * (b * c)
+</span></pre>
+</code></pre>
+</div></div><div class="decl"><h4>tactic.interactive.guard_hyp'</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">guard_hyp h </span><span style="background-color:#fdf6e3;color:#b58900;">:=</span><span style="background-color:#fdf6e3;color:#657b83;"> t</span> fails if the hypothesis <span style="background-color:#fdf6e3;color:#657b83;">h</span> does not have type <span style="background-color:#fdf6e3;color:#657b83;">t</span>.
+We use this tactic for writing tests.
+Fixes <span style="background-color:#fdf6e3;color:#657b83;">guard_hyp</span> by instantiating meta variables</p>
+</div></div><div class="decl"><h4>tactic.interactive.guard_expr_strict</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">guard_expr_strict t </span><span style="background-color:#fdf6e3;color:#b58900;">:=</span><span style="background-color:#fdf6e3;color:#657b83;"> e</span> fails if the expr <span style="background-color:#fdf6e3;color:#657b83;">t</span> is not equal to <span style="background-color:#fdf6e3;color:#657b83;">e</span>. By contrast
+to <span style="background-color:#fdf6e3;color:#657b83;">guard_expr</span>, this tests strict (syntactic) equality.
+We use this tactic for writing tests.</p>
+</div></div><div class="decl"><h4>tactic.interactive.guard_target_strict</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">guard_target_strict t</span> fails if the target of the main goal is not syntactically <span style="background-color:#fdf6e3;color:#657b83;">t</span>.
+We use this tactic for writing tests.</p>
+</div></div><div class="decl"><h4>tactic.interactive.guard_hyp_strict</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">guard_hyp_strict h </span><span style="background-color:#fdf6e3;color:#b58900;">:=</span><span style="background-color:#fdf6e3;color:#657b83;"> t</span> fails if the hypothesis <span style="background-color:#fdf6e3;color:#657b83;">h</span> does not have type syntactically equal
+to <span style="background-color:#fdf6e3;color:#657b83;">t</span>.
+We use this tactic for writing tests.</p>
+</div></div><div class="decl"><h4>tactic.interactive.success_if_fail_with_msg</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">success_if_fail_with_msg { tac } msg</span> succeeds if the interactive tactic <span style="background-color:#fdf6e3;color:#657b83;">tac</span> fails with
+error message <span style="background-color:#fdf6e3;color:#657b83;">msg</span> (for test writing purposes).</p>
+</div></div><div class="decl"><h4>tactic.interactive.have_field</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">have_field</span>, used after <span style="background-color:#fdf6e3;color:#657b83;">refine_struct _</span> poses <span style="background-color:#fdf6e3;color:#657b83;">field</span> as a local constant
+with the type of the field of the current goal:</p>
+<pre><code class="language-lean"><pre style="background-color:#fdf6e3;">
+<span style="color:#657b83;">refine_struct ({ .. } : semigroup α),
+</span><span style="color:#657b83;">{ have_field, ... },
+</span><span style="color:#657b83;">{ have_field, ... },
+</span></pre>
+</code></pre>
+<p>behaves like</p>
+<pre><code class="language-lean"><pre style="background-color:#fdf6e3;">
+<span style="color:#657b83;">refine_struct ({ .. } : semigroup α),
+</span><span style="color:#657b83;">{ </span><span style="color:#859900;">have</span><span style="color:#657b83;"> field </span><span style="color:#b58900;">:= @</span><span style="color:#657b83;">semigroup.mul, ... },
+</span><span style="color:#657b83;">{ </span><span style="color:#859900;">have</span><span style="color:#657b83;"> field </span><span style="color:#b58900;">:= @</span><span style="color:#657b83;">semigroup.mul_assoc, ... },
+</span></pre>
+</code></pre>
+</div></div><div class="decl"><h4>tactic.interactive.apply_field</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">apply_field</span> functions as <span style="background-color:#fdf6e3;color:#657b83;">have_field, apply field, clear field</span></p>
+</div></div><div class="decl"><h4>tactic.interactive.apply_rules</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">apply_rules hs n</span>: apply the list of rules <span style="background-color:#fdf6e3;color:#657b83;">hs</span> (given as pexpr) and <span style="background-color:#fdf6e3;color:#657b83;">assumption</span> on the
+first goal and the resulting subgoals, iteratively, at most <span style="background-color:#fdf6e3;color:#657b83;">n</span> times.
+<span style="background-color:#fdf6e3;color:#657b83;">n</span> is 50 by default. <span style="background-color:#fdf6e3;color:#657b83;">hs</span> can contain user attributes: in this case all theorems with this
+attribute are added to the list of rules.</p>
+<p>example, with or without user attribute:</p>
+<pre><code class="language-lean"><pre style="background-color:#fdf6e3;">
+<span style="color:#586e75;">@[user_attribute]
+</span><span style="color:#859900;">meta def </span><span style="color:#d33682;">mono_rules </span><span style="color:#657b83;">: user_attribute </span><span style="color:#b58900;">:=
+</span><span style="color:#657b83;">{ name </span><span style="color:#b58900;">:=</span><span style="color:#657b83;"> `mono_rules,
+</span><span style="color:#657b83;">  descr </span><span style="color:#b58900;">:= </span><span style="color:#2aa198;">&quot;lemmas usable to prove monotonicity&quot;</span><span style="color:#657b83;"> }
+</span><span style="color:#657b83;">
+</span><span style="color:#586e75;">attribute [mono_rules]</span><span style="color:#657b83;"> add_le_add mul_le_mul_of_nonneg_right
+</span><span style="color:#657b83;">
+</span><span style="color:#859900;">lemma </span><span style="color:#d33682;">my_test </span><span style="color:#657b83;">{a b c d e : real} (h1 : a </span><span style="color:#b58900;">≤</span><span style="color:#657b83;"> b) (h2 : c </span><span style="color:#b58900;">≤</span><span style="color:#657b83;"> d) (h3 : </span><span style="color:#6c71c4;">0 </span><span style="color:#b58900;">≤</span><span style="color:#657b83;"> e) :
+</span><span style="color:#657b83;">a </span><span style="color:#b58900;">+</span><span style="color:#657b83;"> c </span><span style="color:#b58900;">*</span><span style="color:#657b83;"> e </span><span style="color:#b58900;">+</span><span style="color:#657b83;"> a </span><span style="color:#b58900;">+</span><span style="color:#657b83;"> c </span><span style="color:#b58900;">+ </span><span style="color:#6c71c4;">0 </span><span style="color:#b58900;">≤</span><span style="color:#657b83;"> b </span><span style="color:#b58900;">+</span><span style="color:#657b83;"> d </span><span style="color:#b58900;">*</span><span style="color:#657b83;"> e </span><span style="color:#b58900;">+</span><span style="color:#657b83;"> b </span><span style="color:#b58900;">+</span><span style="color:#657b83;"> d </span><span style="color:#b58900;">+</span><span style="color:#657b83;"> e </span><span style="color:#b58900;">:=
+</span><span style="color:#859900;">by</span><span style="color:#657b83;"> apply_rules mono_rules
+</span><span style="color:#93a1a1;">-- any of the following lines would also work:
+</span><span style="color:#93a1a1;">-- add_le_add (add_le_add (add_le_add (add_le_add h1 (mul_le_mul_of_nonneg_right h2 h3)) h1 ) h2) h3
+</span><span style="color:#93a1a1;">-- by apply_rules [add_le_add, mul_le_mul_of_nonneg_right]
+</span><span style="color:#93a1a1;">-- by apply_rules [mono_rules]
+</span></pre>
+</code></pre>
+</div></div><div class="decl"><h4>tactic.interactive.h_generalize</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">h_generalize Hx : e </span><span style="background-color:#fdf6e3;color:#b58900;">==</span><span style="background-color:#fdf6e3;color:#657b83;"> x</span> matches on <span style="background-color:#fdf6e3;color:#657b83;">cast _ e</span> in the goal and replaces it with
+<span style="background-color:#fdf6e3;color:#657b83;">x</span>. It also adds <span style="background-color:#fdf6e3;color:#657b83;">Hx : e </span><span style="background-color:#fdf6e3;color:#b58900;">==</span><span style="background-color:#fdf6e3;color:#657b83;"> x</span> as an assumption. If <span style="background-color:#fdf6e3;color:#657b83;">cast _ e</span> appears multiple
+times (not necessarily with the same proof), they are all replaced by <span style="background-color:#fdf6e3;color:#657b83;">x</span>. <span style="background-color:#fdf6e3;color:#657b83;">cast</span>
+<span style="background-color:#fdf6e3;color:#657b83;">eq.mp</span>, <span style="background-color:#fdf6e3;color:#657b83;">eq.mpr</span>, <span style="background-color:#fdf6e3;color:#657b83;">eq.subst</span>, <span style="background-color:#fdf6e3;color:#657b83;">eq.substr</span>, <span style="background-color:#fdf6e3;color:#657b83;">eq.rec</span> and <span style="background-color:#fdf6e3;color:#657b83;">eq.rec_on</span> are all treated
+as casts.</p>
+<p><span style="background-color:#fdf6e3;color:#657b83;">h_generalize Hx : e </span><span style="background-color:#fdf6e3;color:#b58900;">==</span><span style="background-color:#fdf6e3;color:#657b83;"> x </span><span style="background-color:#fdf6e3;color:#859900;">with</span><span style="background-color:#fdf6e3;color:#657b83;"> h</span> adds hypothesis <span style="background-color:#fdf6e3;color:#657b83;">α </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> β</span> with <span style="background-color:#fdf6e3;color:#657b83;">e : α, x : β</span>.</p>
+<p><span style="background-color:#fdf6e3;color:#657b83;">h_generalize Hx : e </span><span style="background-color:#fdf6e3;color:#b58900;">==</span><span style="background-color:#fdf6e3;color:#657b83;"> x </span><span style="background-color:#fdf6e3;color:#859900;">with</span><span style="background-color:#fdf6e3;color:#657b83;"> _</span> chooses automatically chooses the name of
+assumption <span style="background-color:#fdf6e3;color:#657b83;">α </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> β</span>.</p>
+<p><span style="background-color:#fdf6e3;color:#657b83;">h_generalize! Hx : e </span><span style="background-color:#fdf6e3;color:#b58900;">==</span><span style="background-color:#fdf6e3;color:#657b83;"> x</span> reverts <span style="background-color:#fdf6e3;color:#657b83;">Hx</span>.</p>
+<p>when <span style="background-color:#fdf6e3;color:#657b83;">Hx</span> is omitted, assumption <span style="background-color:#fdf6e3;color:#657b83;">Hx : e </span><span style="background-color:#fdf6e3;color:#b58900;">==</span><span style="background-color:#fdf6e3;color:#657b83;"> x</span> is not added.</p>
+</div></div><div class="decl"><h4>tactic.interactive.choose</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">choose a b h </span><span style="background-color:#fdf6e3;color:#859900;">using</span><span style="background-color:#fdf6e3;color:#657b83;"> hyp</span> takes an hypothesis <span style="background-color:#fdf6e3;color:#657b83;">hyp</span> of the form
+<span style="background-color:#fdf6e3;color:#657b83;">∀ (x : X) (y : Y), ∃ (a : A) (b : B), P x y a b</span> for some <span style="background-color:#fdf6e3;color:#657b83;">P : X </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> Y </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> A </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> B </span><span style="background-color:#fdf6e3;color:#859900;">→ </span><span style="background-color:#fdf6e3;color:#268bd2;">Prop</span> and outputs
+into context a function <span style="background-color:#fdf6e3;color:#657b83;">a : X </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> Y </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> A</span>, <span style="background-color:#fdf6e3;color:#657b83;">b : X </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> Y </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> B</span> and a proposition <span style="background-color:#fdf6e3;color:#657b83;">h</span> stating
+<span style="background-color:#fdf6e3;color:#657b83;">∀ (x : X) (y : Y), P x y (a x y) (b x y)</span>. It presumably also works with dependent versions.</p>
+<p>Example:</p>
+<pre><code class="language-lean"><pre style="background-color:#fdf6e3;">
+<span style="color:#859900;">example</span><span style="color:#657b83;"> (h : </span><span style="color:#859900;">∀</span><span style="color:#657b83;">n m : ℕ, ∃i j, m </span><span style="color:#b58900;">=</span><span style="color:#657b83;"> n </span><span style="color:#b58900;">+</span><span style="color:#657b83;"> i </span><span style="color:#b58900;">∨</span><span style="color:#657b83;"> m </span><span style="color:#b58900;">+</span><span style="color:#657b83;"> j </span><span style="color:#b58900;">=</span><span style="color:#657b83;"> n) : true </span><span style="color:#b58900;">:=
+</span><span style="color:#859900;">begin
+</span><span style="color:#657b83;">  choose i j h </span><span style="color:#859900;">using</span><span style="color:#657b83;"> h,
+</span><span style="color:#657b83;">  guard_hyp i </span><span style="color:#b58900;">:=</span><span style="color:#657b83;"> ℕ </span><span style="color:#859900;">→</span><span style="color:#657b83;"> ℕ </span><span style="color:#859900;">→</span><span style="color:#657b83;"> ℕ,
+</span><span style="color:#657b83;">  guard_hyp j </span><span style="color:#b58900;">:=</span><span style="color:#657b83;"> ℕ </span><span style="color:#859900;">→</span><span style="color:#657b83;"> ℕ </span><span style="color:#859900;">→</span><span style="color:#657b83;"> ℕ,
+</span><span style="color:#657b83;">  guard_hyp h </span><span style="color:#b58900;">:= </span><span style="color:#859900;">∀</span><span style="color:#657b83;"> (n m : ℕ), m </span><span style="color:#b58900;">=</span><span style="color:#657b83;"> n </span><span style="color:#b58900;">+</span><span style="color:#657b83;"> i n m </span><span style="color:#b58900;">∨</span><span style="color:#657b83;"> m </span><span style="color:#b58900;">+</span><span style="color:#657b83;"> j n m </span><span style="color:#b58900;">=</span><span style="color:#657b83;"> n,
+</span><span style="color:#657b83;">  trivial
+</span><span style="color:#859900;">end
+</span></pre>
+</code></pre>
+</div></div><div class="decl"><h4>tactic.interactive.guard_target'</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">guard_target t</span> fails if the target of the main goal is not <span style="background-color:#fdf6e3;color:#657b83;">t</span>.
+We use this tactic for writing tests.</p>
+</div></div><div class="decl"><h4>tactic.interactive.triv</h4><div class="decl_par"><p>a weaker version of <span style="background-color:#fdf6e3;color:#657b83;">trivial</span> that tries to solve the goal by reflexivity or by reducing it to true,
+unfolding only <span style="background-color:#fdf6e3;color:#657b83;">reducible</span> constants.</p>
+</div></div><div class="decl"><h4>tactic.interactive.use</h4><div class="decl_par"><p>Similar to <span style="background-color:#fdf6e3;color:#657b83;">existsi</span>. <span style="background-color:#fdf6e3;color:#657b83;">use x</span> will instantiate the first term of an <span style="background-color:#fdf6e3;color:#657b83;">∃</span> or <span style="background-color:#fdf6e3;color:#657b83;">Σ</span> goal with <span style="background-color:#fdf6e3;color:#657b83;">x</span>.
+Unlike <span style="background-color:#fdf6e3;color:#657b83;">existsi</span>, <span style="background-color:#fdf6e3;color:#657b83;">x</span> is elaborated with respect to the expected type.
+<span style="background-color:#fdf6e3;color:#657b83;">use</span> will alternatively take a list of terms <span style="background-color:#fdf6e3;color:#657b83;">[x0, ..., xn]</span>.</p>
+<p><span style="background-color:#fdf6e3;color:#657b83;">use</span> will work with constructors of arbitrary inductive types.</p>
+<p>Examples:</p>
+<p>example (α : Type) : ∃ S : set α, S = S :=
+by use ∅</p>
+<p>example : ∃ x : ℤ, x = x :=
+by use 42</p>
+<p>example : ∃ a b c : ℤ, a + b + c = 6 :=
+by use [1, 2, 3]</p>
+<p>example : ∃ p : ℤ × ℤ, p.1 = 1 :=
+by use ⟨1, 42⟩</p>
+<p>example : Σ x y : ℤ, (ℤ × ℤ) × ℤ :=
+by use [1, 2, 3, 4, 5]</p>
+<p>inductive foo
+| mk : ℕ → bool × ℕ → ℕ → foo</p>
+<p>example : foo :=
+by use [100, tt, 4, 3]</p>
+</div></div><div class="decl"><h4>tactic.interactive.clear_aux_decl</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">clear_aux_decl</span> clears every <span style="background-color:#fdf6e3;color:#657b83;">aux_decl</span> in the local context for the current goal.
+This includes the induction hypothesis when using the equation compiler and
+<span style="background-color:#fdf6e3;color:#657b83;">_let_match</span> and <span style="background-color:#fdf6e3;color:#657b83;">_fun_match</span>.</p>
+<p>It is useful when using a tactic such as <span style="background-color:#fdf6e3;color:#657b83;">finish</span>, <span style="background-color:#fdf6e3;color:#657b83;">simp </span><span style="background-color:#fdf6e3;color:#b58900;">*</span> or <span style="background-color:#fdf6e3;color:#657b83;">subst</span> that may use these
+auxiliary declarations, and produce an error saying the recursion is not well founded.</p>
+</div></div><div class="decl"><h4>tactic.interactive.change'</h4><div class="decl_par"><p>The logic of <span style="background-color:#fdf6e3;color:#657b83;">change x </span><span style="background-color:#fdf6e3;color:#859900;">with</span><span style="background-color:#fdf6e3;color:#657b83;"> y </span><span style="background-color:#fdf6e3;color:#859900;">at</span><span style="background-color:#fdf6e3;color:#657b83;"> l</span> fails when there are dependencies.
+<span style="background-color:#fdf6e3;color:#657b83;">change&#39;</span> mimics the behavior of <span style="background-color:#fdf6e3;color:#657b83;">change</span>, except in the case of <span style="background-color:#fdf6e3;color:#657b83;">change x </span><span style="background-color:#fdf6e3;color:#859900;">with</span><span style="background-color:#fdf6e3;color:#657b83;"> y </span><span style="background-color:#fdf6e3;color:#859900;">at</span><span style="background-color:#fdf6e3;color:#657b83;"> l</span>.
+In this case, it will correctly replace occurences of <span style="background-color:#fdf6e3;color:#657b83;">x</span> with <span style="background-color:#fdf6e3;color:#657b83;">y</span> at all possible hypotheses in <span style="background-color:#fdf6e3;color:#657b83;">l</span>.
+As long as <span style="background-color:#fdf6e3;color:#657b83;">x</span> and <span style="background-color:#fdf6e3;color:#657b83;">y</span> are defeq, it should never fail.</p>
+</div></div><div class="decl"><h4>tactic.interactive.convert_to</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">convert_to g </span><span style="background-color:#fdf6e3;color:#859900;">using</span><span style="background-color:#fdf6e3;color:#657b83;"> n</span> attempts to change the current goal to <span style="background-color:#fdf6e3;color:#657b83;">g</span>,
+using <span style="background-color:#fdf6e3;color:#657b83;">congr&#39; n</span> to resolve discrepancies.</p>
+<p><span style="background-color:#fdf6e3;color:#657b83;">convert_to g</span> defaults to using <span style="background-color:#fdf6e3;color:#657b83;">congr&#39; </span><span style="background-color:#fdf6e3;color:#6c71c4;">1</span>.</p>
+</div></div><div class="decl"><h4>tactic.interactive.ac_change</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">ac_change g </span><span style="background-color:#fdf6e3;color:#859900;">using</span><span style="background-color:#fdf6e3;color:#657b83;"> n</span> is <span style="background-color:#fdf6e3;color:#657b83;">convert_to g </span><span style="background-color:#fdf6e3;color:#859900;">using</span><span style="background-color:#fdf6e3;color:#657b83;"> n; try {ac_refl}</span></p>
+</div></div><div class="decl"><h4>tactic.interactive.set</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">set a </span><span style="background-color:#fdf6e3;color:#b58900;">:=</span><span style="background-color:#fdf6e3;color:#657b83;"> t </span><span style="background-color:#fdf6e3;color:#859900;">with</span><span style="background-color:#fdf6e3;color:#657b83;"> h</span> is a variant of <span style="background-color:#fdf6e3;color:#859900;">let</span><span style="background-color:#fdf6e3;color:#657b83;"> a </span><span style="background-color:#fdf6e3;color:#b58900;">:=</span><span style="background-color:#fdf6e3;color:#657b83;"> t</span>.
+It adds the hypothesis <span style="background-color:#fdf6e3;color:#657b83;">h : a </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> t</span> to the local context and replaces <span style="background-color:#fdf6e3;color:#657b83;">t</span> with <span style="background-color:#fdf6e3;color:#657b83;">a</span> everywhere it can.
+<span style="background-color:#fdf6e3;color:#657b83;">set a </span><span style="background-color:#fdf6e3;color:#b58900;">:=</span><span style="background-color:#fdf6e3;color:#657b83;"> t </span><span style="background-color:#fdf6e3;color:#859900;">with</span><span style="background-color:#fdf6e3;color:#657b83;"> ←h</span> will add <span style="background-color:#fdf6e3;color:#657b83;">h : t </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> a</span> instead.
+<span style="background-color:#fdf6e3;color:#657b83;">set! a </span><span style="background-color:#fdf6e3;color:#b58900;">:=</span><span style="background-color:#fdf6e3;color:#657b83;"> t </span><span style="background-color:#fdf6e3;color:#859900;">with</span><span style="background-color:#fdf6e3;color:#657b83;"> h</span> does not do any replacing.</p>
+</div></div><div class="decl"><h4>tactic.interactive.clear_except</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">clear_except h₀ h₁</span> deletes all the assumptions it can except for <span style="background-color:#fdf6e3;color:#657b83;">h₀</span> and <span style="background-color:#fdf6e3;color:#657b83;">h₁</span>.</p>
+</div></div><div class="decl"><h4>tactic.interactive.mk_paragraph</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">mk_paragraph right_margin ls</span> packs <span style="background-color:#fdf6e3;color:#657b83;">ls</span> into a paragraph where the lines have
+length at most <span style="background-color:#fdf6e3;color:#657b83;">right_margin</span></p>
+</div></div><div class="decl"><h4>tactic.interactive.extract_goal</h4><div class="decl_par"><p>Format the current goal as a stand-alone example. Useful for testing tactic.</p>
+<ul>
+<li><span style="background-color:#fdf6e3;color:#657b83;">extract_goal</span>: formats the statement as an <span style="background-color:#fdf6e3;color:#859900;">example</span> declaration</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">extract_goal my_decl</span>: formats the statement as a <span style="background-color:#fdf6e3;color:#859900;">lemma</span> or <span style="background-color:#fdf6e3;color:#859900;">def</span> declaration
+called <span style="background-color:#fdf6e3;color:#657b83;">my_decl</span></li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">extract_goal </span><span style="background-color:#fdf6e3;color:#859900;">with</span><span style="background-color:#fdf6e3;color:#657b83;"> i j k:</span> only use local constants <span style="background-color:#fdf6e3;color:#657b83;">i</span>, <span style="background-color:#fdf6e3;color:#657b83;">j</span>, <span style="background-color:#fdf6e3;color:#657b83;">k</span> in the declaration</li>
+</ul>
+<p>Examples:</p>
+<pre><code class="language-lean"><pre style="background-color:#fdf6e3;">
+<span style="color:#859900;">example</span><span style="color:#657b83;"> (i j k : ℕ) (h₀ : i </span><span style="color:#b58900;">≤</span><span style="color:#657b83;"> j) (h₁ : j </span><span style="color:#b58900;">≤</span><span style="color:#657b83;"> k) : i </span><span style="color:#b58900;">≤</span><span style="color:#657b83;"> k </span><span style="color:#b58900;">:=
+</span><span style="color:#859900;">begin
+</span><span style="color:#657b83;">  extract_goal,
+</span><span style="color:#657b83;">     </span><span style="color:#93a1a1;">-- prints:
+</span><span style="color:#657b83;">     </span><span style="color:#93a1a1;">-- example {i j k : ℕ} (h₀ : i ≤ j) (h₁ : j ≤ k) : i ≤ k :=
+</span><span style="color:#657b83;">     </span><span style="color:#93a1a1;">-- begin
+</span><span style="color:#657b83;">
+</span><span style="color:#657b83;">     </span><span style="color:#93a1a1;">-- end
+</span><span style="color:#657b83;">  extract_goal my_lemma
+</span><span style="color:#657b83;">     </span><span style="color:#93a1a1;">-- lemma my_lemma {i j k : ℕ} (h₀ : i ≤ j) (h₁ : j ≤ k) : i ≤ k :=
+</span><span style="color:#657b83;">     </span><span style="color:#93a1a1;">-- begin
+</span><span style="color:#657b83;">
+</span><span style="color:#657b83;">     </span><span style="color:#93a1a1;">-- end
+</span><span style="color:#859900;">end
+</span><span style="color:#657b83;">
+</span><span style="color:#859900;">example</span><span style="color:#657b83;"> {i j k x y z w p q r m n : ℕ} (h₀ : i </span><span style="color:#b58900;">≤</span><span style="color:#657b83;"> j) (h₁ : j </span><span style="color:#b58900;">≤</span><span style="color:#657b83;"> k) (h₁ : k </span><span style="color:#b58900;">≤</span><span style="color:#657b83;"> p) (h₁ : p </span><span style="color:#b58900;">≤</span><span style="color:#657b83;"> q) : i </span><span style="color:#b58900;">≤</span><span style="color:#657b83;"> k </span><span style="color:#b58900;">:=
+</span><span style="color:#859900;">begin
+</span><span style="color:#657b83;">  extract_goal my_lemma,
+</span><span style="color:#657b83;">    </span><span style="color:#93a1a1;">-- prints:
+</span><span style="color:#657b83;">    </span><span style="color:#93a1a1;">-- lemma my_lemma {i j k x y z w p q r m n : ℕ} (h₀ : i ≤ j) (h₁ : j ≤ k)
+</span><span style="color:#657b83;">    </span><span style="color:#93a1a1;">--   (h₁ : k ≤ p) (h₁ : p ≤ q) : i ≤ k :=
+</span><span style="color:#657b83;">    </span><span style="color:#93a1a1;">-- begin
+</span><span style="color:#657b83;">
+</span><span style="color:#657b83;">    </span><span style="color:#93a1a1;">-- end
+</span><span style="color:#657b83;">
+</span><span style="color:#657b83;">  extract_goal my_lemma </span><span style="color:#859900;">with</span><span style="color:#657b83;"> i j k
+</span><span style="color:#657b83;">    </span><span style="color:#93a1a1;">-- prints:
+</span><span style="color:#657b83;">    </span><span style="color:#93a1a1;">-- lemma my_lemma {i j k : ℕ} : i ≤ k :=
+</span><span style="color:#657b83;">    </span><span style="color:#93a1a1;">-- begin
+</span><span style="color:#657b83;">
+</span><span style="color:#657b83;">    </span><span style="color:#93a1a1;">-- end
+</span><span style="color:#859900;">end
+</span></pre>
+</code></pre>
+</div></div></html>

@@ -1,0 +1,11 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><h1>Conjugate morphisms by isomorphisms</h1>
+<p>An isomorphism <span style="background-color:#fdf6e3;color:#657b83;">α : X ≅ Y</span> defines</p>
+<ul>
+<li>a monoid isomorphism <span style="background-color:#fdf6e3;color:#657b83;">conj : End X ≃</span><span style="background-color:#fdf6e3;color:#b58900;">*</span><span style="background-color:#fdf6e3;color:#657b83;"> End Y</span> by <span style="background-color:#fdf6e3;color:#657b83;">α.conj f </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> α.inv ≫ f ≫ α.hom</span>;</li>
+<li>a group isomorphism <span style="background-color:#fdf6e3;color:#657b83;">conj_Aut : Aut X ≃</span><span style="background-color:#fdf6e3;color:#b58900;">*</span><span style="background-color:#fdf6e3;color:#657b83;"> Aut Y</span> by <span style="background-color:#fdf6e3;color:#657b83;">α.conj_Aut f </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> α.symm ≪≫ f ≪≫ α</span>.</li>
+</ul>
+<p>For completeness, we also define <span style="background-color:#fdf6e3;color:#657b83;">hom_congr : (X ≅ X₁) </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> (Y ≅ Y₁) </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> (X ⟶ Y) ≃ (X₁ ⟶ Y₁)</span>, cf. <span style="background-color:#fdf6e3;color:#657b83;">equiv.arrow_congr</span>.</p>
+<hr/><div class="decl"><h4>category_theory.iso.conj</h4><div class="decl_par"><p>An isomorphism between two objects defines a monoid isomorphism between their
+monoid of endomorphisms.</p>
+</div></div><div class="decl"><h4>category_theory.iso.conj_Aut</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">conj</span> defines a group isomorphisms between groups of automorphisms</p>
+</div></div></html>

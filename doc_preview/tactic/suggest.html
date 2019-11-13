@@ -1,0 +1,65 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><p><span style="background-color:#fdf6e3;color:#657b83;">suggest</span> and <span style="background-color:#fdf6e3;color:#657b83;">library_search</span> are a pair of tactics for applying lemmas from the library to the
+current goal.</p>
+<ul>
+<li><span style="background-color:#fdf6e3;color:#657b83;">suggest</span> prints a list of <span style="background-color:#fdf6e3;color:#657b83;">exact ...</span> or <span style="background-color:#fdf6e3;color:#657b83;">refine ...</span> statements, which may produce new goals</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">library_search</span> prints a single <span style="background-color:#fdf6e3;color:#657b83;">exact ...</span> which closes the goal, or fails</li>
+</ul>
+<hr/><div class="decl"><h4>tactic.suggest.head_symbol</h4><div class="decl_par"><p>compute the head symbol of an expression, but normalise <span style="background-color:#fdf6e3;color:#b58900;">&gt;</span> to <span style="background-color:#fdf6e3;color:#b58900;">&lt;</span> and <span style="background-color:#fdf6e3;color:#b58900;">≥</span> to <span style="background-color:#fdf6e3;color:#b58900;">≤</span></p>
+</div></div><div class="decl"><h4>tactic.suggest.head_symbol_match</h4><div class="decl_par"><p>A declaration can match the head symbol of the current goal in four possible ways:</p>
+<ul>
+<li><span style="background-color:#fdf6e3;color:#657b83;">ex</span>  : an exact match</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">mp</span>  : the declaration returns an <span style="background-color:#fdf6e3;color:#657b83;">iff</span>, and the right hand side matches the goal</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">mpr</span> : the declaration returns an <span style="background-color:#fdf6e3;color:#657b83;">iff</span>, and the left hand side matches the goal</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">both</span>: the declaration returns an <span style="background-color:#fdf6e3;color:#657b83;">iff</span>, and the both sides match the goal</li>
+</ul>
+</div></div><div class="decl"><h4>tactic.suggest.head_symbol_match.to_string</h4><div class="decl_par"><p>a textual representation of a <span style="background-color:#fdf6e3;color:#657b83;">head_symbol_match</span>, for trace debugging.</p>
+</div></div><div class="decl"><h4>tactic.suggest.unfold_head_symbol</h4><div class="decl_par"><p>When we are determining if a given declaration is potentially relevant for the current goal,
+we compute <span style="background-color:#fdf6e3;color:#657b83;">unfold_head_symbol</span> on the head symbol of the declaration, producing a list of names.
+We consider the declaration potentially relevant if the head symbol of the goal appears in this list.</p>
+</div></div><div class="decl"><h4>tactic.suggest.match_head_symbol</h4><div class="decl_par"><p>Determine if, and in which way, a given expression matches the specified head symbol.</p>
+</div></div><div class="decl"><h4>tactic.suggest.process_declaration</h4><div class="decl_par"><p>Generate a <span style="background-color:#fdf6e3;color:#657b83;">decl_data</span> from the given declaration if
+it matches the head symbol <span style="background-color:#fdf6e3;color:#657b83;">hs</span> for the current goal.</p>
+</div></div><div class="decl"><h4>tactic.suggest.library_defs</h4><div class="decl_par"><p>Retrieve all library definitions with a given head symbol.</p>
+</div></div><div class="decl"><h4>tactic.suggest.apply_and_solve</h4><div class="decl_par"><p>Apply the lemma <span style="background-color:#fdf6e3;color:#657b83;">e</span>, then attempt to close all goals using <span style="background-color:#fdf6e3;color:#657b83;">solve_by_elim { discharger </span><span style="background-color:#fdf6e3;color:#b58900;">:=</span><span style="background-color:#fdf6e3;color:#657b83;"> discharger }</span>,
+failing if <span style="background-color:#fdf6e3;color:#657b83;">close_goals </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> tt</span> and there are any goals remaining.</p>
+</div></div><div class="decl"><h4>tactic.suggest.apply_declaration</h4><div class="decl_par"><p>Apply the declaration <span style="background-color:#fdf6e3;color:#657b83;">d</span> (or the forward and backward implications separately, if it is an <span style="background-color:#fdf6e3;color:#657b83;">iff</span>),
+and then attempt to solve the goal using <span style="background-color:#fdf6e3;color:#657b83;">apply_and_solve</span>.</p>
+</div></div><div class="decl"><h4>tactic.suggest.replace_mvars</h4><div class="decl_par"><p>Replace any metavariables in the expression with underscores, in preparation for printing
+<span style="background-color:#fdf6e3;color:#657b83;">refine ...</span> statements.</p>
+</div></div><div class="decl"><h4>tactic.suggest.tactic_statement</h4><div class="decl_par"><p>Construct a <span style="background-color:#fdf6e3;color:#657b83;">refine ...</span> or <span style="background-color:#fdf6e3;color:#657b83;">exact ...</span> string which would construct <span style="background-color:#fdf6e3;color:#657b83;">g</span>.</p>
+</div></div><div class="decl"><h4>tactic.suggest.message</h4><div class="decl_par"><p>Assuming that a goal <span style="background-color:#fdf6e3;color:#657b83;">g</span> has been (partially) solved in the tactic_state <span style="background-color:#fdf6e3;color:#657b83;">l</span>,
+this function prepares a string of the form <span style="background-color:#fdf6e3;color:#657b83;">exact ...</span> or <span style="background-color:#fdf6e3;color:#657b83;">refine ...</span> (possibly with underscores)
+that will reproduce that result.</p>
+</div></div><div class="decl"><h4>tactic.suggest.application</h4><div class="decl_par"><p>An <span style="background-color:#fdf6e3;color:#657b83;">application</span> records the result of a successful application of a library lemma.</p>
+</div></div><div class="decl"><h4>tactic.suggest_core</h4><div class="decl_par"><p>The core <span style="background-color:#fdf6e3;color:#657b83;">suggest</span> tactic.
+It attempts to apply a declaration from the library,
+then solve new goals using <span style="background-color:#fdf6e3;color:#657b83;">solve_by_elim</span>.</p>
+<p>It returns a list of <span style="background-color:#fdf6e3;color:#657b83;">application</span>s consisting of fields:</p>
+<ul>
+<li><span style="background-color:#fdf6e3;color:#657b83;">state</span>, a tactic state resulting from the successful application of a declaration from the library,</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">script</span>, a string of the form <span style="background-color:#fdf6e3;color:#657b83;">refine ...</span> or <span style="background-color:#fdf6e3;color:#657b83;">exact ...</span> which will reproduce that tactic state,</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">decl</span>, an <span style="background-color:#fdf6e3;color:#657b83;">option declaration</span> indicating the declaration that was applied (or none, if <span style="background-color:#fdf6e3;color:#657b83;">solve_by_elim</span> succeeded),</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">num_goals</span>, the number of remaining goals, and</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">hyps_used</span>, the number of local hypotheses used in the solution.</li>
+</ul>
+</div></div><div class="decl"><h4>tactic.suggest</h4><div class="decl_par"><p>See <span style="background-color:#fdf6e3;color:#657b83;">suggest_core</span>.</p>
+<p>Returns a list of at most <span style="background-color:#fdf6e3;color:#657b83;">limit</span> <span style="background-color:#fdf6e3;color:#657b83;">application</span>s,
+sorted by number of goals, and then (reverse) number of hypotheses used.</p>
+</div></div><div class="decl"><h4>tactic.suggest_scripts</h4><div class="decl_par"><p>Returns a list of at most <span style="background-color:#fdf6e3;color:#657b83;">limit</span> strings, of the form <span style="background-color:#fdf6e3;color:#657b83;">exact ...</span> or <span style="background-color:#fdf6e3;color:#657b83;">refine ...</span>, which make
+progress on the current goal using a declaration from the library.</p>
+</div></div><div class="decl"><h4>tactic.library_search</h4><div class="decl_par"><p>Returns a string of the form <span style="background-color:#fdf6e3;color:#657b83;">exact ...</span>, which closes the current goal.</p>
+</div></div><div class="decl"><h4>tactic.interactive.suggest</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">suggest</span> tries to apply suitable theorems/defs from the library, and generates
+a list of <span style="background-color:#fdf6e3;color:#657b83;">exact ...</span> or <span style="background-color:#fdf6e3;color:#657b83;">refine ...</span> scripts that could be used at this step.
+It leaves the tactic state unchanged. It is intended as a complement of the search
+function in your editor, the <span style="background-color:#fdf6e3;color:#b58900;">#</span><span style="background-color:#fdf6e3;color:#657b83;">find</span> tactic, and <span style="background-color:#fdf6e3;color:#657b83;">library_search</span>.</p>
+<p><span style="background-color:#fdf6e3;color:#657b83;">suggest</span> takes an optional natural number <span style="background-color:#fdf6e3;color:#657b83;">num</span> as input and returns the first <span style="background-color:#fdf6e3;color:#657b83;">num</span>
+(or less, if all possibilities are exhausted) possibilities ordered by length of lemma names.
+The default for <span style="background-color:#fdf6e3;color:#657b83;">num</span> is <span style="background-color:#fdf6e3;color:#6c71c4;">50</span>.
+For performance reasons <span style="background-color:#fdf6e3;color:#657b83;">suggest</span> uses monadic lazy lists (<span style="background-color:#fdf6e3;color:#657b83;">mllist</span>). This means that
+<span style="background-color:#fdf6e3;color:#657b83;">suggest</span> might miss some results if <span style="background-color:#fdf6e3;color:#657b83;">num</span> is not large enough. However, because
+<span style="background-color:#fdf6e3;color:#657b83;">suggest</span> uses monadic lazy lists, smaller values of <span style="background-color:#fdf6e3;color:#657b83;">num</span> run faster than larger values.</p>
+</div></div><div class="decl"><h4>tactic.interactive.library_search</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">library_search</span> attempts to apply every definition in the library whose head symbol
+matches the goal, and then discharge any new goals using <span style="background-color:#fdf6e3;color:#657b83;">solve_by_elim</span>.</p>
+<p>If it succeeds, it prints a trace message <span style="background-color:#fdf6e3;color:#657b83;">exact ...</span> which can replace the invocation
+of <span style="background-color:#fdf6e3;color:#657b83;">library_search</span>.</p>
+</div></div></html>

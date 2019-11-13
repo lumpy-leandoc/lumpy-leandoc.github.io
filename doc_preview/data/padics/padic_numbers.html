@@ -1,0 +1,56 @@
+<html><head><link rel="stylesheet" href="../../docs_style.css"></head><h1>p-adic numbers</h1>
+<p>This file defines the p-adic numbers (rationals) ℚ_p as the completion of ℚ with respect to the
+p-adic norm. We show that the p-adic norm on ℚ extends to ℚ_p, that ℚ is embedded in ℚ_p, and that
+ℚ_p is Cauchy complete.</p>
+<h2>Important definitions</h2>
+<ul>
+<li><span style="background-color:#fdf6e3;color:#657b83;">padic</span> : the type of p-adic numbers</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">padic_norm_e</span> : the rational ralued p-adic norm on ℚ_p</li>
+</ul>
+<h2>Notation</h2>
+<p>We introduce the notation ℚ_[p] for the p-adic numbers.</p>
+<h2>Implementation notes</h2>
+<p>Much, but not all, of this file assumes that <span style="background-color:#fdf6e3;color:#657b83;">p</span> is prime. This assumption is inferred automatically
+by taking (prime p) as a type class argument.</p>
+<p>We use the same concrete Cauchy sequence construction that is used to construct ℝ. ℚ_p inherits a
+field structure from this construction. The extension of the norm on ℚ to ℚ_p is <em>not</em> analogous to
+extending the absolute value to ℝ, and hence the proof that ℚ_p is complete is different from the
+proof that ℝ is complete.</p>
+<p>A small special-purpose simplification tactic, <span style="background-color:#fdf6e3;color:#657b83;">padic_index_simp</span>, is used to manipulate sequence
+indices in the proof that the norm extends.</p>
+<p><span style="background-color:#fdf6e3;color:#657b83;">padic_norm_e</span> is the rational-valued p-adic norm on ℚ_p. To instantiate ℚ_p as a normed field, we
+must cast this into a ℝ-valued norm. The ℝ-valued norm, using notation ∥ ∥ from normed spaces, is
+the canonical representation of this norm.</p>
+<p>Coercions from ℚ to ℚ_p are set up to work with the <span style="background-color:#fdf6e3;color:#657b83;">norm_cast</span> tactic.</p>
+<h2>References</h2>
+<ul>
+<li>[F. Q. Gouêva, <em>p-adic numbers</em>][gouvea1997]</li>
+<li>[R. Y. Lewis, <em>A formal proof of Hensel's lemma over the p-adic integers</em>][lewis2019]</li>
+<li>https://en.wikipedia.org/wiki/P-adic_number</li>
+</ul>
+<h2>Tags</h2>
+<p>p-adic, p adic, padic, norm, valuation, cauchy, completion, p-adic completion</p>
+<hr/><div class="decl"><h4>padic_seq</h4><div class="decl_par"><p>The type of Cauchy sequences of rationals with respect to the p-adic norm.</p>
+</div></div><div class="decl"><h4>padic_seq.stationary</h4><div class="decl_par"><p>The p-adic norm of the entries of a nonzero Cauchy sequence of rationals is eventually
+constant.</p>
+</div></div><div class="decl"><h4>padic_seq.stationary_point</h4><div class="decl_par"><p>For all n ≥ stationary_point f hf, the p-adic norm of f n is the same.</p>
+</div></div><div class="decl"><h4>padic_seq.norm</h4><div class="decl_par"><p>Since the norm of the entries of a Cauchy sequence is eventually stationary, we can lift the norm
+to sequences.</p>
+</div></div><div class="decl"><h4>padic_seq.lift_index_left_left</h4><div class="decl_par"><p>An auxiliary lemma for manipulating sequence indices.</p>
+</div></div><div class="decl"><h4>padic_seq.lift_index_left</h4><div class="decl_par"><p>An auxiliary lemma for manipulating sequence indices.</p>
+</div></div><div class="decl"><h4>padic_seq.lift_index_right</h4><div class="decl_par"><p>An auxiliary lemma for manipulating sequence indices.</p>
+</div></div><div class="decl"><h4>tactic.interactive.padic_index_simp</h4><div class="decl_par"><p>This is a special-purpose tactic that lifts padic_norm (f (stationary_point f)) to
+padic_norm (f (max _ _ _)).</p>
+</div></div><div class="decl"><h4>padic</h4><div class="decl_par"><p>The p-adic numbers <span style="background-color:#fdf6e3;color:#657b83;">Q_[p]</span> are the Cauchy completion of <span style="background-color:#fdf6e3;color:#657b83;">ℚ</span> with respect to the p-adic norm.</p>
+</div></div><div class="decl"><h4>padic.discrete_field</h4><div class="decl_par"><p>The discrete field structure on ℚ_p is inherited from the Cauchy completion construction.</p>
+</div></div><div class="decl"><h4>padic.mk</h4><div class="decl_par"><p>Builds the equivalence class of a Cauchy sequence of rationals.</p>
+</div></div><div class="decl"><h4>padic.of_rat</h4><div class="decl_par"><p>Embeds the rational numbers in the p-adic numbers.</p>
+</div></div><div class="decl"><h4>padic_norm_e</h4><div class="decl_par"><p>The rational-valued p-adic norm on ℚ_p is lifted from the norm on Cauchy sequences. The
+canonical form of this function is the normed space instance, with notation <span style="background-color:#fdf6e3;color:#657b83;">∥ ∥</span>.</p>
+</div></div><div class="decl"><h4>padic_norm_e.one'</h4><div class="decl_par"><p>Theorems about <span style="background-color:#fdf6e3;color:#657b83;">padic_norm_e</span> are named with a <span style="background-color:#fdf6e3;color:#657b83;">&#39;</span> so the names do not conflict with the
+equivalent theorems about <span style="background-color:#fdf6e3;color:#657b83;">norm</span> (<span style="background-color:#fdf6e3;color:#657b83;">∥ ∥</span>).</p>
+</div></div><div class="decl"><h4>padic_norm_e.nonarchimedean'</h4><div class="decl_par"><p>Theorems about <span style="background-color:#fdf6e3;color:#657b83;">padic_norm_e</span> are named with a <span style="background-color:#fdf6e3;color:#657b83;">&#39;</span> so the names do not conflict with the
+equivalent theorems about <span style="background-color:#fdf6e3;color:#657b83;">norm</span> (<span style="background-color:#fdf6e3;color:#657b83;">∥ ∥</span>).</p>
+</div></div><div class="decl"><h4>padic_norm_e.add_eq_max_of_ne'</h4><div class="decl_par"><p>Theorems about <span style="background-color:#fdf6e3;color:#657b83;">padic_norm_e</span> are named with a <span style="background-color:#fdf6e3;color:#657b83;">&#39;</span> so the names do not conflict with the
+equivalent theorems about <span style="background-color:#fdf6e3;color:#657b83;">norm</span> (<span style="background-color:#fdf6e3;color:#657b83;">∥ ∥</span>).</p>
+</div></div></html>

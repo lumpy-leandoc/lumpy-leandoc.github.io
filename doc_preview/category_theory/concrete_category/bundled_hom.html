@@ -1,0 +1,11 @@
+<html><head><link rel="stylesheet" href="../../docs_style.css"></head><h1>Category instances for algebraic structures that use bundled homs.</h1>
+<p>Many algebraic structures in Lean initially used unbundled homs (e.g. a bare function between types,
+along with an <span style="background-color:#fdf6e3;color:#657b83;">is_monoid_hom</span> typeclass), but the general trend is towards using bundled homs.</p>
+<p>This file provides a basic infrastructure to define concrete categories using bundled homs, and
+define forgetful functors between them.</p>
+<hr/><div class="decl"><h4>category_theory.bundled_hom</h4><div class="decl_par"><p>Class for bundled homs. Note that the arguments order follows that of lemmas for <span style="background-color:#fdf6e3;color:#657b83;">monoid_hom</span>.
+This way we can use <span style="background-color:#fdf6e3;color:#657b83;">⟨</span><span style="background-color:#fdf6e3;color:#b58900;">@</span><span style="background-color:#fdf6e3;color:#657b83;">monoid_hom.to_fun, </span><span style="background-color:#fdf6e3;color:#b58900;">@</span><span style="background-color:#fdf6e3;color:#657b83;">monoid_hom.id ...⟩</span> in an instance.</p>
+</div></div><div class="decl"><h4>category_theory.bundled_hom.category_theory.category</h4><div class="decl_par"><p>Every <span style="background-color:#fdf6e3;color:#b58900;">@</span><span style="background-color:#fdf6e3;color:#657b83;">bundled_hom c _</span> defines a category with objects in <span style="background-color:#fdf6e3;color:#657b83;">bundled c</span>.</p>
+</div></div><div class="decl"><h4>category_theory.bundled_hom.concrete_category</h4><div class="decl_par"><p>A category given by <span style="background-color:#fdf6e3;color:#657b83;">bundled_hom</span> is a concrete category.</p>
+</div></div><div class="decl"><h4>category_theory.bundled_hom.mk_has_forget₂</h4><div class="decl_par"><p>A version of <span style="background-color:#fdf6e3;color:#657b83;">has_forget₂.mk&#39;</span> for categories defined using <span style="background-color:#fdf6e3;color:#b58900;">@</span><span style="background-color:#fdf6e3;color:#657b83;">bundled_hom</span>.</p>
+</div></div></html>

@@ -1,0 +1,74 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><div class="decl"><h4>bdd_above_of_bdd_above_of_monotone</h4><div class="decl_par"><p>The image under a monotone function of a set which is bounded above is bounded above</p>
+</div></div><div class="decl"><h4>bdd_below_of_bdd_below_of_monotone</h4><div class="decl_par"><p>The image under a monotone function of a set which is bounded below is bounded below</p>
+</div></div><div class="decl"><h4>bdd_above_top</h4><div class="decl_par"><p>When there is a global maximum, every set is bounded above.</p>
+</div></div><div class="decl"><h4>bdd_below_bot</h4><div class="decl_par"><p>When there is a global minimum, every set is bounded below.</p>
+</div></div><div class="decl"><h4>bdd_above_union</h4><div class="decl_par"><p>The union of two sets is bounded above if and only if each of the sets is.</p>
+</div></div><div class="decl"><h4>bdd_above_insert</h4><div class="decl_par"><p>Adding a point to a set preserves its boundedness above.</p>
+</div></div><div class="decl"><h4>bdd_above_finite</h4><div class="decl_par"><p>A finite set is bounded above.</p>
+</div></div><div class="decl"><h4>bdd_above_finite_union</h4><div class="decl_par"><p>A finite union of sets which are all bounded above is still bounded above.</p>
+</div></div><div class="decl"><h4>bdd_below_union</h4><div class="decl_par"><p>The union of two sets is bounded below if and only if each of the sets is.</p>
+</div></div><div class="decl"><h4>bdd_below_insert</h4><div class="decl_par"><p>Adding a point to a set preserves its boundedness below.</p>
+</div></div><div class="decl"><h4>bdd_below_finite</h4><div class="decl_par"><p>A finite set is bounded below.</p>
+</div></div><div class="decl"><h4>bdd_below_finite_union</h4><div class="decl_par"><p>A finite union of sets which are all bounded below is still bounded below.</p>
+</div></div><div class="decl"><h4>lattice.conditionally_complete_lattice</h4><div class="decl_par"><p>A conditionally complete lattice is a lattice in which
+every nonempty subset which is bounded above has a supremum, and
+every nonempty subset which is bounded below has an infimum.
+Typical examples are real numbers or natural numbers.</p>
+<p>To differentiate the statements from the corresponding statements in (unconditional)
+complete lattices, we prefix Inf and Sup by a c everywhere. The same statements should
+hold in both worlds, sometimes with additional assumptions of non-emptyness or
+boundedness.</p>
+</div></div><div class="decl"><h4>lattice.cSup_intro</h4><div class="decl_par"><p>Introduction rule to prove that b is the supremum of s: it suffices to check that b
+is larger than all elements of s, and that this is not the case of any w&lt;b.</p>
+</div></div><div class="decl"><h4>lattice.cInf_intro</h4><div class="decl_par"><p>Introduction rule to prove that b is the infimum of s: it suffices to check that b
+is smaller than all elements of s, and that this is not the case of any w&gt;b.</p>
+</div></div><div class="decl"><h4>lattice.cSup_of_mem_of_le</h4><div class="decl_par"><p>When an element a of a set s is larger than all elements of the set, it is Sup s</p>
+</div></div><div class="decl"><h4>lattice.cInf_of_mem_of_le</h4><div class="decl_par"><p>When an element a of a set s is smaller than all elements of the set, it is Inf s</p>
+</div></div><div class="decl"><h4>lattice.lt_cSup_of_lt</h4><div class="decl_par"><p>b &lt; Sup s when there is an element a in s with b &lt; a, when s is bounded above.
+This is essentially an iff, except that the assumptions for the two implications are
+slightly different (one needs boundedness above for one direction, nonemptyness and linear
+order for the other one), so we formulate separately the two implications, contrary to
+the complete_lattice case.</p>
+</div></div><div class="decl"><h4>lattice.cInf_lt_of_lt</h4><div class="decl_par"><p>Inf s &lt; b s when there is an element a in s with a &lt; b, when s is bounded below.
+This is essentially an iff, except that the assumptions for the two implications are
+slightly different (one needs boundedness below for one direction, nonemptyness and linear
+order for the other one), so we formulate separately the two implications, contrary to
+the complete_lattice case.</p>
+</div></div><div class="decl"><h4>lattice.cSup_singleton</h4><div class="decl_par"><p>The supremum of a singleton is the element of the singleton</p>
+</div></div><div class="decl"><h4>lattice.cInf_singleton</h4><div class="decl_par"><p>The infimum of a singleton is the element of the singleton</p>
+</div></div><div class="decl"><h4>lattice.cInf_le_cSup</h4><div class="decl_par"><p>If a set is bounded below and above, and nonempty, its infimum is less than or equal to
+its supremum.</p>
+</div></div><div class="decl"><h4>lattice.cSup_union</h4><div class="decl_par"><p>The sup of a union of sets is the max of the suprema of each subset, under the assumptions
+that all sets are bounded above and nonempty.</p>
+</div></div><div class="decl"><h4>lattice.cInf_union</h4><div class="decl_par"><p>The inf of a union of sets is the min of the infima of each subset, under the assumptions
+that all sets are bounded below and nonempty.</p>
+</div></div><div class="decl"><h4>lattice.cSup_inter_le</h4><div class="decl_par"><p>The supremum of an intersection of sets is bounded by the minimum of the suprema of each
+set, if all sets are bounded above and nonempty.</p>
+</div></div><div class="decl"><h4>lattice.le_cInf_inter</h4><div class="decl_par"><p>The infimum of an intersection of sets is bounded below by the maximum of the
+infima of each set, if all sets are bounded below and nonempty.</p>
+</div></div><div class="decl"><h4>lattice.cSup_insert</h4><div class="decl_par"><p>The supremum of insert a s is the maximum of a and the supremum of s, if s is
+nonempty and bounded above.</p>
+</div></div><div class="decl"><h4>lattice.cInf_insert</h4><div class="decl_par"><p>The infimum of insert a s is the minimum of a and the infimum of s, if s is
+nonempty and bounded below.</p>
+</div></div><div class="decl"><h4>lattice.csupr_le_csupr</h4><div class="decl_par"><p>The indexed supremum of two functions are comparable if the functions are pointwise comparable</p>
+</div></div><div class="decl"><h4>lattice.csupr_le</h4><div class="decl_par"><p>The indexed supremum of a function is bounded above by a uniform bound</p>
+</div></div><div class="decl"><h4>lattice.le_csupr</h4><div class="decl_par"><p>The indexed supremum of a function is bounded below by the value taken at one point</p>
+</div></div><div class="decl"><h4>lattice.cinfi_le_cinfi</h4><div class="decl_par"><p>The indexed infimum of two functions are comparable if the functions are pointwise comparable</p>
+</div></div><div class="decl"><h4>lattice.le_cinfi</h4><div class="decl_par"><p>The indexed minimum of a function is bounded below by a uniform lower bound</p>
+</div></div><div class="decl"><h4>lattice.cinfi_le</h4><div class="decl_par"><p>The indexed infimum of a function is bounded above by the value taken at one point</p>
+</div></div><div class="decl"><h4>lattice.exists_lt_of_lt_cSup</h4><div class="decl_par"><p>When b &lt; Sup s, there is an element a in s with b &lt; a, if s is nonempty and the order is
+a linear order.</p>
+</div></div><div class="decl"><h4>lattice.exists_lt_of_lt_csupr</h4><div class="decl_par"><p>Indexed version of the above lemma <span style="background-color:#fdf6e3;color:#657b83;">exists_lt_of_lt_cSup</span>.
+When <span style="background-color:#fdf6e3;color:#657b83;">b </span><span style="background-color:#fdf6e3;color:#b58900;">&lt;</span><span style="background-color:#fdf6e3;color:#657b83;"> supr f</span>, there is an element <span style="background-color:#fdf6e3;color:#657b83;">i</span> such that <span style="background-color:#fdf6e3;color:#657b83;">b </span><span style="background-color:#fdf6e3;color:#b58900;">&lt;</span><span style="background-color:#fdf6e3;color:#657b83;"> f i</span>.</p>
+</div></div><div class="decl"><h4>lattice.exists_lt_of_cInf_lt</h4><div class="decl_par"><p>When Inf s &lt; b, there is an element a in s with a &lt; b, if s is nonempty and the order is
+a linear order.</p>
+</div></div><div class="decl"><h4>lattice.exists_lt_of_cinfi_lt</h4><div class="decl_par"><p>Indexed version of the above lemma <span style="background-color:#fdf6e3;color:#657b83;">exists_lt_of_cInf_lt</span>
+When <span style="background-color:#fdf6e3;color:#657b83;">infi f </span><span style="background-color:#fdf6e3;color:#b58900;">&lt;</span><span style="background-color:#fdf6e3;color:#657b83;"> a</span>, there is an element <span style="background-color:#fdf6e3;color:#657b83;">i</span> such that <span style="background-color:#fdf6e3;color:#657b83;">f i </span><span style="background-color:#fdf6e3;color:#b58900;">&lt;</span><span style="background-color:#fdf6e3;color:#657b83;"> a</span>.</p>
+</div></div><div class="decl"><h4>lattice.cSup_intro'</h4><div class="decl_par"><p>Introduction rule to prove that b is the supremum of s: it suffices to check that</p>
+<ol>
+<li>b is an upper bound</li>
+<li>every other upper bound b' satisfies b ≤ b'.</li>
+</ol>
+</div></div><div class="decl"><h4>lattice.lattice.lattice</h4><div class="decl_par"><p>This instance is necessary, otherwise the lattice operations would be derived via
+conditionally_complete_linear_order_bot and marked as noncomputable.</p>
+</div></div></html>

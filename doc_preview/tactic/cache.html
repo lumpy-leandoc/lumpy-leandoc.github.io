@@ -1,0 +1,18 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><div class="decl"><h4>tactic.reset_instance_cache</h4><div class="decl_par"><p>Reset the instance cache for the main goal.</p>
+</div></div><div class="decl"><h4>tactic.interactive.unfreezeI</h4><div class="decl_par"><p>Unfreeze local instances, which allows us to revert
+instances in the context.</p>
+</div></div><div class="decl"><h4>tactic.interactive.resetI</h4><div class="decl_par"><p>Reset the instance cache. This allows any new instances
+added to the context to be used in typeclass inference.</p>
+</div></div><div class="decl"><h4>tactic.interactive.introI</h4><div class="decl_par"><p>Like <span style="background-color:#fdf6e3;color:#657b83;">intro</span>, but uses the introduced variable
+in typeclass inference.</p>
+</div></div><div class="decl"><h4>tactic.interactive.introsI</h4><div class="decl_par"><p>Like <span style="background-color:#fdf6e3;color:#657b83;">intros</span>, but uses the introduced variable(s)
+in typeclass inference.</p>
+</div></div><div class="decl"><h4>tactic.interactive.haveI</h4><div class="decl_par"><p>Used to add typeclasses to the context so that they can
+be used in typeclass inference. The syntax is the same as <span style="background-color:#fdf6e3;color:#859900;">have</span>,
+but the proof-omitted version is not supported. For
+this one must write <span style="background-color:#fdf6e3;color:#859900;">have</span><span style="background-color:#fdf6e3;color:#657b83;"> : t, { </span><span style="background-color:#fdf6e3;color:#b58900;">&lt;</span><span style="background-color:#fdf6e3;color:#657b83;">proof</span><span style="background-color:#fdf6e3;color:#b58900;">&gt;</span><span style="background-color:#fdf6e3;color:#657b83;"> }, resetI, </span><span style="background-color:#fdf6e3;color:#b58900;">&lt;</span><span style="background-color:#fdf6e3;color:#657b83;">proof</span><span style="background-color:#fdf6e3;color:#b58900;">&gt;</span>.</p>
+</div></div><div class="decl"><h4>tactic.interactive.letI</h4><div class="decl_par"><p>Used to add typeclasses to the context so that they can
+be used in typeclass inference. The syntax is the same as <span style="background-color:#fdf6e3;color:#859900;">let</span>.</p>
+</div></div><div class="decl"><h4>tactic.interactive.exactI</h4><div class="decl_par"><p>Like <span style="background-color:#fdf6e3;color:#657b83;">exact</span>, but uses all variables in the context
+for typeclass inference.</p>
+</div></div></html>

@@ -1,0 +1,17 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><div class="decl"><h4>unique_factorization_domain</h4><div class="decl_par"><p>Unique factorization domains.</p>
+<p>In a unique factorization domain each element (except zero) is uniquely
+represented as a multiset of irreducible factors.
+Uniqueness is only up to associated elements.</p>
+<p>This is equivalent to defining a unique factorization domain as a domain in
+which each element (except zero) is non-uniquely represented as a multiset
+of prime factors. This definition is used.</p>
+<p>To define a UFD using the traditional definition in terms of multisets
+of irreducible factors, use the definition <span style="background-color:#fdf6e3;color:#657b83;">of_unique_irreducible_factorization</span></p>
+</div></div><div class="decl"><h4>associates.factor_set</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">factor_set α</span> representation elements of unique factorization domain as multisets.</p>
+<p><span style="background-color:#fdf6e3;color:#657b83;">multiset α</span> produced by <span style="background-color:#fdf6e3;color:#657b83;">factors</span> are only unique up to associated elements, while the multisets in
+<span style="background-color:#fdf6e3;color:#657b83;">factor_set α</span> are unqiue by equality and restricted to irreducible elements. This gives us a
+representation of each element as a unique multisets (or the added ⊤ for 0), which has a complete
+lattice struture. Infimum is the greatest common divisor and supremum is the least common multiple.</p>
+</div></div><div class="decl"><h4>unique_factorization_domain.to_gcd_domain</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">to_gcd_domain</span> constructs a GCD domain out of a unique factorization domain over a normalization
+domain.</p>
+</div></div></html>

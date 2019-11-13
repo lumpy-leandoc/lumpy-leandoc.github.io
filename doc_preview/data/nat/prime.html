@@ -1,0 +1,16 @@
+<html><head><link rel="stylesheet" href="../../docs_style.css"></head><div class="decl"><h4>nat.prime</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">prime p</span> means that <span style="background-color:#fdf6e3;color:#657b83;">p</span> is a prime number, that is, a natural number
+at least 2 whose only divisors are <span style="background-color:#fdf6e3;color:#657b83;">p</span> and <span style="background-color:#fdf6e3;color:#6c71c4;">1</span>.</p>
+</div></div><div class="decl"><h4>nat.decidable_prime_1</h4><div class="decl_par"><p>This instance is slower than the instance <span style="background-color:#fdf6e3;color:#657b83;">decidable_prime</span> defined below,
+but has the advantage that it works in the kernel.</p>
+<p>If you need to prove that a particular number is prime, in any case
+you should not use <span style="background-color:#fdf6e3;color:#657b83;">dec_trivial</span>, but rather <span style="background-color:#fdf6e3;color:#859900;">by</span><span style="background-color:#fdf6e3;color:#657b83;"> norm_num</span>, which is
+much faster.</p>
+</div></div><div class="decl"><h4>nat.min_fac</h4><div class="decl_par"><p>Returns the smallest prime factor of <span style="background-color:#fdf6e3;color:#657b83;">n </span><span style="background-color:#fdf6e3;color:#b58900;">≠ </span><span style="background-color:#fdf6e3;color:#6c71c4;">1</span>.</p>
+</div></div><div class="decl"><h4>nat.decidable_prime</h4><div class="decl_par"><p>This instance is faster in the virtual machine than <span style="background-color:#fdf6e3;color:#657b83;">decidable_prime_1</span>,
+but slower in the kernel.</p>
+<p>If you need to prove that a particular number is prime, in any case
+you should not use <span style="background-color:#fdf6e3;color:#657b83;">dec_trivial</span>, but rather <span style="background-color:#fdf6e3;color:#859900;">by</span><span style="background-color:#fdf6e3;color:#657b83;"> norm_num</span>, which is
+much faster.</p>
+</div></div><div class="decl"><h4>nat.factors</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">factors n</span> is the prime factorization of <span style="background-color:#fdf6e3;color:#657b83;">n</span>, listed in increasing order.</p>
+</div></div><div class="decl"><h4>nat.primes</h4><div class="decl_par"><p>The type of prime numbers</p>
+</div></div></html>

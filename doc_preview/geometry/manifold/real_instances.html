@@ -1,0 +1,36 @@
+<html><head><link rel="stylesheet" href="../../docs_style.css"></head><h1>Constructing examples of manifolds over ℝ</h1>
+<p>We introduce the necessary bits to be able to define manifolds modelled over ℝ^n, boundaryless
+or with boundary or with corners. As a concrete example, we construct explicitly the manifold with
+boundary structure on the real interval [x, y].</p>
+<p>More specifically, we introduce</p>
+<ul>
+<li><span style="background-color:#fdf6e3;color:#657b83;">euclidean_space n</span> for a model vector space of dimension <span style="background-color:#fdf6e3;color:#657b83;">n</span>.</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">model_with_corners ℝ (euclidean_space n) (euclidean_half_space n)</span> for the model space used
+to define <span style="background-color:#fdf6e3;color:#657b83;">n</span>-dimensional real manifolds with boundary</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">model_with_corners ℝ (euclidean_space n) (euclidean_quadrant n)</span> for the model space used
+to define <span style="background-color:#fdf6e3;color:#657b83;">n</span>-dimensional real manifolds with corners</li>
+</ul>
+<h2>Implementation notes</h2>
+<p>The manifold structure on the interval [x, y] = Icc x y requires the assumption <span style="background-color:#fdf6e3;color:#657b83;">x </span><span style="background-color:#fdf6e3;color:#b58900;">&lt;</span><span style="background-color:#fdf6e3;color:#657b83;"> y</span>. We
+introduce a dummy class <span style="background-color:#fdf6e3;color:#657b83;">lt_class x y</span> for this, to make such an assumption available to typeclass
+search. This should hopefully not be necessary any more in Lean 4.</p>
+<hr/><div class="decl"><h4>euclidean_space</h4><div class="decl_par"><p>The space ℝ^n. Note that the name is slightly misleading, as we only need a normed space
+structure on ℝ^n, but the one we use here is the sup norm and not the euclidean one -- this is not
+a problem for the manifold applications, but should probably be refactored at some point.</p>
+</div></div><div class="decl"><h4>euclidean_half_space</h4><div class="decl_par"><p>The half-space in ℝ^n, used to model manifolds with boundary. We only define it when <span style="background-color:#fdf6e3;color:#6c71c4;">1 </span><span style="background-color:#fdf6e3;color:#b58900;">≤</span><span style="background-color:#fdf6e3;color:#657b83;"> n</span>, as the
+definition only makes sense in this case.</p>
+</div></div><div class="decl"><h4>euclidean_quadrant</h4><div class="decl_par"><p>The quadrant in ℝ^n, used to model manifolds with corners, made of all vectors with nonnegative
+coordinates.</p>
+</div></div><div class="decl"><h4>model_with_corners_euclidean_half_space</h4><div class="decl_par"><p>Definition of the model with corners (euclidean_space n, euclidean_half_space n), used as a
+model for manifolds with boundary.</p>
+</div></div><div class="decl"><h4>model_with_corners_euclidean_quadrant</h4><div class="decl_par"><p>Definition of the model with corners (euclidean_space n, euclidean_quadrant n), used as a
+model for manifolds with corners</p>
+</div></div><div class="decl"><h4>lt_class</h4><div class="decl_par"><p>Dummy class to make an assumption such as <span style="background-color:#fdf6e3;color:#657b83;">x </span><span style="background-color:#fdf6e3;color:#b58900;">&lt;</span><span style="background-color:#fdf6e3;color:#657b83;"> y</span> available to typeclass search. Such an
+assumption is used to define a manifold structure on [x, y] when <span style="background-color:#fdf6e3;color:#657b83;">x </span><span style="background-color:#fdf6e3;color:#b58900;">&lt;</span><span style="background-color:#fdf6e3;color:#657b83;"> y</span>. Should be fixed in Lean 4.</p>
+</div></div><div class="decl"><h4>Icc_left_chart</h4><div class="decl_par"><p>The left chart for the topological space [x, y], defined on [x,y) and sending x to 0 in
+<span style="background-color:#fdf6e3;color:#657b83;">euclidean_half_space </span><span style="background-color:#fdf6e3;color:#6c71c4;">1</span>.</p>
+</div></div><div class="decl"><h4>Icc_right_chart</h4><div class="decl_par"><p>The right chart for the topological space [x, y], defined on (x,y] and sending y to 0 in
+<span style="background-color:#fdf6e3;color:#657b83;">euclidean_half_space </span><span style="background-color:#fdf6e3;color:#6c71c4;">1</span>.</p>
+</div></div><div class="decl"><h4>Icc_manifold</h4><div class="decl_par"><p>Manifold with boundary structure on [x, y], using only two charts.</p>
+</div></div><div class="decl"><h4>Icc_smooth_manifold</h4><div class="decl_par"><p>The manifold structure on [x, y] is smooth.</p>
+</div></div></html>

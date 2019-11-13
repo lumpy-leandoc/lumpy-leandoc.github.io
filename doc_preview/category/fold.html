@@ -1,0 +1,37 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><div class="decl"><h4>monoid.foldl</h4><div class="decl_par"><p>For a list, foldl f x [y₀,y₁] reduces as follows
+calc  foldl f x [y₀,y₁]
+= foldl f (f x y₀) [y₁]      : rfl
+... = foldl f (f (f x y₀) y₁) [] : rfl
+... = f (f x y₀) y₁              : rfl</p>
+<p>with f : α → β → α
+x : α
+[y₀,y₁] : list β</p>
+<p>We can view the above as a composition of functions:</p>
+<p>... = f (f x y₀) y₁              : rfl
+... = flip f y₁ (flip f y₀ x)    : rfl
+... = (flip f y₁ ∘ flip f y₀) x  : rfl</p>
+<p>We can use traverse and const to construct this composition:</p>
+<p>calc   const.run (traverse (λ y, const.mk' (flip f y)) [y₀,y₁]) x
+= const.run ((::) &lt;$&gt; const.mk' (flip f y₀) &lt;<em>&gt; traverse (λ y, const.mk' (flip f y)) [y₁]) x
+...  = const.run ((::) &lt;$&gt; const.mk' (flip f y₀) &lt;</em>&gt; ( (::) &lt;$&gt; const.mk' (flip f y₁) &lt;<em>&gt; traverse (λ y, const.mk' (flip f y)) [] )) x
+...  = const.run ((::) &lt;$&gt; const.mk' (flip f y₀) &lt;</em>&gt; ( (::) &lt;$&gt; const.mk' (flip f y₁) &lt;<em>&gt; pure [] )) x
+...  = const.run ( ((::) &lt;$&gt; const.mk' (flip f y₁) &lt;</em>&gt; pure []) ∘ ((::) &lt;$&gt; const.mk' (flip f y₀)) ) x
+...  = const.run ( const.mk' (flip f y₁) ∘ const.mk' (flip f y₀) ) x
+...  = const.run ( flip f y₁ ∘ flip f y₀ ) x
+...  = f (f x y₀) y₁</p>
+<p>And this is how <span style="background-color:#fdf6e3;color:#657b83;">const</span> turns a monoid into an applicative functor and
+how the monoid of endofunctions define <span style="background-color:#fdf6e3;color:#657b83;">foldl</span>.</p>
+</div></div><div class="decl"><h4>traversable.to_list</h4><div class="decl_par"><p>Conceptually, <span style="background-color:#fdf6e3;color:#657b83;">to_list</span> collects all the elements of a collection
+in a list. This idea is formalized by</p>
+<p><span style="background-color:#fdf6e3;color:#859900;">lemma </span><span style="background-color:#fdf6e3;color:#d33682;">to_list_spec </span><span style="background-color:#fdf6e3;color:#657b83;">(x : t α) : to_list x </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> fold_map free_monoid.mk x</span>.</p>
+<p>The definition of <span style="background-color:#fdf6e3;color:#657b83;">to_list</span> is based on <span style="background-color:#fdf6e3;color:#657b83;">foldl</span> and <span style="background-color:#fdf6e3;color:#657b83;">list.cons</span> for
+speed. It is faster than using <span style="background-color:#fdf6e3;color:#657b83;">fold_map free_monoid.mk</span> because, by
+using <span style="background-color:#fdf6e3;color:#657b83;">foldl</span> and <span style="background-color:#fdf6e3;color:#657b83;">list.cons</span>, each insertion is done in constant
+time. As a consequence, <span style="background-color:#fdf6e3;color:#657b83;">to_list</span> performs in linear.</p>
+<p>On the other hand, <span style="background-color:#fdf6e3;color:#657b83;">fold_map free_monoid.mk</span> creates a singleton list
+around each element and concatenates all the resulting lists. In
+<span style="background-color:#fdf6e3;color:#657b83;">xs </span><span style="background-color:#fdf6e3;color:#b58900;">++</span><span style="background-color:#fdf6e3;color:#657b83;"> ys</span>, concatenation takes a time proportional to <span style="background-color:#fdf6e3;color:#657b83;">length xs</span>. Since
+the order in which concatenation is evaluated is unspecified, nothing
+prevents each element of the traversable to be appended at the end
+<span style="background-color:#fdf6e3;color:#657b83;">xs </span><span style="background-color:#fdf6e3;color:#b58900;">++</span><span style="background-color:#fdf6e3;color:#657b83;"> [x]</span> which would yield a <span style="background-color:#fdf6e3;color:#657b83;">O(n²)</span> run time.</p>
+</div></div></html>

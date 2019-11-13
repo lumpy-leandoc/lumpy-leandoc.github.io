@@ -1,0 +1,13 @@
+<html><head><link rel="stylesheet" href="../../docs_style.css"></head><div class="decl"><h4>tactic.all_rewrites</h4><div class="decl_par"><p>return a lazy list of (t, n, k) where</p>
+<ul>
+<li><span style="background-color:#fdf6e3;color:#657b83;">t</span> is a <span style="background-color:#fdf6e3;color:#657b83;">tracked_rewrite</span> (i.e. a pair <span style="background-color:#fdf6e3;color:#657b83;">(e&#39; : expr, prf : e </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> e&#39;)</span>)</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">n</span> is the index of the rule <span style="background-color:#fdf6e3;color:#657b83;">r</span> used from <span style="background-color:#fdf6e3;color:#657b83;">rs</span>, and</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">k</span> is the index of <span style="background-color:#fdf6e3;color:#657b83;">t</span> in <span style="background-color:#fdf6e3;color:#657b83;">all_rewrites r e</span>.</li>
+</ul>
+</div></div><div class="decl"><h4>tactic.interactive.perform_nth_rewrite</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">perform_nth_write n rules</span> performs only the <span style="background-color:#fdf6e3;color:#657b83;">n</span>th possible rewrite using the <span style="background-color:#fdf6e3;color:#657b83;">rules</span>.</p>
+<p>The core <span style="background-color:#fdf6e3;color:#657b83;">rewrite</span> has a <span style="background-color:#fdf6e3;color:#657b83;">occs</span> configuration setting intended to achieve a similar
+purpose, but this doesn't really work. (If a rule matches twice, but with different
+values of arguments, the second match will not be identified.)</p>
+</div></div><div class="decl"><h4>tactic.interactive.nth_rewrite_lhs</h4><div class="decl_par"><p>As for <span style="background-color:#fdf6e3;color:#657b83;">perform_nth_rewrite</span>, but only working on the left hand side.</p>
+</div></div><div class="decl"><h4>tactic.interactive.nth_rewrite_rhs</h4><div class="decl_par"><p>As for <span style="background-color:#fdf6e3;color:#657b83;">perform_nth_rewrite</span>, but only working on the right hand side.</p>
+</div></div></html>

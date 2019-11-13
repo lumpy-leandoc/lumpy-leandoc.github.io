@@ -1,0 +1,31 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><h1>Basic properties of holors</h1>
+<p>Holors are indexed collections of tensor coefficients. Confusingly,
+they are often called tensors in physics and in the neural network
+community.</p>
+<p>A holor is simply a multidimensional array of values. The size of a
+holor is specified by a <span style="background-color:#fdf6e3;color:#657b83;">list ℕ</span>, whose length is called the dimension
+of the holor.</p>
+<p>The tensor product of <span style="background-color:#fdf6e3;color:#657b83;">x₁ : holor α ds₁</span> and <span style="background-color:#fdf6e3;color:#657b83;">x₂ : holor α ds₂</span> is the
+holor given by <span style="background-color:#fdf6e3;color:#657b83;">(x₁ ⊗ x₂) (i₁ </span><span style="background-color:#fdf6e3;color:#b58900;">++</span><span style="background-color:#fdf6e3;color:#657b83;"> i₂) </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> x₁ i₁ </span><span style="background-color:#fdf6e3;color:#b58900;">*</span><span style="background-color:#fdf6e3;color:#657b83;"> x₂ i₂</span>. A holor is &quot;of
+rank at most 1&quot; if it is a tensor product of one-dimensional holors.
+The CP rank of a holor <span style="background-color:#fdf6e3;color:#657b83;">x</span> is the smallest N such that <span style="background-color:#fdf6e3;color:#657b83;">x</span> is the sum
+of N holors of rank at most 1.</p>
+<p>Based on the tensor library found in https://www.isa-afp.org/entries/Deep_Learning.html.</p>
+<h2>References</h2>
+<ul>
+<li>https://en.wikipedia.org/wiki/Tensor_rank_decomposition</li>
+</ul>
+<hr/><div class="decl"><h4>holor_index</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">holor_index ds</span> is the type of valid index tuples to identify an entry of a holor of dimensions <span style="background-color:#fdf6e3;color:#657b83;">ds</span></p>
+</div></div><div class="decl"><h4>holor</h4><div class="decl_par"><p>Holor (indexed collections of tensor coefficients)</p>
+</div></div><div class="decl"><h4>holor.mul</h4><div class="decl_par"><p>The tensor product of two holors.</p>
+</div></div><div class="decl"><h4>holor.slice</h4><div class="decl_par"><p>A slice is a subholor consisting of all entries with initial index i.</p>
+</div></div><div class="decl"><h4>holor.unit_vec</h4><div class="decl_par"><p>The 1-dimensional &quot;unit&quot; holor with 1 in the <span style="background-color:#fdf6e3;color:#657b83;">j</span>th position.</p>
+</div></div><div class="decl"><h4>holor.slice_eq</h4><div class="decl_par"><p>Two holors are equal if all their slices are equal.</p>
+</div></div><div class="decl"><h4>holor.sum_unit_vec_mul_slice</h4><div class="decl_par"><p>The original holor can be recovered from its slices by multiplying with unit vectors and summing up.</p>
+</div></div><div class="decl"><h4>holor.cprank_max1</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">cprank_max1 x</span> means <span style="background-color:#fdf6e3;color:#657b83;">x</span> has CP rank at most 1, that is,
+it is the tensor product of 1-dimensional holors.</p>
+</div></div><div class="decl"><h4>holor.cprank_max</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">cprank_max N x</span> means <span style="background-color:#fdf6e3;color:#657b83;">x</span> has CP rank at most <span style="background-color:#fdf6e3;color:#657b83;">N</span>, that is,
+it can be written as the sum of N holors of rank at most 1.</p>
+</div></div><div class="decl"><h4>holor.cprank</h4><div class="decl_par"><p>The CP rank of a holor <span style="background-color:#fdf6e3;color:#657b83;">x</span>: the smallest N such that
+<span style="background-color:#fdf6e3;color:#657b83;">x</span> can be written as the sum of N holors of rank at most 1.</p>
+</div></div></html>

@@ -1,0 +1,15 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><h1>Presheafed spaces</h1>
+<p>Introduces the category of topological spaces equipped with a presheaf (taking values in an
+arbitrary target category <span style="background-color:#fdf6e3;color:#657b83;">C</span>.)</p>
+<p>We further describe how to apply functors and natural transformations to the values of the
+presheaves.</p>
+<hr/><div class="decl"><h4>algebraic_geometry.PresheafedSpace</h4><div class="decl_par"><p>A <span style="background-color:#fdf6e3;color:#657b83;">PresheafedSpace C</span> is a topological space equipped with a presheaf of <span style="background-color:#fdf6e3;color:#657b83;">C</span>s.</p>
+</div></div><div class="decl"><h4>algebraic_geometry.PresheafedSpace.hom</h4><div class="decl_par"><p>A morphism between presheafed spaces <span style="background-color:#fdf6e3;color:#657b83;">X</span> and <span style="background-color:#fdf6e3;color:#657b83;">Y</span> consists of a continuous map
+<span style="background-color:#fdf6e3;color:#657b83;">f</span> between the underlying topological spaces, and a (notice contravariant!) map
+from the presheaf on <span style="background-color:#fdf6e3;color:#657b83;">Y</span> to the pushforward of the presheaf on <span style="background-color:#fdf6e3;color:#657b83;">X</span> via <span style="background-color:#fdf6e3;color:#657b83;">f</span>.</p>
+</div></div><div class="decl"><h4>algebraic_geometry.PresheafedSpace.category_of_PresheafedSpaces</h4><div class="decl_par"><p>The category of PresheafedSpaces. Morphisms are pairs, a continuous map and a presheaf map
+from the presheaf on the target to the pushforward of the presheaf on the source.</p>
+</div></div><div class="decl"><h4>algebraic_geometry.PresheafedSpace.forget</h4><div class="decl_par"><p>The forgetful functor from <span style="background-color:#fdf6e3;color:#657b83;">PresheafedSpace</span> to <span style="background-color:#fdf6e3;color:#657b83;">Top</span>.</p>
+</div></div><div class="decl"><h4>category_theory.functor.map_presheaf</h4><div class="decl_par"><p>We can apply a functor <span style="background-color:#fdf6e3;color:#657b83;">F : C ⥤ D</span> to the values of the presheaf in any <span style="background-color:#fdf6e3;color:#657b83;">PresheafedSpace C</span>,
+giving a functor <span style="background-color:#fdf6e3;color:#657b83;">PresheafedSpace C ⥤ PresheafedSpace D</span></p>
+</div></div></html>

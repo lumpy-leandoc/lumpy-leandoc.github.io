@@ -1,0 +1,32 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><div class="decl"><h4>bucket_array</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">bucket_array α β</span> is the underlying data type for <span style="background-color:#fdf6e3;color:#657b83;">hash_map α β</span>,
+an array of linked lists of key-value pairs.</p>
+</div></div><div class="decl"><h4>hash_map.mk_idx</h4><div class="decl_par"><p>Make a hash_map index from a <span style="background-color:#fdf6e3;color:#657b83;">nat</span> hash value and a (positive) buffer size</p>
+</div></div><div class="decl"><h4>bucket_array.read</h4><div class="decl_par"><p>Read the bucket corresponding to an element</p>
+</div></div><div class="decl"><h4>bucket_array.write</h4><div class="decl_par"><p>Write the bucket corresponding to an element</p>
+</div></div><div class="decl"><h4>bucket_array.modify</h4><div class="decl_par"><p>Modify (read, apply <span style="background-color:#fdf6e3;color:#657b83;">f</span>, and write) the bucket corresponding to an element</p>
+</div></div><div class="decl"><h4>bucket_array.as_list</h4><div class="decl_par"><p>The list of all key-value pairs in the bucket list</p>
+</div></div><div class="decl"><h4>bucket_array.foldl</h4><div class="decl_par"><p>Fold a function <span style="background-color:#fdf6e3;color:#657b83;">f</span> over the key-value pairs in the bucket list</p>
+</div></div><div class="decl"><h4>hash_map.reinsert_aux</h4><div class="decl_par"><p>Insert the pair <span style="background-color:#fdf6e3;color:#657b83;">⟨a, b⟩</span> into the correct location in the bucket array
+(without checking for duplication)</p>
+</div></div><div class="decl"><h4>hash_map.find_aux</h4><div class="decl_par"><p>Search a bucket for a key <span style="background-color:#fdf6e3;color:#657b83;">a</span> and return the value</p>
+</div></div><div class="decl"><h4>hash_map.contains_aux</h4><div class="decl_par"><p>Returns <span style="background-color:#fdf6e3;color:#657b83;">tt</span> if the bucket <span style="background-color:#fdf6e3;color:#657b83;">l</span> contains the key <span style="background-color:#fdf6e3;color:#657b83;">a</span></p>
+</div></div><div class="decl"><h4>hash_map.replace_aux</h4><div class="decl_par"><p>Modify a bucket to replace a value in the list. Leaves the list
+unchanged if the key is not found.</p>
+</div></div><div class="decl"><h4>hash_map.erase_aux</h4><div class="decl_par"><p>Modify a bucket to remove a key, if it exists.</p>
+</div></div><div class="decl"><h4>hash_map.valid</h4><div class="decl_par"><p>The predicate <span style="background-color:#fdf6e3;color:#657b83;">valid bkts sz</span> means that <span style="background-color:#fdf6e3;color:#657b83;">bkts</span> satisfies the <span style="background-color:#fdf6e3;color:#657b83;">hash_map</span>
+invariants: There are exactly <span style="background-color:#fdf6e3;color:#657b83;">sz</span> elements in it, every pair is in the
+bucket determined by its key and the hash function, and no key appears
+multiple times in the list.</p>
+</div></div><div class="decl"><h4>hash_map</h4><div class="decl_par"><p>A hash map data structure, representing a finite key-value map
+with key type <span style="background-color:#fdf6e3;color:#657b83;">α</span> and value type <span style="background-color:#fdf6e3;color:#657b83;">β</span> (which may depend on <span style="background-color:#fdf6e3;color:#657b83;">α</span>).</p>
+</div></div><div class="decl"><h4>mk_hash_map</h4><div class="decl_par"><p>Construct an empty hash map with buffer size <span style="background-color:#fdf6e3;color:#657b83;">nbuckets</span> (default 8).</p>
+</div></div><div class="decl"><h4>hash_map.find</h4><div class="decl_par"><p>Return the value corresponding to a key, or <span style="background-color:#fdf6e3;color:#657b83;">none</span> if not found</p>
+</div></div><div class="decl"><h4>hash_map.contains</h4><div class="decl_par"><p>Return <span style="background-color:#fdf6e3;color:#657b83;">tt</span> if the key exists in the map</p>
+</div></div><div class="decl"><h4>hash_map.fold</h4><div class="decl_par"><p>Fold a function over the key-value pairs in the map</p>
+</div></div><div class="decl"><h4>hash_map.entries</h4><div class="decl_par"><p>The list of key-value pairs in the map</p>
+</div></div><div class="decl"><h4>hash_map.keys</h4><div class="decl_par"><p>The list of keys in the map</p>
+</div></div><div class="decl"><h4>hash_map.insert</h4><div class="decl_par"><p>Insert a key-value pair into the map. (Modifies <span style="background-color:#fdf6e3;color:#657b83;">m</span> in-place when applicable)</p>
+</div></div><div class="decl"><h4>hash_map.insert_all</h4><div class="decl_par"><p>Insert a list of key-value pairs into the map. (Modifies <span style="background-color:#fdf6e3;color:#657b83;">m</span> in-place when applicable)</p>
+</div></div><div class="decl"><h4>hash_map.of_list</h4><div class="decl_par"><p>Construct a hash map from a list of key-value pairs.</p>
+</div></div><div class="decl"><h4>hash_map.erase</h4><div class="decl_par"><p>Remove a key from the map. (Modifies <span style="background-color:#fdf6e3;color:#657b83;">m</span> in-place when applicable)</p>
+</div></div></html>

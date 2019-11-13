@@ -1,0 +1,48 @@
+<html><head><link rel="stylesheet" href="../../docs_style.css"></head><h1>Inner Product Space</h1>
+<p>This file defines real inner product space and proves its basic properties.</p>
+<p>An inner product space is a vector space endowed with an inner product. It generalizes the notion of
+dot product in <span style="background-color:#fdf6e3;color:#657b83;">ℝ^n</span> and provides the means of defining the length of a vector and the angle between
+two vectors. In particular vectors <span style="background-color:#fdf6e3;color:#657b83;">x</span> and <span style="background-color:#fdf6e3;color:#657b83;">y</span> are orthogonal if their inner product equals zero.</p>
+<h2>Main statements</h2>
+<p>Existence of orthogonal projection onto nonempty complete subspace:
+Let <span style="background-color:#fdf6e3;color:#657b83;">u</span> be a point in an inner product space, and let <span style="background-color:#fdf6e3;color:#657b83;">K</span> be a nonempty complete subspace.
+Then there exists a unique <span style="background-color:#fdf6e3;color:#657b83;">v</span> in <span style="background-color:#fdf6e3;color:#657b83;">K</span> that minimizes the distance <span style="background-color:#fdf6e3;color:#657b83;">∥u </span><span style="background-color:#fdf6e3;color:#b58900;">-</span><span style="background-color:#fdf6e3;color:#657b83;"> v∥</span> to <span style="background-color:#fdf6e3;color:#657b83;">u</span>.
+The point <span style="background-color:#fdf6e3;color:#657b83;">v</span> is usually called the orthogonal projection of <span style="background-color:#fdf6e3;color:#657b83;">u</span> onto <span style="background-color:#fdf6e3;color:#657b83;">K</span>.</p>
+<h2>Implementation notes</h2>
+<p>We decide to develop the theory of real inner product spaces and that of complex inner product
+spaces separately.</p>
+<h2>Tags</h2>
+<p>inner product space, norm, orthogonal projection</p>
+<h2>References</h2>
+<ul>
+<li>[Clément &amp; Martin, <em>The Lax-Milgram Theorem. A detailed proof to be formalized in Coq</em>]</li>
+<li>[Clément &amp; Martin, <em>A Coq formal proof of the Lax–Milgram theorem</em>]</li>
+</ul>
+<p>The Coq code is available at the following address: http://www.lri.fr/~sboldo/elfic/index.html</p>
+<hr/><div class="decl"><h4>inner_product_space</h4><div class="decl_par"><p>An inner product space is a real vector space with an additional operation called inner product.
+Inner product spaces over complex vector space will be defined in another file.</p>
+</div></div><div class="decl"><h4>inner_add_add_self</h4><div class="decl_par"><p>Expand <span style="background-color:#fdf6e3;color:#657b83;">inner (x </span><span style="background-color:#fdf6e3;color:#b58900;">+</span><span style="background-color:#fdf6e3;color:#657b83;"> y) (x </span><span style="background-color:#fdf6e3;color:#b58900;">+</span><span style="background-color:#fdf6e3;color:#657b83;"> y)</span></p>
+</div></div><div class="decl"><h4>inner_sub_sub_self</h4><div class="decl_par"><p>Expand <span style="background-color:#fdf6e3;color:#657b83;">inner (x </span><span style="background-color:#fdf6e3;color:#b58900;">-</span><span style="background-color:#fdf6e3;color:#657b83;"> y) (x </span><span style="background-color:#fdf6e3;color:#b58900;">-</span><span style="background-color:#fdf6e3;color:#657b83;"> y)</span></p>
+</div></div><div class="decl"><h4>parallelogram_law</h4><div class="decl_par"><p>Parallelogram law</p>
+</div></div><div class="decl"><h4>inner_mul_inner_self_le</h4><div class="decl_par"><p>Cauchy–Schwarz inequality</p>
+</div></div><div class="decl"><h4>inner_product_space_has_norm</h4><div class="decl_par"><p>An inner product naturally induces a norm.</p>
+</div></div><div class="decl"><h4>norm_add_pow_two</h4><div class="decl_par"><p>Expand the square</p>
+</div></div><div class="decl"><h4>norm_add_mul_self</h4><div class="decl_par"><p>Same lemma as above but in a different form</p>
+</div></div><div class="decl"><h4>norm_sub_pow_two</h4><div class="decl_par"><p>Expand the square</p>
+</div></div><div class="decl"><h4>norm_sub_mul_self</h4><div class="decl_par"><p>Same lemma as above but in a different form</p>
+</div></div><div class="decl"><h4>abs_inner_le_norm</h4><div class="decl_par"><p>Cauchy–Schwarz inequality with norm</p>
+</div></div><div class="decl"><h4>inner_product_space_is_normed_group</h4><div class="decl_par"><p>An inner product space forms a normed group w.r.t. its associated norm.</p>
+</div></div><div class="decl"><h4>inner_product_space_is_normed_space</h4><div class="decl_par"><p>An inner product space forms a normed space over reals w.r.t. its associated norm.</p>
+</div></div><div class="decl"><h4>exists_norm_eq_infi_of_complete_convex</h4><div class="decl_par"><p>Existence of minimizers
+Let <span style="background-color:#fdf6e3;color:#657b83;">u</span> be a point in an inner product space, and let <span style="background-color:#fdf6e3;color:#657b83;">K</span> be a nonempty complete convex subset.
+Then there exists a unique <span style="background-color:#fdf6e3;color:#657b83;">v</span> in <span style="background-color:#fdf6e3;color:#657b83;">K</span> that minimizes the distance <span style="background-color:#fdf6e3;color:#657b83;">∥u </span><span style="background-color:#fdf6e3;color:#b58900;">-</span><span style="background-color:#fdf6e3;color:#657b83;"> v∥</span> to <span style="background-color:#fdf6e3;color:#657b83;">u</span>.</p>
+</div></div><div class="decl"><h4>norm_eq_infi_iff_inner_le_zero</h4><div class="decl_par"><p>Characterization of minimizers in the above theorem</p>
+</div></div><div class="decl"><h4>exists_norm_eq_infi_of_complete_subspace</h4><div class="decl_par"><p>Existence of minimizers.
+Let <span style="background-color:#fdf6e3;color:#657b83;">u</span> be a point in an inner product space, and let <span style="background-color:#fdf6e3;color:#657b83;">K</span> be a nonempty complete subspace.
+Then there exists a unique <span style="background-color:#fdf6e3;color:#657b83;">v</span> in <span style="background-color:#fdf6e3;color:#657b83;">K</span> that minimizes the distance <span style="background-color:#fdf6e3;color:#657b83;">∥u </span><span style="background-color:#fdf6e3;color:#b58900;">-</span><span style="background-color:#fdf6e3;color:#657b83;"> v∥</span> to <span style="background-color:#fdf6e3;color:#657b83;">u</span>.
+This point <span style="background-color:#fdf6e3;color:#657b83;">v</span> is usually called the orthogonal projection of <span style="background-color:#fdf6e3;color:#657b83;">u</span> onto <span style="background-color:#fdf6e3;color:#657b83;">K</span>.</p>
+</div></div><div class="decl"><h4>norm_eq_infi_iff_inner_eq_zero</h4><div class="decl_par"><p>Characterization of minimizers in the above theorem.
+Let <span style="background-color:#fdf6e3;color:#657b83;">u</span> be a point in an inner product space, and let <span style="background-color:#fdf6e3;color:#657b83;">K</span> be a nonempty subspace.
+Then point <span style="background-color:#fdf6e3;color:#657b83;">v</span> minimizes the distance <span style="background-color:#fdf6e3;color:#657b83;">∥u </span><span style="background-color:#fdf6e3;color:#b58900;">-</span><span style="background-color:#fdf6e3;color:#657b83;"> v∥</span> if and only if
+for all <span style="background-color:#fdf6e3;color:#657b83;">w ∈ K</span>, <span style="background-color:#fdf6e3;color:#657b83;">inner (u </span><span style="background-color:#fdf6e3;color:#b58900;">-</span><span style="background-color:#fdf6e3;color:#657b83;"> v) w </span><span style="background-color:#fdf6e3;color:#b58900;">= </span><span style="background-color:#fdf6e3;color:#6c71c4;">0</span> (i.e., <span style="background-color:#fdf6e3;color:#657b83;">u </span><span style="background-color:#fdf6e3;color:#b58900;">-</span><span style="background-color:#fdf6e3;color:#657b83;"> v</span> is orthogonal to the subspace <span style="background-color:#fdf6e3;color:#657b83;">K</span>)</p>
+</div></div></html>

@@ -1,0 +1,31 @@
+<html><head><link rel="stylesheet" href="../../docs_style.css"></head><div class="decl"><h4>prime_multiset</h4><div class="decl_par"><p>The type of multisets of prime numbers.  Unique factorization
+gives an equivalence between this set and ℕ+, as we will formalize
+below.</p>
+</div></div><div class="decl"><h4>prime_multiset.of_prime</h4><div class="decl_par"><p>The multiset consisting of a single prime</p>
+</div></div><div class="decl"><h4>prime_multiset.to_nat_multiset</h4><div class="decl_par"><p>We can forget the primality property and regard a multiset
+of primes as just a multiset of positive integers, or a multiset
+of natural numbers.  In the opposite direction, if we have a
+multiset of positive integers or natural numbers, together with
+a proof that all the elements are prime, then we can regard it
+as a multiset of primes.  The next block of results records
+obvious properties of these coercions.</p>
+</div></div><div class="decl"><h4>prime_multiset.of_nat_list</h4><div class="decl_par"><p>Lists can be coerced to multisets; here we have some results
+about how this interacts with our constructions on multisets.</p>
+</div></div><div class="decl"><h4>prime_multiset.prod_zero</h4><div class="decl_par"><p>The product map gives a homomorphism from the additive monoid
+of multisets to the multiplicative monoid ℕ+.</p>
+</div></div><div class="decl"><h4>pnat.factor_multiset</h4><div class="decl_par"><p>The prime factors of n, regarded as a multiset</p>
+</div></div><div class="decl"><h4>pnat.prod_factor_multiset</h4><div class="decl_par"><p>The product of the factors is the original number</p>
+</div></div><div class="decl"><h4>prime_multiset.factor_multiset_prod</h4><div class="decl_par"><p>If we start with a multiset of primes, take the product and
+then factor it, we get back the original multiset.</p>
+</div></div><div class="decl"><h4>pnat.factor_multiset_equiv</h4><div class="decl_par"><p>Positive integers biject with multisets of primes.</p>
+</div></div><div class="decl"><h4>pnat.factor_multiset_one</h4><div class="decl_par"><p>Factoring gives a homomorphism from the multiplicative
+monoid ℕ+ to the additive monoid of multisets.</p>
+</div></div><div class="decl"><h4>pnat.factor_multiset_of_prime</h4><div class="decl_par"><p>Factoring a prime gives the corresponding one-element multiset.</p>
+</div></div><div class="decl"><h4>pnat.factor_multiset_le_iff</h4><div class="decl_par"><p>We now have four different results that all encode the
+idea that inequality of multisets corresponds to divisibility
+of positive integers.</p>
+</div></div><div class="decl"><h4>pnat.factor_multiset_gcd</h4><div class="decl_par"><p>The gcd and lcm operations on positive integers correspond
+to the inf and sup operations on multisets.</p>
+</div></div><div class="decl"><h4>pnat.count_factor_multiset</h4><div class="decl_par"><p>The number of occurrences of p in the factor multiset of m
+is the same as the p-adic valuation of m.</p>
+</div></div></html>

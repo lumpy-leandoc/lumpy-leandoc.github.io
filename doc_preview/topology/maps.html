@@ -1,0 +1,46 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><h1>Specific classes of maps between topological spaces</h1>
+<p>This file introduces the following properties of a map <span style="background-color:#fdf6e3;color:#657b83;">f : X </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> Y</span> between topological spaces:</p>
+<ul>
+<li><span style="background-color:#fdf6e3;color:#657b83;">is_open_map f</span> means the image of an open set under <span style="background-color:#fdf6e3;color:#657b83;">f</span> is open.</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">is_closed_map f</span> means the image of a closed set under <span style="background-color:#fdf6e3;color:#657b83;">f</span> is closed.</li>
+</ul>
+<p>(Open and closed maps need not be continuous.)</p>
+<ul>
+<li>
+<p><span style="background-color:#fdf6e3;color:#657b83;">inducing f</span> means the topology on <span style="background-color:#fdf6e3;color:#657b83;">X</span> is the one induced via <span style="background-color:#fdf6e3;color:#657b83;">f</span> from the topology on <span style="background-color:#fdf6e3;color:#657b83;">Y</span>.
+These behave like embeddings except they need not be injective. Instead, points of <span style="background-color:#fdf6e3;color:#657b83;">X</span> which
+are identified by <span style="background-color:#fdf6e3;color:#657b83;">f</span> are also indistinguishable in the topology on <span style="background-color:#fdf6e3;color:#657b83;">X</span>.</p>
+</li>
+<li>
+<p><span style="background-color:#fdf6e3;color:#657b83;">embedding f</span> means <span style="background-color:#fdf6e3;color:#657b83;">f</span> is inducing and also injective. Equivalently, <span style="background-color:#fdf6e3;color:#657b83;">f</span> identifies <span style="background-color:#fdf6e3;color:#657b83;">X</span> with
+a subspace of <span style="background-color:#fdf6e3;color:#657b83;">Y</span>.</p>
+</li>
+<li>
+<p><span style="background-color:#fdf6e3;color:#657b83;">open_embedding f</span> means <span style="background-color:#fdf6e3;color:#657b83;">f</span> is an embedding with open image, so it identifies <span style="background-color:#fdf6e3;color:#657b83;">X</span> with an
+open subspace of <span style="background-color:#fdf6e3;color:#657b83;">Y</span>. Equivalently, <span style="background-color:#fdf6e3;color:#657b83;">f</span> is an embedding and an open map.</p>
+</li>
+<li>
+<p><span style="background-color:#fdf6e3;color:#657b83;">closed_embedding f</span> similarly means <span style="background-color:#fdf6e3;color:#657b83;">f</span> is an embedding with closed image, so it identifies
+<span style="background-color:#fdf6e3;color:#657b83;">X</span> with a closed subspace of <span style="background-color:#fdf6e3;color:#657b83;">Y</span>. Equivalently, <span style="background-color:#fdf6e3;color:#657b83;">f</span> is an embedding and a closed map.</p>
+</li>
+<li>
+<p><span style="background-color:#fdf6e3;color:#657b83;">quotient_map f</span> is the dual condition to <span style="background-color:#fdf6e3;color:#657b83;">embedding f</span>: <span style="background-color:#fdf6e3;color:#657b83;">f</span> is surjective and the topology
+on <span style="background-color:#fdf6e3;color:#657b83;">Y</span> is the one coinduced via <span style="background-color:#fdf6e3;color:#657b83;">f</span> from the topology on <span style="background-color:#fdf6e3;color:#657b83;">X</span>. Equivalently, <span style="background-color:#fdf6e3;color:#657b83;">f</span> identifies
+<span style="background-color:#fdf6e3;color:#657b83;">Y</span> with a quotient of <span style="background-color:#fdf6e3;color:#657b83;">X</span>. Quotient maps are also sometimes known as identification maps.</p>
+</li>
+</ul>
+<h2>References</h2>
+<ul>
+<li>https://en.wikipedia.org/wiki/Open_and_closed_maps</li>
+<li>https://en.wikipedia.org/wiki/Embedding#General_topology</li>
+<li>https://en.wikipedia.org/wiki/Quotient_space_(topology)#Quotient_map</li>
+</ul>
+<h2>Tags</h2>
+<p>open map, closed map, embedding, quotient map, identification map</p>
+<hr/><div class="decl"><h4>embedding</h4><div class="decl_par"><p>A function between topological spaces is an embedding if it is injective,
+and for all <span style="background-color:#fdf6e3;color:#657b83;">s : set α</span>, <span style="background-color:#fdf6e3;color:#657b83;">s</span> is open iff it is the preimage of an open set.</p>
+</div></div><div class="decl"><h4>quotient_map</h4><div class="decl_par"><p>A function between topological spaces is a quotient map if it is surjective,
+and for all <span style="background-color:#fdf6e3;color:#657b83;">s : set β</span>, <span style="background-color:#fdf6e3;color:#657b83;">s</span> is open iff its preimage is an open set.</p>
+</div></div><div class="decl"><h4>open_embedding</h4><div class="decl_par"><p>An open embedding is an embedding with open image.</p>
+</div></div><div class="decl"><h4>closed_embedding</h4><div class="decl_par"><p>A closed embedding is an embedding with closed image.</p>
+</div></div></html>

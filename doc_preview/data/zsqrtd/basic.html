@@ -1,0 +1,20 @@
+<html><head><link rel="stylesheet" href="../../docs_style.css"></head><div class="decl"><h4>zsqrtd</h4><div class="decl_par"><p>The ring of integers adjoined with a square root of <span style="background-color:#fdf6e3;color:#657b83;">d</span>.
+These have the form <span style="background-color:#fdf6e3;color:#657b83;">a </span><span style="background-color:#fdf6e3;color:#b58900;">+</span><span style="background-color:#fdf6e3;color:#657b83;"> b √d</span> where <span style="background-color:#fdf6e3;color:#657b83;">a b : ℤ</span>. The components
+are called <span style="background-color:#fdf6e3;color:#657b83;">re</span> and <span style="background-color:#fdf6e3;color:#657b83;">im</span> by analogy to the negative <span style="background-color:#fdf6e3;color:#657b83;">d</span> case,
+but of course both parts are real here since <span style="background-color:#fdf6e3;color:#657b83;">d</span> is nonnegative.</p>
+</div></div><div class="decl"><h4>zsqrtd.of_int</h4><div class="decl_par"><p>Convert an integer to a <span style="background-color:#fdf6e3;color:#657b83;">ℤ√d</span></p>
+</div></div><div class="decl"><h4>zsqrtd.zero</h4><div class="decl_par"><p>The zero of the ring</p>
+</div></div><div class="decl"><h4>zsqrtd.one</h4><div class="decl_par"><p>The one of the ring</p>
+</div></div><div class="decl"><h4>zsqrtd.sqrtd</h4><div class="decl_par"><p>The representative of <span style="background-color:#fdf6e3;color:#657b83;">√d</span> in the ring</p>
+</div></div><div class="decl"><h4>zsqrtd.add</h4><div class="decl_par"><p>Addition of elements of <span style="background-color:#fdf6e3;color:#657b83;">ℤ√d</span></p>
+</div></div><div class="decl"><h4>zsqrtd.neg</h4><div class="decl_par"><p>Negation in <span style="background-color:#fdf6e3;color:#657b83;">ℤ√d</span></p>
+</div></div><div class="decl"><h4>zsqrtd.conj</h4><div class="decl_par"><p>Conjugation in <span style="background-color:#fdf6e3;color:#657b83;">ℤ√d</span>. The conjugate of <span style="background-color:#fdf6e3;color:#657b83;">a </span><span style="background-color:#fdf6e3;color:#b58900;">+</span><span style="background-color:#fdf6e3;color:#657b83;"> b √d</span> is <span style="background-color:#fdf6e3;color:#657b83;">a </span><span style="background-color:#fdf6e3;color:#b58900;">-</span><span style="background-color:#fdf6e3;color:#657b83;"> b √d</span>.</p>
+</div></div><div class="decl"><h4>zsqrtd.mul</h4><div class="decl_par"><p>Multiplication in <span style="background-color:#fdf6e3;color:#657b83;">ℤ√d</span></p>
+</div></div><div class="decl"><h4>zsqrtd.sq_le</h4><div class="decl_par"><p>Read <span style="background-color:#fdf6e3;color:#657b83;">sq_le a c b d</span> as <span style="background-color:#fdf6e3;color:#657b83;">a √c </span><span style="background-color:#fdf6e3;color:#b58900;">≤</span><span style="background-color:#fdf6e3;color:#657b83;"> b √d</span></p>
+</div></div><div class="decl"><h4>zsqrtd.nonnegg</h4><div class="decl_par"><p>&quot;Generalized&quot; <span style="background-color:#fdf6e3;color:#657b83;">nonneg</span>. <span style="background-color:#fdf6e3;color:#657b83;">nonnegg c d x y</span> means <span style="background-color:#fdf6e3;color:#657b83;">a √c </span><span style="background-color:#fdf6e3;color:#b58900;">+</span><span style="background-color:#fdf6e3;color:#657b83;"> b √d </span><span style="background-color:#fdf6e3;color:#b58900;">≥ </span><span style="background-color:#fdf6e3;color:#6c71c4;">0</span>;
+we are interested in the case <span style="background-color:#fdf6e3;color:#657b83;">c </span><span style="background-color:#fdf6e3;color:#b58900;">= </span><span style="background-color:#fdf6e3;color:#6c71c4;">1</span> but this is more symmetric</p>
+</div></div><div class="decl"><h4>zsqrtd.nonneg</h4><div class="decl_par"><p>Nonnegativity of an element of <span style="background-color:#fdf6e3;color:#657b83;">ℤ√d</span>.</p>
+</div></div><div class="decl"><h4>zsqrtd.nonsquare</h4><div class="decl_par"><p>A nonsquare is a natural number that is not equal to the square of an
+integer. This is implemented as a typeclass because it's a necessary condition
+for much of the Pell equation theory.</p>
+</div></div></html>

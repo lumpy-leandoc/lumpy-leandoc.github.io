@@ -1,0 +1,21 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><div class="decl"><h4>opposite</h4><div class="decl_par"><p>The type of objects of the opposite of <span style="background-color:#fdf6e3;color:#657b83;">α</span>; used to defined opposite category/group/...</p>
+<p>In order to avoid confusion between <span style="background-color:#fdf6e3;color:#657b83;">α</span> and its opposite type, we
+set up the type of objects <span style="background-color:#fdf6e3;color:#657b83;">opposite α</span> using the following pattern,
+which will be repeated later for the morphisms.</p>
+<ol>
+<li>Define <span style="background-color:#fdf6e3;color:#657b83;">opposite α </span><span style="background-color:#fdf6e3;color:#b58900;">:=</span><span style="background-color:#fdf6e3;color:#657b83;"> α</span>.</li>
+<li>Define the isomorphisms <span style="background-color:#fdf6e3;color:#657b83;">op : α </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> opposite α</span>, <span style="background-color:#fdf6e3;color:#657b83;">unop : opposite α </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> α</span>.</li>
+<li>Make the definition <span style="background-color:#fdf6e3;color:#657b83;">opposite</span> irreducible.</li>
+</ol>
+<p>This has the following consequences.</p>
+<ul>
+<li><span style="background-color:#fdf6e3;color:#657b83;">opposite α</span> and <span style="background-color:#fdf6e3;color:#657b83;">α</span> are distinct types in the elaborator, so you
+must use <span style="background-color:#fdf6e3;color:#657b83;">op</span> and <span style="background-color:#fdf6e3;color:#657b83;">unop</span> explicitly to convert between them.</li>
+<li>Both <span style="background-color:#fdf6e3;color:#657b83;">unop (op X) </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> X</span> and <span style="background-color:#fdf6e3;color:#657b83;">op (unop X) </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> X</span> are definitional
+equalities. Notably, every object of the opposite category is
+definitionally of the form <span style="background-color:#fdf6e3;color:#657b83;">op X</span>, which greatly simplifies the
+definition of the structure of the opposite category, for example.</li>
+</ul>
+<p>(If Lean supported definitional eta equality for records, we could
+achieve the same goals using a structure with one field.)</p>
+</div></div></html>

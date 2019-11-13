@@ -1,0 +1,58 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><div class="decl"><h4>tactic.rcases_patt_inverted</h4><div class="decl_par"><p>The parser/printer uses an &quot;inverted&quot; meaning for the <span style="background-color:#fdf6e3;color:#657b83;">many</span> constructor:
+rather than representing a sum of products, here it represents a
+product of sums. We fix this by applying <span style="background-color:#fdf6e3;color:#657b83;">invert</span>, defined below, to
+the result.</p>
+</div></div><div class="decl"><h4>tactic.rcases.process_constructor</h4><div class="decl_par"><p>Takes the number of fields of a single constructor and patterns to
+match its fields against (not necessarily the same number). The
+returned lists each contain one element per field of the
+constructor. The <span style="background-color:#fdf6e3;color:#657b83;">name</span> is the name which will be used in the
+top-level <span style="background-color:#fdf6e3;color:#657b83;">cases</span> tactic, and the <span style="background-color:#fdf6e3;color:#657b83;">rcases_patt</span> is the pattern which
+the field will be matched against by subsequent <span style="background-color:#fdf6e3;color:#657b83;">cases</span> tactics.</p>
+</div></div><div class="decl"><h4>tactic.rcases</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">rcases h e pat</span> performs case distinction on <span style="background-color:#fdf6e3;color:#657b83;">e</span> using <span style="background-color:#fdf6e3;color:#657b83;">pat</span> to 
+name the arising new variables and assumptions. If <span style="background-color:#fdf6e3;color:#657b83;">h</span> is <span style="background-color:#fdf6e3;color:#657b83;">some</span> name, 
+a new assumption <span style="background-color:#fdf6e3;color:#657b83;">h : e </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> pat</span> will relate the expression <span style="background-color:#fdf6e3;color:#657b83;">e</span> with the 
+current pattern.</p>
+</div></div><div class="decl"><h4>tactic.rcases_parse</h4><div class="decl_par"><p>syntax for a <span style="background-color:#fdf6e3;color:#657b83;">rcases</span> pattern: <span style="background-color:#fdf6e3;color:#657b83;">(&#39;?&#39; expr (: n)?) | ((h :)? expr (</span><span style="background-color:#fdf6e3;color:#859900;">with</span><span style="background-color:#fdf6e3;color:#657b83;"> patt_list)?)</span></p>
+</div></div><div class="decl"><h4>tactic.interactive.rcases</h4><div class="decl_par"><p>The <span style="background-color:#fdf6e3;color:#657b83;">rcases</span> tactic is the same as <span style="background-color:#fdf6e3;color:#657b83;">cases</span>, but with more flexibility in the
+<span style="background-color:#fdf6e3;color:#859900;">with</span> pattern syntax to allow for recursive case splitting. The pattern syntax
+uses the following recursive grammar:</p>
+<pre><code class="language-lean"><pre style="background-color:#fdf6e3;">
+<span style="color:#657b83;">patt :</span><span style="color:#b58900;">:=</span><span style="color:#657b83;"> (patt_list </span><span style="color:#2aa198;">&quot;|&quot;</span><span style="color:#657b83;">)</span><span style="color:#b58900;">*</span><span style="color:#657b83;"> patt_list
+</span><span style="color:#657b83;">patt_list :</span><span style="color:#b58900;">:=</span><span style="color:#657b83;"> id | </span><span style="color:#2aa198;">&quot;_&quot;</span><span style="color:#657b83;"> | </span><span style="color:#2aa198;">&quot;⟨&quot;</span><span style="color:#657b83;"> (patt </span><span style="color:#2aa198;">&quot;,&quot;</span><span style="color:#657b83;">)</span><span style="color:#b58900;">*</span><span style="color:#657b83;"> patt </span><span style="color:#2aa198;">&quot;⟩&quot;
+</span></pre>
+</code></pre>
+<p>A pattern like <span style="background-color:#fdf6e3;color:#657b83;">⟨a, b, c⟩ | ⟨d, e⟩</span> will do a split over the inductive datatype,
+naming the first three parameters of the first constructor as <span style="background-color:#fdf6e3;color:#657b83;">a,b,c</span> and the
+first two of the second constructor <span style="background-color:#fdf6e3;color:#657b83;">d,e</span>. If the list is not as long as the
+number of arguments to the constructor or the number of constructors, the
+remaining variables will be automatically named. If there are nested brackets
+such as <span style="background-color:#fdf6e3;color:#657b83;">⟨⟨a⟩, b | c⟩ | d</span> then these will cause more case splits as necessary.
+If there are too many arguments, such as <span style="background-color:#fdf6e3;color:#657b83;">⟨a, b, c⟩</span> for splitting on
+<span style="background-color:#fdf6e3;color:#657b83;">∃ x, ∃ y, p x</span>, then it will be treated as <span style="background-color:#fdf6e3;color:#657b83;">⟨a, ⟨b, c⟩⟩</span>, splitting the last
+parameter as necessary.</p>
+<p><span style="background-color:#fdf6e3;color:#657b83;">rcases</span> also has special support for quotient types: quotient induction into Prop works like
+matching on the constructor <span style="background-color:#fdf6e3;color:#657b83;">quot.mk</span>.</p>
+<p><span style="background-color:#fdf6e3;color:#657b83;">rcases h : e </span><span style="background-color:#fdf6e3;color:#859900;">with</span><span style="background-color:#fdf6e3;color:#657b83;"> PAT</span> will do the same as <span style="background-color:#fdf6e3;color:#657b83;">rcases e </span><span style="background-color:#fdf6e3;color:#859900;">with</span><span style="background-color:#fdf6e3;color:#657b83;"> PAT</span> with the exception that an assumption
+<span style="background-color:#fdf6e3;color:#657b83;">h : e </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> PAT</span> will be added to the context.</p>
+<p><span style="background-color:#fdf6e3;color:#657b83;">rcases? e</span> will perform case splits on <span style="background-color:#fdf6e3;color:#657b83;">e</span> in the same way as <span style="background-color:#fdf6e3;color:#657b83;">rcases e</span>,
+but rather than accepting a pattern, it does a maximal cases and prints the
+pattern that would produce this case splitting. The default maximum depth is 5,
+but this can be modified with <span style="background-color:#fdf6e3;color:#657b83;">rcases? e : n</span>.</p>
+</div></div><div class="decl"><h4>tactic.interactive.rintro</h4><div class="decl_par"><p>The <span style="background-color:#fdf6e3;color:#657b83;">rintro</span> tactic is a combination of the <span style="background-color:#fdf6e3;color:#657b83;">intros</span> tactic with <span style="background-color:#fdf6e3;color:#657b83;">rcases</span> to
+allow for destructuring patterns while introducing variables. See <span style="background-color:#fdf6e3;color:#657b83;">rcases</span> for
+a description of supported patterns. For example, <span style="background-color:#fdf6e3;color:#657b83;">rintro (a | ⟨b, c⟩) ⟨d, e⟩</span>
+will introduce two variables, and then do case splits on both of them producing
+two subgoals, one with variables <span style="background-color:#fdf6e3;color:#657b83;">a d e</span> and the other with <span style="background-color:#fdf6e3;color:#657b83;">b c d e</span>.</p>
+<p><span style="background-color:#fdf6e3;color:#657b83;">rintro?</span> will introduce and case split on variables in the same way as
+<span style="background-color:#fdf6e3;color:#657b83;">rintro</span>, but will also print the <span style="background-color:#fdf6e3;color:#657b83;">rintro</span> invocation that would have the same
+result. Like <span style="background-color:#fdf6e3;color:#657b83;">rcases?</span>, <span style="background-color:#fdf6e3;color:#657b83;">rintro? : n</span> allows for modifying the
+depth of splitting; the default is 5.</p>
+</div></div><div class="decl"><h4>tactic.interactive.rintros</h4><div class="decl_par"><p>Alias for <span style="background-color:#fdf6e3;color:#657b83;">rintro</span>.</p>
+</div></div><div class="decl"><h4>tactic.interactive.obtain</h4><div class="decl_par"><p>The <span style="background-color:#fdf6e3;color:#859900;">obtain</span> tactic is a combination of <span style="background-color:#fdf6e3;color:#859900;">have</span> and <span style="background-color:#fdf6e3;color:#657b83;">rcases</span>.
+<span style="background-color:#fdf6e3;color:#859900;">obtain</span><span style="background-color:#fdf6e3;color:#657b83;"> ⟨patt⟩ : type, { ... }</span>
+is equivalent to
+<span style="background-color:#fdf6e3;color:#859900;">have</span><span style="background-color:#fdf6e3;color:#657b83;"> h : type, { ... }, rcases h </span><span style="background-color:#fdf6e3;color:#859900;">with</span><span style="background-color:#fdf6e3;color:#657b83;"> ⟨patt⟩</span>.
+The syntax <span style="background-color:#fdf6e3;color:#859900;">obtain</span><span style="background-color:#fdf6e3;color:#657b83;"> ⟨patt⟩ : type </span><span style="background-color:#fdf6e3;color:#b58900;">:=</span><span style="background-color:#fdf6e3;color:#657b83;"> proof</span> is also supported.
+If <span style="background-color:#fdf6e3;color:#657b83;">⟨patt⟩</span> is omitted, <span style="background-color:#fdf6e3;color:#657b83;">rcases</span> will try to infer the pattern.
+If <span style="background-color:#fdf6e3;color:#657b83;">type</span> is omitted, <span style="background-color:#fdf6e3;color:#b58900;">:=</span><span style="background-color:#fdf6e3;color:#657b83;"> proof</span> is required.</p>
+</div></div></html>

@@ -1,0 +1,56 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><div class="decl"><h4>auto.done</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">done</span> first attempts to close the goal using <span style="background-color:#fdf6e3;color:#657b83;">contradiction</span>. If this fails, it creates an
+SMT state and will repeatedly use <span style="background-color:#fdf6e3;color:#657b83;">ematch</span> (using <span style="background-color:#fdf6e3;color:#657b83;">ematch</span> lemmas in the environment,
+universally quantified assumptions, and the supplied lemmas <span style="background-color:#fdf6e3;color:#657b83;">ps</span>) and congruence closure.</p>
+</div></div><div class="decl"><h4>auto.safe_core</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">safe_core s ps cfg opt</span> negates the goal, normalizes hypotheses
+(by splitting conjunctions, eliminating existentials, pushing negations inwards,
+and calling <span style="background-color:#fdf6e3;color:#657b83;">simp</span> with the supplied lemmas <span style="background-color:#fdf6e3;color:#657b83;">s</span>), and then tries <span style="background-color:#fdf6e3;color:#657b83;">contradiction</span>.</p>
+<p>If this fails, it will create an SMT state and repeatedly use <span style="background-color:#fdf6e3;color:#657b83;">ematch</span>
+(using <span style="background-color:#fdf6e3;color:#657b83;">ematch</span> lemmas in the environment, universally quantified assumptions,
+and the supplied lemmas <span style="background-color:#fdf6e3;color:#657b83;">ps</span>) and congruence closure.</p>
+<p><span style="background-color:#fdf6e3;color:#657b83;">safe_core</span> is complete for propositional logic. Depending on the form of <span style="background-color:#fdf6e3;color:#657b83;">opt</span>
+it will:</p>
+<ul>
+<li>(if <span style="background-color:#fdf6e3;color:#657b83;">opt</span> is <span style="background-color:#fdf6e3;color:#657b83;">case_option.force</span>) fail if it does not close the goal,</li>
+<li>(if <span style="background-color:#fdf6e3;color:#657b83;">opt</span> is <span style="background-color:#fdf6e3;color:#657b83;">case_option.at_most_one</span>) fail if it produces more than one goal, and</li>
+<li>(if <span style="background-color:#fdf6e3;color:#657b83;">opt</span> is <span style="background-color:#fdf6e3;color:#657b83;">case_option.accept</span>) ignore the number of goals it produces.</li>
+</ul>
+</div></div><div class="decl"><h4>auto.clarify</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">clarify</span> is <span style="background-color:#fdf6e3;color:#657b83;">safe_core</span>, but with the <span style="background-color:#fdf6e3;color:#657b83;">(opt : case_option)</span>
+parameter fixed at <span style="background-color:#fdf6e3;color:#657b83;">case_option.at_most_one</span>.</p>
+</div></div><div class="decl"><h4>auto.safe</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">safe</span> is <span style="background-color:#fdf6e3;color:#657b83;">safe_core</span>, but with the <span style="background-color:#fdf6e3;color:#657b83;">(opt : case_option)</span>
+parameter fixed at <span style="background-color:#fdf6e3;color:#657b83;">case_option.accept</span>.</p>
+</div></div><div class="decl"><h4>auto.finish</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">finish</span> is <span style="background-color:#fdf6e3;color:#657b83;">safe_core</span>, but with the <span style="background-color:#fdf6e3;color:#657b83;">(opt : case_option)</span>
+parameter fixed at <span style="background-color:#fdf6e3;color:#657b83;">case_option.force</span>.</p>
+</div></div><div class="decl"><h4>auto.iclarify</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">iclarify</span> is like <span style="background-color:#fdf6e3;color:#657b83;">clarify</span>, but only uses intuitionistic logic.</p>
+</div></div><div class="decl"><h4>auto.isafe</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">isafe</span> is like <span style="background-color:#fdf6e3;color:#657b83;">safe</span>, but only uses intuitionistic logic.</p>
+</div></div><div class="decl"><h4>auto.ifinish</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">ifinish</span> is like <span style="background-color:#fdf6e3;color:#657b83;">finish</span>, but only uses intuitionistic logic.</p>
+</div></div><div class="decl"><h4>tactic.interactive.clarify</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">clarify [h1,...,hn] </span><span style="background-color:#fdf6e3;color:#859900;">using</span><span style="background-color:#fdf6e3;color:#657b83;"> [e1,...,en]</span> negates the goal, normalizes hypotheses
+(by splitting conjunctions, eliminating existentials, pushing negations inwards,
+and calling <span style="background-color:#fdf6e3;color:#657b83;">simp</span> with the supplied lemmas <span style="background-color:#fdf6e3;color:#657b83;">h1,...,hn</span>), and then tries <span style="background-color:#fdf6e3;color:#657b83;">contradiction</span>.</p>
+<p>If this fails, it will create an SMT state and repeatedly use <span style="background-color:#fdf6e3;color:#657b83;">ematch</span>
+(using <span style="background-color:#fdf6e3;color:#657b83;">ematch</span> lemmas in the environment, universally quantified assumptions,
+and the supplied lemmas <span style="background-color:#fdf6e3;color:#657b83;">e1,...,en</span>) and congruence closure.</p>
+<p><span style="background-color:#fdf6e3;color:#657b83;">clarify</span> is complete for propositional logic.</p>
+<p>Either of the supplied simp lemmas or the supplied ematch lemmas are optional.</p>
+<p><span style="background-color:#fdf6e3;color:#657b83;">clarify</span> will fail if it produces more than one goal.</p>
+</div></div><div class="decl"><h4>tactic.interactive.safe</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">safe [h1,...,hn] </span><span style="background-color:#fdf6e3;color:#859900;">using</span><span style="background-color:#fdf6e3;color:#657b83;"> [e1,...,en]</span> negates the goal, normalizes hypotheses
+(by splitting conjunctions, eliminating existentials, pushing negations inwards,
+and calling <span style="background-color:#fdf6e3;color:#657b83;">simp</span> with the supplied lemmas <span style="background-color:#fdf6e3;color:#657b83;">h1,...,hn</span>), and then tries <span style="background-color:#fdf6e3;color:#657b83;">contradiction</span>.</p>
+<p>If this fails, it will create an SMT state and repeatedly use <span style="background-color:#fdf6e3;color:#657b83;">ematch</span>
+(using <span style="background-color:#fdf6e3;color:#657b83;">ematch</span> lemmas in the environment, universally quantified assumptions,
+and the supplied lemmas <span style="background-color:#fdf6e3;color:#657b83;">e1,...,en</span>) and congruence closure.</p>
+<p><span style="background-color:#fdf6e3;color:#657b83;">safe</span> is complete for propositional logic.</p>
+<p>Either of the supplied simp lemmas or the supplied ematch lemmas are optional.</p>
+<p><span style="background-color:#fdf6e3;color:#657b83;">safe</span> ignores the number of goals it produces, and should never fail.</p>
+</div></div><div class="decl"><h4>tactic.interactive.finish</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">finish [h1,...,hn] </span><span style="background-color:#fdf6e3;color:#859900;">using</span><span style="background-color:#fdf6e3;color:#657b83;"> [e1,...,en]</span> negates the goal, normalizes hypotheses
+(by splitting conjunctions, eliminating existentials, pushing negations inwards,
+and calling <span style="background-color:#fdf6e3;color:#657b83;">simp</span> with the supplied lemmas <span style="background-color:#fdf6e3;color:#657b83;">h1,...,hn</span>), and then tries <span style="background-color:#fdf6e3;color:#657b83;">contradiction</span>.</p>
+<p>If this fails, it will create an SMT state and repeatedly use <span style="background-color:#fdf6e3;color:#657b83;">ematch</span>
+(using <span style="background-color:#fdf6e3;color:#657b83;">ematch</span> lemmas in the environment, universally quantified assumptions,
+and the supplied lemmas <span style="background-color:#fdf6e3;color:#657b83;">e1,...,en</span>) and congruence closure.</p>
+<p><span style="background-color:#fdf6e3;color:#657b83;">finish</span> is complete for propositional logic.</p>
+<p>Either of the supplied simp lemmas or the supplied ematch lemmas are optional.</p>
+<p><span style="background-color:#fdf6e3;color:#657b83;">finish</span> will fail if it does not close the goal.</p>
+</div></div><div class="decl"><h4>tactic.interactive.iclarify</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">iclarify</span> is like <span style="background-color:#fdf6e3;color:#657b83;">clarify</span>, but only uses intuitionistic logic.</p>
+</div></div><div class="decl"><h4>tactic.interactive.isafe</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">isafe</span> is like <span style="background-color:#fdf6e3;color:#657b83;">safe</span>, but only uses intuitionistic logic.</p>
+</div></div><div class="decl"><h4>tactic.interactive.ifinish</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">ifinish</span> is like <span style="background-color:#fdf6e3;color:#657b83;">finish</span>, but only uses intuitionistic logic.</p>
+</div></div></html>

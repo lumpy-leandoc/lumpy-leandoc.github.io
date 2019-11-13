@@ -1,0 +1,24 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><h1>Linear maps and matrices</h1>
+<p>This file defines the maps to send matrices to a linear map,
+and to send linear maps between modules with a finite bases
+to matrices. This defines a linear equivalence between linear maps
+between finite-dimensional vector spaces and matrices indexed by
+the respective bases.</p>
+<p>Some results are proved about the linear map corresponding to a
+diagonal matrix (range, ker and rank).</p>
+<h2>Main definitions</h2>
+<p>to_lin, to_matrix, lin_equiv_matrix</p>
+<h2>Tags</h2>
+<p>linear_map, matrix, linear_equiv, diagonal</p>
+<hr/><div class="decl"><h4>matrix.eval</h4><div class="decl_par"><p>Evaluation of matrices gives a linear map from matrix m n R to
+linear maps (n → R) →ₗ[R] (m → R).</p>
+</div></div><div class="decl"><h4>matrix.to_lin</h4><div class="decl_par"><p>Evaluation of matrices gives a map from matrix m n R to
+linear maps (n → R) →ₗ[R] (m → R).</p>
+</div></div><div class="decl"><h4>linear_map.to_matrixₗ</h4><div class="decl_par"><p>The linear map from linear maps (n → R) →ₗ[R] (m → R) to matrix m n R.</p>
+</div></div><div class="decl"><h4>linear_map.to_matrix</h4><div class="decl_par"><p>The map from linear maps (n → R) →ₗ[R] (m → R) to matrix m n R.</p>
+</div></div><div class="decl"><h4>to_matrix_to_lin</h4><div class="decl_par"><p>to_lin is the left inverse of to_matrix.</p>
+</div></div><div class="decl"><h4>to_lin_to_matrix</h4><div class="decl_par"><p>to_lin is the right inverse of to_matrix.</p>
+</div></div><div class="decl"><h4>lin_equiv_matrix'</h4><div class="decl_par"><p>Linear maps (n → R) →ₗ[R] (m → R) are linearly equivalent to matrix  m n R.</p>
+</div></div><div class="decl"><h4>lin_equiv_matrix</h4><div class="decl_par"><p>Given a basis of two modules M₁ and M₂ over a commutative ring R, we get a linear equivalence
+between linear maps M₁ →ₗ M₂ and matrices over R indexed by the bases.</p>
+</div></div></html>

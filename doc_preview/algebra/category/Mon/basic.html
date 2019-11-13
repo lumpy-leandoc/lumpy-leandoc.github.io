@@ -1,0 +1,30 @@
+<html><head><link rel="stylesheet" href="../../../docs_style.css"></head><h1>Category instances for monoid, add_monoid, comm_monoid, and add_comm_monoid.</h1>
+<p>We introduce the bundled categories:</p>
+<ul>
+<li><span style="background-color:#fdf6e3;color:#657b83;">Mon</span></li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">AddMon</span></li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">CommMon</span></li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">AddCommMon</span>
+along with the relevant forgetful functors between them.</li>
+</ul>
+<h2>Implementation notes</h2>
+<h3>Note [locally reducible category instances]</h3>
+<p>We make SemiRing (and the other categories) locally reducible in order
+to define its instances. This is because writing, for example,</p>
+<p>instance : concrete_category SemiRing := by { delta SemiRing, apply_instance }</p>
+<p>results in an instance of the form <span style="background-color:#fdf6e3;color:#657b83;">id (bundled_hom.concrete_category _)</span>
+and this <span style="background-color:#fdf6e3;color:#657b83;">id</span>, not being [reducible], prevents a later instance search
+(once SemiRing is no longer reducible) from seeing that the morphisms of
+SemiRing are really semiring morphisms (<span style="background-color:#fdf6e3;color:#657b83;">→</span><span style="background-color:#fdf6e3;color:#b58900;">+*</span>), and therefore have a coercion
+to functions, for example. It's especially important that the <span style="background-color:#fdf6e3;color:#657b83;">has_coe_to_sort</span>
+instance not contain an extra <span style="background-color:#fdf6e3;color:#657b83;">id</span> as we want the <span style="background-color:#fdf6e3;color:#657b83;">semiring ↥R</span> instance to
+also apply to <span style="background-color:#fdf6e3;color:#657b83;">semiring R.α</span> (it seems to be impractical to guarantee that
+we always access <span style="background-color:#fdf6e3;color:#657b83;">R.α</span> through the coercion rather than directly).</p>
+<p>TODO: Probably @[derive] should be able to create instances of the
+required form (without <span style="background-color:#fdf6e3;color:#657b83;">id</span>), and then we could use that instead of
+this obscure <span style="background-color:#fdf6e3;color:#859900;">local </span><span style="background-color:#fdf6e3;color:#586e75;">attribute [reducible]</span> method.</p>
+<hr/><div class="decl"><h4>Mon</h4><div class="decl_par"><p>The category of monoids and monoid morphisms.</p>
+</div></div><div class="decl"><h4>Mon.of</h4><div class="decl_par"><p>Construct a bundled Mon from the underlying type and typeclass.</p>
+</div></div><div class="decl"><h4>CommMon</h4><div class="decl_par"><p>The category of commutative monoids and monoid morphisms.</p>
+</div></div><div class="decl"><h4>CommMon.of</h4><div class="decl_par"><p>Construct a bundled CommMon from the underlying type and typeclass.</p>
+</div></div></html>

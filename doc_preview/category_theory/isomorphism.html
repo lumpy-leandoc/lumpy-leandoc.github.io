@@ -1,0 +1,21 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><h1>Isomorphisms</h1>
+<p>This file defines isomorphisms between objects of a category.</p>
+<h2>Main definitions</h2>
+<ul>
+<li><span style="background-color:#fdf6e3;color:#859900;">structure </span><span style="background-color:#fdf6e3;color:#d33682;">iso</span> : a bundled isomorphism between two objects of a category;</li>
+<li><span style="background-color:#fdf6e3;color:#859900;">class </span><span style="background-color:#fdf6e3;color:#d33682;">is_iso</span> : an unbundled version of <span style="background-color:#fdf6e3;color:#657b83;">iso</span>; note that <span style="background-color:#fdf6e3;color:#657b83;">is_iso f</span> is usually <em>not</em> a <span style="background-color:#fdf6e3;color:#268bd2;">Prop</span>,
+because it holds the inverse morphism;</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">as_iso</span> : convert from <span style="background-color:#fdf6e3;color:#657b83;">is_iso</span> to <span style="background-color:#fdf6e3;color:#657b83;">iso</span>;</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">of_iso</span> : convert from <span style="background-color:#fdf6e3;color:#657b83;">iso</span> to <span style="background-color:#fdf6e3;color:#657b83;">is_iso</span>;</li>
+<li>standard operations on isomorphisms (composition, inverse etc)</li>
+</ul>
+<h2>Notations</h2>
+<ul>
+<li><span style="background-color:#fdf6e3;color:#657b83;">X ≅ Y</span> : same as <span style="background-color:#fdf6e3;color:#657b83;">iso X Y</span>;</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">α ≪≫ β</span> : composition of two isomorphisms; it is called <span style="background-color:#fdf6e3;color:#657b83;">iso.trans</span></li>
+</ul>
+<h2>Tags</h2>
+<p>category, category theory, isomorphism</p>
+<hr/><div class="decl"><h4>category_theory.is_iso</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">is_iso</span> typeclass expressing that a morphism is invertible.
+This contains the data of the inverse, but is a subsingleton type.</p>
+</div></div></html>

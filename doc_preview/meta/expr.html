@@ -1,0 +1,147 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><h1>Additional operations on expr and related types</h1>
+<p>This file defines basic operations on the types expr, name, declaration, level, environment.</p>
+<p>This file is mostly for non-tactics. Tactics should generally be placed in <span style="background-color:#fdf6e3;color:#657b83;">tactic.core</span>.</p>
+<h2>Tags</h2>
+<p>expr, name, declaration, level, environment, meta, metaprogramming, tactic</p>
+<hr/><div class="decl"><h4>binder_info.brackets</h4><div class="decl_par"><p>The brackets corresponding to a given binder_info.</p>
+</div></div><div class="decl"><h4>name.map_prefix</h4><div class="decl_par"><p>Find the largest prefix <span style="background-color:#fdf6e3;color:#657b83;">n</span> of a <span style="background-color:#fdf6e3;color:#657b83;">name</span> such that <span style="background-color:#fdf6e3;color:#657b83;">f n </span><span style="background-color:#fdf6e3;color:#b58900;">≠</span><span style="background-color:#fdf6e3;color:#657b83;"> none</span>, then replace this prefix
+with the value of <span style="background-color:#fdf6e3;color:#657b83;">f n</span>.</p>
+</div></div><div class="decl"><h4>name.deinternalize_field</h4><div class="decl_par"><p>If <span style="background-color:#fdf6e3;color:#657b83;">nm</span> is a simple name (having only one string component) starting with <span style="background-color:#fdf6e3;color:#657b83;">_</span>, then <span style="background-color:#fdf6e3;color:#657b83;">deinternalize_field nm</span> removes the underscore. Otherwise, it does nothing.</p>
+</div></div><div class="decl"><h4>name.get_nth_prefix</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">get_nth_prefix nm n</span> removes the last <span style="background-color:#fdf6e3;color:#657b83;">n</span> components from <span style="background-color:#fdf6e3;color:#657b83;">nm</span></p>
+</div></div><div class="decl"><h4>_private.520706617.pop_nth_prefix_aux</h4><div class="decl_par"><p>Auxilliary definition for <span style="background-color:#fdf6e3;color:#657b83;">pop_nth_prefix</span></p>
+</div></div><div class="decl"><h4>name.pop_nth_prefix</h4><div class="decl_par"><p>Pops the top <span style="background-color:#fdf6e3;color:#657b83;">n</span> prefixes from the given name.</p>
+</div></div><div class="decl"><h4>name.pop_prefix</h4><div class="decl_par"><p>Pop the prefix of a name</p>
+</div></div><div class="decl"><h4>_private.3323430921.from_components_aux</h4><div class="decl_par"><p>Auxilliary definition for <span style="background-color:#fdf6e3;color:#657b83;">from_components</span></p>
+</div></div><div class="decl"><h4>name.from_components</h4><div class="decl_par"><p>Build a name from components. For example <span style="background-color:#fdf6e3;color:#657b83;">from_components [</span><span style="background-color:#fdf6e3;color:#2aa198;">&quot;foo&quot;</span><span style="background-color:#fdf6e3;color:#657b83;">,</span><span style="background-color:#fdf6e3;color:#2aa198;">&quot;bar&quot;</span><span style="background-color:#fdf6e3;color:#657b83;">]</span> becomes
+<span style="background-color:#fdf6e3;color:#657b83;"> `foo.bar</span></p>
+</div></div><div class="decl"><h4>name.sanitize_name</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">name</span>s can contain numeral pieces, which are not legal names
+when typed/passed directly to the parser. We turn an arbitrary
+name into a legal identifier name by turning the numbers to strings.</p>
+</div></div><div class="decl"><h4>name.append_suffix</h4><div class="decl_par"><p>Append a string to the last component of a name</p>
+</div></div><div class="decl"><h4>name.head</h4><div class="decl_par"><p>The first component of a name, turning a number to a string</p>
+</div></div><div class="decl"><h4>name.is_private</h4><div class="decl_par"><p>Tests whether the first component of a name is <span style="background-color:#fdf6e3;color:#2aa198;">&quot;_private&quot;</span></p>
+</div></div><div class="decl"><h4>name.last</h4><div class="decl_par"><p>Get the last component of a name, and convert it to a string.</p>
+</div></div><div class="decl"><h4>name.length</h4><div class="decl_par"><p>Returns the number of characters used to print all the string components of a name,
+including periods between name segments. Ignores numerical parts of a name.</p>
+</div></div><div class="decl"><h4>name.has_prefix</h4><div class="decl_par"><p>Checks whether <span style="background-color:#fdf6e3;color:#657b83;">nm</span> has a prefix (including itself) such that P is true</p>
+</div></div><div class="decl"><h4>name.add_prime</h4><div class="decl_par"><p>Appends <span style="background-color:#fdf6e3;color:#657b83;">&#39;</span> to the end of a name.</p>
+</div></div><div class="decl"><h4>level.nonzero</h4><div class="decl_par"><p>Tests whether a universe level is non-zero for all assignments of its variables</p>
+</div></div><div class="decl"><h4>binder</h4><div class="decl_par"><p>The type of binders containing a name, the binding info and the binding type</p>
+</div></div><div class="decl"><h4>binder.to_string</h4><div class="decl_par"><p>Turn a binder into a string. Uses expr.to_string for the type.</p>
+</div></div><div class="decl"><h4>nat.mk_numeral</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">nat.mk_numeral n</span> embeds <span style="background-color:#fdf6e3;color:#657b83;">n</span> as a numeral expression inside a type with 0, 1, and +.
+<span style="background-color:#fdf6e3;color:#657b83;">type</span>: an expression representing the target type. This must live in Type 0.
+<span style="background-color:#fdf6e3;color:#657b83;">has_zero</span>, <span style="background-color:#fdf6e3;color:#657b83;">has_one</span>, <span style="background-color:#fdf6e3;color:#657b83;">has_add</span>: expressions of the type <span style="background-color:#fdf6e3;color:#657b83;">has_zero %%type</span>, etc.</p>
+</div></div><div class="decl"><h4>int.mk_numeral</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">int.mk_numeral z</span> embeds <span style="background-color:#fdf6e3;color:#657b83;">z</span> as a numeral expression inside a type with 0, 1, +, and -.
+<span style="background-color:#fdf6e3;color:#657b83;">type</span>: an expression representing the target type. This must live in Type 0.
+<span style="background-color:#fdf6e3;color:#657b83;">has_zero</span>, <span style="background-color:#fdf6e3;color:#657b83;">has_one</span>, <span style="background-color:#fdf6e3;color:#657b83;">has_add</span>, <span style="background-color:#fdf6e3;color:#657b83;">has_neg</span>: expressions of the type <span style="background-color:#fdf6e3;color:#657b83;">has_zero %%type</span>, etc.</p>
+</div></div><div class="decl"><h4>expr.to_pos_nat</h4><div class="decl_par"><p>Turns an expression into a positive natural number, assuming it is only built up from
+<span style="background-color:#fdf6e3;color:#657b83;">has_one.one</span>, <span style="background-color:#fdf6e3;color:#657b83;">bit0</span> and <span style="background-color:#fdf6e3;color:#657b83;">bit1</span>.</p>
+</div></div><div class="decl"><h4>expr.to_nat</h4><div class="decl_par"><p>Turns an expression into a natural number, assuming it is only built up from
+<span style="background-color:#fdf6e3;color:#657b83;">has_one.one</span>, <span style="background-color:#fdf6e3;color:#657b83;">bit0</span>, <span style="background-color:#fdf6e3;color:#657b83;">bit1</span> and <span style="background-color:#fdf6e3;color:#657b83;">has_zero.zero</span>.</p>
+</div></div><div class="decl"><h4>expr.to_int</h4><div class="decl_par"><p>Turns an expression into a integer, assuming it is only built up from
+<span style="background-color:#fdf6e3;color:#657b83;">has_one.one</span>, <span style="background-color:#fdf6e3;color:#657b83;">bit0</span>, <span style="background-color:#fdf6e3;color:#657b83;">bit1</span>, <span style="background-color:#fdf6e3;color:#657b83;">has_zero.zero</span> and a optionally a single <span style="background-color:#fdf6e3;color:#657b83;">has_neg.neg</span> as head.</p>
+</div></div><div class="decl"><h4>expr.apply_replacement_fun</h4><div class="decl_par"><p>Apply a function to each constant (inductive type, defined function etc) in an expression.</p>
+</div></div><div class="decl"><h4>expr.is_mvar</h4><div class="decl_par"><p>Tests whether an expression is a meta-variable.</p>
+</div></div><div class="decl"><h4>expr.is_sort</h4><div class="decl_par"><p>Tests whether an expression is a sort.</p>
+</div></div><div class="decl"><h4>expr.to_implicit</h4><div class="decl_par"><p>If <span style="background-color:#fdf6e3;color:#657b83;">e</span> is a local constant, <span style="background-color:#fdf6e3;color:#657b83;">to_implicit e</span> changes the binder info of <span style="background-color:#fdf6e3;color:#657b83;">e</span> to <span style="background-color:#fdf6e3;color:#657b83;">implicit</span>.</p>
+</div></div><div class="decl"><h4>expr.list_local_consts</h4><div class="decl_par"><p>Returns a list of all local constants in an expression (without duplicates).</p>
+</div></div><div class="decl"><h4>expr.list_constant</h4><div class="decl_par"><p>Returns a name_set of all constants in an expression.</p>
+</div></div><div class="decl"><h4>expr.list_meta_vars</h4><div class="decl_par"><p>Returns a list of all meta-variables in an expression (without duplicates).</p>
+</div></div><div class="decl"><h4>expr.list_names_with_prefix</h4><div class="decl_par"><p>Returns a name_set of all constants in an expression starting with a certain prefix.</p>
+</div></div><div class="decl"><h4>expr.contains_constant</h4><div class="decl_par"><p>Returns true if <span style="background-color:#fdf6e3;color:#657b83;">e</span> contains a name <span style="background-color:#fdf6e3;color:#657b83;">n</span> where <span style="background-color:#fdf6e3;color:#657b83;">p n</span> is true.
+Returns <span style="background-color:#fdf6e3;color:#657b83;">true</span> if <span style="background-color:#fdf6e3;color:#657b83;">p name.anonymous</span> is true</p>
+</div></div><div class="decl"><h4>expr.is_num_eq</h4><div class="decl_par"><p>is_num_eq n1 n2 returns true if n1 and n2 are both numerals with the same numeral structure,
+ignoring differences in type and type class arguments.</p>
+</div></div><div class="decl"><h4>expr.simp</h4><div class="decl_par"><p>Simplifies the expression <span style="background-color:#fdf6e3;color:#657b83;">t</span> with the specified options.
+The result is <span style="background-color:#fdf6e3;color:#657b83;">(new_e, pr)</span> with the new expression <span style="background-color:#fdf6e3;color:#657b83;">new_e</span> and a proof
+<span style="background-color:#fdf6e3;color:#657b83;">pr : e </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> new_e</span>.</p>
+</div></div><div class="decl"><h4>expr.dsimp</h4><div class="decl_par"><p>Definitionally simplifies the expression <span style="background-color:#fdf6e3;color:#657b83;">t</span> with the specified options.
+The result is the simplified expression.</p>
+</div></div><div class="decl"><h4>expr.pi_arity_aux</h4><div class="decl_par"><p>Auxilliary definition for <span style="background-color:#fdf6e3;color:#657b83;">expr.pi_arity</span></p>
+</div></div><div class="decl"><h4>expr.pi_arity</h4><div class="decl_par"><p>The arity of a pi-type. Does not perform any reduction of the expression.
+In one application this was ~30 times quicker than <span style="background-color:#fdf6e3;color:#657b83;">tactic.get_pi_arity</span>.</p>
+</div></div><div class="decl"><h4>expr.binding_names</h4><div class="decl_par"><p>Get the names of the bound variables by a sequence of pis or lambdas.</p>
+</div></div><div class="decl"><h4>expr.reduce_let</h4><div class="decl_par"><p>head-reduce a single let expression</p>
+</div></div><div class="decl"><h4>expr.reduce_lets</h4><div class="decl_par"><p>head-reduce all let expressions</p>
+</div></div><div class="decl"><h4>expr.instantiate_lambdas</h4><div class="decl_par"><p>Instantiate lambdas in the second argument by expressions from the first.</p>
+</div></div><div class="decl"><h4>expr.instantiate_lambdas_or_apps</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">instantiate_lambdas_or_apps es e</span> instantiates lambdas in <span style="background-color:#fdf6e3;color:#657b83;">e</span> by expressions from <span style="background-color:#fdf6e3;color:#657b83;">es</span>.
+If the length of <span style="background-color:#fdf6e3;color:#657b83;">es</span> is larger than the number of lambdas in <span style="background-color:#fdf6e3;color:#657b83;">e</span>,
+then the term is applied to the remaining terms.
+Also reduces head let-expressions in <span style="background-color:#fdf6e3;color:#657b83;">e</span>, including those after instantiating all lambdas.</p>
+</div></div><div class="decl"><h4>expr.pi_codomain</h4><div class="decl_par"><p>Get the codomain/target of a pi-type.
+This definition doesn't Instantiate bound variables, and therefore produces a term that is open.</p>
+</div></div><div class="decl"><h4>expr.pi_binders_aux</h4><div class="decl_par"><p>Auxilliary defintion for <span style="background-color:#fdf6e3;color:#657b83;">pi_binders</span>.</p>
+</div></div><div class="decl"><h4>expr.pi_binders</h4><div class="decl_par"><p>Get the binders and codomain of a pi-type.
+This definition doesn't Instantiate bound variables, and therefore produces a term that is open.
+The.tactic <span style="background-color:#fdf6e3;color:#657b83;">get_pi_binders</span> in <span style="background-color:#fdf6e3;color:#657b83;">tactic.core</span> does the same, but also instantiates the
+free variables</p>
+</div></div><div class="decl"><h4>expr.get_app_fn_args_aux</h4><div class="decl_par"><p>Auxilliary defintion for <span style="background-color:#fdf6e3;color:#657b83;">get_app_fn_args</span>.</p>
+</div></div><div class="decl"><h4>expr.get_app_fn_args</h4><div class="decl_par"><p>A combination of <span style="background-color:#fdf6e3;color:#657b83;">get_app_fn</span> and <span style="background-color:#fdf6e3;color:#657b83;">get_app_args</span>: lists both the
+function and its arguments of an application</p>
+</div></div><div class="decl"><h4>expr.drop_pis</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">drop_pis es e</span> instantiates the pis in <span style="background-color:#fdf6e3;color:#657b83;">e</span> with the expressions from <span style="background-color:#fdf6e3;color:#657b83;">es</span>.</p>
+</div></div><div class="decl"><h4>expr.mk_op_lst</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">mk_op_lst op empty [x1, x2, ...]</span> is defined as <span style="background-color:#fdf6e3;color:#657b83;">op x1 (op x2 ...)</span>.
+Returns <span style="background-color:#fdf6e3;color:#657b83;">empty</span> if the list is empty.</p>
+</div></div><div class="decl"><h4>expr.mk_and_lst</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">mk_and_lst [x1, x2, ...]</span> is defined as <span style="background-color:#fdf6e3;color:#657b83;">x1 </span><span style="background-color:#fdf6e3;color:#b58900;">∧</span><span style="background-color:#fdf6e3;color:#657b83;"> (x2 </span><span style="background-color:#fdf6e3;color:#b58900;">∧</span><span style="background-color:#fdf6e3;color:#657b83;"> ...)</span>, or <span style="background-color:#fdf6e3;color:#657b83;">true</span> if the list is empty.</p>
+</div></div><div class="decl"><h4>expr.mk_or_lst</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">mk_or_lst [x1, x2, ...]</span> is defined as <span style="background-color:#fdf6e3;color:#657b83;">x1 </span><span style="background-color:#fdf6e3;color:#b58900;">∨</span><span style="background-color:#fdf6e3;color:#657b83;"> (x2 </span><span style="background-color:#fdf6e3;color:#b58900;">∨</span><span style="background-color:#fdf6e3;color:#657b83;"> ...)</span>, or <span style="background-color:#fdf6e3;color:#657b83;">false</span> if the list is empty.</p>
+</div></div><div class="decl"><h4>expr.local_binding_info</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">local_binding_info e</span> returns the binding info of <span style="background-color:#fdf6e3;color:#657b83;">e</span> if <span style="background-color:#fdf6e3;color:#657b83;">e</span> is a local constant.
+Otherwise returns <span style="background-color:#fdf6e3;color:#657b83;">binder_info.default</span>.</p>
+</div></div><div class="decl"><h4>expr.is_default_local</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">is_default_local e</span> tests whether <span style="background-color:#fdf6e3;color:#657b83;">e</span> is a local constant with binder info
+<span style="background-color:#fdf6e3;color:#657b83;">binder_info.default</span></p>
+</div></div><div class="decl"><h4>environment.in_current_file'</h4><div class="decl_par"><p>Tests whether a name is declared in the current file. Fixes an error in <span style="background-color:#fdf6e3;color:#657b83;">in_current_file</span>
+which returns <span style="background-color:#fdf6e3;color:#657b83;">tt</span> for the four names <span style="background-color:#fdf6e3;color:#657b83;">quot, quot.mk, quot.lift, quot.ind</span></p>
+</div></div><div class="decl"><h4>environment.is_structure_like</h4><div class="decl_par"><p>Tests whether <span style="background-color:#fdf6e3;color:#657b83;">n</span> is an inductive type with one constructor without indices.
+If so, returns the number of paramaters and the name of the constructor.
+Otherwise, returns <span style="background-color:#fdf6e3;color:#657b83;">none</span>.</p>
+</div></div><div class="decl"><h4>environment.is_structure</h4><div class="decl_par"><p>Tests whether <span style="background-color:#fdf6e3;color:#657b83;">n</span> is a structure.
+It will first test whether <span style="background-color:#fdf6e3;color:#657b83;">n</span> is structure-like and then test that the first projection is
+defined in the environment and is a projection.</p>
+</div></div><div class="decl"><h4>environment.get_projections</h4><div class="decl_par"><p>Get all projections of the structure <span style="background-color:#fdf6e3;color:#657b83;">n</span>. Returns <span style="background-color:#fdf6e3;color:#657b83;">none</span> if <span style="background-color:#fdf6e3;color:#657b83;">n</span> is not structure-like.
+If <span style="background-color:#fdf6e3;color:#657b83;">n</span> is not a structure, but is structure-like, this does not check whether the names
+are existing declarations.</p>
+</div></div><div class="decl"><h4>environment.is_ginductive'</h4><div class="decl_par"><p>Tests whether <span style="background-color:#fdf6e3;color:#657b83;">nm</span> is a generalized inductive type that is not a normal inductive type.
+Note that <span style="background-color:#fdf6e3;color:#657b83;">is_ginductive</span> returns <span style="background-color:#fdf6e3;color:#657b83;">tt</span> even on regular inductive types.
+This returns <span style="background-color:#fdf6e3;color:#657b83;">tt</span> if <span style="background-color:#fdf6e3;color:#657b83;">nm</span> is (part of a) mutually defined inductive type or a nested inductive
+type.</p>
+</div></div><div class="decl"><h4>environment.decl_filter_map</h4><div class="decl_par"><p>For all declarations <span style="background-color:#fdf6e3;color:#657b83;">d</span> where <span style="background-color:#fdf6e3;color:#657b83;">f d </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> some x</span> this adds <span style="background-color:#fdf6e3;color:#657b83;">x</span> to the returned list.</p>
+</div></div><div class="decl"><h4>environment.decl_map</h4><div class="decl_par"><p>Maps <span style="background-color:#fdf6e3;color:#657b83;">f</span> to all declarations in the environment.</p>
+</div></div><div class="decl"><h4>environment.get_decls</h4><div class="decl_par"><p>Lists all declarations in the environment</p>
+</div></div><div class="decl"><h4>environment.get_trusted_decls</h4><div class="decl_par"><p>Lists all trusted (non-meta) declarations in the environment</p>
+</div></div><div class="decl"><h4>environment.get_decl_names</h4><div class="decl_par"><p>Lists the name of all declarations in the environment</p>
+</div></div><div class="decl"><h4>environment.mfold</h4><div class="decl_par"><p>Fold a monad over all declarations in the environment.</p>
+</div></div><div class="decl"><h4>environment.mfilter</h4><div class="decl_par"><p>Filters all declarations in the environment.</p>
+</div></div><div class="decl"><h4>environment.is_prefix_of_file</h4><div class="decl_par"><p>Checks whether <span style="background-color:#fdf6e3;color:#657b83;">s</span> is a prefix of the file where <span style="background-color:#fdf6e3;color:#657b83;">n</span> is declared.
+This is used to check whether <span style="background-color:#fdf6e3;color:#657b83;">n</span> is declared in mathlib, where <span style="background-color:#fdf6e3;color:#657b83;">s</span> is the mathlib directory.</p>
+</div></div><div class="decl"><h4>expr.is_eta_expansion_of</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">is_eta_expansion_of args univs l</span> checks whether for all elements <span style="background-color:#fdf6e3;color:#657b83;">(nm, pr)</span> in <span style="background-color:#fdf6e3;color:#657b83;">l</span> we have
+<span style="background-color:#fdf6e3;color:#657b83;">pr </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> nm.{univs} args</span>.
+Used in <span style="background-color:#fdf6e3;color:#657b83;">is_eta_expansion</span>, where <span style="background-color:#fdf6e3;color:#657b83;">l</span> consists of the projections and the fields of the value we
+want to eta-reduce.</p>
+</div></div><div class="decl"><h4>expr.is_eta_expansion_test</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">is_eta_expansion_test l</span> checks whether there is a list of expresions <span style="background-color:#fdf6e3;color:#657b83;">args</span> such that for all
+elements <span style="background-color:#fdf6e3;color:#657b83;">(nm, pr)</span> in <span style="background-color:#fdf6e3;color:#657b83;">l</span> we have <span style="background-color:#fdf6e3;color:#657b83;">pr </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> nm args</span>. If so, returns the last element of <span style="background-color:#fdf6e3;color:#657b83;">args</span>.
+Used in <span style="background-color:#fdf6e3;color:#657b83;">is_eta_expansion</span>, where <span style="background-color:#fdf6e3;color:#657b83;">l</span> consists of the projections and the fields of the value we
+want to eta-reduce.</p>
+</div></div><div class="decl"><h4>expr.is_eta_expansion_aux</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">is_eta_expansion_aux val l</span> checks whether <span style="background-color:#fdf6e3;color:#657b83;">val</span> can be eta-reduced to an expression <span style="background-color:#fdf6e3;color:#657b83;">e</span>.
+Here <span style="background-color:#fdf6e3;color:#657b83;">l</span> is intended to consists of the projections and the fields of <span style="background-color:#fdf6e3;color:#657b83;">val</span>.
+This tactic calls <span style="background-color:#fdf6e3;color:#657b83;">is_eta_expansion_test l</span>, but first removes all proofs from the list <span style="background-color:#fdf6e3;color:#657b83;">l</span> and
+afterward checks whether the retulting expression <span style="background-color:#fdf6e3;color:#657b83;">e</span> unifies with <span style="background-color:#fdf6e3;color:#657b83;">val</span>.
+This last check is necessary, because <span style="background-color:#fdf6e3;color:#657b83;">val</span> and <span style="background-color:#fdf6e3;color:#657b83;">e</span> might have different types.</p>
+</div></div><div class="decl"><h4>expr.is_eta_expansion</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">is_eta_expansion val</span> checks whether there is an expression <span style="background-color:#fdf6e3;color:#657b83;">e</span> such that <span style="background-color:#fdf6e3;color:#657b83;">val</span> is the
+eta-expansion of <span style="background-color:#fdf6e3;color:#657b83;">e</span>.
+With eta-expansion we here mean the eta-expansion of a structure, not of a function.
+For example, the eta-expansion of <span style="background-color:#fdf6e3;color:#657b83;">x : α × β</span> is <span style="background-color:#fdf6e3;color:#657b83;">⟨x.</span><span style="background-color:#fdf6e3;color:#6c71c4;">1</span><span style="background-color:#fdf6e3;color:#657b83;">, x.</span><span style="background-color:#fdf6e3;color:#6c71c4;">2</span><span style="background-color:#fdf6e3;color:#657b83;">⟩</span>.
+This assumes that <span style="background-color:#fdf6e3;color:#657b83;">val</span> is a fully-applied application of the constructor of a structure.</p>
+<p>This is useful to reduce expressions generated by the notation
+<span style="background-color:#fdf6e3;color:#657b83;">{ field_1 </span><span style="background-color:#fdf6e3;color:#b58900;">:=</span><span style="background-color:#fdf6e3;color:#657b83;"> _, ..other_structure }</span>
+If <span style="background-color:#fdf6e3;color:#657b83;">other_structure</span> is itself a field of the structure, then the elaborator will insert an
+eta-expanded version of <span style="background-color:#fdf6e3;color:#657b83;">other_structure</span>.</p>
+</div></div><div class="decl"><h4>declaration.in_current_file</h4><div class="decl_par"><p>Checks whether the declaration is declared in the current file.
+This is a simple wrapper around <span style="background-color:#fdf6e3;color:#657b83;">environment.in_current_file&#39;</span>
+Use <span style="background-color:#fdf6e3;color:#657b83;">environment.in_current_file&#39;</span> instead if performance matters.</p>
+</div></div><div class="decl"><h4>declaration.is_theorem</h4><div class="decl_par"><p>Checks whether a declaration is a theorem</p>
+</div></div><div class="decl"><h4>declaration.is_constant</h4><div class="decl_par"><p>Checks whether a declaration is a constant</p>
+</div></div><div class="decl"><h4>declaration.is_axiom</h4><div class="decl_par"><p>Checks whether a declaration is a axiom</p>
+</div></div><div class="decl"><h4>declaration.is_auto_generated</h4><div class="decl_par"><p>Checks whether a declaration is automatically generated in the environment.
+There is no cheap way to check whether a declaration in the namespace of a generalized
+inductive type is automatically generated, so for now we say that all of them are automatically
+generated.</p>
+</div></div><div class="decl"><h4>declaration.univ_levels</h4><div class="decl_par"><p>Returns the list of universe levels of a declaration.</p>
+</div></div></html>

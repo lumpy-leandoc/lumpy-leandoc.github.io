@@ -1,0 +1,55 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><h1>Ordering on topologies and (co)induced topologies</h1>
+<p>Topologies on a fixed type <span style="background-color:#fdf6e3;color:#657b83;">α</span> are ordered, by reverse inclusion.
+That is, for topologies <span style="background-color:#fdf6e3;color:#657b83;">t₁</span> and <span style="background-color:#fdf6e3;color:#657b83;">t₂</span> on <span style="background-color:#fdf6e3;color:#657b83;">α</span>, we write <span style="background-color:#fdf6e3;color:#657b83;">t₁ </span><span style="background-color:#fdf6e3;color:#b58900;">≤</span><span style="background-color:#fdf6e3;color:#657b83;"> t₂</span>
+if every set open in <span style="background-color:#fdf6e3;color:#657b83;">t₂</span> is also open in <span style="background-color:#fdf6e3;color:#657b83;">t₁</span>.
+(One also calls <span style="background-color:#fdf6e3;color:#657b83;">t₁</span> finer than <span style="background-color:#fdf6e3;color:#657b83;">t₂</span>, and <span style="background-color:#fdf6e3;color:#657b83;">t₂</span> coarser than <span style="background-color:#fdf6e3;color:#657b83;">t₁</span>.)</p>
+<p>Any function <span style="background-color:#fdf6e3;color:#657b83;">f : α </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> β</span> induces
+<span style="background-color:#fdf6e3;color:#657b83;">induced f : topological_space β </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> topological_space α</span>
+and  <span style="background-color:#fdf6e3;color:#657b83;">coinduced f : topological_space α </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> topological_space β</span>.
+Continuity, the ordering on topologies and (co)induced topologies are
+related as follows:</p>
+<ul>
+<li>The identity map (α, t₁) → (α, t₂) is continuous iff t₁ ≤ t₂.</li>
+<li>A map f : (α, t) → (β, u) is continuous
+iff             t ≤ induced f u   (<span style="background-color:#fdf6e3;color:#657b83;">continuous_iff_le_induced</span>)
+iff coinduced f t ≤ u             (<span style="background-color:#fdf6e3;color:#657b83;">continuous_iff_coinduced_le</span>).</li>
+</ul>
+<p>Topologies on α form a complete lattice, with ⊥ the discrete topology
+and ⊤ the indiscrete topology.</p>
+<p>For a function f : α → β, (coinduced f, induced f) is a Galois connection
+between topologies on α and topologies on β.</p>
+<h2>Implementation notes</h2>
+<p>There is a Galois insertion between topologies on α (with the inclusion ordering)
+and all collections of sets in α. The complete lattice structure on topologies
+on α is defined as the reverse of the one obtained via this Galois insertion.</p>
+<h2>Tags</h2>
+<p>finer, coarser, induced topology, coinduced topology</p>
+<hr/><div class="decl"><h4>topological_space.generate_open</h4><div class="decl_par"><p>The open sets of the least topology containing a collection of basic sets.</p>
+</div></div><div class="decl"><h4>topological_space.generate_from</h4><div class="decl_par"><p>The smallest topological space containing the collection <span style="background-color:#fdf6e3;color:#657b83;">g</span> of basic sets</p>
+</div></div><div class="decl"><h4>topological_space.mk_of_nhds</h4><div class="decl_par"><p>Construct a topology on α given the filter of neighborhoods of each point of α.</p>
+</div></div><div class="decl"><h4>tmp_order</h4><div class="decl_par"><p>The inclusion ordering on topologies on α. We use it to get a complete
+lattice instance via the Galois insertion method, but the partial order
+that we will eventually impose on <span style="background-color:#fdf6e3;color:#657b83;">topological_space α</span> is the reverse one.</p>
+</div></div><div class="decl"><h4>mk_of_closure</h4><div class="decl_par"><p>If <span style="background-color:#fdf6e3;color:#657b83;">s</span> equals the collection of open sets in the topology it generates,
+then <span style="background-color:#fdf6e3;color:#657b83;">s</span> defines a topology.</p>
+</div></div><div class="decl"><h4>gi_generate_from</h4><div class="decl_par"><p>The Galois insertion between <span style="background-color:#fdf6e3;color:#657b83;">set (set α)</span> and <span style="background-color:#fdf6e3;color:#657b83;">topological_space α</span> whose lower part
+sends a collection of subsets of α to the topology they generate, and whose upper part
+sends a topology to its collection of open subsets.</p>
+</div></div><div class="decl"><h4>tmp_complete_lattice</h4><div class="decl_par"><p>The complete lattice of topological spaces, but built on the inclusion ordering.</p>
+</div></div><div class="decl"><h4>topological_space.partial_order</h4><div class="decl_par"><p>The ordering on topologies on the type <span style="background-color:#fdf6e3;color:#657b83;">α</span>.
+<span style="background-color:#fdf6e3;color:#657b83;">t </span><span style="background-color:#fdf6e3;color:#b58900;">≤</span><span style="background-color:#fdf6e3;color:#657b83;"> s</span> if every set open in <span style="background-color:#fdf6e3;color:#657b83;">s</span> is also open in <span style="background-color:#fdf6e3;color:#657b83;">t</span> (<span style="background-color:#fdf6e3;color:#657b83;">t</span> is finer than <span style="background-color:#fdf6e3;color:#657b83;">s</span>).</p>
+</div></div><div class="decl"><h4>topological_space.lattice.complete_lattice</h4><div class="decl_par"><p>Topologies on <span style="background-color:#fdf6e3;color:#657b83;">α</span> form a complete lattice, with <span style="background-color:#fdf6e3;color:#657b83;">⊥</span> the discrete topology
+and <span style="background-color:#fdf6e3;color:#657b83;">⊤</span> the indiscrete topology. The infimum of a collection of topologies
+is the topology generated by all their open sets, while the supremem is the
+topology whose open sets are those sets open in every member of the collection.</p>
+</div></div><div class="decl"><h4>discrete_topology</h4><div class="decl_par"><p>A topological space is discrete if every set is open, that is,
+its topology equals the discrete topology <span style="background-color:#fdf6e3;color:#657b83;">⊥</span>.</p>
+</div></div><div class="decl"><h4>topological_space.induced</h4><div class="decl_par"><p>Given <span style="background-color:#fdf6e3;color:#657b83;">f : α </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> β</span> and a topology on <span style="background-color:#fdf6e3;color:#657b83;">β</span>, the induced topology on <span style="background-color:#fdf6e3;color:#657b83;">α</span> is the collection of
+sets that are preimages of some open set in <span style="background-color:#fdf6e3;color:#657b83;">β</span>. This is the coarsest topology that
+makes <span style="background-color:#fdf6e3;color:#657b83;">f</span> continuous.</p>
+</div></div><div class="decl"><h4>topological_space.coinduced</h4><div class="decl_par"><p>Given <span style="background-color:#fdf6e3;color:#657b83;">f : α </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> β</span> and a topology on <span style="background-color:#fdf6e3;color:#657b83;">α</span>, the coinduced topology on <span style="background-color:#fdf6e3;color:#657b83;">β</span> is defined
+such that <span style="background-color:#fdf6e3;color:#657b83;">s:set β</span> is open if the preimage of <span style="background-color:#fdf6e3;color:#657b83;">s</span> is open. This is the finest topology that
+makes <span style="background-color:#fdf6e3;color:#657b83;">f</span> continuous.</p>
+</div></div><div class="decl"><h4>topological_space.nhds_adjoint</h4><div class="decl_par"><p>This construction is left adjoint to the operation sending a topology on <span style="background-color:#fdf6e3;color:#657b83;">α</span>
+to its neighborhood filter at a fixed point <span style="background-color:#fdf6e3;color:#657b83;">a : α</span>.</p>
+</div></div></html>

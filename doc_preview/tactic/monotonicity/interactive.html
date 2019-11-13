@@ -1,0 +1,41 @@
+<html><head><link rel="stylesheet" href="../../docs_style.css"></head><div class="decl"><h4>tactic.interactive.match_assoc</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">(</span><span style="background-color:#fdf6e3;color:#859900;">prefix</span><span style="background-color:#fdf6e3;color:#657b83;">,left,right,suffix) ← match_assoc unif l r</span> finds the
+longest prefix and suffix common to <span style="background-color:#fdf6e3;color:#657b83;">l</span> and <span style="background-color:#fdf6e3;color:#657b83;">r</span> and
+returns them along with the differences</p>
+</div></div><div class="decl"><h4>tactic.interactive.generalize'</h4><div class="decl_par"><p>tactic-facing function, similar to <span style="background-color:#fdf6e3;color:#657b83;">interactive.tactic.generalize</span> with the
+exception that meta variables</p>
+</div></div><div class="decl"><h4>tactic.interactive.mono</h4><div class="decl_par"><ul>
+<li><span style="background-color:#fdf6e3;color:#657b83;">mono</span> applies a monotonicity rule.</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">mono</span><span style="background-color:#fdf6e3;color:#b58900;">*</span> applies monotonicity rules repetitively.</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">mono </span><span style="background-color:#fdf6e3;color:#859900;">with</span><span style="background-color:#fdf6e3;color:#657b83;"> x </span><span style="background-color:#fdf6e3;color:#b58900;">≤</span><span style="background-color:#fdf6e3;color:#657b83;"> y</span> or <span style="background-color:#fdf6e3;color:#657b83;">mono </span><span style="background-color:#fdf6e3;color:#859900;">with</span><span style="background-color:#fdf6e3;color:#657b83;"> [</span><span style="background-color:#fdf6e3;color:#6c71c4;">0 </span><span style="background-color:#fdf6e3;color:#b58900;">≤</span><span style="background-color:#fdf6e3;color:#657b83;"> x,</span><span style="background-color:#fdf6e3;color:#6c71c4;">0 </span><span style="background-color:#fdf6e3;color:#b58900;">≤</span><span style="background-color:#fdf6e3;color:#657b83;"> y]</span> creates an assertion for the listed
+propositions. Those help to select the right monotonicity rule.</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">mono left</span> or <span style="background-color:#fdf6e3;color:#657b83;">mono right</span> is useful when proving strict orderings:
+for <span style="background-color:#fdf6e3;color:#657b83;">x </span><span style="background-color:#fdf6e3;color:#b58900;">+</span><span style="background-color:#fdf6e3;color:#657b83;"> y </span><span style="background-color:#fdf6e3;color:#b58900;">&lt;</span><span style="background-color:#fdf6e3;color:#657b83;"> w </span><span style="background-color:#fdf6e3;color:#b58900;">+</span><span style="background-color:#fdf6e3;color:#657b83;"> z</span> could be broken down into either
+<ul>
+<li>left:  <span style="background-color:#fdf6e3;color:#657b83;">x </span><span style="background-color:#fdf6e3;color:#b58900;">≤</span><span style="background-color:#fdf6e3;color:#657b83;"> w</span> and <span style="background-color:#fdf6e3;color:#657b83;">y </span><span style="background-color:#fdf6e3;color:#b58900;">&lt;</span><span style="background-color:#fdf6e3;color:#657b83;"> z</span> or</li>
+<li>right: <span style="background-color:#fdf6e3;color:#657b83;">x </span><span style="background-color:#fdf6e3;color:#b58900;">&lt;</span><span style="background-color:#fdf6e3;color:#657b83;"> w</span> and <span style="background-color:#fdf6e3;color:#657b83;">y </span><span style="background-color:#fdf6e3;color:#b58900;">≤</span><span style="background-color:#fdf6e3;color:#657b83;"> z</span></li>
+</ul>
+</li>
+</ul>
+</div></div><div class="decl"><h4>tactic.interactive.ac_mono_aux</h4><div class="decl_par"><p>transforms a goal of the form <span style="background-color:#fdf6e3;color:#657b83;">f x ≼ f y</span> into <span style="background-color:#fdf6e3;color:#657b83;">x </span><span style="background-color:#fdf6e3;color:#b58900;">≤</span><span style="background-color:#fdf6e3;color:#657b83;"> y</span> using lemmas
+marked as <span style="background-color:#fdf6e3;color:#657b83;">monotonic</span>.</p>
+<p>Special care is taken when <span style="background-color:#fdf6e3;color:#657b83;">f</span> is the repeated application of an
+associative operator and if the operator is commutative</p>
+</div></div><div class="decl"><h4>tactic.interactive.repeat_until_or_at_most</h4><div class="decl_par"><p>(repeat_until_or_at_most n t u): repeat tactic <span style="background-color:#fdf6e3;color:#657b83;">t</span> at most n times or until u succeeds</p>
+</div></div><div class="decl"><h4>tactic.interactive.ac_mono</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">ac_mono</span> reduces the <span style="background-color:#fdf6e3;color:#657b83;">f x ⊑ f y</span>, for some relation <span style="background-color:#fdf6e3;color:#657b83;">⊑</span> and a
+monotonic function <span style="background-color:#fdf6e3;color:#657b83;">f</span> to <span style="background-color:#fdf6e3;color:#657b83;">x ≺ y</span>.</p>
+<p><span style="background-color:#fdf6e3;color:#657b83;">ac_mono</span><span style="background-color:#fdf6e3;color:#b58900;">*</span> unwraps monotonic functions until it can't.</p>
+<p><span style="background-color:#fdf6e3;color:#657b83;">ac_mono^k</span>, for some literal number <span style="background-color:#fdf6e3;color:#657b83;">k</span> applies monotonicity <span style="background-color:#fdf6e3;color:#657b83;">k</span>
+times.</p>
+<p><span style="background-color:#fdf6e3;color:#657b83;">ac_mono h</span>, with <span style="background-color:#fdf6e3;color:#657b83;">h</span> a hypothesis, unwraps monotonic functions
+and uses <span style="background-color:#fdf6e3;color:#657b83;">h</span> to solve the remaining goal. Can be combined with * or
+^k: <span style="background-color:#fdf6e3;color:#657b83;">ac_mono</span><span style="background-color:#fdf6e3;color:#b58900;">*</span><span style="background-color:#fdf6e3;color:#657b83;"> h</span></p>
+<p><span style="background-color:#fdf6e3;color:#657b83;">ac_mono : p</span> asserts <span style="background-color:#fdf6e3;color:#657b83;">p</span> and uses it to discharge the goal result
+unwrapping a series of monotonic functions. Can be combined with * or
+^k: <span style="background-color:#fdf6e3;color:#657b83;">ac_mono</span><span style="background-color:#fdf6e3;color:#b58900;">*</span><span style="background-color:#fdf6e3;color:#657b83;"> : p</span></p>
+<p>In the case where <span style="background-color:#fdf6e3;color:#657b83;">f</span> is an associative or commutative operator,
+<span style="background-color:#fdf6e3;color:#657b83;">ac_mono</span> will consider any possible permutation of its arguments
+and use the one the minimizes the difference between the left-hand
+side and the right-hand side.</p>
+<p>TODO(Simon): with <span style="background-color:#fdf6e3;color:#657b83;">ac_mono h</span> and <span style="background-color:#fdf6e3;color:#657b83;">ac_mono : p</span> split the remaining
+gaol if the provided rule does not solve it completely.</p>
+</div></div></html>

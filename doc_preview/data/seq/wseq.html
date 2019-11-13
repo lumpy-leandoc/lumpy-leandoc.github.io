@@ -1,0 +1,77 @@
+<html><head><link rel="stylesheet" href="../../docs_style.css"></head><div class="decl"><h4>wseq</h4><div class="decl_par"><p>Weak sequences.</p>
+<p>While the <span style="background-color:#fdf6e3;color:#657b83;">seq</span> structure allows for lists which may not be finite,
+a weak sequence also allows the computation of each element to
+involve an indeterminate amount of computation, including possibly
+an infinite loop. This is represented as a regular <span style="background-color:#fdf6e3;color:#657b83;">seq</span> interspersed
+with <span style="background-color:#fdf6e3;color:#657b83;">none</span> elements to indicate that computation is ongoing.</p>
+<p>This model is appropriate for Haskell style lazy lists, and is closed
+under most interesting computation patterns on infinite lists,
+but conversely it is difficult to extract elements from it.</p>
+</div></div><div class="decl"><h4>wseq.of_seq</h4><div class="decl_par"><p>Turn a sequence into a weak sequence</p>
+</div></div><div class="decl"><h4>wseq.of_list</h4><div class="decl_par"><p>Turn a list into a weak sequence</p>
+</div></div><div class="decl"><h4>wseq.of_stream</h4><div class="decl_par"><p>Turn a stream into a weak sequence</p>
+</div></div><div class="decl"><h4>wseq.nil</h4><div class="decl_par"><p>The empty weak sequence</p>
+</div></div><div class="decl"><h4>wseq.cons</h4><div class="decl_par"><p>Prepend an element to a weak sequence</p>
+</div></div><div class="decl"><h4>wseq.think</h4><div class="decl_par"><p>Compute for one tick, without producing any elements</p>
+</div></div><div class="decl"><h4>wseq.destruct</h4><div class="decl_par"><p>Destruct a weak sequence, to (eventually possibly) produce either
+<span style="background-color:#fdf6e3;color:#657b83;">none</span> for <span style="background-color:#fdf6e3;color:#657b83;">nil</span> or <span style="background-color:#fdf6e3;color:#657b83;">some (a, s)</span> if an element is produced.</p>
+</div></div><div class="decl"><h4>wseq.head</h4><div class="decl_par"><p>Get the head of a weak sequence. This involves a possibly
+infinite computation.</p>
+</div></div><div class="decl"><h4>wseq.flatten</h4><div class="decl_par"><p>Encode a computation yielding a weak sequence into additional
+<span style="background-color:#fdf6e3;color:#657b83;">think</span> constructors in a weak sequence</p>
+</div></div><div class="decl"><h4>wseq.tail</h4><div class="decl_par"><p>Get the tail of a weak sequence. This doesn't need a <span style="background-color:#fdf6e3;color:#657b83;">computation</span>
+wrapper, unlike <span style="background-color:#fdf6e3;color:#657b83;">head</span>, because <span style="background-color:#fdf6e3;color:#657b83;">flatten</span> allows us to hide this
+in the construction of the weak sequence itself.</p>
+</div></div><div class="decl"><h4>wseq.drop</h4><div class="decl_par"><p>drop the first <span style="background-color:#fdf6e3;color:#657b83;">n</span> elements from <span style="background-color:#fdf6e3;color:#657b83;">s</span>.</p>
+</div></div><div class="decl"><h4>wseq.nth</h4><div class="decl_par"><p>Get the nth element of <span style="background-color:#fdf6e3;color:#657b83;">s</span>.</p>
+</div></div><div class="decl"><h4>wseq.to_list</h4><div class="decl_par"><p>Convert <span style="background-color:#fdf6e3;color:#657b83;">s</span> to a list (if it is finite and completes in finite time).</p>
+</div></div><div class="decl"><h4>wseq.length</h4><div class="decl_par"><p>Get the length of <span style="background-color:#fdf6e3;color:#657b83;">s</span> (if it is finite and completes in finite time).</p>
+</div></div><div class="decl"><h4>wseq.is_finite</h4><div class="decl_par"><p>A weak sequence is finite if <span style="background-color:#fdf6e3;color:#657b83;">to_list s</span> terminates. Equivalently,
+it is a finite number of <span style="background-color:#fdf6e3;color:#657b83;">think</span> and <span style="background-color:#fdf6e3;color:#657b83;">cons</span> applied to <span style="background-color:#fdf6e3;color:#657b83;">nil</span>.</p>
+</div></div><div class="decl"><h4>wseq.get</h4><div class="decl_par"><p>Get the list corresponding to a finite weak sequence.</p>
+</div></div><div class="decl"><h4>wseq.productive</h4><div class="decl_par"><p>A weak sequence is <em>productive</em> if it never stalls forever - there are
+always a finite number of <span style="background-color:#fdf6e3;color:#657b83;">think</span>s between <span style="background-color:#fdf6e3;color:#657b83;">cons</span> constructors.
+The sequence itself is allowed to be infinite though.</p>
+</div></div><div class="decl"><h4>wseq.update_nth</h4><div class="decl_par"><p>Replace the <span style="background-color:#fdf6e3;color:#657b83;">n</span>th element of <span style="background-color:#fdf6e3;color:#657b83;">s</span> with <span style="background-color:#fdf6e3;color:#657b83;">a</span>.</p>
+</div></div><div class="decl"><h4>wseq.remove_nth</h4><div class="decl_par"><p>Remove the <span style="background-color:#fdf6e3;color:#657b83;">n</span>th element of <span style="background-color:#fdf6e3;color:#657b83;">s</span>.</p>
+</div></div><div class="decl"><h4>wseq.filter_map</h4><div class="decl_par"><p>Map the elements of <span style="background-color:#fdf6e3;color:#657b83;">s</span> over <span style="background-color:#fdf6e3;color:#657b83;">f</span>, removing any values that yield <span style="background-color:#fdf6e3;color:#657b83;">none</span>.</p>
+</div></div><div class="decl"><h4>wseq.filter</h4><div class="decl_par"><p>Select the elements of <span style="background-color:#fdf6e3;color:#657b83;">s</span> that satisfy <span style="background-color:#fdf6e3;color:#657b83;">p</span>.</p>
+</div></div><div class="decl"><h4>wseq.find</h4><div class="decl_par"><p>Get the first element of <span style="background-color:#fdf6e3;color:#657b83;">s</span> satisfying <span style="background-color:#fdf6e3;color:#657b83;">p</span>.</p>
+</div></div><div class="decl"><h4>wseq.zip_with</h4><div class="decl_par"><p>Zip a function over two weak sequences</p>
+</div></div><div class="decl"><h4>wseq.zip</h4><div class="decl_par"><p>Zip two weak sequences into a single sequence of pairs</p>
+</div></div><div class="decl"><h4>wseq.find_indexes</h4><div class="decl_par"><p>Get the list of indexes of elements of <span style="background-color:#fdf6e3;color:#657b83;">s</span> satisfying <span style="background-color:#fdf6e3;color:#657b83;">p</span></p>
+</div></div><div class="decl"><h4>wseq.find_index</h4><div class="decl_par"><p>Get the index of the first element of <span style="background-color:#fdf6e3;color:#657b83;">s</span> satisfying <span style="background-color:#fdf6e3;color:#657b83;">p</span></p>
+</div></div><div class="decl"><h4>wseq.index_of</h4><div class="decl_par"><p>Get the index of the first occurrence of <span style="background-color:#fdf6e3;color:#657b83;">a</span> in <span style="background-color:#fdf6e3;color:#657b83;">s</span></p>
+</div></div><div class="decl"><h4>wseq.indexes_of</h4><div class="decl_par"><p>Get the indexes of occurrences of <span style="background-color:#fdf6e3;color:#657b83;">a</span> in <span style="background-color:#fdf6e3;color:#657b83;">s</span></p>
+</div></div><div class="decl"><h4>wseq.union</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">union s1 s2</span> is a weak sequence which interleaves <span style="background-color:#fdf6e3;color:#657b83;">s1</span> and <span style="background-color:#fdf6e3;color:#657b83;">s2</span> in
+some order (nondeterministically).</p>
+</div></div><div class="decl"><h4>wseq.is_empty</h4><div class="decl_par"><p>Returns <span style="background-color:#fdf6e3;color:#657b83;">tt</span> if <span style="background-color:#fdf6e3;color:#657b83;">s</span> is <span style="background-color:#fdf6e3;color:#657b83;">nil</span> and <span style="background-color:#fdf6e3;color:#657b83;">ff</span> if <span style="background-color:#fdf6e3;color:#657b83;">s</span> has an element</p>
+</div></div><div class="decl"><h4>wseq.compute</h4><div class="decl_par"><p>Calculate one step of computation</p>
+</div></div><div class="decl"><h4>wseq.take</h4><div class="decl_par"><p>Get the first <span style="background-color:#fdf6e3;color:#657b83;">n</span> elements of a weak sequence</p>
+</div></div><div class="decl"><h4>wseq.split_at</h4><div class="decl_par"><p>Split the sequence at position <span style="background-color:#fdf6e3;color:#657b83;">n</span> into a finite initial segment
+and the weak sequence tail</p>
+</div></div><div class="decl"><h4>wseq.any</h4><div class="decl_par"><p>Returns <span style="background-color:#fdf6e3;color:#657b83;">tt</span> if any element of <span style="background-color:#fdf6e3;color:#657b83;">s</span> satisfies <span style="background-color:#fdf6e3;color:#657b83;">p</span></p>
+</div></div><div class="decl"><h4>wseq.all</h4><div class="decl_par"><p>Returns <span style="background-color:#fdf6e3;color:#657b83;">tt</span> if every element of <span style="background-color:#fdf6e3;color:#657b83;">s</span> satisfies <span style="background-color:#fdf6e3;color:#657b83;">p</span></p>
+</div></div><div class="decl"><h4>wseq.scanl</h4><div class="decl_par"><p>Apply a function to the elements of the sequence to produce a sequence
+of partial results. (There is no <span style="background-color:#fdf6e3;color:#657b83;">scanr</span> because this would require
+working from the end of the sequence, which may not exist.)</p>
+</div></div><div class="decl"><h4>wseq.inits</h4><div class="decl_par"><p>Get the weak sequence of initial segments of the input sequence</p>
+</div></div><div class="decl"><h4>wseq.collect</h4><div class="decl_par"><p>Like take, but does not wait for a result. Calculates <span style="background-color:#fdf6e3;color:#657b83;">n</span> steps of
+computation and returns the sequence computed so far</p>
+</div></div><div class="decl"><h4>wseq.append</h4><div class="decl_par"><p>Append two weak sequences. As with <span style="background-color:#fdf6e3;color:#657b83;">seq.append</span>, this may not use
+the second sequence if the first one takes forever to compute</p>
+</div></div><div class="decl"><h4>wseq.map</h4><div class="decl_par"><p>Map a function over a weak sequence</p>
+</div></div><div class="decl"><h4>wseq.join</h4><div class="decl_par"><p>Flatten a sequence of weak sequences. (Note that this allows
+empty sequences, unlike <span style="background-color:#fdf6e3;color:#657b83;">seq.join</span>.)</p>
+</div></div><div class="decl"><h4>wseq.bind</h4><div class="decl_par"><p>Monadic bind operator for weak sequences</p>
+</div></div><div class="decl"><h4>wseq.lift_rel</h4><div class="decl_par"><p>Two weak sequences are <span style="background-color:#fdf6e3;color:#657b83;">lift_rel R</span> related if they are either both empty,
+or they are both nonempty and the heads are <span style="background-color:#fdf6e3;color:#657b83;">R</span> related and the tails are
+<span style="background-color:#fdf6e3;color:#657b83;">lift_rel R</span> related. (This is a coinductive definition.)</p>
+</div></div><div class="decl"><h4>wseq.equiv</h4><div class="decl_par"><p>If two sequences are equivalent, then they have the same values and
+the same computational behavior (i.e. if one loops forever then so does
+the other), although they may differ in the number of <span style="background-color:#fdf6e3;color:#657b83;">think</span>s needed to
+arrive at the answer.</p>
+</div></div><div class="decl"><h4>wseq.to_seq</h4><div class="decl_par"><p>Given a productive weak sequence, we can collapse all the <span style="background-color:#fdf6e3;color:#657b83;">think</span>s to
+produce a sequence.</p>
+</div></div><div class="decl"><h4>wseq.ret</h4><div class="decl_par"><p>The monadic <span style="background-color:#fdf6e3;color:#657b83;">return a</span> is a singleton list containing <span style="background-color:#fdf6e3;color:#657b83;">a</span>.</p>
+</div></div></html>

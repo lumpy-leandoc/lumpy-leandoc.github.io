@@ -1,0 +1,35 @@
+<html><head><link rel="stylesheet" href="../../docs_style.css"></head><div class="decl"><h4>category_theory.functor.cones</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">F.cones</span> is the functor assigning to an object <span style="background-color:#fdf6e3;color:#657b83;">X</span> the type of
+natural transformations from the constant functor with value <span style="background-color:#fdf6e3;color:#657b83;">X</span> to <span style="background-color:#fdf6e3;color:#657b83;">F</span>.
+An object representing this functor is a limit of <span style="background-color:#fdf6e3;color:#657b83;">F</span>.</p>
+</div></div><div class="decl"><h4>category_theory.functor.cocones</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">F.cocones</span> is the functor assigning to an object <span style="background-color:#fdf6e3;color:#657b83;">X</span> the type of
+natural transformations from <span style="background-color:#fdf6e3;color:#657b83;">F</span> to the constant functor with value <span style="background-color:#fdf6e3;color:#657b83;">X</span>.
+An object corepresenting this functor is a colimit of <span style="background-color:#fdf6e3;color:#657b83;">F</span>.</p>
+</div></div><div class="decl"><h4>category_theory.cones</h4><div class="decl_par"><p>Functorially associated to each functor <span style="background-color:#fdf6e3;color:#657b83;">J ⥤ C</span>, we have the <span style="background-color:#fdf6e3;color:#657b83;">C</span>-presheaf consisting of
+cones with a given cone point.</p>
+</div></div><div class="decl"><h4>category_theory.cocones</h4><div class="decl_par"><p>Contravariantly associated to each functor <span style="background-color:#fdf6e3;color:#657b83;">J ⥤ C</span>, we have the <span style="background-color:#fdf6e3;color:#657b83;">C</span>-copresheaf consisting of
+cocones with a given cocone point.</p>
+</div></div><div class="decl"><h4>category_theory.limits.cone</h4><div class="decl_par"><p>A <span style="background-color:#fdf6e3;color:#657b83;">c : cone F</span> is:</p>
+<ul>
+<li>an object <span style="background-color:#fdf6e3;color:#657b83;">c.X</span> and</li>
+<li>a natural transformation <span style="background-color:#fdf6e3;color:#657b83;">c.π : c.X ⟶ F</span> from the constant <span style="background-color:#fdf6e3;color:#657b83;">c.X</span> functor to <span style="background-color:#fdf6e3;color:#657b83;">F</span>.</li>
+</ul>
+<p><span style="background-color:#fdf6e3;color:#657b83;">cone F</span> is equivalent, via <span style="background-color:#fdf6e3;color:#657b83;">cone.equiv</span> below, to <span style="background-color:#fdf6e3;color:#657b83;">Σ X, F.cones.obj X</span>.</p>
+</div></div><div class="decl"><h4>category_theory.limits.cocone</h4><div class="decl_par"><p>A <span style="background-color:#fdf6e3;color:#657b83;">c : cocone F</span> is</p>
+<ul>
+<li>an object <span style="background-color:#fdf6e3;color:#657b83;">c.X</span> and</li>
+<li>a natural transformation <span style="background-color:#fdf6e3;color:#657b83;">c.ι : F ⟶ c.X</span> from <span style="background-color:#fdf6e3;color:#657b83;">F</span> to the constant <span style="background-color:#fdf6e3;color:#657b83;">c.X</span> functor.</li>
+</ul>
+<p><span style="background-color:#fdf6e3;color:#657b83;">cocone F</span> is equivalent, via <span style="background-color:#fdf6e3;color:#657b83;">cone.equiv</span> below, to <span style="background-color:#fdf6e3;color:#657b83;">Σ X, F.cocones.obj X</span>.</p>
+</div></div><div class="decl"><h4>category_theory.limits.cone.extend</h4><div class="decl_par"><p>A map to the vertex of a cone induces a cone by composition.</p>
+</div></div><div class="decl"><h4>category_theory.limits.cone.naturality_concrete</h4><div class="decl_par"><p>Naturality of a cone over functors to a concrete category.</p>
+</div></div><div class="decl"><h4>category_theory.limits.cocone.extend</h4><div class="decl_par"><p>A map from the vertex of a cocone induces a cocone by composition.</p>
+</div></div><div class="decl"><h4>category_theory.limits.cocone.naturality_concrete</h4><div class="decl_par"><p>Naturality of a cocone over functors into a concrete category.</p>
+</div></div><div class="decl"><h4>category_theory.limits.cones.ext</h4><div class="decl_par"><p>To give an isomorphism between cones, it suffices to give an
+isomorphism between their vertices which commutes with the cone
+maps.</p>
+</div></div><div class="decl"><h4>category_theory.limits.cocones.ext</h4><div class="decl_par"><p>To give an isomorphism between cocones, it suffices to give an
+isomorphism between their vertices which commutes with the cocone
+maps.</p>
+</div></div><div class="decl"><h4>category_theory.functor.map_cone</h4><div class="decl_par"><p>The image of a cone in C under a functor G : C ⥤ D is a cone in D.</p>
+</div></div><div class="decl"><h4>category_theory.functor.map_cocone</h4><div class="decl_par"><p>The image of a cocone in C under a functor G : C ⥤ D is a cocone in D.</p>
+</div></div></html>

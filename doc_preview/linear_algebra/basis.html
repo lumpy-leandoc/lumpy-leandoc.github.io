@@ -1,0 +1,62 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><h1>Linear independence and bases</h1>
+<p>This file defines linear independence and bases in a module or vector space.</p>
+<p>It is inspired by Isabelle/HOL's linear algebra, and hence indirectly by HOL Light.</p>
+<h2>Main definitions</h2>
+<p>All definitions are given for families of vectors, i.e. <span style="background-color:#fdf6e3;color:#657b83;">v : ι </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> M</span> where M is the module or
+vectorspace and <span style="background-color:#fdf6e3;color:#657b83;">ι : </span><span style="background-color:#fdf6e3;color:#268bd2;">Type</span><span style="background-color:#fdf6e3;color:#b58900;">*</span> is an arbitrary indexing type.</p>
+<ul>
+<li>
+<p><span style="background-color:#fdf6e3;color:#657b83;">linear_independent R v</span> states that the elements of the family <span style="background-color:#fdf6e3;color:#657b83;">v</span> are linear independent</p>
+</li>
+<li>
+<p><span style="background-color:#fdf6e3;color:#657b83;">linear_independent.repr hv x</span> returns the linear combination representing <span style="background-color:#fdf6e3;color:#657b83;">x : span R (range v)</span>
+on the linear independent vectors <span style="background-color:#fdf6e3;color:#657b83;">v</span>, given <span style="background-color:#fdf6e3;color:#657b83;">hv : linear_independent R v</span>
+(using classical choice). <span style="background-color:#fdf6e3;color:#657b83;">linear_independent.repr hv</span> is provided as a linear map.</p>
+</li>
+<li>
+<p><span style="background-color:#fdf6e3;color:#657b83;">is_basis R v</span> states that the vector family <span style="background-color:#fdf6e3;color:#657b83;">v</span> is a basis, i.e. it is linear independent and
+spans the entire space</p>
+</li>
+<li>
+<p><span style="background-color:#fdf6e3;color:#657b83;">is_basis.repr hv x</span> is the basis version of <span style="background-color:#fdf6e3;color:#657b83;">linear_independent.repr hv x</span>. It returns the
+linear combination representing <span style="background-color:#fdf6e3;color:#657b83;">x : M</span> on a basis <span style="background-color:#fdf6e3;color:#657b83;">v</span> of <span style="background-color:#fdf6e3;color:#657b83;">M</span> (using classical choice).
+The argument <span style="background-color:#fdf6e3;color:#657b83;">hv</span> must be a proof that <span style="background-color:#fdf6e3;color:#657b83;">is_basis R v</span>. <span style="background-color:#fdf6e3;color:#657b83;">is_basis.repr hv</span> is given as a linear
+map as well.</p>
+</li>
+<li>
+<p><span style="background-color:#fdf6e3;color:#657b83;">is_basis.constr hv f</span> constructs a linear map <span style="background-color:#fdf6e3;color:#657b83;">M₁ </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;">ₗ[R] M₂</span> given the values <span style="background-color:#fdf6e3;color:#657b83;">f : ι </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> M₂</span> at the
+basis <span style="background-color:#fdf6e3;color:#657b83;">v : ι </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> M₁</span>, given <span style="background-color:#fdf6e3;color:#657b83;">hv : is_basis R v</span>.</p>
+</li>
+</ul>
+<h2>Main statements</h2>
+<ul>
+<li>
+<p><span style="background-color:#fdf6e3;color:#657b83;">is_basis.ext</span> states that two linear maps are equal if they coincide on a basis.</p>
+</li>
+<li>
+<p><span style="background-color:#fdf6e3;color:#657b83;">exists_is_basis</span> states that every vector space has a basis.</p>
+</li>
+</ul>
+<h2>Implementation notes</h2>
+<p>We use families instead of sets because it allows us to say that two identical vectors are linearly
+dependent. For bases, this is useful as well because we can easily derive ordered bases by using an
+ordered index type ι.</p>
+<p>If you want to use sets, use the family <span style="background-color:#fdf6e3;color:#657b83;">(λ x, x : s </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> M)</span> given a set <span style="background-color:#fdf6e3;color:#657b83;">s : set M</span>. The lemmas
+<span style="background-color:#fdf6e3;color:#657b83;">linear_independent.to_subtype_range</span> and <span style="background-color:#fdf6e3;color:#657b83;">linear_independent.of_subtype_range</span> connect those two
+worlds.</p>
+<h2>Tags</h2>
+<p>linearly dependent, linear dependence, linearly independent, linear independence, basis</p>
+<hr/><div class="decl"><h4>linear_independent</h4><div class="decl_par"><p>Linearly independent family of vectors</p>
+</div></div><div class="decl"><h4>linear_independent.total_equiv</h4><div class="decl_par"><p>Canonical isomorphism between linear combinations and the span of linearly independent vectors.</p>
+</div></div><div class="decl"><h4>linear_independent.repr</h4><div class="decl_par"><p>Linear combination representing a vector in the span of linearly independent vectors.</p>
+<p>Given a family of linearly independent vectors, we can represent any vector in their span as
+a linear combination of these vectors. These are provided by this linear map.
+It is simply one direction of <span style="background-color:#fdf6e3;color:#657b83;">linear_independent.total_equiv</span></p>
+</div></div><div class="decl"><h4>linear_independent_monoid_hom</h4><div class="decl_par"><p>Dedekind's linear independence of characters</p>
+</div></div><div class="decl"><h4>is_basis</h4><div class="decl_par"><p>A family of vectors is a basis if it is linearly independent and all vectors are in the span.</p>
+</div></div><div class="decl"><h4>is_basis.constr</h4><div class="decl_par"><p>Construct a linear map given the value at the basis.</p>
+</div></div><div class="decl"><h4>module_equiv_finsupp</h4><div class="decl_par"><p>Canonical equivalence between a module and the linear combinations of basis vectors.</p>
+</div></div><div class="decl"><h4>equiv_of_is_basis</h4><div class="decl_par"><p>Isomorphism between the two modules, given two modules M and M' with respective bases v and v'
+and a bijection between the two bases.</p>
+</div></div><div class="decl"><h4>equiv_fun_basis</h4><div class="decl_par"><p>A module over R with a finite basis is linearly equivalent to functions from its basis to R.</p>
+</div></div></html>

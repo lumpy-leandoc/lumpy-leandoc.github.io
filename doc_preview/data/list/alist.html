@@ -1,0 +1,18 @@
+<html><head><link rel="stylesheet" href="../../docs_style.css"></head><div class="decl"><h4>alist</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">alist β</span> is a key-value map stored as a <span style="background-color:#fdf6e3;color:#657b83;">list</span> (i.e. a linked list).
+It is a wrapper around certain <span style="background-color:#fdf6e3;color:#657b83;">list</span> functions with the added constraint
+that the list have unique keys.</p>
+</div></div><div class="decl"><h4>alist.keys</h4><div class="decl_par"><p>The list of keys of an association list.</p>
+</div></div><div class="decl"><h4>alist.has_mem</h4><div class="decl_par"><p>The predicate <span style="background-color:#fdf6e3;color:#657b83;">a ∈ s</span> means that <span style="background-color:#fdf6e3;color:#657b83;">s</span> has a value associated to the key <span style="background-color:#fdf6e3;color:#657b83;">a</span>.</p>
+</div></div><div class="decl"><h4>alist.has_emptyc</h4><div class="decl_par"><p>The empty association list.</p>
+</div></div><div class="decl"><h4>alist.singleton</h4><div class="decl_par"><p>The singleton association list.</p>
+</div></div><div class="decl"><h4>alist.lookup</h4><div class="decl_par"><p>Look up the value associated to a key in an association list.</p>
+</div></div><div class="decl"><h4>alist.replace</h4><div class="decl_par"><p>Replace a key with a given value in an association list.
+If the key is not present it does nothing.</p>
+</div></div><div class="decl"><h4>alist.foldl</h4><div class="decl_par"><p>Fold a function over the key-value pairs in the map.</p>
+</div></div><div class="decl"><h4>alist.erase</h4><div class="decl_par"><p>Erase a key from the map. If the key is not present it does nothing.</p>
+</div></div><div class="decl"><h4>alist.insert</h4><div class="decl_par"><p>Insert a key-value pair into an association list and erase any existing pair
+with the same key.</p>
+</div></div><div class="decl"><h4>alist.extract</h4><div class="decl_par"><p>Erase a key from the map, and return the corresponding value, if found.</p>
+</div></div><div class="decl"><h4>alist.union</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">s₁ ∪ s₂</span> is the key-based union of two association lists. It is
+left-biased: if there exists an <span style="background-color:#fdf6e3;color:#657b83;">a ∈ s₁</span>, <span style="background-color:#fdf6e3;color:#657b83;">lookup a (s₁ ∪ s₂) </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> lookup a s₁</span>.</p>
+</div></div></html>

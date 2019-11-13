@@ -1,0 +1,18 @@
+<html><head><link rel="stylesheet" href="../../../docs_style.css"></head><h1>Pullbacks</h1>
+<p>We define a category <span style="background-color:#fdf6e3;color:#657b83;">walking_cospan</span> (resp. <span style="background-color:#fdf6e3;color:#657b83;">walking_span</span>), which is the index category
+for the given data for a pullback (resp. pushout) diagram. Convenience methods <span style="background-color:#fdf6e3;color:#657b83;">cospan f g</span>
+and <span style="background-color:#fdf6e3;color:#657b83;">span f g</span> construct functors from the walking (co)span, hitting the given morphisms.</p>
+<p>We define <span style="background-color:#fdf6e3;color:#657b83;">pullback f g</span> and <span style="background-color:#fdf6e3;color:#657b83;">pushout f g</span> as limits and colimits of such functors.</p>
+<p>Typeclasses <span style="background-color:#fdf6e3;color:#657b83;">has_pullbacks</span> and <span style="background-color:#fdf6e3;color:#657b83;">has_pushouts</span> assert the existence of (co)limits shaped as
+walking (co)spans.</p>
+<hr/><div class="decl"><h4>category_theory.limits.walking_cospan</h4><div class="decl_par"><p>The type of objects for the diagram indexing a pullback.</p>
+</div></div><div class="decl"><h4>category_theory.limits.walking_span</h4><div class="decl_par"><p>The type of objects for the diagram indexing a pushout.</p>
+</div></div><div class="decl"><h4>category_theory.limits.walking_cospan.hom</h4><div class="decl_par"><p>The arrows in a pullback diagram.</p>
+</div></div><div class="decl"><h4>category_theory.limits.walking_cospan.category_theory.small_category</h4><div class="decl_par"><p>The walking_cospan is the index diagram for a pullback.</p>
+</div></div><div class="decl"><h4>category_theory.limits.walking_span.hom</h4><div class="decl_par"><p>The arrows in a pushout diagram.</p>
+</div></div><div class="decl"><h4>category_theory.limits.walking_span.category_theory.small_category</h4><div class="decl_par"><p>The walking_span is the index diagram for a pushout.</p>
+</div></div><div class="decl"><h4>category_theory.limits.cospan</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">cospan f g</span> is the functor from the walking cospan hitting <span style="background-color:#fdf6e3;color:#657b83;">f</span> and <span style="background-color:#fdf6e3;color:#657b83;">g</span>.</p>
+</div></div><div class="decl"><h4>category_theory.limits.span</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">span f g</span> is the functor from the walking span hitting <span style="background-color:#fdf6e3;color:#657b83;">f</span> and <span style="background-color:#fdf6e3;color:#657b83;">g</span>.</p>
+</div></div><div class="decl"><h4>category_theory.limits.pullback</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">pullback f g</span> computes the pullback of a pair of morphisms with the same target.</p>
+</div></div><div class="decl"><h4>category_theory.limits.pushout</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">pushout f g</span> computes the pushout of a pair of morphisms with the same source.</p>
+</div></div></html>

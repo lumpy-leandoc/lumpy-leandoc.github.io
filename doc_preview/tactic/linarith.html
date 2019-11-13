@@ -1,0 +1,56 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><p>A tactic for discharging linear arithmetic goals using Fourier-Motzkin elimination.</p>
+<p><span style="background-color:#fdf6e3;color:#657b83;">linarith</span> is (in principle) complete for ℚ and ℝ. It is not complete for non-dense orders, i.e. ℤ.</p>
+<p>@TODO: investigate storing comparisons in a list instead of a set, for possible efficiency gains
+@TODO: delay proofs of denominator normalization and nat casting until after contradiction is found</p>
+<hr/><div class="decl"><h4>linarith.comp</h4><div class="decl_par"><p>The main datatype for FM elimination.
+Variables are represented by natural numbers, each of which has an integer coefficient.
+Index 0 is reserved for constants, i.e. <span style="background-color:#fdf6e3;color:#657b83;">coeffs.find </span><span style="background-color:#fdf6e3;color:#6c71c4;">0</span> is the coefficient of 1.
+The represented term is coeffs.keys.sum (λ i, coeffs.find i * Var[i]).
+str determines the direction of the comparison -- is it &lt; 0, ≤ 0, or = 0?</p>
+</div></div><div class="decl"><h4>linarith.elim_var</h4><div class="decl_par"><p>If c1 and c2 both contain variable a with opposite coefficients,
+produces v1, v2, and c such that a has been cancelled in c := v1<em>c1 + v2</em>c2</p>
+</div></div><div class="decl"><h4>linarith.linarith_structure</h4><div class="decl_par"><p>The state for the elimination monad.
+vars: the set of variables present in comps
+comps: a set of comparisons
+inputs: a set of pairs of exprs (t, pf), where t is a term and pf is a proof that t {&lt;, ≤, =} 0,
+indexed by ℕ.
+has_false: stores a pcomp of 0 &lt; 0 if one has been found
+TODO: is it more efficient to store comps as a list, to avoid comparisons?</p>
+</div></div><div class="decl"><h4>linarith.map_of_expr</h4><div class="decl_par"><p>Turns an expression into a map from ℕ to ℤ, for use in a comp object.
+The expr_map ℕ argument identifies which expressions have already been assigned numbers.
+Returns a new map.</p>
+</div></div><div class="decl"><h4>linarith.mk_linarith_structure</h4><div class="decl_par"><p>Takes a list of proofs of props of the form t {&lt;, ≤, =} 0, and creates a linarith_structure.</p>
+</div></div><div class="decl"><h4>linarith.mk_lt_zero_pf</h4><div class="decl_par"><p>Takes a list of coefficients [c] and list of expressions, of equal length.
+Each expression is a proof of a prop of the form t {&lt;, ≤, =} 0.
+Produces a proof that the sum of (c*t) {&lt;, ≤, =} 0, where the comp is as strong as possible.</p>
+</div></div><div class="decl"><h4>linarith.mk_neg_eq_zero_pf</h4><div class="decl_par"><p>Assumes e is a proof that t = 0. Creates a proof that -t = 0.</p>
+</div></div><div class="decl"><h4>linarith.prove_false_by_linarith1</h4><div class="decl_par"><p>Takes a list of proofs of propositions of the form t {&lt;, ≤, =} 0,
+and tries to prove the goal <span style="background-color:#fdf6e3;color:#657b83;">false</span>.</p>
+</div></div><div class="decl"><h4>linarith.kill_factors</h4><div class="decl_par"><p>e is a term with rational division. produces a natural number n and a proof that n*e = e',
+where e' has no division.</p>
+</div></div><div class="decl"><h4>linarith.prove_false_by_linarith</h4><div class="decl_par"><p>Takes a list of proofs of propositions.
+Filters out the proofs of linear (in)equalities,
+and tries to use them to prove <span style="background-color:#fdf6e3;color:#657b83;">false</span>.
+If pref_type is given, starts by working over this type</p>
+</div></div><div class="decl"><h4>linarith.interactive_aux</h4><div class="decl_par"><p>linarith.interactive_aux cfg o_goal restrict_hyps args:</p>
+<ul>
+<li>cfg is a linarith_config object</li>
+<li>o_goal : option expr is the local constant corresponding to the former goal, if there was one</li>
+<li>restrict_hyps : bool is tt if <span style="background-color:#fdf6e3;color:#657b83;">linarith only [...]</span> was used</li>
+<li>args : option (list pexpr) is the optional list of arguments in <span style="background-color:#fdf6e3;color:#657b83;">linarith [...]</span></li>
+</ul>
+</div></div><div class="decl"><h4>tactic.interactive.linarith</h4><div class="decl_par"><p>Tries to prove a goal of <span style="background-color:#fdf6e3;color:#657b83;">false</span> by linear arithmetic on hypotheses.
+If the goal is a linear (in)equality, tries to prove it by contradiction.
+If the goal is not <span style="background-color:#fdf6e3;color:#657b83;">false</span> or an inequality, applies <span style="background-color:#fdf6e3;color:#657b83;">exfalso</span> and tries linarith on the
+hypotheses.
+<span style="background-color:#fdf6e3;color:#657b83;">linarith</span> will use all relevant hypotheses in the local context.
+<span style="background-color:#fdf6e3;color:#657b83;">linarith [t1, t2, t3]</span> will add proof terms t1, t2, t3 to the local context.
+<span style="background-color:#fdf6e3;color:#657b83;">linarith only [h1, h2, h3, t1, t2, t3]</span> will use only the goal (if relevant), local hypotheses
+h1, h2, h3, and proofs t1, t2, t3. It will ignore the rest of the local context.
+<span style="background-color:#fdf6e3;color:#657b83;">linarith!</span> will use a stronger reducibility setting to identify atoms.</p>
+<p>Config options:
+<span style="background-color:#fdf6e3;color:#657b83;">linarith {exfalso </span><span style="background-color:#fdf6e3;color:#b58900;">:=</span><span style="background-color:#fdf6e3;color:#657b83;"> ff}</span> will fail on a goal that is neither an inequality nor <span style="background-color:#fdf6e3;color:#657b83;">false</span>
+<span style="background-color:#fdf6e3;color:#657b83;">linarith {restrict_type </span><span style="background-color:#fdf6e3;color:#b58900;">:=</span><span style="background-color:#fdf6e3;color:#657b83;"> T}</span> will run only on hypotheses that are inequalities over <span style="background-color:#fdf6e3;color:#657b83;">T</span>
+<span style="background-color:#fdf6e3;color:#657b83;">linarith {discharger </span><span style="background-color:#fdf6e3;color:#b58900;">:=</span><span style="background-color:#fdf6e3;color:#657b83;"> tac}</span> will use <span style="background-color:#fdf6e3;color:#657b83;">tac</span> instead of <span style="background-color:#fdf6e3;color:#657b83;">ring</span> for normalization.
+Options: <span style="background-color:#fdf6e3;color:#657b83;">ring2</span>, <span style="background-color:#fdf6e3;color:#657b83;">ring SOP</span>, <span style="background-color:#fdf6e3;color:#657b83;">simp</span></p>
+</div></div></html>

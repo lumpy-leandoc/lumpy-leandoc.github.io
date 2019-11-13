@@ -1,0 +1,45 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><h1>ring2</h1>
+<p>An experimental variant on the <span style="background-color:#fdf6e3;color:#657b83;">ring</span> tactic that uses computational
+reflection instead of proof generation. Useful for kernel benchmarking.</p>
+<hr/><div class="decl"><h4>tree.reflect'</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">(reflect&#39; t u α)</span> quasiquotes a tree <span style="background-color:#fdf6e3;color:#657b83;">(t: tree expr)</span> of quoted
+values of type <span style="background-color:#fdf6e3;color:#657b83;">α</span> at level <span style="background-color:#fdf6e3;color:#657b83;">u</span> into an <span style="background-color:#fdf6e3;color:#657b83;">expr</span> which reifies to a <span style="background-color:#fdf6e3;color:#657b83;">tree α</span>
+containing the reifications of the <span style="background-color:#fdf6e3;color:#657b83;">expr</span>s from the original <span style="background-color:#fdf6e3;color:#657b83;">t</span>.</p>
+</div></div><div class="decl"><h4>tree.get_or_zero</h4><div class="decl_par"><p>Returns an element indexed by <span style="background-color:#fdf6e3;color:#657b83;">n</span>, or zero if <span style="background-color:#fdf6e3;color:#657b83;">n</span> isn't a valid index.
+See <span style="background-color:#fdf6e3;color:#657b83;">tree.get</span>.</p>
+</div></div><div class="decl"><h4>tactic.ring2.csring_expr</h4><div class="decl_par"><p>A reflected/meta representation of an expression in a commutative
+semiring. This representation is a direct translation of such
+expressions - see <span style="background-color:#fdf6e3;color:#657b83;">horner_expr</span> for a normal form.</p>
+</div></div><div class="decl"><h4>tactic.ring2.csring_expr.eval</h4><div class="decl_par"><p>Evaluates a reflected <span style="background-color:#fdf6e3;color:#657b83;">csring_expr</span> into an element of the
+original <span style="background-color:#fdf6e3;color:#657b83;">comm_semiring</span> type <span style="background-color:#fdf6e3;color:#657b83;">α</span>, retrieving opaque elements
+(atoms) from the tree <span style="background-color:#fdf6e3;color:#657b83;">t</span>.</p>
+</div></div><div class="decl"><h4>tactic.ring2.horner_expr</h4><div class="decl_par"><p>An efficient representation of expressions in a commutative
+semiring using the sparse Horner normal form. This type admits
+non-optimal instantiations (e.g. <span style="background-color:#fdf6e3;color:#657b83;">P</span> can be represented as <span style="background-color:#fdf6e3;color:#657b83;">P</span><span style="background-color:#fdf6e3;color:#b58900;">+</span><span style="background-color:#fdf6e3;color:#6c71c4;">0</span><span style="background-color:#fdf6e3;color:#b58900;">+</span><span style="background-color:#fdf6e3;color:#6c71c4;">0</span>),
+so to get good performance out of it, care must be taken to maintain
+an optimal, <em>canonical</em> form.</p>
+</div></div><div class="decl"><h4>tactic.ring2.horner_expr.is_cs</h4><div class="decl_par"><p>True iff the <span style="background-color:#fdf6e3;color:#657b83;">horner_expr</span> argument is a valid <span style="background-color:#fdf6e3;color:#657b83;">csring_expr</span>.
+For that to be the case, all its constants must be non-negative.</p>
+</div></div><div class="decl"><h4>tactic.ring2.horner_expr.atom</h4><div class="decl_par"><p>Represent a <span style="background-color:#fdf6e3;color:#657b83;">csring_expr.atom</span> in Horner form.</p>
+</div></div><div class="decl"><h4>tactic.ring2.horner_expr.horner'</h4><div class="decl_par"><p>Alternative constructor for (horner a x n b) which maintains canonical
+form by simplifying special cases of <span style="background-color:#fdf6e3;color:#657b83;">a</span>.</p>
+</div></div><div class="decl"><h4>tactic.ring2.horner_expr.of_csexpr</h4><div class="decl_par"><p>Brings expressions into Horner normal form.</p>
+</div></div><div class="decl"><h4>tactic.ring2.horner_expr.cseval</h4><div class="decl_par"><p>Evaluates a reflected <span style="background-color:#fdf6e3;color:#657b83;">horner_expr</span> - see <span style="background-color:#fdf6e3;color:#657b83;">csring_expr.</span><span style="background-color:#fdf6e3;color:#859900;">eval</span>.</p>
+</div></div><div class="decl"><h4>tactic.ring2.horner_expr.cseval_of_csexpr</h4><div class="decl_par"><p>For any given tree <span style="background-color:#fdf6e3;color:#657b83;">t</span> of atoms and any reflected expression <span style="background-color:#fdf6e3;color:#657b83;">r</span>,
+the Horner form of <span style="background-color:#fdf6e3;color:#657b83;">r</span> is a valid csring expression, and under <span style="background-color:#fdf6e3;color:#657b83;">t</span>,
+the Horner form evaluates to the same thing as <span style="background-color:#fdf6e3;color:#657b83;">r</span>.</p>
+</div></div><div class="decl"><h4>tactic.ring2.correctness</h4><div class="decl_par"><p>The main proof-by-reflection theorem. Given reflected csring expressions
+<span style="background-color:#fdf6e3;color:#657b83;">r₁</span> and <span style="background-color:#fdf6e3;color:#657b83;">r₂</span> plus a storage <span style="background-color:#fdf6e3;color:#657b83;">t</span> of atoms, if both expressions go to the
+same Horner normal form, then the original non-reflected expressions are
+equal. <span style="background-color:#fdf6e3;color:#657b83;">H</span> follows from kernel reduction and is therefore <span style="background-color:#fdf6e3;color:#657b83;">rfl</span>.</p>
+</div></div><div class="decl"><h4>tactic.ring2.reflect_expr</h4><div class="decl_par"><p>Reflects a csring expression into a <span style="background-color:#fdf6e3;color:#657b83;">csring_expr</span>, together
+with a dlist of atoms, i.e. opaque variables over which the
+expression is a polynomial.</p>
+</div></div><div class="decl"><h4>tactic.ring2.csring_expr.replace</h4><div class="decl_par"><p>In the output of <span style="background-color:#fdf6e3;color:#657b83;">reflect_expr</span>, <span style="background-color:#fdf6e3;color:#657b83;">atom</span>s are initialized with incorrect indices.
+The indices cannot be computed until the whole tree is built, so another pass over
+the expressions is needed - this is what <span style="background-color:#fdf6e3;color:#657b83;">replace</span> does. The computation (expressed
+in the state monad) fixes up <span style="background-color:#fdf6e3;color:#657b83;">atom</span>s to match their positions in the atom tree.
+The initial state is a list of all atom occurrences in the goal, left-to-right.</p>
+</div></div><div class="decl"><h4>tactic.interactive.ring2</h4><div class="decl_par"><p>Tactic for solving equations in the language of rings.
+This variant on the <span style="background-color:#fdf6e3;color:#657b83;">ring</span> tactic uses kernel computation instead
+of proof generation.</p>
+</div></div></html>

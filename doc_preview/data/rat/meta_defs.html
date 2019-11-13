@@ -1,0 +1,40 @@
+<html><head><link rel="stylesheet" href="../../docs_style.css"></head><h1>Meta operations on ℚ</h1>
+<p>This file defines functions for dealing with rational numbers as expressions.</p>
+<p>They are not defined earlier in the hierarchy, in the <span style="background-color:#fdf6e3;color:#657b83;">tactic</span> or <span style="background-color:#fdf6e3;color:#859900;">meta</span> folders, since we do not
+want to import <span style="background-color:#fdf6e3;color:#657b83;">data.rat.basic</span> there.</p>
+<h2>Main definitions</h2>
+<ul>
+<li>
+<p><span style="background-color:#fdf6e3;color:#657b83;">rat.mk_numeral</span> embeds a rational <span style="background-color:#fdf6e3;color:#657b83;">q</span> as a numeral expression into a type supporting the needed
+operations. It does not need a tactic state.</p>
+</li>
+<li>
+<p><span style="background-color:#fdf6e3;color:#657b83;">rat.reflect</span> specializes <span style="background-color:#fdf6e3;color:#657b83;">rat.mk_numeral</span> to <span style="background-color:#fdf6e3;color:#657b83;">ℚ</span>.</p>
+</li>
+<li>
+<p><span style="background-color:#fdf6e3;color:#657b83;">expr.of_rat</span> behaves like <span style="background-color:#fdf6e3;color:#657b83;">rat.mk_numeral</span>, but uses the tactic state to infer the needed
+structure on the target type.</p>
+</li>
+<li>
+<p><span style="background-color:#fdf6e3;color:#657b83;">expr.to_rat</span> evaluates a normal numeral expression as a rat.</p>
+</li>
+<li>
+<p><span style="background-color:#fdf6e3;color:#657b83;">expr.eval_rat</span> evaluates a numeral expression with arithmetic operations as a rat.</p>
+</li>
+</ul>
+<hr/><div class="decl"><h4>rat.mk_numeral</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">rat.mk_numeral q</span> embeds <span style="background-color:#fdf6e3;color:#657b83;">q</span> as a numeral expression inside a type with 0, 1, +, -, and /</p>
+<p><span style="background-color:#fdf6e3;color:#657b83;">type</span>: an expression representing the target type. This must live in Type 0.
+<span style="background-color:#fdf6e3;color:#657b83;">has_zero</span>, <span style="background-color:#fdf6e3;color:#657b83;">has_one</span>, <span style="background-color:#fdf6e3;color:#657b83;">has_add</span>: expressions of the type <span style="background-color:#fdf6e3;color:#657b83;">has_zero %%type</span>, etc.</p>
+<p>This function is similar to <span style="background-color:#fdf6e3;color:#657b83;">expr.of_rat</span> but takes more hypotheses and is not tactic valued.</p>
+</div></div><div class="decl"><h4>rat.reflect</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">rat.reflect q</span> represents the rational number <span style="background-color:#fdf6e3;color:#657b83;">q</span> as a numeral expression of type <span style="background-color:#fdf6e3;color:#657b83;">ℚ</span>.</p>
+</div></div><div class="decl"><h4>expr.to_nonneg_rat</h4><div class="decl_par"><p>Evaluates an expression as a rational number,
+if that expression represents a numeral or the quotient of two numerals.</p>
+</div></div><div class="decl"><h4>expr.to_rat</h4><div class="decl_par"><p>Evaluates an expression as a rational number,
+if that expression represents a numeral, the quotient of two numerals,
+the negation of a numeral, or the negation of the quotient of two numerals.</p>
+</div></div><div class="decl"><h4>expr.eval_rat</h4><div class="decl_par"><p>Evaluates an expression into a rational number, if that expression is built up from
+numerals, +, -, *, /, ⁻¹</p>
+</div></div><div class="decl"><h4>expr.of_rat</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">expr.of_rat α q</span> embeds <span style="background-color:#fdf6e3;color:#657b83;">q</span> as a numeral expression inside the type <span style="background-color:#fdf6e3;color:#657b83;">α</span>.
+Lean will try to infer the correct type classes on <span style="background-color:#fdf6e3;color:#657b83;">α</span>, and the tactic will fail if it cannot.
+This function is similar to <span style="background-color:#fdf6e3;color:#657b83;">rat.mk_numeral</span> but it takes fewer hypotheses and is tactic valued.</p>
+</div></div></html>

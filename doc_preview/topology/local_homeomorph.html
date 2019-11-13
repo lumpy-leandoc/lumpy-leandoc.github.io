@@ -1,0 +1,74 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><h1>Local homeomorphisms</h1>
+<p>This file defines homeomorphisms between open subsets of topological spaces. An element <span style="background-color:#fdf6e3;color:#657b83;">e</span> of
+<span style="background-color:#fdf6e3;color:#657b83;">local_homeomorph α β</span> is an extension of <span style="background-color:#fdf6e3;color:#657b83;">local_equiv α β</span>, i.e., it is a pair of functions
+<span style="background-color:#fdf6e3;color:#657b83;">e.to_fun</span> and <span style="background-color:#fdf6e3;color:#657b83;">e.inv_fun</span>, inverse of each other on the sets <span style="background-color:#fdf6e3;color:#657b83;">e.source</span> and <span style="background-color:#fdf6e3;color:#657b83;">e.target</span>.
+Additionally, we require that these sets are open, and that the functions are continuous on them.
+Equivalently, they are homeomorphisms there.</p>
+<p>Contrary to equivs, we do not register the coercion to functions and we use explicitly to_fun and
+inv_fun: coercions create unification problems for manifolds.</p>
+<h2>Main definitions</h2>
+<p><span style="background-color:#fdf6e3;color:#657b83;">homeomorph.to_local_homeomorph</span>: associating a local homeomorphism to a homeomorphism, with
+source = target = univ
+<span style="background-color:#fdf6e3;color:#657b83;">local_homeomorph.symm</span>  : the inverse of a local homeomorphism
+<span style="background-color:#fdf6e3;color:#657b83;">local_homeomorph.trans</span> : the composition of two local homeomorphisms
+<span style="background-color:#fdf6e3;color:#657b83;">local_homeomorph.refl</span>  : the identity local homeomorphism
+<span style="background-color:#fdf6e3;color:#657b83;">local_homeomorph.of_set</span>: the identity on a set <span style="background-color:#fdf6e3;color:#657b83;">s</span>
+<span style="background-color:#fdf6e3;color:#657b83;">eq_on_source</span>           : equivalence relation describing the &quot;right&quot; notion of equality for local
+homeomorphisms</p>
+<h2>Implementation notes</h2>
+<p>Most statements are copied from their local_equiv versions, although some care is required
+especially when restricting to subsets, as these should be open subsets.</p>
+<p>For design notes, see <span style="background-color:#fdf6e3;color:#657b83;">local_equiv.lean</span>.</p>
+<hr/><div class="decl"><h4>local_homeomorph</h4><div class="decl_par"><p>local homeomorphisms, defined on open subsets of the space</p>
+</div></div><div class="decl"><h4>homeomorph.to_local_homeomorph</h4><div class="decl_par"><p>A homeomorphism induces a local homeomorphism on the whole space</p>
+</div></div><div class="decl"><h4>local_homeomorph.ext</h4><div class="decl_par"><p>Two local homeomorphisms are equal when they have equal to_fun, inv_fun and source. It is not
+sufficient to have equal to_fun and source, as this only determines inv_fun on the target. This
+would only be true for a weaker notion of equality, arguably the right one, called <span style="background-color:#fdf6e3;color:#657b83;">eq_on_source</span>.</p>
+</div></div><div class="decl"><h4>local_homeomorph.symm</h4><div class="decl_par"><p>The inverse of a local homeomorphism</p>
+</div></div><div class="decl"><h4>local_homeomorph.continuous_at_to_fun</h4><div class="decl_par"><p>A local homeomorphism is continuous at any point of its source</p>
+</div></div><div class="decl"><h4>local_homeomorph.continuous_at_inv_fun</h4><div class="decl_par"><p>A local homeomorphism inverse is continuous at any point of its target</p>
+</div></div><div class="decl"><h4>local_homeomorph.preimage_interior</h4><div class="decl_par"><p>Preimage of interior or interior of preimage coincide for local homeomorphisms, when restricted
+to the source.</p>
+</div></div><div class="decl"><h4>local_homeomorph.image_open_of_open</h4><div class="decl_par"><p>The image of an open set in the source is open.</p>
+</div></div><div class="decl"><h4>local_homeomorph.restr_open</h4><div class="decl_par"><p>Restricting a local homeomorphism <span style="background-color:#fdf6e3;color:#657b83;">e</span> to <span style="background-color:#fdf6e3;color:#657b83;">e.source ∩ s</span> when <span style="background-color:#fdf6e3;color:#657b83;">s</span> is open. This is sometimes hard
+to use because of the openness assumption, but it has the advantage that when it can
+be used then its local_equiv is defeq to local_equiv.restr</p>
+</div></div><div class="decl"><h4>local_homeomorph.restr</h4><div class="decl_par"><p>Restricting a local homeomorphism <span style="background-color:#fdf6e3;color:#657b83;">e</span> to <span style="background-color:#fdf6e3;color:#657b83;">e.source ∩ interior s</span>. We use the interior to make
+sure that the restriction is well defined whatever the set s, since local homeomorphisms are by
+definition defined on open sets. In applications where <span style="background-color:#fdf6e3;color:#657b83;">s</span> is open, this coincides with the
+restriction of local equivalences</p>
+</div></div><div class="decl"><h4>local_homeomorph.refl</h4><div class="decl_par"><p>The identity on the whole space as a local homeomorphism.</p>
+</div></div><div class="decl"><h4>local_homeomorph.of_set</h4><div class="decl_par"><p>The identity local equiv on a set <span style="background-color:#fdf6e3;color:#657b83;">s</span></p>
+</div></div><div class="decl"><h4>local_homeomorph.trans'</h4><div class="decl_par"><p>Composition of two local homeomorphisms when the target of the first and the source of
+the second coincide.</p>
+</div></div><div class="decl"><h4>local_homeomorph.trans</h4><div class="decl_par"><p>Composing two local homeomorphisms, by restricting to the maximal domain where their
+composition is well defined.</p>
+</div></div><div class="decl"><h4>local_homeomorph.eq_on_source</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">eq_on_source e e&#39;</span> means that <span style="background-color:#fdf6e3;color:#657b83;">e</span> and <span style="background-color:#fdf6e3;color:#657b83;">e&#39;</span> have the same source, and coincide there. They
+should really be considered the same local equiv.</p>
+</div></div><div class="decl"><h4>local_homeomorph.setoid</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">eq_on_source</span> is an equivalence relation</p>
+</div></div><div class="decl"><h4>local_homeomorph.eq_on_source_symm</h4><div class="decl_par"><p>If two local homeomorphisms are equivalent, so are their inverses</p>
+</div></div><div class="decl"><h4>local_homeomorph.source_eq_of_eq_on_source</h4><div class="decl_par"><p>Two equivalent local homeomorphisms have the same source</p>
+</div></div><div class="decl"><h4>local_homeomorph.target_eq_of_eq_on_source</h4><div class="decl_par"><p>Two equivalent local homeomorphisms have the same target</p>
+</div></div><div class="decl"><h4>local_homeomorph.apply_eq_of_eq_on_source</h4><div class="decl_par"><p>Two equivalent local homeomorphisms have coinciding <span style="background-color:#fdf6e3;color:#657b83;">to_fun</span> on the source</p>
+</div></div><div class="decl"><h4>local_homeomorph.inv_apply_eq_of_eq_on_source</h4><div class="decl_par"><p>Two equivalent local homeomorphisms have coinciding <span style="background-color:#fdf6e3;color:#657b83;">inv_fun</span> on the target</p>
+</div></div><div class="decl"><h4>local_homeomorph.eq_on_source_trans</h4><div class="decl_par"><p>Composition of local homeomorphisms respects equivalence</p>
+</div></div><div class="decl"><h4>local_homeomorph.eq_on_source_restr</h4><div class="decl_par"><p>Restriction of local homeomorphisms respects equivalence</p>
+</div></div><div class="decl"><h4>local_homeomorph.trans_self_symm</h4><div class="decl_par"><p>Composition of a local homeomorphism and its inverse is equivalent to the restriction of the
+identity to the source</p>
+</div></div><div class="decl"><h4>local_homeomorph.prod</h4><div class="decl_par"><p>The product of two local homeomorphisms, as a local homeomorphism on the product space.</p>
+</div></div><div class="decl"><h4>local_homeomorph.continuous_within_at_iff_continuous_within_at_comp_right</h4><div class="decl_par"><p>Continuity within a set at a point can be read under right composition with a local
+homeomorphism, if the point is in its target</p>
+</div></div><div class="decl"><h4>local_homeomorph.continuous_at_iff_continuous_at_comp_right</h4><div class="decl_par"><p>Continuity at a point can be read under right composition with a local homeomorphism, if the
+point is in its target</p>
+</div></div><div class="decl"><h4>local_homeomorph.continuous_on_iff_continuous_on_comp_right</h4><div class="decl_par"><p>A function is continuous on a set if and only if its composition with a local homeomorphism
+on the right is continuous on the corresponding set.</p>
+</div></div><div class="decl"><h4>local_homeomorph.continuous_within_at_iff_continuous_within_at_comp_left</h4><div class="decl_par"><p>Continuity within a set at a point can be read under left composition with a local
+homeomorphism if a neighborhood of the initial point is sent to the source of the local
+homeomorphism</p>
+</div></div><div class="decl"><h4>local_homeomorph.continuous_at_iff_continuous_at_comp_left</h4><div class="decl_par"><p>Continuity at a point can be read under left composition with a local homeomorphism if a
+neighborhood of the initial point is sent to the source of the local homeomorphism</p>
+</div></div><div class="decl"><h4>local_homeomorph.continuous_on_iff_continuous_on_comp_left</h4><div class="decl_par"><p>A function is continuous on a set if and only if its composition with a local homeomorphism
+on the left is continuous on the corresponding set.</p>
+</div></div><div class="decl"><h4>local_homeomorph.to_homeomorph_of_source_eq_univ_target_eq_univ</h4><div class="decl_par"><p>If a local homeomorphism has source and target equal to univ, then it induces a homeomorphism
+between the whole spaces, expressed in this definition.</p>
+</div></div></html>

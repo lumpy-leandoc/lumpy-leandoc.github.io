@@ -1,0 +1,104 @@
+<html><head><link rel="stylesheet" href="../../docs_style.css"></head><h1>Higher differentiability</h1>
+<p>A function is <span style="background-color:#fdf6e3;color:#657b83;">C^</span><span style="background-color:#fdf6e3;color:#6c71c4;">1</span> on a domain if it is differentiable there, and its derivative is continuous.
+By induction, it is <span style="background-color:#fdf6e3;color:#657b83;">C^n</span> if it is <span style="background-color:#fdf6e3;color:#657b83;">C^{n</span><span style="background-color:#fdf6e3;color:#b58900;">-</span><span style="background-color:#fdf6e3;color:#6c71c4;">1</span><span style="background-color:#fdf6e3;color:#657b83;">}</span> and its (n-1)-th derivative is <span style="background-color:#fdf6e3;color:#657b83;">C^</span><span style="background-color:#fdf6e3;color:#6c71c4;">1</span> there or,
+equivalently, if it is <span style="background-color:#fdf6e3;color:#657b83;">C^</span><span style="background-color:#fdf6e3;color:#6c71c4;">1</span> and its derivative is <span style="background-color:#fdf6e3;color:#657b83;">C^{n</span><span style="background-color:#fdf6e3;color:#b58900;">-</span><span style="background-color:#fdf6e3;color:#6c71c4;">1</span><span style="background-color:#fdf6e3;color:#657b83;">}</span>.
+Finally, it is <span style="background-color:#fdf6e3;color:#657b83;">C^∞</span> if it is <span style="background-color:#fdf6e3;color:#657b83;">C^n</span> for all n.</p>
+<p>We formalize these notions by defining iteratively the n-th derivative of a function at the
+(n-1)-th derivative of the derivative. It is called <span style="background-color:#fdf6e3;color:#657b83;">iterated_fderiv 𝕜 n f x</span> where <span style="background-color:#fdf6e3;color:#657b83;">𝕜</span> is the
+field, <span style="background-color:#fdf6e3;color:#657b83;">n</span> is the number of iterations, <span style="background-color:#fdf6e3;color:#657b83;">f</span> is the function and <span style="background-color:#fdf6e3;color:#657b83;">x</span> is the point. We also define a
+version <span style="background-color:#fdf6e3;color:#657b83;">iterated_fderiv_within</span> relative to a domain, as well as predicates <span style="background-color:#fdf6e3;color:#657b83;">times_cont_diff 𝕜 n f</span>
+and <span style="background-color:#fdf6e3;color:#657b83;">times_cont_diff_on 𝕜 n f s</span> saying that the function is <span style="background-color:#fdf6e3;color:#657b83;">C^n</span>, respectively in the whole space
+or on the set <span style="background-color:#fdf6e3;color:#657b83;">s</span>.</p>
+<p>We prove basic properties of these notions.</p>
+<h2>Implementation notes</h2>
+<p>The n-th derivative of a function belongs to the space E →L[𝕜] (E →L[𝕜] (E ... F)...))),
+where there are n iterations of <span style="background-color:#fdf6e3;color:#657b83;">E </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;">L[𝕜]</span>. We define this space inductively, call it
+<span style="background-color:#fdf6e3;color:#657b83;">iterated_continuous_linear_map 𝕜 n E F</span>, and denote it by <span style="background-color:#fdf6e3;color:#657b83;">E [×n]→L[𝕜] F</span>. We can define
+it inductively either from the left (i.e., saying that the
+(n+1)-th space S_{n+1} is E →L[𝕜] S_n) or from the right (i.e., saying that
+the (n+1)-th space associated to F, denoted by S_{n+1} (F), is equal to S_n (E →L[𝕜] F)).
+For proofs, it turns out to be more convenient to use the latter approach (from the right),
+as it means to prove things at the (n+1)-th step we only need to understand well enough the
+derivative in E →L[𝕜] F (contrary to the approach from the left, where one would need to know
+enough on the n-th derivative to deduce things on the (n+1)-th derivative).
+In other words, one could define the (n+1)-th derivative either as the derivative of the n-th
+derivative, or as the n-th derivative of the derivative. We use the latter definition.</p>
+<p>A difficulty is related to universes: the first and second spaces in the sequence, for n=0
+and 1, are F and E →L[𝕜] F. If E has universe u and F has universe v, then the first one lives in
+v and the second one in max v u. Since they should live in the same universe (as all the other
+spaces in the construction), it means that at the 0-th step we should not use F, but ulift it to
+universe max v u. But we should also ulift its vector space structure and its normed space
+structure. This can certainly be done, but I decided it was not worth it for now. Therefore, the
+definition is only made when E and F live in the same universe.</p>
+<p>Regarding the definition of <span style="background-color:#fdf6e3;color:#657b83;">C^n</span> functions, there are two equivalent definitions:</p>
+<ul>
+<li>require by induction that the function is differentiable, and that its derivative is C^{n-1}</li>
+<li>or require that, for all m ≤ n, the m-th derivative is continuous, and for all m &lt; n the m-th
+derivative is differentiable.
+The first definition is more efficient for many proofs by induction. The second definition is more
+satisfactory as it gives concrete information about the n-th derivative (contrary to the first point
+of view), and moreover it also makes sense for n = ∞.</li>
+</ul>
+<p>Therefore, we give (and use) both definitions, named respectively <span style="background-color:#fdf6e3;color:#657b83;">times_cont_diff_rec</span> and
+<span style="background-color:#fdf6e3;color:#657b83;">times_cont_diff</span> (as well as relativized versions on a set). We show that they are equivalent.
+The first one is mainly auxiliary: in applications, one should always use <span style="background-color:#fdf6e3;color:#657b83;">times_cont_diff</span>
+(but the proofs below use heavily the equivalence to show that <span style="background-color:#fdf6e3;color:#657b83;">times_cont_diff</span> is well behaved).</p>
+<h2>Tags</h2>
+<p>derivative, differentiability, higher derivative, C^n</p>
+<hr/><div class="decl"><h4>iterated_continuous_linear_map</h4><div class="decl_par"><p>The space <span style="background-color:#fdf6e3;color:#657b83;">iterated_continuous_linear_map 𝕜 n E F</span> is the space E →L[𝕜] (E →L[𝕜] (E ... F)...))),
+defined inductively over <span style="background-color:#fdf6e3;color:#657b83;">n</span>. This is the space to which the <span style="background-color:#fdf6e3;color:#657b83;">n</span>-th derivative of a function
+naturally belongs. It is only defined when <span style="background-color:#fdf6e3;color:#657b83;">E</span> and <span style="background-color:#fdf6e3;color:#657b83;">F</span> live in the same universe.</p>
+</div></div><div class="decl"><h4>iterated_continuous_linear_map.normed_group_rec</h4><div class="decl_par"><p>Define by induction a normed group structure on the space of iterated continuous linear
+maps. To avoid <span style="background-color:#fdf6e3;color:#657b83;">resetI</span> in the statement, use the @ version with all parameters. As the equation
+compiler chokes on this one, we use the <span style="background-color:#fdf6e3;color:#657b83;">nat.rec_on</span> version.</p>
+</div></div><div class="decl"><h4>iterated_continuous_linear_map.normed_space_rec</h4><div class="decl_par"><p>Define by induction a normed space structure on the space of iterated continuous linear
+maps. To avoid <span style="background-color:#fdf6e3;color:#657b83;">resetI</span> in the statement, use the @ version with all parameters. As the equation
+compiler chokes on this one, we use the <span style="background-color:#fdf6e3;color:#657b83;">nat.rec_on</span> version.</p>
+</div></div><div class="decl"><h4>iterated_continuous_linear_map.normed_group</h4><div class="decl_par"><p>Explicit normed group structure on the space of iterated continuous linear maps.</p>
+</div></div><div class="decl"><h4>iterated_continuous_linear_map.normed_space</h4><div class="decl_par"><p>Explicit normed space structure on the space of iterated continuous linear maps.</p>
+</div></div><div class="decl"><h4>iterated_fderiv</h4><div class="decl_par"><p>The n-th derivative of a function, defined inductively by saying that the (n+1)-th
+derivative of f is the n-th derivative of the derivative of f.</p>
+</div></div><div class="decl"><h4>iterated_fderiv_within</h4><div class="decl_par"><p>The n-th derivative of a function along a set, defined inductively by saying that the (n+1)-th
+derivative of f is the n-th derivative of the derivative of f.</p>
+</div></div><div class="decl"><h4>iterated_fderiv_within_congr</h4><div class="decl_par"><p>If two functions coincide on a set <span style="background-color:#fdf6e3;color:#657b83;">s</span> of unique differentiability, then their iterated
+differentials within this set coincide.</p>
+</div></div><div class="decl"><h4>iterated_fderiv_within_inter_open</h4><div class="decl_par"><p>The iterated differential within a set <span style="background-color:#fdf6e3;color:#657b83;">s</span> at a point <span style="background-color:#fdf6e3;color:#657b83;">x</span> is not modified if one intersects
+<span style="background-color:#fdf6e3;color:#657b83;">s</span> with an open set containing <span style="background-color:#fdf6e3;color:#657b83;">x</span>.</p>
+</div></div><div class="decl"><h4>iterated_fderiv_within_inter</h4><div class="decl_par"><p>The iterated differential within a set <span style="background-color:#fdf6e3;color:#657b83;">s</span> at a point <span style="background-color:#fdf6e3;color:#657b83;">x</span> is not modified if one intersects
+<span style="background-color:#fdf6e3;color:#657b83;">s</span> with a neighborhood of <span style="background-color:#fdf6e3;color:#657b83;">x</span>.</p>
+</div></div><div class="decl"><h4>times_cont_diff_rec</h4><div class="decl_par"><p>Auxiliary definition defining <span style="background-color:#fdf6e3;color:#657b83;">C^n</span> functions by induction over <span style="background-color:#fdf6e3;color:#657b83;">n</span>.
+In applications, use <span style="background-color:#fdf6e3;color:#657b83;">times_cont_diff</span> instead.</p>
+</div></div><div class="decl"><h4>times_cont_diff_on_rec</h4><div class="decl_par"><p>Auxiliary definition defining <span style="background-color:#fdf6e3;color:#657b83;">C^n</span> functions on a set by induction over <span style="background-color:#fdf6e3;color:#657b83;">n</span>.
+In applications, use <span style="background-color:#fdf6e3;color:#657b83;">times_cont_diff_on</span> instead.</p>
+</div></div><div class="decl"><h4>times_cont_diff_on</h4><div class="decl_par"><p>A function is <span style="background-color:#fdf6e3;color:#657b83;">C^n</span> on a set, for <span style="background-color:#fdf6e3;color:#657b83;">n : with_top ℕ</span>, if its derivatives of order at most <span style="background-color:#fdf6e3;color:#657b83;">n</span>
+are all well defined and continuous.</p>
+</div></div><div class="decl"><h4>times_cont_diff_on_iff_times_cont_diff_on_rec</h4><div class="decl_par"><p>The two definitions of <span style="background-color:#fdf6e3;color:#657b83;">C^n</span> functions on domains, directly in terms of continuity of all
+derivatives, or by induction, are equivalent.</p>
+</div></div><div class="decl"><h4>times_cont_diff_on.differentiable_on</h4><div class="decl_par"><p>If a function is at least C^1 on a set, it is differentiable there.</p>
+</div></div><div class="decl"><h4>times_cont_diff_on.continuous_on_fderiv_within_apply</h4><div class="decl_par"><p>If a function is at least <span style="background-color:#fdf6e3;color:#657b83;">C^</span><span style="background-color:#fdf6e3;color:#6c71c4;">1</span>, its bundled derivative (mapping <span style="background-color:#fdf6e3;color:#657b83;">(x, v)</span> to <span style="background-color:#fdf6e3;color:#657b83;">Df(x) v</span>) is
+continuous.</p>
+</div></div><div class="decl"><h4>times_cont_diff_on_of_locally_times_cont_diff_on</h4><div class="decl_par"><p>Being <span style="background-color:#fdf6e3;color:#657b83;">C^n</span> is a local property.</p>
+</div></div><div class="decl"><h4>times_cont_diff</h4><div class="decl_par"><p>A function is <span style="background-color:#fdf6e3;color:#657b83;">C^n</span>, for <span style="background-color:#fdf6e3;color:#657b83;">n : with_top ℕ</span>, if its derivatives of order at most <span style="background-color:#fdf6e3;color:#657b83;">n</span> are all well
+defined and continuous.</p>
+</div></div><div class="decl"><h4>times_cont_diff_const</h4><div class="decl_par"><p>Constants are C^∞.</p>
+</div></div><div class="decl"><h4>is_bounded_linear_map.times_cont_diff</h4><div class="decl_par"><p>Linear functions are C^∞.</p>
+</div></div><div class="decl"><h4>times_cont_diff_fst</h4><div class="decl_par"><p>The first projection in a product is C^∞.</p>
+</div></div><div class="decl"><h4>times_cont_diff_snd</h4><div class="decl_par"><p>The second projection in a product is C^∞.</p>
+</div></div><div class="decl"><h4>times_cont_diff_id</h4><div class="decl_par"><p>The identity is C^∞.</p>
+</div></div><div class="decl"><h4>is_bounded_bilinear_map.times_cont_diff</h4><div class="decl_par"><p>Bilinear functions are C^∞.</p>
+</div></div><div class="decl"><h4>times_cont_diff_on.comp_is_bounded_linear</h4><div class="decl_par"><p>Composition by bounded linear maps preserves <span style="background-color:#fdf6e3;color:#657b83;">C^n</span> functions on domains.</p>
+</div></div><div class="decl"><h4>times_cont_diff.comp_is_bounded_linear</h4><div class="decl_par"><p>Composition by bounded linear maps preserves <span style="background-color:#fdf6e3;color:#657b83;">C^n</span> functions.</p>
+</div></div><div class="decl"><h4>times_cont_diff_on.prod</h4><div class="decl_par"><p>The cartesian product of <span style="background-color:#fdf6e3;color:#657b83;">C^n</span> functions on domains is <span style="background-color:#fdf6e3;color:#657b83;">C^n</span>.</p>
+</div></div><div class="decl"><h4>times_cont_diff.prod</h4><div class="decl_par"><p>The cartesian product of <span style="background-color:#fdf6e3;color:#657b83;">C^n</span> functions is <span style="background-color:#fdf6e3;color:#657b83;">C^n</span>.</p>
+</div></div><div class="decl"><h4>times_cont_diff_on.comp</h4><div class="decl_par"><p>The composition of <span style="background-color:#fdf6e3;color:#657b83;">C^n</span> functions on domains is <span style="background-color:#fdf6e3;color:#657b83;">C^n</span>.</p>
+</div></div><div class="decl"><h4>times_cont_diff.comp_times_cont_diff_on</h4><div class="decl_par"><p>The composition of a C^n function on domain with a C^n function is C^n.</p>
+</div></div><div class="decl"><h4>times_cont_diff.comp</h4><div class="decl_par"><p>The composition of <span style="background-color:#fdf6e3;color:#657b83;">C^n</span> functions is <span style="background-color:#fdf6e3;color:#657b83;">C^n</span>.</p>
+</div></div><div class="decl"><h4>times_cont_diff_on_fderiv_within_apply</h4><div class="decl_par"><p>The bundled derivative of a <span style="background-color:#fdf6e3;color:#657b83;">C^{n</span><span style="background-color:#fdf6e3;color:#b58900;">+</span><span style="background-color:#fdf6e3;color:#6c71c4;">1</span><span style="background-color:#fdf6e3;color:#657b83;">}</span> function is <span style="background-color:#fdf6e3;color:#657b83;">C^n</span>.</p>
+</div></div><div class="decl"><h4>times_cont_diff.times_cont_diff_fderiv_apply</h4><div class="decl_par"><p>The bundled derivative of a <span style="background-color:#fdf6e3;color:#657b83;">C^{n</span><span style="background-color:#fdf6e3;color:#b58900;">+</span><span style="background-color:#fdf6e3;color:#6c71c4;">1</span><span style="background-color:#fdf6e3;color:#657b83;">}</span> function is <span style="background-color:#fdf6e3;color:#657b83;">C^n</span>.</p>
+</div></div><div class="decl"><h4>times_cont_diff_on.add</h4><div class="decl_par"><p>The sum of two C^n functions on a domain is C^n.</p>
+</div></div><div class="decl"><h4>times_cont_diff.add</h4><div class="decl_par"><p>The sum of two C^n functions is C^n.</p>
+</div></div><div class="decl"><h4>times_cont_diff_on.neg</h4><div class="decl_par"><p>The negative of a C^n function on a domain is C^n.</p>
+</div></div><div class="decl"><h4>times_cont_diff.neg</h4><div class="decl_par"><p>The negative of a C^n function is C^n.</p>
+</div></div><div class="decl"><h4>times_cont_diff_on.sub</h4><div class="decl_par"><p>The difference of two C^n functions on a domain is C^n.</p>
+</div></div><div class="decl"><h4>times_cont_diff.sub</h4><div class="decl_par"><p>The difference of two C^n functions is C^n.</p>
+</div></div></html>

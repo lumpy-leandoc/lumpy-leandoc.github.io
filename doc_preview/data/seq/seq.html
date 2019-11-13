@@ -1,0 +1,63 @@
+<html><head><link rel="stylesheet" href="../../docs_style.css"></head><div class="decl"><h4>stream.is_seq</h4><div class="decl_par"><p>A stream <span style="background-color:#fdf6e3;color:#657b83;">s : option α</span> is a sequence if <span style="background-color:#fdf6e3;color:#657b83;">s.nth n </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> none</span> implies <span style="background-color:#fdf6e3;color:#657b83;">s.nth (n </span><span style="background-color:#fdf6e3;color:#b58900;">+ </span><span style="background-color:#fdf6e3;color:#6c71c4;">1</span><span style="background-color:#fdf6e3;color:#657b83;">) </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> none</span>.</p>
+</div></div><div class="decl"><h4>seq</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">seq α</span> is the type of possibly infinite lists (referred here as sequences).
+It is encoded as an infinite stream of options such that if <span style="background-color:#fdf6e3;color:#657b83;">f n </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> none</span>, then
+<span style="background-color:#fdf6e3;color:#657b83;">f m </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> none</span> for all <span style="background-color:#fdf6e3;color:#657b83;">m </span><span style="background-color:#fdf6e3;color:#b58900;">≥</span><span style="background-color:#fdf6e3;color:#657b83;"> n</span>.</p>
+</div></div><div class="decl"><h4>seq1</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">seq1 α</span> is the type of nonempty sequences.</p>
+</div></div><div class="decl"><h4>seq.nil</h4><div class="decl_par"><p>The empty sequence</p>
+</div></div><div class="decl"><h4>seq.cons</h4><div class="decl_par"><p>Prepend an element to a sequence</p>
+</div></div><div class="decl"><h4>seq.nth</h4><div class="decl_par"><p>Get the nth element of a sequence (if it exists)</p>
+</div></div><div class="decl"><h4>seq.terminated_at</h4><div class="decl_par"><p>A sequence has terminated at position <span style="background-color:#fdf6e3;color:#657b83;">n</span> if the value at position <span style="background-color:#fdf6e3;color:#657b83;">n</span> equals <span style="background-color:#fdf6e3;color:#657b83;">none</span>.</p>
+</div></div><div class="decl"><h4>seq.terminated_at_decidable</h4><div class="decl_par"><p>It is decidable whether a sequence terminates at a given position.</p>
+</div></div><div class="decl"><h4>seq.terminates</h4><div class="decl_par"><p>A sequence terminates if there is some position <span style="background-color:#fdf6e3;color:#657b83;">n</span> at which it has terminated.</p>
+</div></div><div class="decl"><h4>seq.omap</h4><div class="decl_par"><p>Functorial action of the functor <span style="background-color:#fdf6e3;color:#657b83;">option (α × _)</span></p>
+</div></div><div class="decl"><h4>seq.head</h4><div class="decl_par"><p>Get the first element of a sequence</p>
+</div></div><div class="decl"><h4>seq.tail</h4><div class="decl_par"><p>Get the tail of a sequence (or <span style="background-color:#fdf6e3;color:#657b83;">nil</span> if the sequence is <span style="background-color:#fdf6e3;color:#657b83;">nil</span>)</p>
+</div></div><div class="decl"><h4>seq.terminated_stable</h4><div class="decl_par"><p>If a sequence terminated at position <span style="background-color:#fdf6e3;color:#657b83;">n</span>, it also terminated at <span style="background-color:#fdf6e3;color:#657b83;">m </span><span style="background-color:#fdf6e3;color:#b58900;">≥</span><span style="background-color:#fdf6e3;color:#657b83;"> n </span>.</p>
+</div></div><div class="decl"><h4>seq.ge_stable</h4><div class="decl_par"><p>If <span style="background-color:#fdf6e3;color:#657b83;">s.nth n </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> some aₙ</span> for some value <span style="background-color:#fdf6e3;color:#657b83;">aₙ</span>, then there is also some value <span style="background-color:#fdf6e3;color:#657b83;">aₘ</span> such
+that <span style="background-color:#fdf6e3;color:#657b83;">s.nth </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> some aₘ</span> for <span style="background-color:#fdf6e3;color:#657b83;">m </span><span style="background-color:#fdf6e3;color:#b58900;">≤</span><span style="background-color:#fdf6e3;color:#657b83;"> n</span>.</p>
+</div></div><div class="decl"><h4>seq.destruct</h4><div class="decl_par"><p>Destructor for a sequence, resulting in either <span style="background-color:#fdf6e3;color:#657b83;">none</span> (for <span style="background-color:#fdf6e3;color:#657b83;">nil</span>) or
+<span style="background-color:#fdf6e3;color:#657b83;">some (a, s)</span> (for <span style="background-color:#fdf6e3;color:#657b83;">cons a s</span>).</p>
+</div></div><div class="decl"><h4>seq.corec</h4><div class="decl_par"><p>Corecursor for <span style="background-color:#fdf6e3;color:#657b83;">seq α</span> as a coinductive type. Iterates <span style="background-color:#fdf6e3;color:#657b83;">f</span> to produce new elements
+of the sequence until <span style="background-color:#fdf6e3;color:#657b83;">none</span> is obtained.</p>
+</div></div><div class="decl"><h4>seq.of_list</h4><div class="decl_par"><p>Embed a list as a sequence</p>
+</div></div><div class="decl"><h4>seq.of_stream</h4><div class="decl_par"><p>Embed an infinite stream as a sequence</p>
+</div></div><div class="decl"><h4>seq.of_lazy_list</h4><div class="decl_par"><p>Embed a <span style="background-color:#fdf6e3;color:#657b83;">lazy_list α</span> as a sequence. Note that even though this
+is non-meta, it will produce infinite sequences if used with
+cyclic <span style="background-color:#fdf6e3;color:#657b83;">lazy_list</span>s created by meta constructions.</p>
+</div></div><div class="decl"><h4>seq.to_lazy_list</h4><div class="decl_par"><p>Translate a sequence into a <span style="background-color:#fdf6e3;color:#657b83;">lazy_list</span>. Since <span style="background-color:#fdf6e3;color:#657b83;">lazy_list</span> and <span style="background-color:#fdf6e3;color:#657b83;">list</span>
+are isomorphic as non-meta types, this function is necessarily meta.</p>
+</div></div><div class="decl"><h4>seq.force_to_list</h4><div class="decl_par"><p>Translate a sequence to a list. This function will run forever if
+run on an infinite sequence.</p>
+</div></div><div class="decl"><h4>seq.nats</h4><div class="decl_par"><p>The sequence of natural numbers some 0, some 1, ...</p>
+</div></div><div class="decl"><h4>seq.append</h4><div class="decl_par"><p>Append two sequences. If <span style="background-color:#fdf6e3;color:#657b83;">s₁</span> is infinite, then <span style="background-color:#fdf6e3;color:#657b83;">s₁ </span><span style="background-color:#fdf6e3;color:#b58900;">++</span><span style="background-color:#fdf6e3;color:#657b83;"> s₂ </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> s₁</span>,
+otherwise it puts <span style="background-color:#fdf6e3;color:#657b83;">s₂</span> at the location of the <span style="background-color:#fdf6e3;color:#657b83;">nil</span> in <span style="background-color:#fdf6e3;color:#657b83;">s₁</span>.</p>
+</div></div><div class="decl"><h4>seq.map</h4><div class="decl_par"><p>Map a function over a sequence.</p>
+</div></div><div class="decl"><h4>seq.join</h4><div class="decl_par"><p>Flatten a sequence of sequences. (It is required that the
+sequences be nonempty to ensure productivity; in the case
+of an infinite sequence of <span style="background-color:#fdf6e3;color:#657b83;">nil</span>, the first element is never
+generated.)</p>
+</div></div><div class="decl"><h4>seq.drop</h4><div class="decl_par"><p>Remove the first <span style="background-color:#fdf6e3;color:#657b83;">n</span> elements from the sequence.</p>
+</div></div><div class="decl"><h4>seq.take</h4><div class="decl_par"><p>Take the first <span style="background-color:#fdf6e3;color:#657b83;">n</span> elements of the sequence (producing a list)</p>
+</div></div><div class="decl"><h4>seq.split_at</h4><div class="decl_par"><p>Split a sequence at <span style="background-color:#fdf6e3;color:#657b83;">n</span>, producing a finite initial segment
+and an infinite tail.</p>
+</div></div><div class="decl"><h4>seq.zip_with</h4><div class="decl_par"><p>Combine two sequences with a function</p>
+</div></div><div class="decl"><h4>seq.zip</h4><div class="decl_par"><p>Pair two sequences into a sequence of pairs</p>
+</div></div><div class="decl"><h4>seq.unzip</h4><div class="decl_par"><p>Separate a sequence of pairs into two sequences</p>
+</div></div><div class="decl"><h4>seq.to_list</h4><div class="decl_par"><p>Convert a sequence which is known to terminate into a list</p>
+</div></div><div class="decl"><h4>seq.to_stream</h4><div class="decl_par"><p>Convert a sequence which is known not to terminate into a stream</p>
+</div></div><div class="decl"><h4>seq.to_list_or_stream</h4><div class="decl_par"><p>Convert a sequence into either a list or a stream depending on whether
+it is finite or infinite. (Without decidability of the infiniteness predicate,
+this is not constructively possible.)</p>
+</div></div><div class="decl"><h4>seq.to_list'</h4><div class="decl_par"><p>Convert a sequence into a list, embedded in a computation to allow for
+the possibility of infinite sequences (in which case the computation
+never returns anything).</p>
+</div></div><div class="decl"><h4>seq1.to_seq</h4><div class="decl_par"><p>Convert a <span style="background-color:#fdf6e3;color:#657b83;">seq1</span> to a sequence.</p>
+</div></div><div class="decl"><h4>seq1.map</h4><div class="decl_par"><p>Map a function on a <span style="background-color:#fdf6e3;color:#657b83;">seq1</span></p>
+</div></div><div class="decl"><h4>seq1.join</h4><div class="decl_par"><p>Flatten a nonempty sequence of nonempty sequences</p>
+</div></div><div class="decl"><h4>seq1.ret</h4><div class="decl_par"><p>The <span style="background-color:#fdf6e3;color:#657b83;">return</span> operator for the <span style="background-color:#fdf6e3;color:#657b83;">seq1</span> monad,
+which produces a singleton sequence.</p>
+</div></div><div class="decl"><h4>seq1.bind</h4><div class="decl_par"><p>The <span style="background-color:#fdf6e3;color:#657b83;">bind</span> operator for the <span style="background-color:#fdf6e3;color:#657b83;">seq1</span> monad,
+which maps <span style="background-color:#fdf6e3;color:#657b83;">f</span> on each element of <span style="background-color:#fdf6e3;color:#657b83;">s</span> and appends the results together.
+(Not all of <span style="background-color:#fdf6e3;color:#657b83;">s</span> may be evaluated, because the first few elements of <span style="background-color:#fdf6e3;color:#657b83;">s</span>
+may already produce an infinite result.)</p>
+</div></div></html>

@@ -1,0 +1,39 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><h1>Dual vector spaces</h1>
+<p>The dual space of an R-module M is the R-module of linear maps <span style="background-color:#fdf6e3;color:#657b83;">M </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> R</span>.</p>
+<h2>Main definitions</h2>
+<ul>
+<li><span style="background-color:#fdf6e3;color:#657b83;">dual R M</span> defines the dual space of M over R.</li>
+<li>Given a basis for a K-vector space <span style="background-color:#fdf6e3;color:#657b83;">V</span>, <span style="background-color:#fdf6e3;color:#657b83;">is_basis.to_dual</span> produces a map from <span style="background-color:#fdf6e3;color:#657b83;">V</span> to <span style="background-color:#fdf6e3;color:#657b83;">dual K V</span>.</li>
+<li>Given families of vectors <span style="background-color:#fdf6e3;color:#657b83;">e</span> and <span style="background-color:#fdf6e3;color:#657b83;">ε</span>, <span style="background-color:#fdf6e3;color:#657b83;">dual_pair e ε</span> states that these families have the
+characteristic properties of a basis and a dual.</li>
+</ul>
+<h2>Main results</h2>
+<ul>
+<li><span style="background-color:#fdf6e3;color:#657b83;">to_dual_equiv</span> : the dual space is linearly equivalent to the primal space.</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">dual_pair.is_basis</span> and <span style="background-color:#fdf6e3;color:#657b83;">dual_pair.eq_dual</span>: if <span style="background-color:#fdf6e3;color:#657b83;">e</span> and <span style="background-color:#fdf6e3;color:#657b83;">ε</span> form a dual pair, <span style="background-color:#fdf6e3;color:#657b83;">e</span> is a basis and
+<span style="background-color:#fdf6e3;color:#657b83;">ε</span> is its dual basis.</li>
+</ul>
+<h2>Notation</h2>
+<p>We sometimes use <span style="background-color:#fdf6e3;color:#657b83;">V&#39;</span> as local notation for <span style="background-color:#fdf6e3;color:#657b83;">dual K V</span>.</p>
+<h2>Implementation details</h2>
+<p>Because of unresolved type class issues, the following local instance can be of use:</p>
+<pre><code class="language-lean"><pre style="background-color:#fdf6e3;">
+<span style="color:#859900;">private def </span><span style="color:#d33682;">help_tcs </span><span style="color:#657b83;">: has_scalar K V </span><span style="color:#b58900;">:=</span><span style="color:#657b83;"> mul_action.to_has_scalar _ _
+</span><span style="color:#859900;">local </span><span style="color:#586e75;">attribute [instance]</span><span style="color:#657b83;"> help_tcs
+</span></pre>
+</code></pre>
+<hr/><div class="decl"><h4>module.dual</h4><div class="decl_par"><p>The dual space of an R-module M is the R-module of linear maps <span style="background-color:#fdf6e3;color:#657b83;">M </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> R</span>.</p>
+</div></div><div class="decl"><h4>module.dual.eval</h4><div class="decl_par"><p>Maps a module M to the dual of the dual of M. See <span style="background-color:#fdf6e3;color:#657b83;">vector_space.eval_range</span> and
+<span style="background-color:#fdf6e3;color:#657b83;">vector_space.eval_equiv</span>.</p>
+</div></div><div class="decl"><h4>is_basis.to_dual</h4><div class="decl_par"><p>The linear map from a vector space equipped with basis to its dual vector space,
+taking basis elements to corresponding dual basis elements.</p>
+</div></div><div class="decl"><h4>is_basis.eval_finsupp_at</h4><div class="decl_par"><p>Evaluation of finitely supported functions at a fixed point <span style="background-color:#fdf6e3;color:#657b83;">i</span>, as a <span style="background-color:#fdf6e3;color:#657b83;">K</span>-linear map.</p>
+</div></div><div class="decl"><h4>is_basis.dual_basis</h4><div class="decl_par"><p>Maps a basis for <span style="background-color:#fdf6e3;color:#657b83;">V</span> to a basis for the dual space.</p>
+</div></div><div class="decl"><h4>is_basis.to_dual_equiv</h4><div class="decl_par"><p>A vector space is linearly equivalent to its dual space.</p>
+</div></div><div class="decl"><h4>vector_space.eval_equiv</h4><div class="decl_par"><p>A vector space is linearly equivalent to the dual of its dual space.</p>
+</div></div><div class="decl"><h4>dual_pair</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">e</span> and <span style="background-color:#fdf6e3;color:#657b83;">ε</span> have characteristic properties of a basis and its dual</p>
+</div></div><div class="decl"><h4>dual_pair.coeffs</h4><div class="decl_par"><p>The coefficients of <span style="background-color:#fdf6e3;color:#657b83;">v</span> on the basis <span style="background-color:#fdf6e3;color:#657b83;">e</span></p>
+</div></div><div class="decl"><h4>dual_pair.lc</h4><div class="decl_par"><p>linear combinations of elements of <span style="background-color:#fdf6e3;color:#657b83;">e</span>.
+This is a convenient abbreviation for <span style="background-color:#fdf6e3;color:#657b83;">finsupp.total _ V K e l</span></p>
+</div></div><div class="decl"><h4>dual_pair.decomposition</h4><div class="decl_par"><p>For any v : V n, \sum_{p ∈ Q n} (ε p v) • e p = v</p>
+</div></div></html>

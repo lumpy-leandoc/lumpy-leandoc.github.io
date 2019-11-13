@@ -1,0 +1,87 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><p>Reformulate category-theoretic axioms in a more associativity-friendly way.</p>
+<h2>The <span style="background-color:#fdf6e3;color:#657b83;">reassoc</span> attribute</h2>
+<p>The <span style="background-color:#fdf6e3;color:#657b83;">reassoc</span> attribute can be applied to a lemma</p>
+<pre><code class="language-lean"><pre style="background-color:#fdf6e3;">
+<span style="color:#586e75;">@[reassoc]
+</span><span style="color:#859900;">lemma </span><span style="color:#d33682;">some_lemma </span><span style="color:#657b83;">: foo ≫ bar </span><span style="color:#b58900;">=</span><span style="color:#657b83;"> baz </span><span style="color:#b58900;">:=</span><span style="color:#657b83;"> ...
+</span></pre>
+</code></pre>
+<p>and produce</p>
+<pre><code class="language-lean"><pre style="background-color:#fdf6e3;">
+<span style="color:#859900;">lemma </span><span style="color:#d33682;">some_lemma_assoc </span><span style="color:#657b83;">{Y : C} (f : X ⟶ Y) : foo ≫ bar ≫ f </span><span style="color:#b58900;">=</span><span style="color:#657b83;"> baz ≫ f </span><span style="color:#b58900;">:=</span><span style="color:#657b83;"> ...
+</span></pre>
+</code></pre>
+<p>The name of the produced lemma can be specified with <span style="background-color:#fdf6e3;color:#586e75;">@[reassoc other_lemma_name]</span>. If
+<span style="background-color:#fdf6e3;color:#657b83;">simp</span> is added first, the generated lemma will also have the <span style="background-color:#fdf6e3;color:#657b83;">simp</span> attribute.</p>
+<h2>The <span style="background-color:#fdf6e3;color:#657b83;">reassoc_axiom</span> command</h2>
+<p>When declaring a class of categories, the axioms can be reformulated to be more amenable
+to manipulation in right associated expressions:</p>
+<pre><code class="language-lean"><pre style="background-color:#fdf6e3;">
+<span style="color:#859900;">class </span><span style="color:#d33682;">some_class </span><span style="color:#657b83;">(C : </span><span style="color:#268bd2;">Type</span><span style="color:#657b83;">) [category C] </span><span style="color:#b58900;">:=
+</span><span style="color:#657b83;">(foo : Π X : C, X ⟶ X)
+</span><span style="color:#657b83;">(bar : </span><span style="color:#859900;">∀</span><span style="color:#657b83;"> {X Y : C} (f : X ⟶ Y), foo X ≫ f </span><span style="color:#b58900;">=</span><span style="color:#657b83;"> f ≫ foo Y)
+</span><span style="color:#657b83;">
+</span><span style="color:#657b83;">reassoc_axiom some_class.bar
+</span></pre>
+</code></pre>
+<p>Here too, the <span style="background-color:#fdf6e3;color:#657b83;">reassoc</span> attribute can be used instead. It works well when combined with
+<span style="background-color:#fdf6e3;color:#657b83;">simp</span>:</p>
+<pre><code class="language-lean"><pre style="background-color:#fdf6e3;">
+<span style="color:#586e75;">attribute [simp, reassoc]</span><span style="color:#657b83;"> some_class.bar
+</span></pre>
+</code></pre>
+<hr/><div class="decl"><h4>tactic.get_cat_inst</h4><div class="decl_par"><p>From an expression <span style="background-color:#fdf6e3;color:#657b83;">f ≫ g</span>, extract the expression representing the category instance.</p>
+</div></div><div class="decl"><h4>tactic.prove_reassoc</h4><div class="decl_par"><p>(internals for <span style="background-color:#fdf6e3;color:#586e75;">@[reassoc]</span>)
+Given a lemma of the form <span style="background-color:#fdf6e3;color:#657b83;">f ≫ g </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> h</span>, proves a new lemma of the form <span style="background-color:#fdf6e3;color:#657b83;">h : </span><span style="background-color:#fdf6e3;color:#859900;">∀</span><span style="background-color:#fdf6e3;color:#657b83;"> {W} (k), f ≫ (g ≫ k) </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> h ≫ k</span>,
+and returns the type and proof of this lemma.</p>
+</div></div><div class="decl"><h4>tactic.reassoc_axiom</h4><div class="decl_par"><p>(implementation for <span style="background-color:#fdf6e3;color:#586e75;">@[reassoc]</span>)
+Given a declaration named <span style="background-color:#fdf6e3;color:#657b83;">n</span> of the form <span style="background-color:#fdf6e3;color:#657b83;">f ≫ g </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> h</span>, proves a new lemma named <span style="background-color:#fdf6e3;color:#657b83;">n&#39;</span> of the form <span style="background-color:#fdf6e3;color:#657b83;">∀ {W} (k), f ≫ (g ≫ k) </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> h ≫ k</span>.</p>
+</div></div><div class="decl"><h4>tactic.reassoc_attr</h4><div class="decl_par"><p>On the following lemma:</p>
+<pre><code class="language-lean"><pre style="background-color:#fdf6e3;">
+<span style="color:#586e75;">@[reassoc]
+</span><span style="color:#859900;">lemma </span><span style="color:#d33682;">foo_bar </span><span style="color:#657b83;">: foo ≫ bar </span><span style="color:#b58900;">=</span><span style="color:#657b83;"> foo </span><span style="color:#b58900;">:=</span><span style="color:#657b83;"> ...
+</span></pre>
+</code></pre>
+<p>generates</p>
+<pre><code class="language-lean"><pre style="background-color:#fdf6e3;">
+<span style="color:#859900;">lemma </span><span style="color:#d33682;">foo_bar_assoc </span><span style="color:#657b83;">{Z} {x : Y ⟶ Z} : foo ≫ bar ≫ x </span><span style="color:#b58900;">=</span><span style="color:#657b83;"> foo ≫ x </span><span style="color:#b58900;">:=</span><span style="color:#657b83;"> ...
+</span></pre>
+</code></pre>
+<p>The name of <span style="background-color:#fdf6e3;color:#657b83;">foo_bar_assoc</span> can also be selected with @[reassoc new_name]</p>
+</div></div><div class="decl"><h4>tactic.reassoc_cmd</h4><div class="decl_par"><pre><code class="language-lean"><pre style="background-color:#fdf6e3;">
+<span style="color:#657b83;">reassoc_axiom my_axiom
+</span></pre>
+</code></pre>
+<p>produces the lemma <span style="background-color:#fdf6e3;color:#657b83;">my_axiom_assoc</span> which transforms a statement of the
+form <span style="background-color:#fdf6e3;color:#657b83;">x ≫ y </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> z</span> into <span style="background-color:#fdf6e3;color:#657b83;">x ≫ y ≫ k </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> z ≫ k</span>.</p>
+</div></div><div class="decl"><h4>tactic.interactive.reassoc</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">reassoc h</span>, for assumption <span style="background-color:#fdf6e3;color:#657b83;">h : x ≫ y </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> z</span>, creates a new assumption <span style="background-color:#fdf6e3;color:#657b83;">h : </span><span style="background-color:#fdf6e3;color:#859900;">∀</span><span style="background-color:#fdf6e3;color:#657b83;"> {W} (f : Z ⟶ W), x ≫ y ≫ f </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> z ≫ f</span>.
+<span style="background-color:#fdf6e3;color:#657b83;">reassoc! h</span>, does the same but deletes the initial <span style="background-color:#fdf6e3;color:#657b83;">h</span> assumption.
+(You can also add the attribute <span style="background-color:#fdf6e3;color:#586e75;">@[reassoc]</span> to lemmas to generate new declarations generalized in this way.)</p>
+</div></div><div class="decl"><h4>category_theory.reassoc_of</h4><div class="decl_par"><p>With <span style="background-color:#fdf6e3;color:#657b83;">h : x ≫ y ≫ z </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> x</span> (with universal quantifiers tolerated),
+<span style="background-color:#fdf6e3;color:#657b83;">reassoc_of h : </span><span style="background-color:#fdf6e3;color:#859900;">∀</span><span style="background-color:#fdf6e3;color:#657b83;"> {X&#39;} (f : W ⟶ X&#39;), x ≫ y ≫ z ≫ f </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> x ≫ f</span>.</p>
+<p>The type and proof of <span style="background-color:#fdf6e3;color:#657b83;">reassoc_of h</span> is generated by <span style="background-color:#fdf6e3;color:#657b83;">tactic.derive_reassoc_proof</span>
+which make <span style="background-color:#fdf6e3;color:#657b83;">reassoc_of</span> meta-programming adjacent. It is not called as a tactic but as
+an expression. The goal is to avoid creating assumptions to dismiss after one use:</p>
+<pre><code class="language-lean"><pre style="background-color:#fdf6e3;">
+<span style="color:#859900;">example</span><span style="color:#657b83;"> (X Y Z W : C) (x : X ⟶ Y) (y : Y ⟶ Z) (z z&#39; : Z ⟶ W) (w : X ⟶ Z)
+</span></pre>
+<pre style="background-color:#fdf6e3;">
+<span style="color:#657b83;">  (h : x ≫ y </span><span style="color:#b58900;">=</span><span style="color:#657b83;"> w)
+</span></pre>
+<pre style="background-color:#fdf6e3;">
+<span style="color:#657b83;">  (h&#39; : y ≫ z </span><span style="color:#b58900;">=</span><span style="color:#657b83;"> y ≫ z&#39;) :
+</span></pre>
+<pre style="background-color:#fdf6e3;">
+<span style="color:#657b83;">  x ≫ y ≫ z </span><span style="color:#b58900;">=</span><span style="color:#657b83;"> w ≫ z&#39; </span><span style="color:#b58900;">:=
+</span></pre>
+<pre style="background-color:#fdf6e3;">
+<span style="color:#859900;">begin
+</span></pre>
+<pre style="background-color:#fdf6e3;">
+<span style="color:#657b83;">  rw [h&#39;,reassoc_of h],
+</span></pre>
+<pre style="background-color:#fdf6e3;">
+<span style="color:#859900;">end
+</span></pre>
+</code></pre>
+</div></div></html>

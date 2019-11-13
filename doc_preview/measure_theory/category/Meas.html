@@ -1,0 +1,13 @@
+<html><head><link rel="stylesheet" href="../../docs_style.css"></head><div class="decl"><h4>Meas.of</h4><div class="decl_par"><p>Construct a bundled <span style="background-color:#fdf6e3;color:#657b83;">Meas</span> from the underlying type and the typeclass.</p>
+</div></div><div class="decl"><h4>Meas.Measure</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">Measure X</span> is the measurable space of measures over the measurable space <span style="background-color:#fdf6e3;color:#657b83;">X</span>. It is the
+weakest measurable space, s.t. λμ, μ s is measurable for all measurable sets <span style="background-color:#fdf6e3;color:#657b83;">s</span> in <span style="background-color:#fdf6e3;color:#657b83;">X</span>. An
+important purpose is to assign a monadic structure on it, the Giry monad. In the Giry monad,
+the pure values are the Dirac measure, and the bind operation maps to the integral:
+<span style="background-color:#fdf6e3;color:#657b83;">(μ </span><span style="background-color:#fdf6e3;color:#b58900;">&gt;&gt;=</span><span style="background-color:#fdf6e3;color:#657b83;"> ν) s </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> ∫ x. (ν x) s dμ</span>.</p>
+<p>In probability theory, the <span style="background-color:#fdf6e3;color:#657b83;">Meas</span>-morphisms <span style="background-color:#fdf6e3;color:#657b83;">X </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> Prob X</span> are (sub-)Markov kernels (here <span style="background-color:#fdf6e3;color:#657b83;">Prob</span> is
+the restriction of <span style="background-color:#fdf6e3;color:#657b83;">Measure</span> to (sub-)probability space.)</p>
+</div></div><div class="decl"><h4>Meas.category_theory.monad</h4><div class="decl_par"><p>The Giry monad, i.e. the monadic structure associated with <span style="background-color:#fdf6e3;color:#657b83;">Measure</span>.</p>
+</div></div><div class="decl"><h4>Meas.Integral</h4><div class="decl_par"><p>An example for an algebra on <span style="background-color:#fdf6e3;color:#657b83;">Measure</span>: the nonnegative Lebesgue integral is a hom, behaving
+nicely under the monad operations.</p>
+</div></div><div class="decl"><h4>Borel</h4><div class="decl_par"><p>The Borel functor, the canonical embedding of topological spaces into measurable spaces.</p>
+</div></div></html>

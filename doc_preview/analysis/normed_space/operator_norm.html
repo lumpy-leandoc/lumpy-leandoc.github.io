@@ -1,0 +1,21 @@
+<html><head><link rel="stylesheet" href="../../docs_style.css"></head><div class="decl"><h4>linear_map.with_bound</h4><div class="decl_par"><p>Construct a continuous linear map from a linear map and a bound on this linear map.</p>
+</div></div><div class="decl"><h4>continuous_linear_map.bound</h4><div class="decl_par"><p>A continuous linear map between normed spaces is bounded when the field is nondiscrete.
+The continuity ensures boundedness on a ball of some radius δ. The nondiscreteness is then
+used to rescale any element into an element of norm in [δ/C, δ], whose image has a controlled norm.
+The norm control for the original element follows by rescaling.</p>
+</div></div><div class="decl"><h4>continuous_linear_map.op_norm</h4><div class="decl_par"><p>The operator norm of a continuous linear map is the inf of all its bounds.</p>
+</div></div><div class="decl"><h4>continuous_linear_map.le_op_norm</h4><div class="decl_par"><p>The fundamental property of the operator norm: ∥f x∥ ≤ ∥f∥ * ∥x∥.</p>
+</div></div><div class="decl"><h4>continuous_linear_map.unit_le_op_norm</h4><div class="decl_par"><p>The image of the unit ball under a continuous linear map is bounded.</p>
+</div></div><div class="decl"><h4>continuous_linear_map.op_norm_le_bound</h4><div class="decl_par"><p>If one controls the norm of every A x, then one controls the norm of A.</p>
+</div></div><div class="decl"><h4>continuous_linear_map.op_norm_triangle</h4><div class="decl_par"><p>The operator norm satisfies the triangle inequality.</p>
+</div></div><div class="decl"><h4>continuous_linear_map.op_norm_zero_iff</h4><div class="decl_par"><p>An operator is zero iff its norm vanishes.</p>
+</div></div><div class="decl"><h4>continuous_linear_map.norm_id</h4><div class="decl_par"><p>The norm of the identity is at most 1. It is in fact 1, except when the space is trivial where
+it is 0. It means that one can not do better than an inequality in general.</p>
+</div></div><div class="decl"><h4>continuous_linear_map.op_norm_smul</h4><div class="decl_par"><p>The operator norm is homogeneous.</p>
+</div></div><div class="decl"><h4>continuous_linear_map.to_normed_group</h4><div class="decl_par"><p>Continuous linear maps themselves form a normed space with respect to
+the operator norm.</p>
+</div></div><div class="decl"><h4>continuous_linear_map.op_norm_comp_le</h4><div class="decl_par"><p>The operator norm is submultiplicative.</p>
+</div></div><div class="decl"><h4>continuous_linear_map.lipschitz</h4><div class="decl_par"><p>continuous linear maps are Lipschitz continuous.</p>
+</div></div><div class="decl"><h4>continuous_linear_map.smul_right_norm</h4><div class="decl_par"><p>The norm of the tensor product of a scalar linear map and of an element of a normed space
+is the product of the norms.</p>
+</div></div></html>

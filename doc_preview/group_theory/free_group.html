@@ -1,0 +1,61 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><div class="decl"><h4>free_group.red.step</h4><div class="decl_par"><p>Reduction step: <span style="background-color:#fdf6e3;color:#657b83;">w </span><span style="background-color:#fdf6e3;color:#b58900;">*</span><span style="background-color:#fdf6e3;color:#657b83;"> x </span><span style="background-color:#fdf6e3;color:#b58900;">*</span><span style="background-color:#fdf6e3;color:#657b83;"> x</span><span style="background-color:#fdf6e3;color:#b58900;">⁻¹ *</span><span style="background-color:#fdf6e3;color:#657b83;"> v ~</span><span style="background-color:#fdf6e3;color:#b58900;">&gt;</span><span style="background-color:#fdf6e3;color:#657b83;"> w </span><span style="background-color:#fdf6e3;color:#b58900;">*</span><span style="background-color:#fdf6e3;color:#657b83;"> v</span></p>
+</div></div><div class="decl"><h4>free_group.red</h4><div class="decl_par"><p>Reflexive-transitive closure of red.step</p>
+</div></div><div class="decl"><h4>free_group.red.step.length</h4><div class="decl_par"><p>Predicate asserting that word <span style="background-color:#fdf6e3;color:#657b83;">w₁</span> can be reduced to <span style="background-color:#fdf6e3;color:#657b83;">w₂</span> in one step, i.e. there are words
+<span style="background-color:#fdf6e3;color:#657b83;">w₃ w₄</span> and letter <span style="background-color:#fdf6e3;color:#657b83;">x</span> such that <span style="background-color:#fdf6e3;color:#657b83;">w₁ </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> w₃xx</span><span style="background-color:#fdf6e3;color:#b58900;">⁻¹</span><span style="background-color:#fdf6e3;color:#657b83;">w₄</span> and <span style="background-color:#fdf6e3;color:#657b83;">w₂ </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> w₃w₄</span></p>
+</div></div><div class="decl"><h4>free_group.red.church_rosser</h4><div class="decl_par"><p>Church-Rosser theorem for word reduction: If <span style="background-color:#fdf6e3;color:#657b83;">w1 w2 w3</span> are words such that <span style="background-color:#fdf6e3;color:#657b83;">w1</span> reduces to <span style="background-color:#fdf6e3;color:#657b83;">w2</span>
+and <span style="background-color:#fdf6e3;color:#657b83;">w3</span> respectively, then there is a word <span style="background-color:#fdf6e3;color:#657b83;">w4</span> such that <span style="background-color:#fdf6e3;color:#657b83;">w2</span> and <span style="background-color:#fdf6e3;color:#657b83;">w3</span> reduce to <span style="background-color:#fdf6e3;color:#657b83;">w4</span> respectively.</p>
+</div></div><div class="decl"><h4>free_group.red.nil_iff</h4><div class="decl_par"><p>The empty word <span style="background-color:#fdf6e3;color:#657b83;">[]</span> only reduces to itself.</p>
+</div></div><div class="decl"><h4>free_group.red.singleton_iff</h4><div class="decl_par"><p>A letter only reduces to itself.</p>
+</div></div><div class="decl"><h4>free_group.red.cons_nil_iff_singleton</h4><div class="decl_par"><p>If <span style="background-color:#fdf6e3;color:#657b83;">x</span> is a letter and <span style="background-color:#fdf6e3;color:#657b83;">w</span> is a word such that <span style="background-color:#fdf6e3;color:#657b83;">xw</span> reduces to the empty word, then <span style="background-color:#fdf6e3;color:#657b83;">w</span> reduces
+to <span style="background-color:#fdf6e3;color:#657b83;">x</span><span style="background-color:#fdf6e3;color:#b58900;">⁻¹</span></p>
+</div></div><div class="decl"><h4>free_group.red.inv_of_red_of_ne</h4><div class="decl_par"><p>If <span style="background-color:#fdf6e3;color:#657b83;">x</span> and <span style="background-color:#fdf6e3;color:#657b83;">y</span> are distinct letters and <span style="background-color:#fdf6e3;color:#657b83;">w₁ w₂</span> are words such that <span style="background-color:#fdf6e3;color:#657b83;">xw₁</span> reduces to <span style="background-color:#fdf6e3;color:#657b83;">yw₂</span>, then
+<span style="background-color:#fdf6e3;color:#657b83;">w₁</span> reduces to <span style="background-color:#fdf6e3;color:#657b83;">x</span><span style="background-color:#fdf6e3;color:#b58900;">⁻¹</span><span style="background-color:#fdf6e3;color:#657b83;">yw₂</span>.</p>
+</div></div><div class="decl"><h4>free_group.red.sublist</h4><div class="decl_par"><p>If <span style="background-color:#fdf6e3;color:#657b83;">w₁ w₂</span> are words such that <span style="background-color:#fdf6e3;color:#657b83;">w₁</span> reduces to <span style="background-color:#fdf6e3;color:#657b83;">w₂</span>, then <span style="background-color:#fdf6e3;color:#657b83;">w₂</span> is a sublist of <span style="background-color:#fdf6e3;color:#657b83;">w₁</span>.</p>
+</div></div><div class="decl"><h4>free_group</h4><div class="decl_par"><p>The free group over a type, i.e. the words formed by the elements of the type and their formal
+inverses, quotient by one step reduction.</p>
+</div></div><div class="decl"><h4>free_group.of</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">of x</span> is the canonical injection from the type to the free group over that type by sending each
+element to the equivalence class of the letter that is the element.</p>
+</div></div><div class="decl"><h4>free_group.of.inj</h4><div class="decl_par"><p>The canonical injection from the type to the free group is an injection.</p>
+</div></div><div class="decl"><h4>free_group.to_group</h4><div class="decl_par"><p>If <span style="background-color:#fdf6e3;color:#657b83;">β</span> is a group, then any function from <span style="background-color:#fdf6e3;color:#657b83;">α</span> to <span style="background-color:#fdf6e3;color:#657b83;">β</span>
+extends uniquely to a group homomorphism from
+the free group over <span style="background-color:#fdf6e3;color:#657b83;">α</span> to <span style="background-color:#fdf6e3;color:#657b83;">β</span></p>
+</div></div><div class="decl"><h4>free_group.map</h4><div class="decl_par"><p>Any function from <span style="background-color:#fdf6e3;color:#657b83;">α</span> to <span style="background-color:#fdf6e3;color:#657b83;">β</span> extends uniquely
+to a group homomorphism from the free group
+ver <span style="background-color:#fdf6e3;color:#657b83;">α</span> to the free group over <span style="background-color:#fdf6e3;color:#657b83;">β</span>.</p>
+</div></div><div class="decl"><h4>free_group.free_group_congr</h4><div class="decl_par"><p>Equivalent types give rise to equivalent free groups.</p>
+</div></div><div class="decl"><h4>free_group.prod</h4><div class="decl_par"><p>If <span style="background-color:#fdf6e3;color:#657b83;">α</span> is a group, then any function from <span style="background-color:#fdf6e3;color:#657b83;">α</span> to <span style="background-color:#fdf6e3;color:#657b83;">α</span>
+extends uniquely to a homomorphism from the
+free group over <span style="background-color:#fdf6e3;color:#657b83;">α</span> to <span style="background-color:#fdf6e3;color:#657b83;">α</span>. This is the multiplicative
+version of <span style="background-color:#fdf6e3;color:#657b83;">sum</span>.</p>
+</div></div><div class="decl"><h4>free_group.sum</h4><div class="decl_par"><p>If <span style="background-color:#fdf6e3;color:#657b83;">α</span> is a group, then any function from <span style="background-color:#fdf6e3;color:#657b83;">α</span> to <span style="background-color:#fdf6e3;color:#657b83;">α</span>
+extends uniquely to a homomorphism from the
+free group over <span style="background-color:#fdf6e3;color:#657b83;">α</span> to <span style="background-color:#fdf6e3;color:#657b83;">α</span>. This is the additive
+version of <span style="background-color:#fdf6e3;color:#657b83;">prod</span>.</p>
+</div></div><div class="decl"><h4>free_group.reduce</h4><div class="decl_par"><p>The maximal reduction of a word. It is computable
+iff <span style="background-color:#fdf6e3;color:#657b83;">α</span> has decidable equality.</p>
+</div></div><div class="decl"><h4>free_group.reduce.red</h4><div class="decl_par"><p>The first theorem that characterises the function
+<span style="background-color:#fdf6e3;color:#657b83;">reduce</span>: a word reduces to its maximal reduction.</p>
+</div></div><div class="decl"><h4>free_group.reduce.min</h4><div class="decl_par"><p>The second theorem that characterises the
+function <span style="background-color:#fdf6e3;color:#657b83;">reduce</span>: the maximal reduction of a word
+only reduces to itself.</p>
+</div></div><div class="decl"><h4>free_group.reduce.idem</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">reduce</span> is idempotent, i.e. the maximal reduction
+of the maximal reduction of a word is the maximal
+reduction of the word.</p>
+</div></div><div class="decl"><h4>free_group.reduce.eq_of_red</h4><div class="decl_par"><p>If a word reduces to another word, then they have
+a common maximal reduction.</p>
+</div></div><div class="decl"><h4>free_group.reduce.sound</h4><div class="decl_par"><p>If two words correspond to the same element in
+the free group, then they have a common maximal
+reduction. This is the proof that the function that
+sends an element of the free group to its maximal
+reduction is well-defined.</p>
+</div></div><div class="decl"><h4>free_group.reduce.exact</h4><div class="decl_par"><p>If two words have a common maximal reduction,
+then they correspond to the same element in the free group.</p>
+</div></div><div class="decl"><h4>free_group.reduce.self</h4><div class="decl_par"><p>A word and its maximal reduction correspond to
+the same element of the free group.</p>
+</div></div><div class="decl"><h4>free_group.reduce.rev</h4><div class="decl_par"><p>If words <span style="background-color:#fdf6e3;color:#657b83;">w₁ w₂</span> are such that <span style="background-color:#fdf6e3;color:#657b83;">w₁</span> reduces to <span style="background-color:#fdf6e3;color:#657b83;">w₂</span>,
+then <span style="background-color:#fdf6e3;color:#657b83;">w₂</span> reduces to the maximal reduction of <span style="background-color:#fdf6e3;color:#657b83;">w₁</span>.</p>
+</div></div><div class="decl"><h4>free_group.to_word</h4><div class="decl_par"><p>The function that sends an element of the free
+group to its maximal reduction.</p>
+</div></div><div class="decl"><h4>free_group.reduce.church_rosser</h4><div class="decl_par"><p>Constructive Church-Rosser theorem (compare <span style="background-color:#fdf6e3;color:#657b83;">church_rosser</span>).</p>
+</div></div><div class="decl"><h4>free_group.red.enum</h4><div class="decl_par"><p>A list containing every word that <span style="background-color:#fdf6e3;color:#657b83;">w₁</span> reduces to.</p>
+</div></div></html>

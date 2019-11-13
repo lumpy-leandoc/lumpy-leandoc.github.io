@@ -1,0 +1,85 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><div class="decl"><h4>extensional_attribute</h4><div class="decl_par"><p>Tag lemmas of the form:</p>
+<pre><code class="language-lean"><pre style="background-color:#fdf6e3;">
+<span style="color:#586e75;">@[extensionality]
+</span><span style="color:#859900;">lemma </span><span style="color:#d33682;">my_collection.ext </span><span style="color:#657b83;">(a b : my_collection)
+</span><span style="color:#657b83;">  (h : </span><span style="color:#859900;">∀</span><span style="color:#657b83;"> x, a.lookup x </span><span style="color:#b58900;">=</span><span style="color:#657b83;"> b.lookup y) :
+</span><span style="color:#657b83;">  a </span><span style="color:#b58900;">=</span><span style="color:#657b83;"> b </span><span style="color:#b58900;">:=</span><span style="color:#657b83;"> ...
+</span></pre>
+</code></pre>
+<p>The attribute indexes extensionality lemma using the type of the
+objects (i.e. <span style="background-color:#fdf6e3;color:#657b83;">my_collection</span>) which it gets from the statement of
+the lemma.  In some cases, the same lemma can be used to state the
+extensionality of multiple types that are definitionally equivalent.</p>
+<pre><code class="language-lean"><pre style="background-color:#fdf6e3;">
+<span style="color:#586e75;">attribute [extensionality [(→),thunk,stream]</span><span style="color:#657b83;">] funext
+</span></pre>
+</code></pre>
+<p>Those parameters are cumulative. The following are equivalent:</p>
+<pre><code class="language-lean"><pre style="background-color:#fdf6e3;">
+<span style="color:#586e75;">attribute [extensionality [(→),thunk]</span><span style="color:#657b83;">] funext
+</span><span style="color:#586e75;">attribute [extensionality [stream]</span><span style="color:#657b83;">] funext
+</span></pre>
+</code></pre>
+<p>and</p>
+<pre><code class="language-lean"><pre style="background-color:#fdf6e3;">
+<span style="color:#586e75;">attribute [extensionality [(→),thunk,stream]</span><span style="color:#657b83;">] funext
+</span></pre>
+</code></pre>
+<p>One removes type names from the list for one lemma with:</p>
+<pre><code class="language-lean"><pre style="background-color:#fdf6e3;">
+<span style="color:#586e75;">attribute [extensionality [-stream,-thunk]</span><span style="color:#657b83;">] funext
+</span></pre>
+</code></pre>
+<p>Finally, the following:</p>
+<pre><code class="language-lean"><pre style="background-color:#fdf6e3;">
+<span style="color:#586e75;">@[extensionality]
+</span><span style="color:#859900;">lemma </span><span style="color:#d33682;">my_collection.ext </span><span style="color:#657b83;">(a b : my_collection)
+</span><span style="color:#657b83;">  (h : </span><span style="color:#859900;">∀</span><span style="color:#657b83;"> x, a.lookup x </span><span style="color:#b58900;">=</span><span style="color:#657b83;"> b.lookup y) :
+</span><span style="color:#657b83;">  a </span><span style="color:#b58900;">=</span><span style="color:#657b83;"> b </span><span style="color:#b58900;">:=</span><span style="color:#657b83;"> ...
+</span></pre>
+</code></pre>
+<p>is equivalent to</p>
+<pre><code class="language-lean"><pre style="background-color:#fdf6e3;">
+<span style="color:#586e75;">@[extensionality *]
+</span><span style="color:#859900;">lemma </span><span style="color:#d33682;">my_collection.ext </span><span style="color:#657b83;">(a b : my_collection)
+</span><span style="color:#657b83;">  (h : </span><span style="color:#859900;">∀</span><span style="color:#657b83;"> x, a.lookup x </span><span style="color:#b58900;">=</span><span style="color:#657b83;"> b.lookup y) :
+</span><span style="color:#657b83;">  a </span><span style="color:#b58900;">=</span><span style="color:#657b83;"> b </span><span style="color:#b58900;">:=</span><span style="color:#657b83;"> ...
+</span></pre>
+</code></pre>
+<p>This allows us specify type synonyms along with the type
+that referred to in the lemma statement.</p>
+<pre><code class="language-lean"><pre style="background-color:#fdf6e3;">
+<span style="color:#586e75;">@[extensionality [*,my_type_synonym]</span><span style="color:#657b83;">]
+</span><span style="color:#859900;">lemma </span><span style="color:#d33682;">my_collection.ext </span><span style="color:#657b83;">(a b : my_collection)
+</span><span style="color:#657b83;">  (h : </span><span style="color:#859900;">∀</span><span style="color:#657b83;"> x, a.lookup x </span><span style="color:#b58900;">=</span><span style="color:#657b83;"> b.lookup y) :
+</span><span style="color:#657b83;">  a </span><span style="color:#b58900;">=</span><span style="color:#657b83;"> b </span><span style="color:#b58900;">:=</span><span style="color:#657b83;"> ...
+</span></pre>
+</code></pre>
+</div></div><div class="decl"><h4>tactic.interactive.ext1</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">ext1 id</span> selects and apply one extensionality lemma (with attribute
+<span style="background-color:#fdf6e3;color:#657b83;">extensionality</span>), using <span style="background-color:#fdf6e3;color:#657b83;">id</span>, if provided, to name a local constant
+introduced by the lemma. If <span style="background-color:#fdf6e3;color:#657b83;">id</span> is omitted, the local constant is
+named automatically, as per <span style="background-color:#fdf6e3;color:#657b83;">intro</span>.</p>
+</div></div><div class="decl"><h4>tactic.interactive.ext</h4><div class="decl_par"><ul>
+<li><span style="background-color:#fdf6e3;color:#657b83;">ext</span> applies as many extensionality lemmas as possible;</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">ext ids</span>, with <span style="background-color:#fdf6e3;color:#657b83;">ids</span> a list of identifiers, finds extentionality and applies them
+until it runs out of identifiers in <span style="background-color:#fdf6e3;color:#657b83;">ids</span> to name the local constants.</li>
+</ul>
+<p>When trying to prove:</p>
+<pre><code class="language-lean"><pre style="background-color:#fdf6e3;">
+<span style="color:#657b83;">α β : </span><span style="color:#268bd2;">Type</span><span style="color:#657b83;">,
+</span><span style="color:#657b83;">f g : α </span><span style="color:#859900;">→</span><span style="color:#657b83;"> set β
+</span><span style="color:#657b83;">⊢ f </span><span style="color:#b58900;">=</span><span style="color:#657b83;"> g
+</span></pre>
+</code></pre>
+<p>applying <span style="background-color:#fdf6e3;color:#657b83;">ext x y</span> yields:</p>
+<pre><code class="language-lean"><pre style="background-color:#fdf6e3;">
+<span style="color:#657b83;">α β : </span><span style="color:#268bd2;">Type</span><span style="color:#657b83;">,
+</span><span style="color:#657b83;">f g : α </span><span style="color:#859900;">→</span><span style="color:#657b83;"> set β,
+</span><span style="color:#657b83;">x : α,
+</span><span style="color:#657b83;">y : β
+</span><span style="color:#657b83;">⊢ y ∈ f x </span><span style="color:#b58900;">↔</span><span style="color:#657b83;"> y ∈ f x
+</span></pre>
+</code></pre>
+<p>by applying functional extensionality and set extensionality.</p>
+<p>A maximum depth can be provided with <span style="background-color:#fdf6e3;color:#657b83;">ext x y z : </span><span style="background-color:#fdf6e3;color:#6c71c4;">3</span>.</p>
+</div></div></html>

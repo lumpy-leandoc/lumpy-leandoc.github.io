@@ -1,0 +1,17 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><div class="decl"><h4>tactic.guard_mem_fin</h4><div class="decl_par"><p>Checks that the expression looks like <span style="background-color:#fdf6e3;color:#657b83;">x ∈ A</span> for <span style="background-color:#fdf6e3;color:#657b83;">A : finset α</span>, <span style="background-color:#fdf6e3;color:#657b83;">multiset α</span> or <span style="background-color:#fdf6e3;color:#657b83;">A : list α</span>,
+and returns the type α.</p>
+</div></div><div class="decl"><h4>tactic.interactive.fin_cases</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">fin_cases h</span> performs case analysis on a hypothesis of the form
+<span style="background-color:#fdf6e3;color:#657b83;">h : A</span>, where <span style="background-color:#fdf6e3;color:#657b83;">[fintype A]</span> is available, or
+<span style="background-color:#fdf6e3;color:#657b83;">h ∈ A</span>, where <span style="background-color:#fdf6e3;color:#657b83;">A : finset X</span>, <span style="background-color:#fdf6e3;color:#657b83;">A : multiset X</span> or <span style="background-color:#fdf6e3;color:#657b83;">A : list X</span>.</p>
+<p><span style="background-color:#fdf6e3;color:#657b83;">fin_cases </span><span style="background-color:#fdf6e3;color:#b58900;">*</span> performs case analysis on all suitable hypotheses.</p>
+<p>As an example, in</p>
+<pre><code class="language-lean"><pre style="background-color:#fdf6e3;">
+<span style="color:#859900;">example</span><span style="color:#657b83;"> (f : ℕ </span><span style="color:#859900;">→ </span><span style="color:#268bd2;">Prop</span><span style="color:#657b83;">) (p : fin </span><span style="color:#6c71c4;">3</span><span style="color:#657b83;">) (h0 : f </span><span style="color:#6c71c4;">0</span><span style="color:#657b83;">) (h1 : f </span><span style="color:#6c71c4;">1</span><span style="color:#657b83;">) (h2 : f </span><span style="color:#6c71c4;">2</span><span style="color:#657b83;">) : f p.val </span><span style="color:#b58900;">:=
+</span><span style="color:#859900;">begin
+</span><span style="color:#657b83;">  fin_cases </span><span style="color:#b58900;">*</span><span style="color:#657b83;">; simp,
+</span><span style="color:#657b83;">  all_goals { assumption }
+</span><span style="color:#859900;">end
+</span></pre>
+</code></pre>
+<p>after <span style="background-color:#fdf6e3;color:#657b83;">fin_cases p; simp</span>, there are three goals, <span style="background-color:#fdf6e3;color:#657b83;">f </span><span style="background-color:#fdf6e3;color:#6c71c4;">0</span>, <span style="background-color:#fdf6e3;color:#657b83;">f </span><span style="background-color:#fdf6e3;color:#6c71c4;">1</span>, and <span style="background-color:#fdf6e3;color:#657b83;">f </span><span style="background-color:#fdf6e3;color:#6c71c4;">2</span>.</p>
+</div></div></html>

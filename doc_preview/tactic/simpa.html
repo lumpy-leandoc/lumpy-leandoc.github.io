@@ -1,0 +1,12 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><div class="decl"><h4>tactic.interactive.simpa</h4><div class="decl_par"><p>This is a &quot;finishing&quot; tactic modification of <span style="background-color:#fdf6e3;color:#657b83;">simp</span>.</p>
+<ul>
+<li>
+<p><span style="background-color:#fdf6e3;color:#657b83;">simpa [rules, ...] </span><span style="background-color:#fdf6e3;color:#859900;">using</span><span style="background-color:#fdf6e3;color:#657b83;"> e</span> will simplify the goal and the type of
+<span style="background-color:#fdf6e3;color:#657b83;">e</span> using <span style="background-color:#fdf6e3;color:#657b83;">rules</span>, then try to close the goal using <span style="background-color:#fdf6e3;color:#657b83;">e</span>.</p>
+</li>
+<li>
+<p><span style="background-color:#fdf6e3;color:#657b83;">simpa [rules, ...]</span> will simplify the goal using <span style="background-color:#fdf6e3;color:#657b83;">rules</span>, then try
+to close it using <span style="background-color:#fdf6e3;color:#657b83;">assumption</span>.</p>
+</li>
+</ul>
+</div></div></html>

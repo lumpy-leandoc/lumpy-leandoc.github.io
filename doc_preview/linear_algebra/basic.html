@@ -1,0 +1,122 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><h1>Linear algebra</h1>
+<p>This file defines the basics of linear algebra. It sets up the &quot;categorical/lattice structure&quot; of
+modules over a ring, submodules, and linear maps. If <span style="background-color:#fdf6e3;color:#657b83;">p</span> and <span style="background-color:#fdf6e3;color:#657b83;">q</span> are submodules of a module, <span style="background-color:#fdf6e3;color:#657b83;">p </span><span style="background-color:#fdf6e3;color:#b58900;">≤</span><span style="background-color:#fdf6e3;color:#657b83;"> q</span>
+means that <span style="background-color:#fdf6e3;color:#657b83;">p ⊆ q</span>.</p>
+<p>Many of the relevant definitions, including <span style="background-color:#fdf6e3;color:#657b83;">module</span>, <span style="background-color:#fdf6e3;color:#657b83;">submodule</span>, and <span style="background-color:#fdf6e3;color:#657b83;">linear_map</span>, are found in
+<span style="background-color:#fdf6e3;color:#657b83;">src</span><span style="background-color:#fdf6e3;color:#b58900;">/</span><span style="background-color:#fdf6e3;color:#657b83;">algebra</span><span style="background-color:#fdf6e3;color:#b58900;">/</span><span style="background-color:#fdf6e3;color:#657b83;">module.lean</span>.</p>
+<h2>Main definitions</h2>
+<ul>
+<li>Many constructors for linear maps, including <span style="background-color:#fdf6e3;color:#657b83;">pair</span> and <span style="background-color:#fdf6e3;color:#657b83;">copair</span></li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">submodule.span s</span> is defined to be the smallest submodule containing the set <span style="background-color:#fdf6e3;color:#657b83;">s</span>.</li>
+<li>If <span style="background-color:#fdf6e3;color:#657b83;">p</span> is a submodule of <span style="background-color:#fdf6e3;color:#657b83;">M</span>, <span style="background-color:#fdf6e3;color:#657b83;">submodule.quotient p</span> is the quotient of <span style="background-color:#fdf6e3;color:#657b83;">M</span> with respect to <span style="background-color:#fdf6e3;color:#657b83;">p</span>:
+that is, elements of <span style="background-color:#fdf6e3;color:#657b83;">M</span> are identified if their difference is in <span style="background-color:#fdf6e3;color:#657b83;">p</span>. This is itself a module.</li>
+<li>The kernel <span style="background-color:#fdf6e3;color:#657b83;">ker</span> and range <span style="background-color:#fdf6e3;color:#657b83;">range</span> of a linear map are submodules of the domain and codomain
+respectively.</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">lin_equiv M M₂</span>, the type of linear equivalences between <span style="background-color:#fdf6e3;color:#657b83;">M</span> and <span style="background-color:#fdf6e3;color:#657b83;">M₂</span>, is a structure that extends
+<span style="background-color:#fdf6e3;color:#657b83;">linear_map</span> and <span style="background-color:#fdf6e3;color:#657b83;">equiv</span>.</li>
+<li>The general linear group is defined to be the group of invertible linear maps from <span style="background-color:#fdf6e3;color:#657b83;">M</span> to itself.</li>
+</ul>
+<h2>Main statements</h2>
+<ul>
+<li>The first and second isomorphism laws for modules are proved as <span style="background-color:#fdf6e3;color:#657b83;">quot_ker_equiv_range</span> and
+<span style="background-color:#fdf6e3;color:#657b83;">sup_quotient_equiv_quotient_inf</span>.</li>
+</ul>
+<h2>Notations</h2>
+<ul>
+<li>We continue to use the notation <span style="background-color:#fdf6e3;color:#657b83;">M </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;">ₗ[R] M₂</span> for the type of linear maps from <span style="background-color:#fdf6e3;color:#657b83;">M</span> to <span style="background-color:#fdf6e3;color:#657b83;">M₂</span> over the
+ring <span style="background-color:#fdf6e3;color:#657b83;">R</span>.</li>
+<li>We introduce the notations <span style="background-color:#fdf6e3;color:#657b83;">M ≃ₗ M₂</span> and <span style="background-color:#fdf6e3;color:#657b83;">M ≃ₗ[R] M₂</span> for <span style="background-color:#fdf6e3;color:#657b83;">lin_equiv M M₂</span>. In the first, the ring
+<span style="background-color:#fdf6e3;color:#657b83;">R</span> is implicit.</li>
+</ul>
+<h2>Implementation notes</h2>
+<p>We note that, when constructing linear maps, it is convenient to use operations defined on bundled
+maps (<span style="background-color:#fdf6e3;color:#657b83;">pair</span>, <span style="background-color:#fdf6e3;color:#657b83;">copair</span>, arithmetic operations like <span style="background-color:#fdf6e3;color:#b58900;">+</span>) instead of defining a function and proving
+it is linear.</p>
+<h2>Tags</h2>
+<p>linear algebra, vector space, module</p>
+<hr/><div class="decl"><h4>linear_map.cod_restrict</h4><div class="decl_par"><p>A linear map <span style="background-color:#fdf6e3;color:#657b83;">f : M₂ </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> M</span> whose values lie in a submodule <span style="background-color:#fdf6e3;color:#657b83;">p ⊆ M</span> can be restricted to a
+linear map M₂ → p.</p>
+</div></div><div class="decl"><h4>linear_map.inverse</h4><div class="decl_par"><p>If a function <span style="background-color:#fdf6e3;color:#657b83;">g</span> is a left and right inverse of a linear map <span style="background-color:#fdf6e3;color:#657b83;">f</span>, then <span style="background-color:#fdf6e3;color:#657b83;">g</span> is linear itself.</p>
+</div></div><div class="decl"><h4>linear_map.has_zero</h4><div class="decl_par"><p>The constant 0 map is linear.</p>
+</div></div><div class="decl"><h4>linear_map.has_neg</h4><div class="decl_par"><p>The negation of a linear map is linear.</p>
+</div></div><div class="decl"><h4>linear_map.has_add</h4><div class="decl_par"><p>The sum of two linear maps is linear.</p>
+</div></div><div class="decl"><h4>linear_map.add_comm_group</h4><div class="decl_par"><p>The type of linear maps is an additive group.</p>
+</div></div><div class="decl"><h4>linear_map.smul_right</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">λb, f b • x</span> is a linear map.</p>
+</div></div><div class="decl"><h4>linear_map.fst</h4><div class="decl_par"><p>The first projection of a product is a linear map.</p>
+</div></div><div class="decl"><h4>linear_map.snd</h4><div class="decl_par"><p>The second projection of a product is a linear map.</p>
+</div></div><div class="decl"><h4>linear_map.pair</h4><div class="decl_par"><p>The pair of two linear maps is a linear map.</p>
+</div></div><div class="decl"><h4>linear_map.inl</h4><div class="decl_par"><p>The left injection into a product is a linear map.</p>
+</div></div><div class="decl"><h4>linear_map.inr</h4><div class="decl_par"><p>The right injection into a product is a linear map.</p>
+</div></div><div class="decl"><h4>linear_map.copair</h4><div class="decl_par"><p>The copair function <span style="background-color:#fdf6e3;color:#657b83;">λ x : M × M₂, f x.</span><span style="background-color:#fdf6e3;color:#6c71c4;">1 </span><span style="background-color:#fdf6e3;color:#b58900;">+</span><span style="background-color:#fdf6e3;color:#657b83;"> g x.</span><span style="background-color:#fdf6e3;color:#6c71c4;">2</span> is a linear map.</p>
+</div></div><div class="decl"><h4>linear_map.congr_right</h4><div class="decl_par"><p>Composition by <span style="background-color:#fdf6e3;color:#657b83;">f : M₂ </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> M₃</span> is a linear map from the space of linear maps <span style="background-color:#fdf6e3;color:#657b83;">M </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> M₂</span> to the space of
+linear maps <span style="background-color:#fdf6e3;color:#657b83;">M₂ </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> M₃</span>.</p>
+</div></div><div class="decl"><h4>submodule.of_le</h4><div class="decl_par"><p>If two submodules p and p' satisfy p ⊆ p', then <span style="background-color:#fdf6e3;color:#657b83;">of_le p p&#39;</span> is the linear map version of this
+inclusion.</p>
+</div></div><div class="decl"><h4>submodule.lattice.has_bot</h4><div class="decl_par"><p>The set <span style="background-color:#fdf6e3;color:#657b83;">{</span><span style="background-color:#fdf6e3;color:#6c71c4;">0</span><span style="background-color:#fdf6e3;color:#657b83;">}</span> is the bottom element of the lattice of submodules.</p>
+</div></div><div class="decl"><h4>submodule.lattice.has_top</h4><div class="decl_par"><p>The universal set is the top element of the lattice of submodules.</p>
+</div></div><div class="decl"><h4>submodule.map</h4><div class="decl_par"><p>The pushforward of a submodule <span style="background-color:#fdf6e3;color:#657b83;">p ⊆ M</span> by <span style="background-color:#fdf6e3;color:#657b83;">f : M </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> M₂</span></p>
+</div></div><div class="decl"><h4>submodule.comap</h4><div class="decl_par"><p>The pullback of a submodule <span style="background-color:#fdf6e3;color:#657b83;">p ⊆ M₂</span> along <span style="background-color:#fdf6e3;color:#657b83;">f : M </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> M₂</span></p>
+</div></div><div class="decl"><h4>submodule.span</h4><div class="decl_par"><p>The span of a set <span style="background-color:#fdf6e3;color:#657b83;">s ⊆ M</span> is the smallest submodule of M that contains <span style="background-color:#fdf6e3;color:#657b83;">s</span>.</p>
+</div></div><div class="decl"><h4>submodule.span_induction</h4><div class="decl_par"><p>An induction principle for span membership. If <span style="background-color:#fdf6e3;color:#657b83;">p</span> holds for 0 and all elements of <span style="background-color:#fdf6e3;color:#657b83;">s</span>, and is
+preserved under addition and scalar multiplication, then <span style="background-color:#fdf6e3;color:#657b83;">p</span> holds for all elements of the span of
+<span style="background-color:#fdf6e3;color:#657b83;">s</span>.</p>
+</div></div><div class="decl"><h4>submodule.gi</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">span</span> forms a Galois insertion with the coercion from submodule to set.</p>
+</div></div><div class="decl"><h4>submodule.prod</h4><div class="decl_par"><p>The product of two submodules is a submodule.</p>
+</div></div><div class="decl"><h4>submodule.quotient_rel</h4><div class="decl_par"><p>The equivalence relation associated to a submodule <span style="background-color:#fdf6e3;color:#657b83;">p</span>, defined by <span style="background-color:#fdf6e3;color:#657b83;">x ≈ y</span> iff <span style="background-color:#fdf6e3;color:#657b83;">y </span><span style="background-color:#fdf6e3;color:#b58900;">-</span><span style="background-color:#fdf6e3;color:#657b83;"> x ∈ p</span>.</p>
+</div></div><div class="decl"><h4>submodule.quotient</h4><div class="decl_par"><p>The quotient of a module <span style="background-color:#fdf6e3;color:#657b83;">M</span> by a submodule <span style="background-color:#fdf6e3;color:#657b83;">p ⊆ M</span>.</p>
+</div></div><div class="decl"><h4>submodule.quotient.mk</h4><div class="decl_par"><p>Map associating to an element of <span style="background-color:#fdf6e3;color:#657b83;">M</span> the corresponding element of <span style="background-color:#fdf6e3;color:#657b83;">M</span><span style="background-color:#fdf6e3;color:#b58900;">/</span><span style="background-color:#fdf6e3;color:#657b83;">p</span>,
+when <span style="background-color:#fdf6e3;color:#657b83;">p</span> is a submodule of <span style="background-color:#fdf6e3;color:#657b83;">M</span>.</p>
+</div></div><div class="decl"><h4>linear_map.range</h4><div class="decl_par"><p>The range of a linear map <span style="background-color:#fdf6e3;color:#657b83;">f : M </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> M₂</span> is a submodule of <span style="background-color:#fdf6e3;color:#657b83;">M₂</span>.</p>
+</div></div><div class="decl"><h4>linear_map.ker</h4><div class="decl_par"><p>The kernel of a linear map <span style="background-color:#fdf6e3;color:#657b83;">f : M </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> M₂</span> is defined to be <span style="background-color:#fdf6e3;color:#657b83;">comap f ⊥</span>. This is equivalent to the
+set of <span style="background-color:#fdf6e3;color:#657b83;">x : M</span> such that <span style="background-color:#fdf6e3;color:#657b83;">f x </span><span style="background-color:#fdf6e3;color:#b58900;">= </span><span style="background-color:#fdf6e3;color:#6c71c4;">0</span>. The kernel is a submodule of <span style="background-color:#fdf6e3;color:#657b83;">M</span>.</p>
+</div></div><div class="decl"><h4>submodule.map_subtype.order_iso</h4><div class="decl_par"><p>If N ⊆ M then submodules of N are the same as submodules of M contained in N</p>
+</div></div><div class="decl"><h4>submodule.map_subtype.le_order_embedding</h4><div class="decl_par"><p>If <span style="background-color:#fdf6e3;color:#657b83;">p ⊆ M</span> is a submodule, the ordering of submodules of <span style="background-color:#fdf6e3;color:#657b83;">p</span> is embedded in the ordering of
+submodules of M.</p>
+</div></div><div class="decl"><h4>submodule.map_subtype.lt_order_embedding</h4><div class="decl_par"><p>If <span style="background-color:#fdf6e3;color:#657b83;">p ⊆ M</span> is a submodule, the ordering of submodules of <span style="background-color:#fdf6e3;color:#657b83;">p</span> is embedded in the ordering of
+submodules of M.</p>
+</div></div><div class="decl"><h4>submodule.mkq</h4><div class="decl_par"><p>The map from a module <span style="background-color:#fdf6e3;color:#657b83;">M</span> to the quotient of <span style="background-color:#fdf6e3;color:#657b83;">M</span> by a submodule <span style="background-color:#fdf6e3;color:#657b83;">p</span> is a linear map.</p>
+</div></div><div class="decl"><h4>submodule.liftq</h4><div class="decl_par"><p>The map from the quotient of <span style="background-color:#fdf6e3;color:#657b83;">M</span> by a submodule <span style="background-color:#fdf6e3;color:#657b83;">p</span> to <span style="background-color:#fdf6e3;color:#657b83;">M₂</span> along <span style="background-color:#fdf6e3;color:#657b83;">f : M </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> M₂</span> is linear.</p>
+</div></div><div class="decl"><h4>submodule.mapq</h4><div class="decl_par"><p>The map from the quotient of <span style="background-color:#fdf6e3;color:#657b83;">M</span> by submodule <span style="background-color:#fdf6e3;color:#657b83;">p</span> to the quotient of <span style="background-color:#fdf6e3;color:#657b83;">M₂</span> by submodule <span style="background-color:#fdf6e3;color:#657b83;">q</span> along
+<span style="background-color:#fdf6e3;color:#657b83;">f : M </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> M₂</span> is linear.</p>
+</div></div><div class="decl"><h4>submodule.comap_mkq.order_iso</h4><div class="decl_par"><p>The correspondence theorem for modules: there is an order isomorphism between submodules of the
+quotient of <span style="background-color:#fdf6e3;color:#657b83;">M</span> by <span style="background-color:#fdf6e3;color:#657b83;">p</span>, and submodules of <span style="background-color:#fdf6e3;color:#657b83;">M</span> larger than <span style="background-color:#fdf6e3;color:#657b83;">p</span>.</p>
+</div></div><div class="decl"><h4>submodule.comap_mkq.le_order_embedding</h4><div class="decl_par"><p>The ordering on submodules of the quotient of <span style="background-color:#fdf6e3;color:#657b83;">M</span> by <span style="background-color:#fdf6e3;color:#657b83;">p</span> embeds into the ordering on submodules
+of <span style="background-color:#fdf6e3;color:#657b83;">M</span>.</p>
+</div></div><div class="decl"><h4>submodule.comap_mkq.lt_order_embedding</h4><div class="decl_par"><p>The ordering on submodules of the quotient of <span style="background-color:#fdf6e3;color:#657b83;">M</span> by <span style="background-color:#fdf6e3;color:#657b83;">p</span> embeds into the ordering on submodules
+of <span style="background-color:#fdf6e3;color:#657b83;">M</span>.</p>
+</div></div><div class="decl"><h4>linear_equiv</h4><div class="decl_par"><p>A linear equivalence is an invertible linear map.</p>
+</div></div><div class="decl"><h4>linear_equiv.refl</h4><div class="decl_par"><p>The identity map is a linear equivalence.</p>
+</div></div><div class="decl"><h4>linear_equiv.symm</h4><div class="decl_par"><p>Linear equivalences are symmetric.</p>
+</div></div><div class="decl"><h4>linear_equiv.trans</h4><div class="decl_par"><p>Linear equivalences are transitive.</p>
+</div></div><div class="decl"><h4>linear_equiv.of_bijective</h4><div class="decl_par"><p>A bijective linear map is a linear equivalence. Here, bijectivity is described by saying that
+the kernel of <span style="background-color:#fdf6e3;color:#657b83;">f</span> is <span style="background-color:#fdf6e3;color:#657b83;">{</span><span style="background-color:#fdf6e3;color:#6c71c4;">0</span><span style="background-color:#fdf6e3;color:#657b83;">}</span> and the range is the universal set.</p>
+</div></div><div class="decl"><h4>linear_equiv.of_linear</h4><div class="decl_par"><p>If a linear map has an inverse, it is a linear equivalence.</p>
+</div></div><div class="decl"><h4>linear_equiv.of_top</h4><div class="decl_par"><p>The top submodule of <span style="background-color:#fdf6e3;color:#657b83;">M</span> is linearly equivalent to <span style="background-color:#fdf6e3;color:#657b83;">M</span>.</p>
+</div></div><div class="decl"><h4>linear_equiv.smul_of_unit</h4><div class="decl_par"><p>Multiplying by a unit <span style="background-color:#fdf6e3;color:#657b83;">a</span> of the ring <span style="background-color:#fdf6e3;color:#657b83;">R</span> is a linear equivalence.</p>
+</div></div><div class="decl"><h4>linear_equiv.arrow_congr</h4><div class="decl_par"><p>A linear isomorphism between the domains and codomains of two spaces of linear maps gives a
+linear isomorphism between the two function spaces.</p>
+</div></div><div class="decl"><h4>linear_equiv.congr_right</h4><div class="decl_par"><p>If M₂ and M₃ are linearly isomorphic then the two spaces of linear maps from M into M₂ and
+M into M₃ are linearly isomorphic.</p>
+</div></div><div class="decl"><h4>linear_equiv.conj</h4><div class="decl_par"><p>If M and M₂ are linearly isomorphic then the two spaces of linear maps from M and M₂ to themselves
+are linearly isomorphic.</p>
+</div></div><div class="decl"><h4>linear_equiv.smul_of_ne_zero</h4><div class="decl_par"><p>Multiplying by a nonzero element <span style="background-color:#fdf6e3;color:#657b83;">a</span> of the field <span style="background-color:#fdf6e3;color:#657b83;">K</span> is a linear equivalence.</p>
+</div></div><div class="decl"><h4>equiv.to_linear_equiv</h4><div class="decl_par"><p>An equivalence whose underlying function is linear is a linear equivalence.</p>
+</div></div><div class="decl"><h4>linear_map.quot_ker_equiv_range</h4><div class="decl_par"><p>The first isomorphism law for modules. The quotient of <span style="background-color:#fdf6e3;color:#657b83;">M</span> by the kernel of <span style="background-color:#fdf6e3;color:#657b83;">f</span> is linearly
+equivalent to the range of <span style="background-color:#fdf6e3;color:#657b83;">f</span>.</p>
+</div></div><div class="decl"><h4>linear_map.sup_quotient_to_quotient_inf</h4><div class="decl_par"><p>Canonical linear map from the quotient p/(p ∩ p') to (p+p')/p', mapping x + (p ∩ p') to x + p',
+where p and p' are submodules of an ambient module.</p>
+</div></div><div class="decl"><h4>linear_map.sup_quotient_equiv_quotient_inf</h4><div class="decl_par"><p>Second Isomorphism Law : the canonical map from p/(p ∩ p') to (p+p')/p' as a linear isomorphism.</p>
+</div></div><div class="decl"><h4>linear_map.prod</h4><div class="decl_par"><p>The cartesian product of two linear maps as a linear map.</p>
+</div></div><div class="decl"><h4>linear_map.pi</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">pi</span> construction for linear functions. From a family of linear functions it produces a linear
+function into a family of modules.</p>
+</div></div><div class="decl"><h4>linear_map.proj</h4><div class="decl_par"><p>The projections from a family of modules are linear maps.</p>
+</div></div><div class="decl"><h4>linear_map.infi_ker_proj_equiv</h4><div class="decl_par"><p>If <span style="background-color:#fdf6e3;color:#657b83;">I</span> and <span style="background-color:#fdf6e3;color:#657b83;">J</span> are disjoint index sets, the product of the kernels of the <span style="background-color:#fdf6e3;color:#657b83;">J</span>th projections of
+<span style="background-color:#fdf6e3;color:#657b83;">φ</span> is linearly equivalent to the product over <span style="background-color:#fdf6e3;color:#657b83;">I</span>.</p>
+</div></div><div class="decl"><h4>linear_map.diag</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">diag i j</span> is the identity map if <span style="background-color:#fdf6e3;color:#657b83;">i </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> j</span>. Otherwise it is the constant 0 map.</p>
+</div></div><div class="decl"><h4>linear_map.std_basis</h4><div class="decl_par"><p>The standard basis of the product of <span style="background-color:#fdf6e3;color:#657b83;">φ</span>.</p>
+</div></div><div class="decl"><h4>linear_map.general_linear_group</h4><div class="decl_par"><p>The group of invertible linear maps from <span style="background-color:#fdf6e3;color:#657b83;">M</span> to itself</p>
+</div></div><div class="decl"><h4>linear_map.general_linear_group.to_linear_equiv</h4><div class="decl_par"><p>An invertible linear map <span style="background-color:#fdf6e3;color:#657b83;">f</span> determines an equivalence from <span style="background-color:#fdf6e3;color:#657b83;">M</span> to itself.</p>
+</div></div><div class="decl"><h4>linear_map.general_linear_group.of_linear_equiv</h4><div class="decl_par"><p>An equivalence from <span style="background-color:#fdf6e3;color:#657b83;">M</span> to itself determines an invertible linear map.</p>
+</div></div><div class="decl"><h4>linear_map.general_linear_group.general_linear_equiv</h4><div class="decl_par"><p>The general linear group on <span style="background-color:#fdf6e3;color:#657b83;">R</span> and <span style="background-color:#fdf6e3;color:#657b83;">M</span> is multiplicatively equivalent to the type of linear
+equivalences between <span style="background-color:#fdf6e3;color:#657b83;">M</span> and itself.</p>
+</div></div></html>

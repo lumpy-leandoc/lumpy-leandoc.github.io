@@ -1,0 +1,108 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><h1>Strongly Connected Components</h1>
+<p>This file defines tactics to construct proofs of equivalences between a set of mutually equivalent
+propositions. The tactics use implications transitively to find sets of equivalent propositions.</p>
+<h2>Implementation notes</h2>
+<p>The tactics use a strongly connected components algorithm on a graph where propositions are
+vertices and edges are proofs that the source implies the target. The strongly connected components
+are therefore sets of propositions that are pairwise equivalent to each other.</p>
+<p>The resulting strongly connected components are encoded in a disjoint set data structure to
+facilitate the construction of equivalence proofs between two arbitrary members of an equivalence
+class.</p>
+<h2>Possible generalizations</h2>
+<p>Instead of reasoning about implications and equivalence, we could generalize the machinery to
+reason about arbitrary partial orders.</p>
+<h2>References</h2>
+<ul>
+<li>Tarjan, R. E. (1972), &quot;Depth-first search and linear graph algorithms&quot;,
+SIAM Journal on Computing, 1 (2): 146–160, doi:10.1137/0201010</li>
+<li>Dijkstra, Edsger (1976), A Discipline of Programming, NJ: Prentice Hall, Ch. 25.</li>
+<li>https://en.wikipedia.org/wiki/Disjoint-set_data_structure</li>
+</ul>
+<h2>Tags</h2>
+<p>graphs, tactic, strongly connected components, disjoint sets</p>
+<hr/><div class="decl"><h4>tactic.closure</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">closure</span> implements a disjoint set data structure using path compression
+optimization. For the sake of the scc algorithm, it also stores the preorder
+numbering of the equivalence graph of the local assumptions.</p>
+<p>The <span style="background-color:#fdf6e3;color:#657b83;">expr_map</span> encodes a directed forest by storing for every non-root
+node, a reference to its parent and a proof of equivalence between
+that node's expression and its parent's expression. Given that data
+structure, checking that two nodes belong to the same tree is easy and
+fast by repeatedly following the parent references until a root is reached.
+If both nodes have the same root, they belong to the same tree, i.e. their
+expressions are equivalent. The proof of equivalence can be formed by
+composing the proofs along the edges of the paths to the root.</p>
+<p>More concretely, if we ignore preorder numbering, the set
+<span style="background-color:#fdf6e3;color:#657b83;">{ {e₀,e₁,e₂,e₃}, {e₄,e₅} }</span> is represented as:</p>
+<pre><code class="language-lean"><pre style="background-color:#fdf6e3;">
+<span style="color:#657b83;">e₀ </span><span style="color:#859900;">→</span><span style="color:#657b83;"> ⊥      </span><span style="color:#93a1a1;">-- no parent, i.e. e₀ is a root
+</span><span style="color:#657b83;">e₁ </span><span style="color:#859900;">→</span><span style="color:#657b83;"> e₀, p₁ </span><span style="color:#93a1a1;">-- with p₁ : e₁ ↔ e₀
+</span><span style="color:#657b83;">e₂ </span><span style="color:#859900;">→</span><span style="color:#657b83;"> e₁, p₂ </span><span style="color:#93a1a1;">-- with p₂ : e₂ ↔ e₁
+</span><span style="color:#657b83;">e₃ </span><span style="color:#859900;">→</span><span style="color:#657b83;"> e₀, p₃ </span><span style="color:#93a1a1;">-- with p₃ : e₃ ↔ e₀
+</span><span style="color:#657b83;">e₄ </span><span style="color:#859900;">→</span><span style="color:#657b83;"> ⊥      </span><span style="color:#93a1a1;">-- no parent, i.e. e₄ is a root
+</span><span style="color:#657b83;">e₅ </span><span style="color:#859900;">→</span><span style="color:#657b83;"> e₄, p₅ </span><span style="color:#93a1a1;">-- with p₅ : e₅ ↔ e₄
+</span></pre>
+</code></pre>
+<p>We can check that <span style="background-color:#fdf6e3;color:#657b83;">e₂</span> and <span style="background-color:#fdf6e3;color:#657b83;">e₃</span> are equivalent by seeking the root of
+the tree of each. The parent of <span style="background-color:#fdf6e3;color:#657b83;">e₂</span> is <span style="background-color:#fdf6e3;color:#657b83;">e₁</span>, the parent of <span style="background-color:#fdf6e3;color:#657b83;">e₁</span> is
+<span style="background-color:#fdf6e3;color:#657b83;">e₀</span> and <span style="background-color:#fdf6e3;color:#657b83;">e₀</span> does not have a parent, and thus, this is the root of its tree.
+The parent of <span style="background-color:#fdf6e3;color:#657b83;">e₃</span> is <span style="background-color:#fdf6e3;color:#657b83;">e₀</span> and it's also the root, the same as for <span style="background-color:#fdf6e3;color:#657b83;">e₂</span> and
+they are therefore equivalent. We can build a proof of that equivalence by using
+transitivity on <span style="background-color:#fdf6e3;color:#657b83;">p₂</span>, <span style="background-color:#fdf6e3;color:#657b83;">p₁</span> and <span style="background-color:#fdf6e3;color:#657b83;">p₃.symm</span> in that order.</p>
+<p>Similarly, we can discover that <span style="background-color:#fdf6e3;color:#657b83;">e₂</span> and <span style="background-color:#fdf6e3;color:#657b83;">e₅</span> aren't equivalent.</p>
+<p>A description of the path compression optimization can be found at:
+https://en.wikipedia.org/wiki/Disjoint-set_data_structure#Path_compression</p>
+</div></div><div class="decl"><h4>tactic.closure.with_new_closure</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">with_new_closure f</span> creates an empty <span style="background-color:#fdf6e3;color:#657b83;">closure</span> <span style="background-color:#fdf6e3;color:#657b83;">c</span>, executes <span style="background-color:#fdf6e3;color:#657b83;">f</span> on <span style="background-color:#fdf6e3;color:#657b83;">c</span>, and then deletes <span style="background-color:#fdf6e3;color:#657b83;">c</span>,
+returning the output of <span style="background-color:#fdf6e3;color:#657b83;">f</span>.</p>
+</div></div><div class="decl"><h4>tactic.closure.to_tactic_format</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">to_tactic_format cl</span> pretty-prints the <span style="background-color:#fdf6e3;color:#657b83;">closure</span> <span style="background-color:#fdf6e3;color:#657b83;">cl</span> as a list. Assuming <span style="background-color:#fdf6e3;color:#657b83;">cl</span> was built by
+<span style="background-color:#fdf6e3;color:#657b83;">dfs_at</span>, each element corresponds to a node <span style="background-color:#fdf6e3;color:#657b83;">pᵢ : expr</span> and is one of the folllowing:</p>
+<ul>
+<li>if <span style="background-color:#fdf6e3;color:#657b83;">pᵢ</span> is a root: <span style="background-color:#fdf6e3;color:#2aa198;">&quot;pᵢ ⇐ i&quot;</span>, where <span style="background-color:#fdf6e3;color:#657b83;">i</span> is the preorder number of <span style="background-color:#fdf6e3;color:#657b83;">pᵢ</span>,</li>
+<li>otherwise: <span style="background-color:#fdf6e3;color:#2aa198;">&quot;(pᵢ, pⱼ) : P&quot;</span>, where <span style="background-color:#fdf6e3;color:#657b83;">P</span> is <span style="background-color:#fdf6e3;color:#657b83;">pᵢ </span><span style="background-color:#fdf6e3;color:#b58900;">↔</span><span style="background-color:#fdf6e3;color:#657b83;"> pⱼ</span>.
+Useful for debugging.</li>
+</ul>
+</div></div><div class="decl"><h4>tactic.closure.root</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">(n,r,p) ← root cl e</span> returns <span style="background-color:#fdf6e3;color:#657b83;">r</span> the root of the tree that <span style="background-color:#fdf6e3;color:#657b83;">e</span> is a part of (which might be
+itself) along with <span style="background-color:#fdf6e3;color:#657b83;">p</span> a proof of <span style="background-color:#fdf6e3;color:#657b83;">e </span><span style="background-color:#fdf6e3;color:#b58900;">↔</span><span style="background-color:#fdf6e3;color:#657b83;"> r</span> and <span style="background-color:#fdf6e3;color:#657b83;">n</span>, the preorder numbering of the root.</p>
+</div></div><div class="decl"><h4>tactic.closure.merge_intl</h4><div class="decl_par"><p>(Implementation of <span style="background-color:#fdf6e3;color:#657b83;">merge</span>.)</p>
+</div></div><div class="decl"><h4>tactic.closure.merge</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">merge cl p</span>, with <span style="background-color:#fdf6e3;color:#657b83;">p</span> a proof of <span style="background-color:#fdf6e3;color:#657b83;">e₀ </span><span style="background-color:#fdf6e3;color:#b58900;">↔</span><span style="background-color:#fdf6e3;color:#657b83;"> e₁</span> for some <span style="background-color:#fdf6e3;color:#657b83;">e₀</span> and <span style="background-color:#fdf6e3;color:#657b83;">e₁</span>,
+merges the trees of <span style="background-color:#fdf6e3;color:#657b83;">e₀</span> and <span style="background-color:#fdf6e3;color:#657b83;">e₁</span> and keeps the root with the smallest preorder
+number as the root. This ensures that, in the depth-first traversal of the graph,
+when encountering an edge going into a vertex whose equivalence class includes
+a vertex that originated the current search, that vertex will be the root of
+the corresponding tree.</p>
+</div></div><div class="decl"><h4>tactic.closure.assign_preorder</h4><div class="decl_par"><p>Sequentially assign numbers to the nodes of the graph as they are being visited.</p>
+</div></div><div class="decl"><h4>tactic.closure.prove_eqv</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">prove_eqv cl e₀ e₁</span> constructs a proof of equivalence of <span style="background-color:#fdf6e3;color:#657b83;">e₀</span> and <span style="background-color:#fdf6e3;color:#657b83;">e₁</span> if
+they are equivalent.</p>
+</div></div><div class="decl"><h4>tactic.closure.prove_impl</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">prove_impl cl e₀ e₁</span> constructs a proof of <span style="background-color:#fdf6e3;color:#657b83;">e₀ </span><span style="background-color:#fdf6e3;color:#b58900;">-&gt;</span><span style="background-color:#fdf6e3;color:#657b83;"> e₁</span> if they are equivalent.</p>
+</div></div><div class="decl"><h4>tactic.closure.is_eqv</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">is_eqv cl e₀ e₁</span> checks whether <span style="background-color:#fdf6e3;color:#657b83;">e₀</span> and <span style="background-color:#fdf6e3;color:#657b83;">e₁</span> are equivalent without building a proof.</p>
+</div></div><div class="decl"><h4>tactic.impl_graph</h4><div class="decl_par"><p>mutable graphs between local propositions that imply each other with the proof of implication</p>
+</div></div><div class="decl"><h4>tactic.with_impl_graph</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">with_impl_graph f</span> creates an empty <span style="background-color:#fdf6e3;color:#657b83;">impl_graph</span> <span style="background-color:#fdf6e3;color:#657b83;">g</span>, executes <span style="background-color:#fdf6e3;color:#657b83;">f</span> on <span style="background-color:#fdf6e3;color:#657b83;">g</span>, and then deletes
+<span style="background-color:#fdf6e3;color:#657b83;">g</span>, returning the output of <span style="background-color:#fdf6e3;color:#657b83;">f</span>.</p>
+</div></div><div class="decl"><h4>tactic.impl_graph.add_edge</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">add_edge g p</span>, with <span style="background-color:#fdf6e3;color:#657b83;">p</span> a proof of <span style="background-color:#fdf6e3;color:#657b83;">v₀ </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> v₁</span> or <span style="background-color:#fdf6e3;color:#657b83;">v₀ </span><span style="background-color:#fdf6e3;color:#b58900;">↔</span><span style="background-color:#fdf6e3;color:#657b83;"> v₁</span>, adds an edge to the implication
+graph <span style="background-color:#fdf6e3;color:#657b83;">g</span>.</p>
+</div></div><div class="decl"><h4>tactic.impl_graph.merge_path</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">merge_path path e</span>, where <span style="background-color:#fdf6e3;color:#657b83;">path</span> and <span style="background-color:#fdf6e3;color:#657b83;">e</span> forms a cycle with proofs of implication between
+consecutive vertices. The proofs are compiled into proofs of equivalences and added to the closure
+structure. <span style="background-color:#fdf6e3;color:#657b83;">e</span> and the first vertex of <span style="background-color:#fdf6e3;color:#657b83;">path</span> do not have to be the same but they have to be
+in the same equivalence class.</p>
+</div></div><div class="decl"><h4>tactic.impl_graph.collapse'</h4><div class="decl_par"><p>(implementation of <span style="background-color:#fdf6e3;color:#657b83;">collapse</span>)</p>
+</div></div><div class="decl"><h4>tactic.impl_graph.collapse</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">collapse path v</span>, where <span style="background-color:#fdf6e3;color:#657b83;">v</span> is a vertex that originated the current search
+(or a vertex in the same equivalence class as the one that originated the current search).
+It or its equivalent should be found in <span style="background-color:#fdf6e3;color:#657b83;">path</span>. Since the vertices following <span style="background-color:#fdf6e3;color:#657b83;">v</span> in the path
+form a cycle with <span style="background-color:#fdf6e3;color:#657b83;">v</span>, they can all be added to an equivalence class.</p>
+</div></div><div class="decl"><h4>tactic.impl_graph.dfs_at</h4><div class="decl_par"><p>Strongly connected component algorithm inspired by Tarjan's and
+Dijkstra's scc algorithm. Whereas they return strongly connected
+components by enumerating them, this algorithm returns a disjoint set
+data structure using path compression. This is a compact
+representation that allows us, after the fact, to construct a proof of
+equivalence between any two members of an equivalence class.</p>
+<ul>
+<li>Tarjan, R. E. (1972), &quot;Depth-first search and linear graph algorithms&quot;,
+SIAM Journal on Computing, 1 (2): 146–160, doi:10.1137/0201010</li>
+<li>Dijkstra, Edsger (1976), A Discipline of Programming, NJ: Prentice Hall, Ch. 25.</li>
+</ul>
+</div></div><div class="decl"><h4>tactic.impl_graph.mk_scc</h4><div class="decl_par"><p>Use the local assumptions to create a set of equivalence classes.</p>
+</div></div><div class="decl"><h4>tactic.interactive.scc</h4><div class="decl_par"><p>Use the available equivalences and implications to prove
+a goal of the form <span style="background-color:#fdf6e3;color:#657b83;">p </span><span style="background-color:#fdf6e3;color:#b58900;">↔</span><span style="background-color:#fdf6e3;color:#657b83;"> q</span>.</p>
+</div></div><div class="decl"><h4>tactic.interactive.scc'</h4><div class="decl_par"><p>Collect all the available equivalences and implications and
+add assumptions for every equivalence that can be proven using the
+strongly connected components technique. Mostly useful for testing.</p>
+</div></div></html>

@@ -1,0 +1,19 @@
+<html><head><link rel="stylesheet" href="../../docs_style.css"></head><h1>Monad</h1>
+<h2>Attributes</h2>
+<ul>
+<li>extensionality</li>
+<li>functor_norm</li>
+<li>monad_norm</li>
+</ul>
+<h2>Implementation Details</h2>
+<p>Set of rewrite rules and automation for monads in general and
+<span style="background-color:#fdf6e3;color:#657b83;">reader_t</span>, <span style="background-color:#fdf6e3;color:#657b83;">state_t</span>, <span style="background-color:#fdf6e3;color:#657b83;">except_t</span> and <span style="background-color:#fdf6e3;color:#657b83;">option_t</span> in particular.</p>
+<p>The rewrite rules for monads are carefully chosen so that <span style="background-color:#fdf6e3;color:#657b83;">simp </span><span style="background-color:#fdf6e3;color:#859900;">with</span><span style="background-color:#fdf6e3;color:#657b83;"> functor_norm</span> will not introduce monadic vocabulary in a context where
+applicatives would do just fine but will handle monadic notation
+already present in an expression.</p>
+<p>In a context where monadic reasoning is desired <span style="background-color:#fdf6e3;color:#657b83;">simp </span><span style="background-color:#fdf6e3;color:#859900;">with</span><span style="background-color:#fdf6e3;color:#657b83;"> monad_norm</span>
+will translate functor and applicative notation into monad notation
+and use regular <span style="background-color:#fdf6e3;color:#657b83;">functor_norm</span> rules as well.</p>
+<h2>Tags</h2>
+<p>functor, applicative, monad, simp</p>
+<hr/></html>

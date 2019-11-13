@@ -1,0 +1,19 @@
+<html><head><link rel="stylesheet" href="../../docs_style.css"></head><h1>Bitraversable type class</h1>
+<p>Type class for traversing bifunctors. The concepts and laws are taken from
+https://hackage.haskell.org/package/base-4.12.0.0/docs/Data-Bitraversable.html</p>
+<p>Simple examples of <span style="background-color:#fdf6e3;color:#657b83;">bitraversable</span> are <span style="background-color:#fdf6e3;color:#657b83;">prod</span> and <span style="background-color:#fdf6e3;color:#657b83;">sum</span>. A more elaborate example is
+to define an a-list as:</p>
+<pre><code class="language-lean"><pre style="background-color:#fdf6e3;">
+<span style="color:#859900;">def </span><span style="color:#d33682;">alist </span><span style="color:#657b83;">(key val : </span><span style="color:#268bd2;">Type</span><span style="color:#657b83;">) </span><span style="color:#b58900;">:=</span><span style="color:#657b83;"> list (key × val)
+</span></pre>
+</code></pre>
+<p>Then we can use <span style="background-color:#fdf6e3;color:#657b83;">f : key </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> io key&#39;</span> and <span style="background-color:#fdf6e3;color:#657b83;">g : val </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> io val&#39;</span> to manipulate the <span style="background-color:#fdf6e3;color:#657b83;">alist</span>'s key
+and value respectively with <span style="background-color:#fdf6e3;color:#657b83;">bitraverse f g : alist key val </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> io (alist key&#39; val&#39;)</span></p>
+<h2>Main definitions</h2>
+<ul>
+<li>bitraversable - exposes the <span style="background-color:#fdf6e3;color:#657b83;">bitraverse</span> function</li>
+<li>is_lawful_bitraversable - laws similar to is_lawful_traversable</li>
+</ul>
+<h2>Tags</h2>
+<p>traversable bitraversable iterator functor bifunctor applicative</p>
+<hr/></html>

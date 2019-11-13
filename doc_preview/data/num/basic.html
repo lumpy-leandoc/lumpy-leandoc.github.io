@@ -1,0 +1,21 @@
+<html><head><link rel="stylesheet" href="../../docs_style.css"></head><div class="decl"><h4>pos_num</h4><div class="decl_par"><p>The type of positive binary numbers.</p>
+<pre><code>13 = 1101(base 2) = bit1 (bit0 (bit1 one))</code></pre>
+</div></div><div class="decl"><h4>num</h4><div class="decl_par"><p>The type of nonnegative binary numbers, using <span style="background-color:#fdf6e3;color:#657b83;">pos_num</span>.</p>
+<pre><code>13 = 1101(base 2) = pos (bit1 (bit0 (bit1 one)))</code></pre>
+</div></div><div class="decl"><h4>znum</h4><div class="decl_par"><p>Representation of integers using trichotomy around zero.</p>
+<pre><code>13 = 1101(base 2) = pos (bit1 (bit0 (bit1 one)))
+-13 = -1101(base 2) = neg (bit1 (bit0 (bit1 one)))</code></pre>
+</div></div><div class="decl"><h4>nzsnum</h4><div class="decl_par"><p>See <span style="background-color:#fdf6e3;color:#657b83;">snum</span>.</p>
+</div></div><div class="decl"><h4>snum</h4><div class="decl_par"><p>Alternative representation of integers using a sign bit at the end.
+The convention on sign here is to have the argument to <span style="background-color:#fdf6e3;color:#657b83;">msb</span> denote
+the sign of the MSB itself, with all higher bits set to the negation
+of this sign. The result is interpreted in two's complement.</p>
+<pre><code>13  = ..0001101(base 2) = nz (bit1 (bit0 (bit1 (msb tt))))
+-13 = ..1110011(base 2) = nz (bit1 (bit1 (bit0 (msb ff))))
+</code></pre>
+<p>As with <span style="background-color:#fdf6e3;color:#657b83;">num</span>, a special case must be added for zero, which has no msb,
+but by two's complement symmetry there is a second special case for -1.
+Here the <span style="background-color:#fdf6e3;color:#657b83;">bool</span> field indicates the sign of the number.</p>
+<pre><code>0  = ..0000000(base 2) = zero ff
+-1 = ..1111111(base 2) = zero tt</code></pre>
+</div></div></html>

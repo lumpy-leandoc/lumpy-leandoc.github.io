@@ -1,0 +1,57 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><div class="decl"><h4>tactic.mk_assumption_set</h4><div class="decl_par"><p>Builds a collection of lemmas for use in the backtracking search in <span style="background-color:#fdf6e3;color:#657b83;">solve_by_elim</span>.</p>
+<ul>
+<li>By default, it includes all local hypotheses, along with <span style="background-color:#fdf6e3;color:#657b83;">rfl</span>, <span style="background-color:#fdf6e3;color:#657b83;">trivial</span>, <span style="background-color:#fdf6e3;color:#657b83;">congr_fun</span> and <span style="background-color:#fdf6e3;color:#657b83;">congr_arg</span>.</li>
+<li>The flag <span style="background-color:#fdf6e3;color:#657b83;">no_dflt</span> removes these.</li>
+<li>The argument <span style="background-color:#fdf6e3;color:#657b83;">hs</span> is a list of <span style="background-color:#fdf6e3;color:#657b83;">simp_arg_type</span>s,
+and can be used to add, or remove, lemmas or expressions from the set.</li>
+<li>The argument <span style="background-color:#fdf6e3;color:#657b83;">attr : list name</span> adds all lemmas tagged with one of a specified list of attributes.</li>
+</ul>
+</div></div><div class="decl"><h4>tactic.solve_by_elim_aux</h4><div class="decl_par"><p>The internal implementation of <span style="background-color:#fdf6e3;color:#657b83;">solve_by_elim</span>, with a limiting counter.</p>
+</div></div><div class="decl"><h4>tactic.by_elim_opt</h4><div class="decl_par"><p>Configuration options for <span style="background-color:#fdf6e3;color:#657b83;">solve_by_elim</span>.</p>
+<ul>
+<li>By default <span style="background-color:#fdf6e3;color:#657b83;">solve_by_elim</span> operates only on the first goal,
+but with <span style="background-color:#fdf6e3;color:#657b83;">backtrack_all_goals </span><span style="background-color:#fdf6e3;color:#b58900;">:=</span><span style="background-color:#fdf6e3;color:#657b83;"> true</span>, it operates on all goals at once,
+backtracking across goals as needed,
+and only succeeds if it dischargers all goals.</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">discharger</span> specifies a tactic to try discharge subgoals
+(this is only attempted on subgoals for which no lemma applies successfully).</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">assumptions</span> generates the list of lemmas to use in the backtracking search.</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">max_rep</span> bounds the depth of the search.</li>
+</ul>
+</div></div><div class="decl"><h4>tactic.solve_by_elim</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">solve_by_elim</span> repeatedly tries <span style="background-color:#fdf6e3;color:#657b83;">apply</span>ing a lemma
+from the list of assumptions (passed via the <span style="background-color:#fdf6e3;color:#657b83;">by_elim_opt</span> argument),
+recursively operating on any generated subgoals.
+It succeeds only if it discharges the first goal
+(or with <span style="background-color:#fdf6e3;color:#657b83;">backtrack_all_goals </span><span style="background-color:#fdf6e3;color:#b58900;">:=</span><span style="background-color:#fdf6e3;color:#657b83;"> tt</span>, if it discharges all goals.)</p>
+</div></div><div class="decl"><h4>tactic.interactive.apply_assumption</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">apply_assumption</span> looks for an assumption of the form <span style="background-color:#fdf6e3;color:#657b83;">... </span><span style="background-color:#fdf6e3;color:#859900;">→ ∀</span><span style="background-color:#fdf6e3;color:#657b83;"> _, ... </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> head</span>
+where <span style="background-color:#fdf6e3;color:#657b83;">head</span> matches the current goal.</p>
+<p>alternatively, when encountering an assumption of the form <span style="background-color:#fdf6e3;color:#657b83;">sg₀ </span><span style="background-color:#fdf6e3;color:#859900;">→ </span><span style="background-color:#fdf6e3;color:#b58900;">¬</span><span style="background-color:#fdf6e3;color:#657b83;"> sg₁</span>,
+after the main approach failed, the goal is dismissed and <span style="background-color:#fdf6e3;color:#657b83;">sg₀</span> and <span style="background-color:#fdf6e3;color:#657b83;">sg₁</span>
+are made into the new goal.</p>
+<p>optional arguments:</p>
+<ul>
+<li>asms: list of rules to consider instead of the local constants</li>
+<li>tac:  a tactic to run on each subgoals after applying an assumption; if
+this tactic fails, the corresponding assumption will be rejected and
+the next one will be attempted.</li>
+</ul>
+</div></div><div class="decl"><h4>tactic.interactive.solve_by_elim</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">solve_by_elim</span> calls <span style="background-color:#fdf6e3;color:#657b83;">apply</span> on the main goal to find an assumption whose head matches
+and then repeatedly calls <span style="background-color:#fdf6e3;color:#657b83;">apply</span> on the generated subgoals until no subgoals remain,
+performing at most <span style="background-color:#fdf6e3;color:#657b83;">max_rep</span> recursive steps.</p>
+<p><span style="background-color:#fdf6e3;color:#657b83;">solve_by_elim</span> discharges the current goal or fails.</p>
+<p><span style="background-color:#fdf6e3;color:#657b83;">solve_by_elim</span> performs back-tracking if <span style="background-color:#fdf6e3;color:#657b83;">apply_assumption</span> chooses an unproductive assumption.</p>
+<p>By default, the assumptions passed to apply_assumption are the local context, <span style="background-color:#fdf6e3;color:#657b83;">rfl</span>, <span style="background-color:#fdf6e3;color:#657b83;">trivial</span>, <span style="background-color:#fdf6e3;color:#657b83;">congr_fun</span> and
+<span style="background-color:#fdf6e3;color:#657b83;">congr_arg</span>.</p>
+<p><span style="background-color:#fdf6e3;color:#657b83;">solve_by_elim [h₁, h₂, ..., hᵣ]</span> also applies the named lemmas.</p>
+<p>`solve_by_elim with attr₁ ... attrᵣ also applied all lemmas tagged with the specified attributes.</p>
+<p><span style="background-color:#fdf6e3;color:#657b83;">solve_by_elim only [h₁, h₂, ..., hᵣ]</span> does not include the local context, <span style="background-color:#fdf6e3;color:#657b83;">rfl</span>, <span style="background-color:#fdf6e3;color:#657b83;">trivial</span>, <span style="background-color:#fdf6e3;color:#657b83;">congr_fun</span>, or <span style="background-color:#fdf6e3;color:#657b83;">congr_arg</span>
+unless they are explicitly included.</p>
+<p><span style="background-color:#fdf6e3;color:#657b83;">solve_by_elim [</span><span style="background-color:#fdf6e3;color:#b58900;">-</span><span style="background-color:#fdf6e3;color:#657b83;">id]</span> removes a specified assumption.</p>
+<p><span style="background-color:#fdf6e3;color:#657b83;">solve_by_elim</span><span style="background-color:#fdf6e3;color:#b58900;">*</span> tries to solve all goals together, using backtracking if a solution for one goal
+makes other goals impossible.</p>
+<p>optional arguments:</p>
+<ul>
+<li>discharger: a subsidiary tactic to try at each step (e.g. <span style="background-color:#fdf6e3;color:#657b83;">cc</span> may be helpful)</li>
+<li>max_rep: number of attempts at discharging generated sub-goals</li>
+</ul>
+</div></div></html>

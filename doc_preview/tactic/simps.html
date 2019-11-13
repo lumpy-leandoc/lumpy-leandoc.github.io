@@ -1,0 +1,54 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><h1>simps attribute</h1>
+<p>This file defines the <span style="background-color:#fdf6e3;color:#586e75;">@[simps]</span> attribute, to automatically generate simp-lemmas
+reducing a definition when projections are applied to it.</p>
+<h2>Tags</h2>
+<p>structures, projections, simp, simplifier, generates declarations</p>
+<hr/><div class="decl"><h4>simps_add_projection</h4><div class="decl_par"><p>Add a lemma with <span style="background-color:#fdf6e3;color:#657b83;">nm</span> stating that <span style="background-color:#fdf6e3;color:#657b83;">lhs </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> rhs</span>. <span style="background-color:#fdf6e3;color:#657b83;">type</span> is the type of both <span style="background-color:#fdf6e3;color:#657b83;">lhs</span> and <span style="background-color:#fdf6e3;color:#657b83;">rhs</span>,
+<span style="background-color:#fdf6e3;color:#657b83;">args</span> is the list of local constants occurring, and <span style="background-color:#fdf6e3;color:#657b83;">univs</span> is the list of universe variables.
+If <span style="background-color:#fdf6e3;color:#657b83;">add_simp</span> then we make the resulting lemma a simp-lemma.</p>
+</div></div><div class="decl"><h4>simps_add_projections</h4><div class="decl_par"><p>Derive lemmas specifying the projections of the declaration.
+If <span style="background-color:#fdf6e3;color:#657b83;">todo</span> is non-empty, it will generate exactly the names in <span style="background-color:#fdf6e3;color:#657b83;">todo</span>.</p>
+</div></div><div class="decl"><h4>simps_tac</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">simps_tac</span> derives simp-lemmas for all (nested) non-Prop projections of the declaration.
+If <span style="background-color:#fdf6e3;color:#657b83;">todo</span> is non-empty, it will generate exactly the names in <span style="background-color:#fdf6e3;color:#657b83;">todo</span>.
+If <span style="background-color:#fdf6e3;color:#657b83;">short_nm</span> is true, the generated names will only use the last projection name.</p>
+</div></div><div class="decl"><h4>simps_parser</h4><div class="decl_par"><p>The parser for simps. Pattern: <span style="background-color:#fdf6e3;color:#657b83;">&#39;lemmas_only&#39;? ident</span><span style="background-color:#fdf6e3;color:#b58900;">*</span></p>
+</div></div><div class="decl"><h4>simps_attr</h4><div class="decl_par"><ul>
+<li>Automatically derive lemmas specifying the projections of this declaration.</li>
+<li>Example: (note that the forward and reverse functions are specified differently!)
+<pre><code class="language-lean"><pre style="background-color:#fdf6e3;">
+<span style="color:#586e75;">@[simps] </span><span style="color:#859900;">def </span><span style="color:#d33682;">refl </span><span style="color:#657b83;">(α) : α ≃ α </span><span style="color:#b58900;">:=</span><span style="color:#657b83;"> ⟨id, </span><span style="color:#859900;">λ</span><span style="color:#657b83;"> x, x, </span><span style="color:#859900;">λ</span><span style="color:#657b83;"> x, rfl, </span><span style="color:#859900;">λ</span><span style="color:#657b83;"> x, rfl⟩
+</span></pre>
+</code></pre>
+derives two simp-lemmas:
+<pre><code class="language-lean"><pre style="background-color:#fdf6e3;">
+<span style="color:#586e75;">@[simp] </span><span style="color:#859900;">lemma </span><span style="color:#d33682;">refl_to_fun </span><span style="color:#657b83;">(α) (x : α) : (refl α).to_fun x </span><span style="color:#b58900;">=</span><span style="color:#657b83;"> id x
+</span></pre>
+<pre style="background-color:#fdf6e3;">
+<span style="color:#586e75;">@[simp] </span><span style="color:#859900;">lemma </span><span style="color:#d33682;">refl_inv_fun </span><span style="color:#657b83;">(α) (x : α) : (refl α).inv_fun x </span><span style="color:#b58900;">=</span><span style="color:#657b83;"> x
+</span></pre>
+</code></pre>
+</li>
+<li>It does not derive simp-lemmas for the prop-valued projections.</li>
+<li>It will automatically reduce newly created beta-redexes, but not unfold any definitions.</li>
+<li>If one of the fields itself is a structure, this command will recursively create
+simp-lemmas for all fields in that structure.</li>
+<li>You can use <span style="background-color:#fdf6e3;color:#586e75;">@[simps proj1 proj2 ...]</span> to only generate the projection lemmas for the specified
+projections. For example:
+<pre><code class="language-lean"><pre style="background-color:#fdf6e3;">
+<span style="color:#586e75;">attribute [simps to_fun]</span><span style="color:#657b83;"> refl
+</span></pre>
+</code></pre>
+</li>
+<li>If one of the values is an eta-expanded structure, we will eta-reduce this structure.</li>
+<li>You can use <span style="background-color:#fdf6e3;color:#586e75;">@[simps lemmas_only]</span> to derive the lemmas, but not mark them
+as simp-lemmas.</li>
+<li>You can use <span style="background-color:#fdf6e3;color:#586e75;">@[simps short_name]</span> to only use the name of the last projection for the name of the
+generated lemmas.</li>
+<li>The precise syntax is <span style="background-color:#fdf6e3;color:#657b83;">(&#39;simps&#39; &#39;lemmas_only&#39;? &#39;short_name&#39;? ident</span><span style="background-color:#fdf6e3;color:#b58900;">*</span><span style="background-color:#fdf6e3;color:#657b83;">)</span>.</li>
+<li>If one of the projections is marked as a coercion, the generated lemmas do <em>not</em> use this
+coercion.</li>
+<li><span style="background-color:#fdf6e3;color:#586e75;">@[simps]</span> reduces let-expressions where necessary.</li>
+<li>If one of the fields is a partially applied constructor, we will eta-expand it
+(this likely never happens).</li>
+</ul>
+</div></div></html>

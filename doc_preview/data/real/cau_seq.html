@@ -1,0 +1,19 @@
+<html><head><link rel="stylesheet" href="../../docs_style.css"></head><h1>Cauchy sequences</h1>
+<p>A basic theory of Cauchy sequences, used in the construction of the reals and p-adic numbers. Where
+applicable, lemmas that will be reused in other contexts have been stated in extra generality.</p>
+<p>There are other &quot;versions&quot; of Cauchyness in the library, in particular Cauchy filters in topology.
+This is a concrete implementation that is useful for simplicity and computability reasons.</p>
+<h2>Important definitions</h2>
+<ul>
+<li><span style="background-color:#fdf6e3;color:#657b83;">is_absolute_value</span>: a type class stating that <span style="background-color:#fdf6e3;color:#657b83;">f : β </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> α</span> satisfies the axioms of an abs val</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">is_cau_seq</span>: a predicate that says <span style="background-color:#fdf6e3;color:#657b83;">f : ℕ </span><span style="background-color:#fdf6e3;color:#859900;">→</span><span style="background-color:#fdf6e3;color:#657b83;"> β</span> is Cauchy.</li>
+</ul>
+<h2>Tags</h2>
+<p>sequence, cauchy, abs val, absolute value</p>
+<hr/><div class="decl"><h4>is_absolute_value</h4><div class="decl_par"><p>A function f is an absolute value if it is nonnegative, zero only at 0, additive, and
+multiplicative.</p>
+</div></div><div class="decl"><h4>is_cau_seq</h4><div class="decl_par"><p>A sequence is Cauchy if the distance between its entries tends to zero.</p>
+</div></div><div class="decl"><h4>cau_seq.const</h4><div class="decl_par"><p>The constant Cauchy sequence.</p>
+</div></div><div class="decl"><h4>cau_seq.lim_zero</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">lim_zero f</span> holds when <span style="background-color:#fdf6e3;color:#657b83;">f</span> approaches 0.</p>
+</div></div><div class="decl"><h4>cau_seq.pos</h4><div class="decl_par"><p>The entries of a positive Cauchy sequence eventually have a positive lower bound.</p>
+</div></div></html>

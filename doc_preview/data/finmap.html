@@ -1,0 +1,22 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><div class="decl"><h4>multiset.keys</h4><div class="decl_par"><p>Multiset of keys of an association multiset.</p>
+</div></div><div class="decl"><h4>multiset.nodupkeys</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">nodupkeys s</span> means that <span style="background-color:#fdf6e3;color:#657b83;">s</span> has no duplicate keys.</p>
+</div></div><div class="decl"><h4>finmap</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">finmap β</span> is the type of finite maps over a multiset. It is effectively
+a quotient of <span style="background-color:#fdf6e3;color:#657b83;">alist β</span> by permutation of the underlying list.</p>
+</div></div><div class="decl"><h4>alist.to_finmap</h4><div class="decl_par"><p>The quotient map from <span style="background-color:#fdf6e3;color:#657b83;">alist</span> to <span style="background-color:#fdf6e3;color:#657b83;">finmap</span>.</p>
+</div></div><div class="decl"><h4>finmap.lift_on</h4><div class="decl_par"><p>Lift a permutation-respecting function on <span style="background-color:#fdf6e3;color:#657b83;">alist</span> to <span style="background-color:#fdf6e3;color:#657b83;">finmap</span>.</p>
+</div></div><div class="decl"><h4>finmap.lift_on₂</h4><div class="decl_par"><p>Lift a permutation-respecting function on 2 <span style="background-color:#fdf6e3;color:#657b83;">alist</span>s to 2 <span style="background-color:#fdf6e3;color:#657b83;">finmap</span>s.</p>
+</div></div><div class="decl"><h4>finmap.has_mem</h4><div class="decl_par"><p>The predicate <span style="background-color:#fdf6e3;color:#657b83;">a ∈ s</span> means that <span style="background-color:#fdf6e3;color:#657b83;">s</span> has a value associated to the key <span style="background-color:#fdf6e3;color:#657b83;">a</span>.</p>
+</div></div><div class="decl"><h4>finmap.keys</h4><div class="decl_par"><p>The set of keys of a finite map.</p>
+</div></div><div class="decl"><h4>finmap.has_emptyc</h4><div class="decl_par"><p>The empty map.</p>
+</div></div><div class="decl"><h4>finmap.singleton</h4><div class="decl_par"><p>The singleton map.</p>
+</div></div><div class="decl"><h4>finmap.lookup</h4><div class="decl_par"><p>Look up the value associated to a key in a map.</p>
+</div></div><div class="decl"><h4>finmap.replace</h4><div class="decl_par"><p>Replace a key with a given value in a finite map.
+If the key is not present it does nothing.</p>
+</div></div><div class="decl"><h4>finmap.foldl</h4><div class="decl_par"><p>Fold a commutative function over the key-value pairs in the map</p>
+</div></div><div class="decl"><h4>finmap.erase</h4><div class="decl_par"><p>Erase a key from the map. If the key is not present it does nothing.</p>
+</div></div><div class="decl"><h4>finmap.insert</h4><div class="decl_par"><p>Insert a key-value pair into a finite map, replacing any existing pair with
+the same key.</p>
+</div></div><div class="decl"><h4>finmap.extract</h4><div class="decl_par"><p>Erase a key from the map, and return the corresponding value, if found.</p>
+</div></div><div class="decl"><h4>finmap.union</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">s₁ ∪ s₂</span> is the key-based union of two finite maps. It is left-biased: if
+there exists an <span style="background-color:#fdf6e3;color:#657b83;">a ∈ s₁</span>, <span style="background-color:#fdf6e3;color:#657b83;">lookup a (s₁ ∪ s₂) </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> lookup a s₁</span>.</p>
+</div></div></html>

@@ -1,0 +1,24 @@
+<html><head><link rel="stylesheet" href="../docs_style.css"></head><div class="decl"><h4>norm_cast.elim_cast_attr</h4><div class="decl_par"><p>This is an attribute for simplification rules that are
+used to normalize casts.</p>
+<p>Let r be = or ↔, then elimination lemmas of the shape
+Π ..., P ↑a1 ... ↑an r P a1 ... an should be given the
+attribute elim_cast.</p>
+</div></div><div class="decl"><h4>norm_cast.move_cast_attr</h4><div class="decl_par"><p>This is an attribute for simplification rules that are
+used to normalize casts.</p>
+<p>Let r be = or ↔, then compositional lemmas of the shape
+Π ..., ↑(P a1 ... an) r P ↑a1 ... ↑an should be given the
+attribute move_cast.</p>
+</div></div><div class="decl"><h4>norm_cast.squash_cast_attr</h4><div class="decl_par"><p>This is an attribute for simplification rules of the shape
+Π ..., ↑↑a = ↑a or  Π ..., ↑a = a.</p>
+<p>They are used in a heuristic to infer intermediate casts.</p>
+</div></div><div class="decl"><h4>tactic.interactive.norm_cast</h4><div class="decl_par"><p>Normalize casts at the given locations by moving them &quot;upwards&quot;.
+As opposed to simp, norm_cast can be used without necessarily
+closing the goal.</p>
+</div></div><div class="decl"><h4>tactic.interactive.rw_mod_cast</h4><div class="decl_par"><p>Rewrite with the given rule and normalize casts between steps.</p>
+</div></div><div class="decl"><h4>tactic.interactive.exact_mod_cast</h4><div class="decl_par"><p>Normalize the goal and the given expression,
+then close the goal with exact.</p>
+</div></div><div class="decl"><h4>tactic.interactive.apply_mod_cast</h4><div class="decl_par"><p>Normalize the goal and the given expression,
+then apply the expression to the goal.</p>
+</div></div><div class="decl"><h4>tactic.interactive.assumption_mod_cast</h4><div class="decl_par"><p>Normalize the goal and every expression in the local context,
+then close the goal with assumption.</p>
+</div></div></html>

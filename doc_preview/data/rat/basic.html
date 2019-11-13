@@ -1,0 +1,33 @@
+<html><head><link rel="stylesheet" href="../../docs_style.css"></head><h1>Basics for the Rational Numbers</h1>
+<h2>Summary</h2>
+<p>We define a rational number <span style="background-color:#fdf6e3;color:#657b83;">q</span> as a structure <span style="background-color:#fdf6e3;color:#657b83;">{ num, denom, pos, cop }</span>, where</p>
+<ul>
+<li><span style="background-color:#fdf6e3;color:#657b83;">num</span> is the numerator of <span style="background-color:#fdf6e3;color:#657b83;">q</span>,</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">denom</span> is the denominator of <span style="background-color:#fdf6e3;color:#657b83;">q</span>,</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">pos</span> is a proof that <span style="background-color:#fdf6e3;color:#657b83;">denom </span><span style="background-color:#fdf6e3;color:#b58900;">&gt; </span><span style="background-color:#fdf6e3;color:#6c71c4;">0</span>, and</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">cop</span> is a proof <span style="background-color:#fdf6e3;color:#657b83;">num</span> and <span style="background-color:#fdf6e3;color:#657b83;">denom</span> are coprime.</li>
+</ul>
+<p>We then define the expected (discrete) field structure on <span style="background-color:#fdf6e3;color:#657b83;">ℚ</span> and prove basic lemmas about it.
+Moreoever, we provide the expected casts from <span style="background-color:#fdf6e3;color:#657b83;">ℕ</span> and <span style="background-color:#fdf6e3;color:#657b83;">ℤ</span> into <span style="background-color:#fdf6e3;color:#657b83;">ℚ</span>, i.e. <span style="background-color:#fdf6e3;color:#657b83;">(↑n : ℚ) </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> n </span><span style="background-color:#fdf6e3;color:#b58900;">/ </span><span style="background-color:#fdf6e3;color:#6c71c4;">1</span>.</p>
+<h2>Main Definitions</h2>
+<ul>
+<li><span style="background-color:#fdf6e3;color:#657b83;">rat</span> is the structure encoding <span style="background-color:#fdf6e3;color:#657b83;">ℚ</span>.</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">rat.mk n d</span> constructs a rational number <span style="background-color:#fdf6e3;color:#657b83;">q </span><span style="background-color:#fdf6e3;color:#b58900;">=</span><span style="background-color:#fdf6e3;color:#657b83;"> n </span><span style="background-color:#fdf6e3;color:#b58900;">/</span><span style="background-color:#fdf6e3;color:#657b83;"> d</span> from <span style="background-color:#fdf6e3;color:#657b83;">n d : ℤ</span>.</li>
+</ul>
+<h2>Notations</h2>
+<ul>
+<li><span style="background-color:#fdf6e3;color:#b58900;">/</span><span style="background-color:#fdf6e3;color:#657b83;">.</span> is infix notation for <span style="background-color:#fdf6e3;color:#657b83;">rat.mk</span>.</li>
+</ul>
+<h2>Tags</h2>
+<p>rat, rationals, field, ℚ, numerator, denominator, num, denom</p>
+<hr/><div class="decl"><h4>rat</h4><div class="decl_par"><p><span style="background-color:#fdf6e3;color:#657b83;">rat</span>, or <span style="background-color:#fdf6e3;color:#657b83;">ℚ</span>, is the type of rational numbers. It is defined
+as the set of pairs ⟨n, d⟩ of integers such that <span style="background-color:#fdf6e3;color:#657b83;">d</span> is positive and <span style="background-color:#fdf6e3;color:#657b83;">n</span> and
+<span style="background-color:#fdf6e3;color:#657b83;">d</span> are coprime. This representation is preferred to the quotient
+because without periodic reduction, the numerator and denominator can grow
+exponentially (for example, adding 1/2 to itself repeatedly).</p>
+</div></div><div class="decl"><h4>rat.of_int</h4><div class="decl_par"><p>Embed an integer as a rational number</p>
+</div></div><div class="decl"><h4>rat.mk_pnat</h4><div class="decl_par"><p>Form the quotient <span style="background-color:#fdf6e3;color:#657b83;">n </span><span style="background-color:#fdf6e3;color:#b58900;">/</span><span style="background-color:#fdf6e3;color:#657b83;"> d</span> where <span style="background-color:#fdf6e3;color:#657b83;">n:ℤ</span> and <span style="background-color:#fdf6e3;color:#657b83;">d:ℕ</span><span style="background-color:#fdf6e3;color:#b58900;">+</span> (not necessarily coprime)</p>
+</div></div><div class="decl"><h4>rat.mk_nat</h4><div class="decl_par"><p>Form the quotient <span style="background-color:#fdf6e3;color:#657b83;">n </span><span style="background-color:#fdf6e3;color:#b58900;">/</span><span style="background-color:#fdf6e3;color:#657b83;"> d</span> where <span style="background-color:#fdf6e3;color:#657b83;">n:ℤ</span> and <span style="background-color:#fdf6e3;color:#657b83;">d:ℕ</span>. In the case <span style="background-color:#fdf6e3;color:#657b83;">d </span><span style="background-color:#fdf6e3;color:#b58900;">= </span><span style="background-color:#fdf6e3;color:#6c71c4;">0</span>, we
+define <span style="background-color:#fdf6e3;color:#657b83;">n </span><span style="background-color:#fdf6e3;color:#b58900;">/ </span><span style="background-color:#fdf6e3;color:#6c71c4;">0 </span><span style="background-color:#fdf6e3;color:#b58900;">= </span><span style="background-color:#fdf6e3;color:#6c71c4;">0</span> by convention.</p>
+</div></div><div class="decl"><h4>rat.mk</h4><div class="decl_par"><p>Form the quotient <span style="background-color:#fdf6e3;color:#657b83;">n </span><span style="background-color:#fdf6e3;color:#b58900;">/</span><span style="background-color:#fdf6e3;color:#657b83;"> d</span> where <span style="background-color:#fdf6e3;color:#657b83;">n d : ℤ</span>.</p>
+</div></div></html>

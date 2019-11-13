@@ -1,0 +1,100 @@
+<html><head><link rel="stylesheet" href="../../docs_style.css"></head><h1>Smooth manifolds (possibly with boundary or corners)</h1>
+<p>A smooth manifold is a manifold modelled on a normed vector space, or a subset like a
+half-space (to get manifolds with boundaries) for which the change of coordinates are smooth maps.
+We define a model with corners as a map I : H → E embedding nicely the topological space H in the
+vector space E (or more precisely as a structure containing all the relevant properties).
+Given such a model with corners I on (E, H), we define the groupoid of local
+homeomorphisms of H which are smooth when read in E (for any regularity n : with_top ℕ).
+With this groupoid at hand and the general machinery of manifolds, we thus get the notion of C^n
+manifold with respect to any model with corners I on (E, H). We also introduce a specific type
+class for C^∞ manifolds as these are the most commonly used.</p>
+<h2>Main definitions</h2>
+<p><span style="background-color:#fdf6e3;color:#657b83;">model_with_corners 𝕜 E H</span> :
+a structure containing informations on the way a space H embeds in a
+model vector space E over the field 𝕜. This is all that is needed to
+define a smooth manifold with model space H, and model vector space E.
+<span style="background-color:#fdf6e3;color:#657b83;">model_with_corners_self 𝕜 E</span> :
+trivial model with corners structure on the space E embedded in itself by the identity.
+<span style="background-color:#fdf6e3;color:#657b83;">times_cont_diff_groupoid n I</span> :
+when I is a model with corners on (𝕜, E, H), this is the groupoid of local homeos of H
+which are of class C^n over the normed field 𝕜, when read in E.
+<span style="background-color:#fdf6e3;color:#657b83;">smooth_manifold_with_corners I M</span> :
+a type class saying that the manifold M, modelled on the space H, has C^∞ changes of
+coordinates with respect to the model with corners I on (𝕜, E, H). This type class is just
+a shortcut for <span style="background-color:#fdf6e3;color:#657b83;">has_groupoid M (times_cont_diff_groupoid ⊤ I)</span></p>
+<p>As specific examples of models with corners, we define (in the file <span style="background-color:#fdf6e3;color:#657b83;">real_instances.lean</span>)</p>
+<ul>
+<li><span style="background-color:#fdf6e3;color:#657b83;">euclidean_space n</span> for a model vector space of dimension <span style="background-color:#fdf6e3;color:#657b83;">n</span>.</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">model_with_corners ℝ (euclidean_space n) (euclidean_half_space n)</span> for the model space used
+to define <span style="background-color:#fdf6e3;color:#657b83;">n</span>-dimensional real manifolds with boundary and</li>
+<li><span style="background-color:#fdf6e3;color:#657b83;">model_with_corners ℝ (euclidean_space n) (euclidean_quadrant n)</span> for the model space used
+to define <span style="background-color:#fdf6e3;color:#657b83;">n</span>-dimensional real manifolds with corners</li>
+</ul>
+<p>With these definitions at hand, to invoke an <span style="background-color:#fdf6e3;color:#657b83;">n</span>-dimensional real manifold without boundary,
+one could use</p>
+<p><span style="background-color:#fdf6e3;color:#859900;">variables</span><span style="background-color:#fdf6e3;color:#657b83;"> {n : ℕ} {M : </span><span style="background-color:#fdf6e3;color:#268bd2;">Type</span><span style="background-color:#fdf6e3;color:#b58900;">*</span><span style="background-color:#fdf6e3;color:#657b83;">} [topological_space M] [manifold (euclidean_space n)] [smooth_manifold_with_corners (model_with_corners_self ℝ (euclidean_space n)) M]</span>.</p>
+<p>However, this is not the recommended way: a theorem proved using this assumption would not apply
+for instance to the tangent space of such a manifold, which is modelled on
+<span style="background-color:#fdf6e3;color:#657b83;">(euclidean_space n) × (euclidean_space n)</span> and not on <span style="background-color:#fdf6e3;color:#657b83;">euclidean_space (</span><span style="background-color:#fdf6e3;color:#6c71c4;">2 </span><span style="background-color:#fdf6e3;color:#b58900;">*</span><span style="background-color:#fdf6e3;color:#657b83;"> n)</span>! In the same way,
+it would not apply to product manifolds, modelled on <span style="background-color:#fdf6e3;color:#657b83;">(euclidean_space n) × (euclidean_space m)</span>.
+The right invocation does not focus on one specific construction, but on all constructions sharing
+the right properties, like</p>
+<p><span style="background-color:#fdf6e3;color:#859900;">variables</span><span style="background-color:#fdf6e3;color:#657b83;"> {E : </span><span style="background-color:#fdf6e3;color:#268bd2;">Type</span><span style="background-color:#fdf6e3;color:#b58900;">*</span><span style="background-color:#fdf6e3;color:#657b83;">} [normed_group E] [normed_space ℝ E] [finite_dimensional ℝ E] {I : model_with_corners ℝ E E} [I.boundaryless] {M : </span><span style="background-color:#fdf6e3;color:#268bd2;">Type</span><span style="background-color:#fdf6e3;color:#b58900;">*</span><span style="background-color:#fdf6e3;color:#657b83;">} [topological_space M] [manifold E M] [smooth_manifold_with_corners I M]</span></p>
+<p>Here, <span style="background-color:#fdf6e3;color:#657b83;">I.boundaryless</span> is a typeclass property ensuring that there is no boundary (this is for
+instance the case for model_with_corners_self, or products of these). Note that one could consider
+as a natural assumption to only use the trivial model with corners <span style="background-color:#fdf6e3;color:#657b83;">model_with_corners_self ℝ E</span>,
+but again in product manifolds the natural model with corners will not be this one but the product
+one (and they are not defeq as (λp : E × F, (p.1, p.2)) is not defeq to the identity). So, it is
+important to use the above incantation to maximize the applicability of theorems.</p>
+<h2>Implementation notes</h2>
+<p>We want to talk about manifolds modelled on a vector space, but also on manifolds with
+boundary, modelled on a half space (or even manifolds with corners). For the latter examples,
+we still want to define smooth functions, tangent bundles, and so on. As smooth functions are
+well defined on vector spaces or subsets of these, one could take for model space a subtype of a
+vector space. With the drawback that the whole vector space itself (which is the most basic
+example) is not directly a subtype of itself: the inclusion of <span style="background-color:#fdf6e3;color:#657b83;">univ : set E</span> in <span style="background-color:#fdf6e3;color:#657b83;">set E</span> would
+show up in the definition, instead of <span style="background-color:#fdf6e3;color:#657b83;">id</span>.</p>
+<p>A good abstraction covering both cases it to have a vector
+space E (with basic example the Euclidean space), a model space H (with basic example the upper half
+space), and an embedding of H into E (which can be the identity for H = E, or
+subtype.val for manifolds with corners). We say that the pair (E, H) with their embedding is a model
+with corners, and we encompass all the relevant properties (in particular the fact that the image of
+H in E should have unique differentials) in the definition of <span style="background-color:#fdf6e3;color:#657b83;">model_with_corners</span>.</p>
+<p>We concentrate on C^∞ manifolds: all the definitions work equally well for C^n manifolds, but later
+on it is a pain to carry all over the smoothness parameter, especially when one wants to deal with
+C^k functions as there would be additional conditions k ≤ n everywhere. Since one deals almost all
+the time with C^∞ (or analytic) manifolds, this seems to be a reasonable choice that one could
+revisit later if needed. C^k manifolds are still available, but they should be called using
+<span style="background-color:#fdf6e3;color:#657b83;">has_groupoid M (times_cont_diff_groupoid k I)</span> where <span style="background-color:#fdf6e3;color:#657b83;">I</span> is the model with corners.</p>
+<p>I have considered using the model with corners <span style="background-color:#fdf6e3;color:#657b83;">I</span> as a typeclass argument, possibly out_param, to
+get lighter notations later on, but it did not turn out right, as on <span style="background-color:#fdf6e3;color:#657b83;">E × F</span> there are two natural
+model with corners, the trivial (identity) one, and the product one, and they are not defeq and one
+needs to indicate to Lean which one we want to use.
+This means that when talking on objects on manifolds one will most often need to specify the model
+with corners one is using. For instance, the tangent bundle will be <span style="background-color:#fdf6e3;color:#657b83;">tangent_bundle I M</span> and the
+derivative will be <span style="background-color:#fdf6e3;color:#657b83;">mfderiv I I&#39; f</span>, instead of the more natural notations <span style="background-color:#fdf6e3;color:#657b83;">tangent_bundle 𝕜 M</span> and
+<span style="background-color:#fdf6e3;color:#657b83;">mfderiv 𝕜 f</span> (the field has to be explicit anyway, as some manifolds could be considered both as
+real and complex manifolds).</p>
+<hr/><div class="decl"><h4>model_with_corners</h4><div class="decl_par"><p>A structure containing informations on the way a space H embeds in a
+model vector space E over the field 𝕜. This is all what is needed to
+define a smooth manifold with model space H, and model vector space E.</p>
+</div></div><div class="decl"><h4>model_with_corners_self</h4><div class="decl_par"><p>A vector space is a model with corners.</p>
+</div></div><div class="decl"><h4>model_with_corners_self_local_equiv</h4><div class="decl_par"><p>In the trivial model with corners, the associated local equiv is the identity.</p>
+</div></div><div class="decl"><h4>model_with_corners.prod</h4><div class="decl_par"><p>Given two model_with_corners I on (E, H) and I' on (E', H'), we define the model with corners
+I.prod I' on (E × E', H × H'). This appears in particular for the manifold structure on the tangent
+bundle to a manifold modelled on (E, H): it will be modelled on (E × E, H × E).</p>
+</div></div><div class="decl"><h4>model_with_corners.tangent</h4><div class="decl_par"><p>Special case of product model with corners, which is trivial on the second factor. This shows up
+as the model to tangent bundles.</p>
+</div></div><div class="decl"><h4>model_with_corners.boundaryless</h4><div class="decl_par"><p>Property ensuring that the model with corners I defines manifolds without boundary.</p>
+</div></div><div class="decl"><h4>model_with_corners_self_range</h4><div class="decl_par"><p>The trivial model with corners has no boundary</p>
+</div></div><div class="decl"><h4>model_with_corners.range_eq_univ_prod</h4><div class="decl_par"><p>If two model with corners are boundaryless, their product also is</p>
+</div></div><div class="decl"><h4>times_cont_diff_groupoid</h4><div class="decl_par"><p>Given a model with corners (E, H), we define the groupoid of C^n transformations of H as the
+maps that are C^n when read in E through I.</p>
+</div></div><div class="decl"><h4>times_cont_diff_groupoid_le</h4><div class="decl_par"><p>Inclusion of the groupoid of C^n local diffeos in the groupoid of C^m local diffeos when m ≤ n</p>
+</div></div><div class="decl"><h4>times_cont_diff_groupoid_zero_eq</h4><div class="decl_par"><p>The groupoid of 0-times continuously differentiable maps is just the groupoid of all
+local homeomorphisms</p>
+</div></div><div class="decl"><h4>of_set_mem_times_cont_diff_groupoid</h4><div class="decl_par"><p>An identity local homeomorphism belongs to the C^n groupoid.</p>
+</div></div><div class="decl"><h4>symm_trans_mem_times_cont_diff_groupoid</h4><div class="decl_par"><p>The composition of a local homeomorphism from H to M and its inverse belongs to
+the C^n groupoid.</p>
+</div></div><div class="decl"><h4>model_space_smooth</h4><div class="decl_par"><p>For any model with corners, the model space is a smooth manifold</p>
+</div></div></html>
